@@ -1,0 +1,78 @@
+package Parser;
+import java_cup.runtime.*;
+
+
+/* ------------- TERMINALS ------------- */
+terminal            SEMICOLON, AND, OR, NOT, LPAREN, RPAREN;
+terminal String     GE, LE, GT, LT, NE, EQ;
+terminal Integer    ID, INT_LIT;
+terminal Boolean    BOOL_LIT;    
+
+non terminal Object     expr_list, expr_part;
+non terminal String     Oprel;
+non terminal Integer    RelTerm;
+non terminal Boolean    LogicExpr, LogicFactor, LogicTerm, RelCondition;
+
+/* ------------- SYNTACTIC GRAMMAR RULES ------------- */
+
+/* Gramatica de expresiones logicas + comparaciones de enteros (i.e. todo lo que devuelva bool) */
+expr_list   ::=   expr_list expr_part
+                | expr_part
+                | error
+                ;
+
+expr_part   ::=   LogicExpr:e SEMICOLON 
+                    {: System.out.println(" --> "+e); :}
+                | RelCondition:r SEMICOLON
+                    {: System.out.println(" --> "+r); :}
+                ;
+
+Oprel       ::=   GT 
+                    {: RESULT = "GT"; :}
+                | LT 
+                    {: RESULT = "LT"; :}
+                | GE 
+                    {: RESULT = "GE"; :}
+                | LE 
+                    {: RESULT = "LE"; :}
+                | EQ 
+                    {: RESULT = "EQ"; :}
+                | NE 
+                    {: RESULT = "NE"; :}
+                ;
+
+RelCondition ::=   RelTerm:r1 Oprel:op RelTerm:r2 
+                    {: :}
+                 ;
+RelTerm      ::=   INT_LIT:i {: RESULT = new Integer(i); :};
+                /* tambien ID */
+
+
+LogicExpr   ::=   LogicTerm:t OR LogicExpr:e  
+                    {: RESULT = new Boolean(e || t); :}
+                | LogicTerm:t 
+                    {: RESULT = new Boolean(t); :}
+                ;
+
+LogicTerm   ::=   LogicFactor:f AND LogicTerm:t 
+                    {: RESULT = new Boolean(f && t); :}
+                | LogicFactor:f  
+                    {: RESULT = new Boolean(f); :}
+                ;
+
+LogicFactor ::=   LPAREN LogicExpr:e RPAREN 
+                    {: RESULT = new Boolean(e); :}
+
+                | ID:id 
+                    {: RESULT = new Boolean(false); :}
+                
+                | BOOL_LIT:bool 
+                    {: RESULT = new Boolean(bool); :}
+                
+                | NOT LogicFactor:f  
+                    {: RESULT = new Boolean(!f); :}
+                
+                | LPAREN RelCondition:r RPAREN
+                    {: RESULT = new Boolean(r); :}
+                ;   
+
