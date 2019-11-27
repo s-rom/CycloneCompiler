@@ -3,9 +3,16 @@ import java_cup.runtime.*;
 
 
 /* ------------- TERMINALS ------------- */
-terminal            SEMICOLON, AND, OR, NOT, LPAREN, RPAREN;
-terminal String     GE, LE, GT, LT, NE, EQ;
-terminal Integer    ID, INT_LIT;
+
+terminal String     STR_TYPE, INT_TYPE, VOID_TYPE, BOOL_TYPE; /* string, int, void, bool */
+terminal String     WHILE, IF, ELSE, FUNC, OUTPUT, INPUT, RETURN; /* while, if, else, func, intput(), output() */
+terminal String     LPAREN, RPAREN, LCURL, RCURL, COMMA, SEMICOLON; /* ( ) { } , ; */
+terminal String     AND, OR, NOT;
+terminal String     GE, LE, GT, LT, NE, EQ; /* >=, <=, >, <, !=, == */
+terminal String     ASSIGN; /* = */
+terminal Integer    ID; 
+terminal Integer    INT_LIT;
+terminal String     STR_LIT;
 terminal Boolean    BOOL_LIT;    
 
 non terminal Object     expr_list, expr_part;

@@ -83,13 +83,13 @@ comment2    = "//"[^\n\r]*
 "*"         {System.out.println("MULT");}
 "/"         {System.out.println("DIV");}
 "%"         {System.out.println("MOD");}
-"++"        {System.out.println("INC");}
-"--"        {System.out.println("DEC");}
+//"++"        {System.out.println("INC");}
+//"--"        {System.out.println("DEC");}
 
-"+="        {System.out.println("SUM_ASSIGN");}
-"-="        {System.out.println("SUB_ASSIGN");}
-"*="        {System.out.println("MULT_ASSIGN");}
-"/="        {System.out.println("DIV_ASSIGN");}
+//"+="        {System.out.println("SUM_ASSIGN");}
+//"-="        {System.out.println("SUB_ASSIGN");}
+//"*="        {System.out.println("MULT_ASSIGN");}
+//"/="        {System.out.println("DIV_ASSIGN");}
 
 "&&"        {System.out.println("AND");}
 "||"        {System.out.println("OR");}
@@ -100,6 +100,7 @@ comment2    = "//"[^\n\r]*
 "{"         {System.out.println("LCURL");}
 "}"         {System.out.println("RCURL");}
 ";"         {System.out.println("SEMICOLON");}
+","         {System.out.println("COMMA");}
 
 "true"      {System.out.println("TRUE");}
 "false"     {System.out.println("FALSE");}

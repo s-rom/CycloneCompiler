@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 public class Main {
     
-    @SuppressWarnings("empty-statement")
     public static void main (String [] args){
         final String FILE_NAME = "C:\\Users\\Sergi\\Desktop\\PracticaCompiladores\\CycloneCompiler\\cyclone_src\\program.cc";
         try {
