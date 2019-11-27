@@ -39,6 +39,7 @@ public class ParserSym {
   public static final int RCURL = 16;
   public static final int ELSE = 8;
   public static final int FUNC = 9;
+  public static final int UNARI_SUB = 38;
   public static final int WHILE = 6;
   public static final int NE = 31;
   public static final int BOOL_LIT = 37;
@@ -84,7 +85,8 @@ public class ParserSym {
   "ID",
   "INT_LIT",
   "STR_LIT",
-  "BOOL_LIT"
+  "BOOL_LIT",
+  "UNARI_SUB"
   };
 }
 
