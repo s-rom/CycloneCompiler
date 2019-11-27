@@ -12,7 +12,7 @@ import Parser.ParserSym;
 
 %%
 
-%cup //Compatibilidad con java_cup
+%cup
 %public
 %class Scanner
 
@@ -21,7 +21,7 @@ import Parser.ParserSym;
 %eofval}
 
 %eof{
-    System.out.println("EOF");
+    /* Qué hacer cuando llega a EOF */
 %eof}
 
 
@@ -35,8 +35,6 @@ import Parser.ParserSym;
         return new ComplexSymbol(ParserSym.terminalNames[type], type, value);
     }
 %} 
-
-
 
 
 
@@ -54,63 +52,63 @@ comment1    = \/\* ([^"*/"]|[\*])* \*\/
 comment2    = "//"[^\n\r]*
 
 
-
 %%
 
-"string"    {System.out.println("STRING");}
-"int"       {System.out.println("INT");}
-"void"      {System.out.println("VOID");}
-"bool"      {System.out.println("BOOL");}
+"string"    {return getSymbol(ParserSym.STR_TYPE);}
+"int"       {return getSymbol(ParserSym.INT_TYPE);}
+"void"      {return getSymbol(ParserSym.VOID_TYPE);}
+"bool"      {return getSymbol(ParserSym.BOOL_TYPE);}
 
-"while"     {System.out.println("WHILE");}
-"if"        {System.out.println("IF");}
-"else"      {System.out.println("ELSE");}
-"func"      {System.out.println("FUNC");}
-"output"    {System.out.println("OUTPUT");}
-"input"     {System.out.println("INPUT");}
-"return"    {System.out.println("RETURN");}
+"while"     {return getSymbol(ParserSym.WHILE);}
+"if"        {return getSymbol(ParserSym.IF);}
+"else"      {return getSymbol(ParserSym.ELSE);}
+"func"      {return getSymbol(ParserSym.FUNC);}
+"output"    {return getSymbol(ParserSym.OUTPUT);}
+"input"     {return getSymbol(ParserSym.INPUT);}
+"return"    {return getSymbol(ParserSym.RETURN);}
 
-"="         {System.out.println("ASSIGN");}
-"=="        {System.out.println("EQ");}
-"!="        {System.out.println("NOTEQ");}
-">"         {System.out.println("GT");}
-"<"         {System.out.println("LT");}
-">="        {System.out.println("GE");}
-"<="        {System.out.println("LE");}
 
-"+"         {System.out.println("SUM");}
-"-"         {System.out.println("SUB");}
-"*"         {System.out.println("MULT");}
-"/"         {System.out.println("DIV");}
-"%"         {System.out.println("MOD");}
-//"++"        {System.out.println("INC");}
-//"--"        {System.out.println("DEC");}
+"("         {return getSymbol(ParserSym.LPAREN);}
+")"         {return getSymbol(ParserSym.RPAREN);}
+"{"         {return getSymbol(ParserSym.LCURL);}
+"}"         {return getSymbol(ParserSym.RCURL);}
+";"         {return getSymbol(ParserSym.SEMICOLON);}
+","         {return getSymbol(ParserSym.COMMA);}
 
-//"+="        {System.out.println("SUM_ASSIGN");}
-//"-="        {System.out.println("SUB_ASSIGN");}
-//"*="        {System.out.println("MULT_ASSIGN");}
-//"/="        {System.out.println("DIV_ASSIGN");}
 
-"&&"        {System.out.println("AND");}
-"||"        {System.out.println("OR");}
-"!"         {System.out.println("NOT");}
+"="         {return getSymbol(ParserSym.ASSIGN);}
+"=="        {return getSymbol(ParserSym.EQ);}
+"!="        {return getSymbol(ParserSym.NE);}
+">"         {return getSymbol(ParserSym.GT);}
+"<"         {return getSymbol(ParserSym.LT);}
+">="        {return getSymbol(ParserSym.GE);}
+"<="        {return getSymbol(ParserSym.LE);}
 
-"("         {System.out.println("LPAREN");}
-")"         {System.out.println("RPAREN");}
-"{"         {System.out.println("LCURL");}
-"}"         {System.out.println("RCURL");}
-";"         {System.out.println("SEMICOLON");}
-","         {System.out.println("COMMA");}
+"+"         {return getSymbol(ParserSym.SUM);}
+"-"         {return getSymbol(ParserSym.SUB);}
+"*"         {return getSymbol(ParserSym.MULT);}
+"/"         {return getSymbol(ParserSym.DIV);}
+"%"         {return getSymbol(ParserSym.MOD);}
+//"++"        {return getSymbol(ParserSym.INC");}
+//"--"        {return getSymbol(ParserSym.DEC");}
 
-"true"      {System.out.println("TRUE");}
-"false"     {System.out.println("FALSE");}
+//"+="        {return getSymbol(ParserSym.SUM_ASSIGN");}
+//"-="        {return getSymbol(ParserSym.SUB_ASSIGN");}
+//"*="        {return getSymbol(ParserSym.MULT_ASSIGN");}
+//"/="        {return getSymbol(ParserSym.DIV_ASSIGN");}
 
+"&&"        {return getSymbol(ParserSym.AND);}
+"||"        {return getSymbol(ParserSym.OR);}
+"!"         {return getSymbol(ParserSym.NOT);}
+
+"true"      {return getSymbol(ParserSym.BOOL_LIT, new Boolean(true));}
+"false"     {return getSymbol(ParserSym.BOOL_LIT, new Boolean(false));}
+{int_lit}   {return getSymbol(ParserSym.INT_LIT, Integer.parseInt(yytext()));}
+{str_lit}   {return getSymbol(ParserSym.STR_LIT, yytext());}
 
 {ws}        {/* white space */}
-{id}        {System.out.println("--> ID: "+ yytext());}
-{int_lit}   {System.out.println("--> INT_LIT: "+yytext());}
-{str_lit}   {System.out.println("--> STR_LIT: "+yytext());}
-{comment1}  {System.out.println("--> COMMENT1: "+yytext());}
-{comment2}  {System.out.println("--> COMMENT2: "+yytext());}
+{id}        {return getSymbol(ParserSym.ID, new Integer(1));}
+{comment1}  {}
+{comment2}  {}
 
-[^] {System.out.println(" ############## Error léxico: "+yytext());}
+[^] {System.out.println("Error léxico: "+yytext());}

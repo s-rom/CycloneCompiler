@@ -8,39 +8,44 @@ package Parser;
 /** CUP generated class containing symbol constants. */
 public class ParserSym {
   /* terminals */
-  public static final int AND = 19;
-  public static final int INPUT = 11;
-  public static final int NE = 26;
-  public static final int LT = 25;
-  public static final int SEMICOLON = 18;
-  public static final int ELSE = 8;
-  public static final int OR = 20;
-  public static final int RPAREN = 14;
-  public static final int LCURL = 15;
-  public static final int WHILE = 6;
-  public static final int NOT = 21;
-  public static final int RETURN = 12;
-  public static final int IF = 7;
-  public static final int GT = 24;
   public static final int BOOL_TYPE = 5;
-  public static final int LPAREN = 13;
-  public static final int ID = 29;
-  public static final int LE = 23;
-  public static final int VOID_TYPE = 4;
-  public static final int COMMA = 17;
-  public static final int BOOL_LIT = 32;
-  public static final int EOF = 0;
-  public static final int STR_TYPE = 2;
-  public static final int FUNC = 9;
-  public static final int STR_LIT = 31;
-  public static final int GE = 22;
-  public static final int error = 1;
-  public static final int INT_TYPE = 3;
-  public static final int ASSIGN = 28;
-  public static final int EQ = 27;
-  public static final int INT_LIT = 30;
+  public static final int MULT = 24;
+  public static final int GE = 27;
   public static final int OUTPUT = 10;
+  public static final int INPUT = 11;
+  public static final int LPAREN = 13;
+  public static final int RPAREN = 14;
+  public static final int NOT = 21;
+  public static final int LCURL = 15;
+  public static final int SEMICOLON = 18;
+  public static final int AND = 19;
+  public static final int LT = 30;
+  public static final int OR = 20;
+  public static final int COMMA = 17;
+  public static final int STR_TYPE = 2;
+  public static final int DIV = 25;
+  public static final int VOID_TYPE = 4;
+  public static final int ASSIGN = 33;
+  public static final int IF = 7;
+  public static final int ID = 34;
+  public static final int LE = 28;
+  public static final int EOF = 0;
+  public static final int RETURN = 12;
+  public static final int error = 1;
+  public static final int MOD = 26;
+  public static final int INT_TYPE = 3;
+  public static final int STR_LIT = 36;
+  public static final int EQ = 32;
   public static final int RCURL = 16;
+  public static final int ELSE = 8;
+  public static final int FUNC = 9;
+  public static final int WHILE = 6;
+  public static final int NE = 31;
+  public static final int BOOL_LIT = 37;
+  public static final int SUM = 22;
+  public static final int INT_LIT = 35;
+  public static final int GT = 29;
+  public static final int SUB = 23;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -64,6 +69,11 @@ public class ParserSym {
   "AND",
   "OR",
   "NOT",
+  "SUM",
+  "SUB",
+  "MULT",
+  "DIV",
+  "MOD",
   "GE",
   "LE",
   "GT",
