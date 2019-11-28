@@ -26,7 +26,7 @@ non terminal Object     Loop, Conditional, Declaration, Instruction;
 non terminal Object     WhileLoop;
 non terminal Object     IfCondition;
 non terminal Object     Assignation;
-non terminal Object     Expr, BinOp, UnOp, UnExpr, Primary;
+non terminal Object     Expr, BinOp, UnOp, UnExpr, Primary, ExprList, ExprArg;
 
 precedence left SUM, SUB;
 precedence left MULT, DIV, MOD;
@@ -63,13 +63,9 @@ FunctionList ::=   Function FunctionList
 
 Function    ::=   FUNC TypeFunc ID LPAREN Args RPAREN LCURL Block RCURL;
 
-Args        ::=   Arg
-                | Arg COMMA Args
-                ;
+Args        ::=   | Arg | Arg COMMA Args;
+Arg         ::=   TypeVar ID;
 
-Arg         ::=   TypeVar ID
-                |
-                ;
 
 
 Block       ::=   StatementList;
@@ -92,7 +88,7 @@ IfCondition ::=   IF LPAREN Expr RPAREN LCURL Block RCURL
                 | IF LPAREN Expr RPAREN LCURL Block RCURL ELSE LCURL Block RCURL
                 ;
 
-Instruction ::=   ID LPAREN Expr RPAREN // Llamada a funcion foo(arg1, arg2, ...)
+Instruction ::=   ID LPAREN ExprArg RPAREN // Llamada a funcion foo(arg1, arg2, ...)
                 | INPUT LPAREN RPAREN   // input(var)
                 | OUTPUT LPAREN Expr RPAREN  // output(bla)
                 | RETURN Expr           // return bla
@@ -100,7 +96,8 @@ Instruction ::=   ID LPAREN Expr RPAREN // Llamada a funcion foo(arg1, arg2, ...
                 | Declaration           // type lhs = rhs; type lhs2;
                 ;
 
-
+ExprArg     ::=   | Expr ExprList;
+ExprList    ::=   | COMMA Expr ExprList;
 
 Declaration ::=   TypeVar ID 
                 | TypeVar Assignation  
@@ -136,9 +133,9 @@ UnOp        ::=   SUB %prec UNARI_SUB
                 | NOT 
                 ;
 
-Primary     ::=   LPAREN Expr RPAREN
-                | ID LPAREN Expr RPAREN
-                | ID
+Primary     ::=   LPAREN Expr RPAREN // ( ID )
+                | ID LPAREN ExprArg RPAREN // llamada a funcion que devuelva valor: getVal(x,y)
+                | ID 
                 | INT_LIT
                 | STR_LIT
                 | BOOL_LIT
