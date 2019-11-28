@@ -27,6 +27,22 @@ func void CountTo(int goal)
     }
 }
 
+func string prueba()
+{
+    int msg = "hola";
+
+    int y = 3;
+    int x = y + 1 % 3;
+    bool cond = x < 3 || x > 0;
+
+    if (cond)
+    {
+        output("kek");
+    }
+
+    return "hola";
+}
+
 /* Función principal */
 func int main()
 {
