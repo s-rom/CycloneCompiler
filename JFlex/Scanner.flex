@@ -75,7 +75,6 @@ comment2    = "//"[^\n\r]*
 ";"         {return getSymbol(ParserSym.SEMICOLON);}
 ","         {return getSymbol(ParserSym.COMMA);}
 
-
 "="         {return getSymbol(ParserSym.ASSIGN);}
 "=="        {return getSymbol(ParserSym.EQ);}
 "!="        {return getSymbol(ParserSym.NE);}
@@ -107,7 +106,7 @@ comment2    = "//"[^\n\r]*
 {str_lit}   {return getSymbol(ParserSym.STR_LIT, yytext());}
 
 {ws}        {/* white space */}
-{id}        {return getSymbol(ParserSym.ID, new Integer(1));}
+{id}        {return getSymbol(ParserSym.ID, yytext());}
 {comment1}  {}
 {comment2}  {}
 

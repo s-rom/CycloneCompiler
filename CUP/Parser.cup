@@ -1,32 +1,32 @@
 package Parser;
 import java_cup.runtime.*;
-
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+import AST.*;
 
 /* ------------- TERMINALS ------------- */
 
-terminal            STR_TYPE, INT_TYPE, VOID_TYPE, BOOL_TYPE; /* string, int, void, bool */
 terminal            WHILE, IF, ELSE, FUNC, OUTPUT, INPUT, RETURN; /* while, if, else, func, intput(), output() */
 terminal            LPAREN, RPAREN, LCURL, RCURL, COMMA, SEMICOLON; /* ( ) { } , ; */
 terminal            AND, OR, NOT;
 terminal            SUM, SUB, MULT, DIV, MOD; /* +, -, *, /, %  */
 terminal            GE, LE, GT, LT, NE, EQ; /* >=, <=, >, <, !=, == */
 terminal            ASSIGN; /* = */
-terminal Integer    ID; /* hola */
 terminal Integer    INT_LIT; /* 42 */
 terminal String     STR_LIT; /* "hola" */
 terminal Boolean    BOOL_LIT; /* true, false */  
 terminal            UNARI_SUB;
+terminal String     ID; /* hola */
+terminal String     STR_TYPE, INT_TYPE, VOID_TYPE, BOOL_TYPE; /* string, int, void, bool */
 
-
-non terminal Object     Program, Function, FunctionList;
-non terminal Object     TypeFunc, TypeVar;
-non terminal Object     Arg, Args;
-non terminal Object     Block, Statement, StatementList;
-non terminal Object     Loop, Conditional, Declaration, Instruction;
-non terminal Object     WhileLoop;
-non terminal Object     IfCondition;
-non terminal Object     Assignation;
-non terminal Object     Expr, BinOp, UnOp, UnExpr, Primary, ExprList, ExprArg;
+non terminal Node     Program, Function, FunctionList;
+non terminal Node     Arg, Args;
+non terminal Node     Block, Statement, StatementList;
+non terminal Node     Loop, Conditional, Declaration, Instruction;
+non terminal Node     WhileLoop;
+non terminal Node     IfCondition;
+non terminal Node     Assignation;
+non terminal Node     Expr, BinOp, UnOp, UnExpr, Primary, ExprList, ExprArg;
+non terminal String   TypeFunc, TypeVar;
 
 precedence left SUM, SUB;
 precedence left MULT, DIV, MOD;
@@ -38,18 +38,21 @@ precedence right NOT;
 
 /* ------------- SYNTACTIC GRAMMAR RULES ------------- */
 
-/* Gramatica de expresiones logicas + comparaciones de enteros (i.e. todo lo que devuelva bool) */
-
 start with Program;
 
-Program     ::=   FunctionList
+Program     ::=   FunctionList:fl
+                    {: RESULT = new Program((FunctionList) fl); RESULT.toDot(); :}
                 | error
                 ;
 
-TypeFunc    ::=   BOOL_TYPE 
-                | STR_TYPE
-                | INT_TYPE
-                | VOID_TYPE
+TypeFunc    ::=   BOOL_TYPE:type
+                    {: System.out.println("Reducido type int"); RESULT = type; :}
+                | STR_TYPE:type
+                     {: System.out.println("Reducido type int"); RESULT = type; :}
+                | INT_TYPE:type
+                    {: System.out.println("Reducido type int"); RESULT = type; :}
+                | VOID_TYPE:type
+                    {: System.out.println("Reducido type void"); RESULT = type; :}
                 ;
 
 TypeVar     ::=   BOOL_TYPE 
@@ -57,18 +60,30 @@ TypeVar     ::=   BOOL_TYPE
                 | INT_TYPE
                 ;
 
-FunctionList ::=   Function FunctionList
-                 | Function
+FunctionList ::=   Function:f FunctionList:fl
+                    {: RESULT = new FunctionList((Function)f, (FunctionList)fl); RESULT.toDot(); :}
+                 | Function:f
+                    {: RESULT = new FunctionList((Function)f, null); RESULT.toDot(); :}
                  ;
 
-Function    ::=   FUNC TypeFunc ID LPAREN Args RPAREN LCURL Block RCURL;
+Function    ::=   FUNC TypeFunc:t ID:id LPAREN Args:args RPAREN LCURL Block:b RCURL
+                    {: System.out.println("reducido Function: "+t); RESULT = new Function(t,id,(Args)args,(Block)b); RESULT.toDot(); :}
+                ;
 
-Args        ::=   | Arg | Arg COMMA Args;
+Args        ::= | 
+                   Arg
+                    {: RESULT = new Args(); RESULT.toDot(); :} 
+                |  Arg COMMA Args
+                    {: RESULT = new Args(); :}
+                ;
+
 Arg         ::=   TypeVar ID;
 
 
 
-Block       ::=   StatementList;
+Block       ::=   StatementList
+                    {: RESULT = new Block(); RESULT.toDot(); :}
+                ;
 
 StatementList ::=   Statement StatementList
                   |
