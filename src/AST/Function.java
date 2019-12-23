@@ -26,6 +26,10 @@ public class Function extends Node{
         int idType = DOT.nextNode();
         int idID = DOT.nextNode();
 
+        assert(type != null);
+        assert(id != null);
+        
+        
         DOT.writeNode(idType, "Type: "+type);
         DOT.writeNode(idID, "ID: "+id);
         

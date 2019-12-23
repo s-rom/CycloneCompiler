@@ -2,36 +2,26 @@ digraph ccTree {
 	n0 [label = "Args"]
 	n1 [label = "Block"]
 	n2 [label = "Function"]
-	n3 [label = "Type: null"]
+	n3 [label = "Type: int"]
 	n4 [label = "ID: main"]
 	n2-> n3
 	n2-> n4
 	n2-> n0
 	n2-> n1
-	n5 [label = "Block"]
-	n6 [label = "Function"]
-	n7 [label = "Type: null"]
-	n8 [label = "ID: kek"]
-	n6-> n7
-	n6-> n8
-	n6-> n5
-	n9 [label = "Args"]
-	n10 [label = "Block"]
-	n11 [label = "Function"]
-	n12 [label = "Type: null"]
-	n13 [label = "ID: prueba"]
-	n11-> n12
-	n11-> n13
-	n11-> n9
+	n5 [label = "Args"]
+	n6 [label = "Block"]
+	n7 [label = "Function"]
+	n8 [label = "Type: void"]
+	n9 [label = "ID: prueba"]
+	n7-> n8
+	n7-> n9
+	n7-> n5
+	n7-> n6
+	n10 [label = "FunctionList"]
+	n10-> n7
+	n11 [label = "FunctionList"]
 	n11-> n10
-	n14 [label = "FunctionList"]
-	n14-> n11
-	n15 [label = "FunctionList"]
-	n15-> n14
-	n15-> n6
-	n16 [label = "FunctionList"]
-	n16-> n15
-	n16-> n2
-	n17 [label = "Program"]
-	n17-> n16
+	n11-> n2
+	n12 [label = "Program"]
+	n12-> n11
 }

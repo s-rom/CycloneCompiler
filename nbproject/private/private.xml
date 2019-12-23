@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/cyclonecompiler/DOT.java</file>
-            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/AST/Program.java</file>
-            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/AST/Function.java</file>
-            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/AST/FunctionList.java</file>
-            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/cyclonecompiler/Main.java</file>
-            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/AST/Node.java</file>
+            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/SymbolTable/Scope.java</file>
+            <file>file:/C:/Users/Sergi/Desktop/PracticaCompiladores/CycloneCompiler/src/SymbolTable/SymbolTable.java</file>
         </group>
     </open-files>
 </project-private>

@@ -787,7 +787,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 68: break;
           case 29: 
-            { return getSymbol(ParserSym.INT_TYPE);
+            { return getSymbol(ParserSym.INT_TYPE,yytext());
             } 
             // fall through
           case 69: break;
@@ -797,12 +797,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 70: break;
           case 31: 
-            { return getSymbol(ParserSym.VOID_TYPE);
+            { return getSymbol(ParserSym.VOID_TYPE,yytext());
             } 
             // fall through
           case 71: break;
           case 32: 
-            { return getSymbol(ParserSym.BOOL_TYPE);
+            { return getSymbol(ParserSym.BOOL_TYPE,yytext());
             } 
             // fall through
           case 72: break;
@@ -832,7 +832,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 77: break;
           case 38: 
-            { return getSymbol(ParserSym.STR_TYPE);
+            { return getSymbol(ParserSym.STR_TYPE,yytext());
             } 
             // fall through
           case 78: break;

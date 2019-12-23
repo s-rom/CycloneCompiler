@@ -7,13 +7,8 @@ func int main(int x)
 
 }
 
-func void kek()
-{
-    
-}
 
-
-func int prueba(string x)
+func void prueba(int y)
 {
-    
+
 }

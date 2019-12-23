@@ -45,14 +45,14 @@ Program     ::=   FunctionList:fl
                 | error
                 ;
 
-TypeFunc    ::=   BOOL_TYPE:type
-                    {: System.out.println("Reducido type int"); RESULT = type; :}
-                | STR_TYPE:type
-                     {: System.out.println("Reducido type int"); RESULT = type; :}
-                | INT_TYPE:type
-                    {: System.out.println("Reducido type int"); RESULT = type; :}
-                | VOID_TYPE:type
-                    {: System.out.println("Reducido type void"); RESULT = type; :}
+TypeFunc    ::=   BOOL_TYPE:t
+                    {: System.out.println("Reducido type bool: "+t); RESULT = t; :}
+                | STR_TYPE:t
+                     {: System.out.println("Reducido type str: "+t); RESULT = t; :}
+                | INT_TYPE:t
+                    {: System.out.println("Reducido type int: "+t); RESULT = t; :}
+                | VOID_TYPE:t
+                    {: System.out.println("Reducido type void: "+t); RESULT = t; :}
                 ;
 
 TypeVar     ::=   BOOL_TYPE 
@@ -74,7 +74,7 @@ Args        ::= |
                    Arg
                     {: RESULT = new Args(); RESULT.toDot(); :} 
                 |  Arg COMMA Args
-                    {: RESULT = new Args(); :}
+                    {: RESULT = new Args(); RESULT.toDot(); :}
                 ;
 
 Arg         ::=   TypeVar ID;

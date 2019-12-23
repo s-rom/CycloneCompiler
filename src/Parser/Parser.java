@@ -357,10 +357,10 @@ class CUP$Parser$actions {
           case 3: // TypeFunc ::= BOOL_TYPE 
             {
               String RESULT =null;
-		int typeleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int typeright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String type = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 System.out.println("Reducido type int"); RESULT = type; 
+		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		 System.out.println("Reducido type bool: "+t); RESULT = t; 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("TypeFunc",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -369,10 +369,10 @@ class CUP$Parser$actions {
           case 4: // TypeFunc ::= STR_TYPE 
             {
               String RESULT =null;
-		int typeleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int typeright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String type = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 System.out.println("Reducido type int"); RESULT = type; 
+		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		 System.out.println("Reducido type str: "+t); RESULT = t; 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("TypeFunc",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -381,10 +381,10 @@ class CUP$Parser$actions {
           case 5: // TypeFunc ::= INT_TYPE 
             {
               String RESULT =null;
-		int typeleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int typeright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String type = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 System.out.println("Reducido type int"); RESULT = type; 
+		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		 System.out.println("Reducido type int: "+t); RESULT = t; 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("TypeFunc",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -393,10 +393,10 @@ class CUP$Parser$actions {
           case 6: // TypeFunc ::= VOID_TYPE 
             {
               String RESULT =null;
-		int typeleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int typeright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String type = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 System.out.println("Reducido type void"); RESULT = type; 
+		int tleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
+		String t = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		 System.out.println("Reducido type void: "+t); RESULT = t; 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("TypeFunc",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -498,7 +498,7 @@ class CUP$Parser$actions {
           case 15: // Args ::= Arg COMMA Args 
             {
               Node RESULT =null;
-		 RESULT = new Args(); 
+		 RESULT = new Args(); RESULT.toDot(); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Args",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

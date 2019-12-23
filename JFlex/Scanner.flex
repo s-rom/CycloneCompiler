@@ -54,10 +54,10 @@ comment2    = "//"[^\n\r]*
 
 %%
 
-"string"    {return getSymbol(ParserSym.STR_TYPE);}
-"int"       {return getSymbol(ParserSym.INT_TYPE);}
-"void"      {return getSymbol(ParserSym.VOID_TYPE);}
-"bool"      {return getSymbol(ParserSym.BOOL_TYPE);}
+"string"    {return getSymbol(ParserSym.STR_TYPE,yytext());}
+"int"       {return getSymbol(ParserSym.INT_TYPE,yytext());}
+"void"      {return getSymbol(ParserSym.VOID_TYPE,yytext());}
+"bool"      {return getSymbol(ParserSym.BOOL_TYPE,yytext());}
 
 "while"     {return getSymbol(ParserSym.WHILE);}
 "if"        {return getSymbol(ParserSym.IF);}
