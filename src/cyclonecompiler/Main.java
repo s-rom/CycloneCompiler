@@ -7,21 +7,33 @@ import java.io.FileReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import java_cup.runtime.SymbolFactory;
 
 public class Main {
     
     public static void main (String [] args){
-        final String FILE_NAME = ".\\cyclone_src\\prueba_ast2.cc";
+        final String FILE_NAME = ".\\cyclone_src\\prueba_errores_lexicos.cc";
 //        final String FILE_NAME = ".\\cyclone_src\\program.cc";
         
         try {
-            DOT.initWriter(".\\dot\\prueba_ast2.dot");
+            DOT.initWriter(".\\dot\\prueba_errores_lexicos.dot");
             
             SymbolFactory sf = new ComplexSymbolFactory();
             Scanner scanner = new Scanner(new FileReader(FILE_NAME));
-            Parser parser = new Parser(scanner, sf);
-            parser.parse();
+//            Parser parser = new Parser(scanner, sf);
+//            parser.parse();
+            
+            
+            ComplexSymbol cs = (ComplexSymbol)scanner.next_token();
+            while (cs.sym != ParserSym.EOF)
+            {
+                System.out.print(ParserSym.terminalNames[cs.sym]);
+                Object attr = cs.value;
+                if (attr != null && cs.sym == ParserSym.ID) System.out.println(" : "+attr);
+                else System.out.println("");
+                cs = (ComplexSymbol)scanner.next_token();
+            }
             
             DOT.closeWriter();
         } catch (FileNotFoundException ex) {

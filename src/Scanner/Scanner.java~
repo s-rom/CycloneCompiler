@@ -578,6 +578,62 @@ public class Scanner implements java_cup.runtime.Scanner {
     while (true) {
       zzMarkedPosL = zzMarkedPos;
 
+      boolean zzR = false;
+      int zzCh;
+      int zzCharCount;
+      for (zzCurrentPosL = zzStartRead  ;
+           zzCurrentPosL < zzMarkedPosL ;
+           zzCurrentPosL += zzCharCount ) {
+        zzCh = Character.codePointAt(zzBufferL, zzCurrentPosL, zzMarkedPosL);
+        zzCharCount = Character.charCount(zzCh);
+        switch (zzCh) {
+        case '\u000B':  // fall through
+        case '\u000C':  // fall through
+        case '\u0085':  // fall through
+        case '\u2028':  // fall through
+        case '\u2029':
+          yyline++;
+          yycolumn = 0;
+          zzR = false;
+          break;
+        case '\r':
+          yyline++;
+          yycolumn = 0;
+          zzR = true;
+          break;
+        case '\n':
+          if (zzR)
+            zzR = false;
+          else {
+            yyline++;
+            yycolumn = 0;
+          }
+          break;
+        default:
+          zzR = false;
+          yycolumn += zzCharCount;
+        }
+      }
+
+      if (zzR) {
+        // peek one character ahead if it is \n (if we have counted one line too much)
+        boolean zzPeek;
+        if (zzMarkedPosL < zzEndReadL)
+          zzPeek = zzBufferL[zzMarkedPosL] == '\n';
+        else if (zzAtEOF)
+          zzPeek = false;
+        else {
+          boolean eof = zzRefill();
+          zzEndReadL = zzEndRead;
+          zzMarkedPosL = zzMarkedPos;
+          zzBufferL = zzBuffer;
+          if (eof) 
+            zzPeek = false;
+          else 
+            zzPeek = zzBufferL[zzMarkedPosL] == '\n';
+        }
+        if (zzPeek) yyline--;
+      }
       zzAction = -1;
 
       zzCurrentPosL = zzCurrentPos = zzStartRead = zzMarkedPosL;
@@ -647,7 +703,7 @@ public class Scanner implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("Error léxico: "+yytext());
+            { System.out.println("Error léxico: \""+yytext()+"\"\n Encontrado en la fila "+yyline+", columna"+yycolumn);
             } 
             // fall through
           case 41: break;
@@ -667,12 +723,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 44: break;
           case 5: 
-            { return getSymbol(ParserSym.DIV);
+            { return getSymbol(ParserSym.DIV,yytext());
             } 
             // fall through
           case 45: break;
           case 6: 
-            { return getSymbol(ParserSym.MULT);
+            { return getSymbol(ParserSym.MULT,yytext());
             } 
             // fall through
           case 46: break;
@@ -707,7 +763,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 52: break;
           case 13: 
-            { return getSymbol(ParserSym.ASSIGN);
+            { return getSymbol(ParserSym.ASSIGN,yytext());
             } 
             // fall through
           case 53: break;
@@ -717,27 +773,27 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 54: break;
           case 15: 
-            { return getSymbol(ParserSym.GT);
+            { return getSymbol(ParserSym.GT,yytext());
             } 
             // fall through
           case 55: break;
           case 16: 
-            { return getSymbol(ParserSym.LT);
+            { return getSymbol(ParserSym.LT,yytext());
             } 
             // fall through
           case 56: break;
           case 17: 
-            { return getSymbol(ParserSym.SUM);
+            { return getSymbol(ParserSym.SUM,yytext());
             } 
             // fall through
           case 57: break;
           case 18: 
-            { return getSymbol(ParserSym.SUB);
+            { return getSymbol(ParserSym.SUB,yytext());
             } 
             // fall through
           case 58: break;
           case 19: 
-            { return getSymbol(ParserSym.MOD);
+            { return getSymbol(ParserSym.MOD,yytext());
             } 
             // fall through
           case 59: break;
@@ -757,22 +813,22 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 62: break;
           case 23: 
-            { return getSymbol(ParserSym.EQ);
+            { return getSymbol(ParserSym.EQ,yytext());
             } 
             // fall through
           case 63: break;
           case 24: 
-            { return getSymbol(ParserSym.NE);
+            { return getSymbol(ParserSym.NE,yytext());
             } 
             // fall through
           case 64: break;
           case 25: 
-            { return getSymbol(ParserSym.GE);
+            { return getSymbol(ParserSym.GE,yytext());
             } 
             // fall through
           case 65: break;
           case 26: 
-            { return getSymbol(ParserSym.LE);
+            { return getSymbol(ParserSym.LE,yytext());
             } 
             // fall through
           case 66: break;

@@ -13,6 +13,8 @@ import Parser.ParserSym;
 %%
 
 %cup
+%line
+%column
 %public
 %class Scanner
 
@@ -111,4 +113,4 @@ comment2    = "//"[^\n\r]*
 {comment1}  {}
 {comment2}  {}
 
-[^] {System.out.println("Error léxico: "+yytext());}
+[^] {System.out.println("Error léxico: \""+yytext()+"\"\nEncontrado en la fila "+yyline+", columna"+yycolumn);}
