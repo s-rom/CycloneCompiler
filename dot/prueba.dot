@@ -1,4 +1,5 @@
 digraph ccTree {
+<<<<<<< HEAD
 	n0 [label = "Primary"]
 	n1 [label = "INT_LIT: 3"]
 	n0-> n1
@@ -46,4 +47,31 @@ digraph ccTree {
 	n22-> n19
 	n23 [label = "Program"]
 	n23-> n22
+=======
+	n0 [label = "Args"]
+	n1 [label = "Block"]
+	n2 [label = "Function"]
+	n3 [label = "Type: int"]
+	n4 [label = "ID: main"]
+	n2-> n3
+	n2-> n4
+	n2-> n0
+	n2-> n1
+	n5 [label = "Args"]
+	n6 [label = "Block"]
+	n7 [label = "Function"]
+	n8 [label = "Type: void"]
+	n9 [label = "ID: prueba"]
+	n7-> n8
+	n7-> n9
+	n7-> n5
+	n7-> n6
+	n10 [label = "FunctionList"]
+	n10-> n7
+	n11 [label = "FunctionList"]
+	n11-> n10
+	n11-> n2
+	n12 [label = "Program"]
+	n12-> n11
+>>>>>>> 2c26ddbbe5f2771d849921d8f51edcb42a77fd7c
 }
