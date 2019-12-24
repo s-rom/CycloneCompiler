@@ -54,10 +54,10 @@ comment2    = "//"[^\n\r]*
 
 %%
 
-"string"    {return getSymbol(ParserSym.STR_TYPE);}
-"int"       {return getSymbol(ParserSym.INT_TYPE);}
-"void"      {return getSymbol(ParserSym.VOID_TYPE);}
-"bool"      {return getSymbol(ParserSym.BOOL_TYPE);}
+"string"    {return getSymbol(ParserSym.STR_TYPE,yytext());}
+"int"       {return getSymbol(ParserSym.INT_TYPE,yytext());}
+"void"      {return getSymbol(ParserSym.VOID_TYPE,yytext());}
+"bool"      {return getSymbol(ParserSym.BOOL_TYPE,yytext());}
 
 "while"     {return getSymbol(ParserSym.WHILE);}
 "if"        {return getSymbol(ParserSym.IF);}
@@ -75,19 +75,20 @@ comment2    = "//"[^\n\r]*
 ";"         {return getSymbol(ParserSym.SEMICOLON);}
 ","         {return getSymbol(ParserSym.COMMA);}
 
-"="         {return getSymbol(ParserSym.ASSIGN);}
-"=="        {return getSymbol(ParserSym.EQ);}
-"!="        {return getSymbol(ParserSym.NE);}
-">"         {return getSymbol(ParserSym.GT);}
-"<"         {return getSymbol(ParserSym.LT);}
-">="        {return getSymbol(ParserSym.GE);}
-"<="        {return getSymbol(ParserSym.LE);}
+"="         {return getSymbol(ParserSym.ASSIGN,yytext());}
+"=="        {return getSymbol(ParserSym.EQ,yytext());}
+"!="        {return getSymbol(ParserSym.NE,yytext());}
+">"         {return getSymbol(ParserSym.GT,yytext());}
+"<"         {return getSymbol(ParserSym.LT,yytext());}
+">="        {return getSymbol(ParserSym.GE,yytext());}
+"<="        {return getSymbol(ParserSym.LE,yytext());}
 
-"+"         {return getSymbol(ParserSym.SUM);}
-"-"         {return getSymbol(ParserSym.SUB);}
-"*"         {return getSymbol(ParserSym.MULT);}
-"/"         {return getSymbol(ParserSym.DIV);}
-"%"         {return getSymbol(ParserSym.MOD);}
+"+"         {return getSymbol(ParserSym.SUM,yytext());}
+"-"         {return getSymbol(ParserSym.SUB,yytext());}
+"*"         {return getSymbol(ParserSym.MULT,yytext());}
+"/"         {return getSymbol(ParserSym.DIV,yytext());}
+"%"         {return getSymbol(ParserSym.MOD,yytext());}
+
 //"++"        {return getSymbol(ParserSym.INC");}
 //"--"        {return getSymbol(ParserSym.DEC");}
 

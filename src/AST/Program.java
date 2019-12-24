@@ -7,6 +7,7 @@ public class Program extends Node{
     
     public Program(FunctionList fl){
         this.fl = fl;
+        toDot();
     }
 
     @Override

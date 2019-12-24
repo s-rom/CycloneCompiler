@@ -2,19 +2,22 @@ package Parser;
 import java_cup.runtime.*;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import AST.*;
+import AST.Primary.PrimaryType;
+import AST.Instruction.InstructionType;
+
 
 /* ------------- TERMINALS ------------- */
 
 terminal            WHILE, IF, ELSE, FUNC, OUTPUT, INPUT, RETURN; /* while, if, else, func, intput(), output() */
 terminal            LPAREN, RPAREN, LCURL, RCURL, COMMA, SEMICOLON; /* ( ) { } , ; */
-terminal            AND, OR, NOT;
-terminal            SUM, SUB, MULT, DIV, MOD; /* +, -, *, /, %  */
-terminal            GE, LE, GT, LT, NE, EQ; /* >=, <=, >, <, !=, == */
+terminal String     AND, OR, NOT;
+terminal String     SUM, SUB, MULT, DIV, MOD; /* +, -, *, /, %  */
+terminal String     GE, LE, GT, LT, NE, EQ; /* >=, <=, >, <, !=, == */
 terminal            ASSIGN; /* = */
 terminal Integer    INT_LIT; /* 42 */
 terminal String     STR_LIT; /* "hola" */
 terminal Boolean    BOOL_LIT; /* true, false */  
-terminal            UNARI_SUB;
+terminal String     UNARI_SUB; /*-3, -a*b*/
 terminal String     ID; /* hola */
 terminal String     STR_TYPE, INT_TYPE, VOID_TYPE, BOOL_TYPE; /* string, int, void, bool */
 
@@ -25,7 +28,8 @@ non terminal Node     Loop, Conditional, Declaration, Instruction;
 non terminal Node     WhileLoop;
 non terminal Node     IfCondition;
 non terminal Node     Assignation;
-non terminal Node     Expr, BinOp, UnOp, UnExpr, Primary, ExprList, ExprArg;
+non terminal Node     Expr, UnExpr, ExprList, ExprArg, Primary;
+non terminal String   BinOp, UnOp;
 non terminal String   TypeFunc, TypeVar;
 
 precedence left SUM, SUB;
@@ -40,118 +44,182 @@ precedence right NOT;
 
 start with Program;
 
-Program     ::=   FunctionList:fl
-                    {: RESULT = new Program((FunctionList) fl); RESULT.toDot(); :}
-                | error
-                ;
+Program         ::=   FunctionList:fl
+                        {: RESULT = new Program((FunctionList) fl); :}
+                    | error
+                    ;
 
-TypeFunc    ::=   BOOL_TYPE:type
-                    {: System.out.println("Reducido type int"); RESULT = type; :}
-                | STR_TYPE:type
-                     {: System.out.println("Reducido type int"); RESULT = type; :}
-                | INT_TYPE:type
-                    {: System.out.println("Reducido type int"); RESULT = type; :}
-                | VOID_TYPE:type
-                    {: System.out.println("Reducido type void"); RESULT = type; :}
-                ;
+TypeFunc        ::=   BOOL_TYPE:t
+                        {: RESULT = t; :}
+                    | STR_TYPE:t
+                        {: RESULT = t; :}
+                    | INT_TYPE:t
+                        {: RESULT = t; :}
+                    | VOID_TYPE:t
+                        {: RESULT = t; :}
+                    ;
 
-TypeVar     ::=   BOOL_TYPE 
-                | STR_TYPE
-                | INT_TYPE
-                ;
+TypeVar         ::=   BOOL_TYPE:t
+                        {: RESULT = t; :}
+                    | STR_TYPE:t
+                        {: RESULT = t; :}
+                    | INT_TYPE:t
+                        {: RESULT = t; :}
+                    ;
 
-FunctionList ::=   Function:f FunctionList:fl
-                    {: RESULT = new FunctionList((Function)f, (FunctionList)fl); RESULT.toDot(); :}
-                 | Function:f
-                    {: RESULT = new FunctionList((Function)f, null); RESULT.toDot(); :}
-                 ;
+FunctionList    ::=   Function:f FunctionList:fl
+                        {: RESULT = new FunctionList((Function) f, (FunctionList) fl); :}
+                     | Function:f
+                        {: RESULT = new FunctionList((Function) f, null); :}
+                     ;
 
-Function    ::=   FUNC TypeFunc:t ID:id LPAREN Args:args RPAREN LCURL Block:b RCURL
-                    {: System.out.println("reducido Function: "+t); RESULT = new Function(t,id,(Args)args,(Block)b); RESULT.toDot(); :}
-                ;
+Function        ::=   FUNC TypeFunc:t ID:id LPAREN Args:args RPAREN LCURL Block:b RCURL
+                        {: RESULT = new Function(t, id, (Args) args, (Block) b); :}
+                    ;
 
-Args        ::= | 
-                   Arg
-                    {: RESULT = new Args(); RESULT.toDot(); :} 
-                |  Arg COMMA Args
-                    {: RESULT = new Args(); :}
-                ;
+Args            ::= | 
+                      Arg:a
+                        {: RESULT = new Args((Arg) a, null); :} 
+                    | Arg:a COMMA Args:as
+                        {: RESULT = new Args((Arg) a, (Args) as); :}
+                    ;
 
-Arg         ::=   TypeVar ID;
+Arg             ::=   TypeVar:t ID:id
+                        {: RESULT = new Arg(t, id); :}
+                    ;
 
 
 
-Block       ::=   StatementList
-                    {: RESULT = new Block(); RESULT.toDot(); :}
-                ;
+Block           ::=   StatementList:sl
+                        {: RESULT = new Block((StatementList) sl); :}
+                    ;
 
-StatementList ::=   Statement StatementList
-                  |
+StatementList   ::= |
+                      Statement:s StatementList:sl
+                        {: RESULT = new StatementList((Statement) s, (StatementList) sl); :} 
+                    ;
+
+Statement       ::=   Loop:n
+                        {: RESULT = new Statement(n); :}
+                    | Conditional:n
+                        {: RESULT = new Statement(n); :}
+                    | Instruction:n SEMICOLON
+                        {: RESULT = new Statement(n); :}
+                    ;
+
+Loop            ::=   WhileLoop:wl
+                        {: RESULT = new Loop((WhileLoop) wl); :}
+                    ;
+WhileLoop       ::=   WHILE LPAREN Expr:e RPAREN LCURL Block:b RCURL
+                        {: RESULT = new WhileLoop((Expr) e, (Block) b); :}
+                    ;
+
+Conditional     ::=   IfCondition:ic
+                        {: RESULT = new Conditional((IfCondition) ic); :}
+                    ;
+IfCondition     ::=   IF LPAREN Expr:e RPAREN LCURL Block:b1 RCURL
+                        {: RESULT = new IfCondition((Expr) e, (Block) b1, null); :}
+                    | IF LPAREN Expr:e RPAREN LCURL Block:b1 RCURL ELSE LCURL Block:b2 RCURL
+                        {: RESULT = new IfCondition((Expr) e, (Block) b1, (Block) b2); :}
+                    ;
+
+Instruction     ::=   // Llamada a funcion foo(arg1, arg2, ...)
+                      ID:id LPAREN ExprArg:ea RPAREN
+                        {: RESULT = new Instruction(new FunctionCall(id, (ExprArg)ea)); :}
+                    | // input()
+                      INPUT LPAREN RPAREN
+                        {: RESULT = new Instruction(InstructionType.INPUT); :}
+                    | // output(bla)
+                      OUTPUT LPAREN Expr:e RPAREN
+                        {: RESULT = new Instruction((Expr)e, InstructionType.OUTPUT); :}
+                    | // return bla
+                      RETURN Expr:e
+                        {: RESULT = new Instruction((Expr)e, InstructionType.RETURN); :}
+                    | // lhs = rhs
+                      Assignation:assign
+                        {: RESULT = new Instruction((Assignation)assign); :}
+                    | // type lhs = rhs; type lhs2;
+                      Declaration:declar
+                        {: RESULT = new Instruction((Declaration)declar); :}
+                    ;
+
+ExprArg         ::= |
+                      Expr:e ExprList:el
+                        {: RESULT = new ExprArg((Expr)e, (ExprList)el);  :}
+                    ;
+
+ExprList        ::= | 
+                      COMMA Expr:e ExprList:el
+                        {: RESULT = new ExprList((Expr)e, (ExprList)el); :}
                   ;
 
-Statement   ::=   Loop 
-                | Conditional
-                | Instruction SEMICOLON
-                ;
+Declaration     ::=   TypeVar:t ID:id 
+                        {: RESULT = new Declaration(t,id,null); :}
+                    | TypeVar:t ID:id Assignation:a
+                        {: RESULT = new Declaration(t,id,(Assignation)a); :}
+                    ;
 
-
-Loop        ::=   WhileLoop;
-Conditional ::=   IfCondition;
-
-WhileLoop   ::=   WHILE LPAREN Expr RPAREN LCURL Block RCURL;
-IfCondition ::=   IF LPAREN Expr RPAREN LCURL Block RCURL
-                | IF LPAREN Expr RPAREN LCURL Block RCURL ELSE LCURL Block RCURL
-                ;
-
-Instruction ::=   ID LPAREN ExprArg RPAREN // Llamada a funcion foo(arg1, arg2, ...)
-                | INPUT LPAREN RPAREN   // input(var)
-                | OUTPUT LPAREN Expr RPAREN  // output(bla)
-                | RETURN Expr           // return bla
-                | Assignation           // lhs = rhs
-                | Declaration           // type lhs = rhs; type lhs2;
-                ;
-
-ExprArg     ::=   | Expr ExprList;
-ExprList    ::=   | COMMA Expr ExprList;
-
-Declaration ::=   TypeVar ID 
-                | TypeVar Assignation  
-                ;
-
-Assignation ::=   ID ASSIGN Expr
-                ;
+Assignation     ::=   ASSIGN Expr:e
+                        {: RESULT = new Assignation((Expr)e); :}
+                    ;
 
 /* EXPRESIONES ARITMETICOLÓGICAS */
-Expr        ::=   UnExpr 
-                | Expr BinOp UnExpr
-                ;
-UnExpr      ::=   UnOp UnExpr
-                | Primary
-                ;
+Expr            ::=   UnExpr:ue
+                        {: RESULT = new Expr(null, null, (UnExpr) ue); :}
+                    | Expr:e BinOp:bo UnExpr:ue
+                        {: RESULT = new Expr((Expr) e, bo, (UnExpr) ue); :}
+                    ;
+UnExpr          ::=   UnOp:u UnExpr:e
+                        {: RESULT = new UnExpr(u, (UnExpr)e, null); :}
+                    | Primary:p
+                        {: RESULT = new UnExpr(null, null, (Primary)p); :}
+                    ;
 
-BinOp       ::=   OR
-                | AND 
-                | SUM
-                | SUB 
-                | MULT 
-                | DIV 
-                | MOD 
-                | GT 
-                | LT 
-                | GE 
-                | LE
-                | EQ
-                | NE
-                ;
+BinOp           ::=   OR:bo
+                        {: RESULT = bo; :}
+                    | AND:bo
+                        {: RESULT = bo; :}
+                    | SUM:bo
+                        {: RESULT = bo; :}
+                    | SUB:bo
+                        {: RESULT = bo; :}
+                    | MULT:bo
+                        {: RESULT = bo; :}
+                    | DIV:bo
+                        {: RESULT = bo; :}
+                    | MOD:bo
+                        {: RESULT = bo; :}
+                    | GT:bo
+                        {: RESULT = bo; :}
+                    | LT:bo
+                        {: RESULT = bo; :}
+                    | GE:bo
+                        {: RESULT = bo; :}
+                    | LE:bo
+                        {: RESULT = bo; :}
+                    | EQ:bo
+                        {: RESULT = bo; :}
+                    | NE:bo
+                        {: RESULT = bo; :}
+                    ;
 
-UnOp        ::=   SUB %prec UNARI_SUB
-                | NOT 
-                ;
+UnOp            ::=   SUB:s 
+                        {: RESULT = s; :} 
+                      %prec UNARI_SUB
+                    | NOT:n
+                        {:  RESULT = n; :}
+                    ;
 
-Primary     ::=   LPAREN Expr RPAREN // ( ID )
-                | ID LPAREN ExprArg RPAREN // llamada a funcion que devuelva valor: getVal(x,y)
-                | ID 
-                | INT_LIT
-                | STR_LIT
-                | BOOL_LIT
-                ;
+Primary         ::= LPAREN Expr:e RPAREN         // (a+3)
+                        {: RESULT = new Primary((Expr) e); :}
+                    | ID:id LPAREN ExprArg:param RPAREN  // foo(x,y)
+                        {: RESULT = new Primary(new FunctionCall(id,(ExprArg)param),id); :}
+                    | ID:id                        // b
+                        {: RESULT = new Primary(id,PrimaryType.ID); :}
+                    | INT_LIT:i                   // 34
+                        {: RESULT = new Primary(i); :}
+                    | STR_LIT:str                   // "hola"
+                        {: RESULT = new Primary(str,PrimaryType.STR_LIT); :}
+                    | BOOL_LIT:b                  // false
+                        {: RESULT = new Primary(b); :}
+                    ;

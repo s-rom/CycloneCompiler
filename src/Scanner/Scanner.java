@@ -667,12 +667,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 44: break;
           case 5: 
-            { return getSymbol(ParserSym.DIV);
+            { return getSymbol(ParserSym.DIV,yytext());
             } 
             // fall through
           case 45: break;
           case 6: 
-            { return getSymbol(ParserSym.MULT);
+            { return getSymbol(ParserSym.MULT,yytext());
             } 
             // fall through
           case 46: break;
@@ -707,7 +707,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 52: break;
           case 13: 
-            { return getSymbol(ParserSym.ASSIGN);
+            { return getSymbol(ParserSym.ASSIGN,yytext());
             } 
             // fall through
           case 53: break;
@@ -717,27 +717,27 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 54: break;
           case 15: 
-            { return getSymbol(ParserSym.GT);
+            { return getSymbol(ParserSym.GT,yytext());
             } 
             // fall through
           case 55: break;
           case 16: 
-            { return getSymbol(ParserSym.LT);
+            { return getSymbol(ParserSym.LT,yytext());
             } 
             // fall through
           case 56: break;
           case 17: 
-            { return getSymbol(ParserSym.SUM);
+            { return getSymbol(ParserSym.SUM,yytext());
             } 
             // fall through
           case 57: break;
           case 18: 
-            { return getSymbol(ParserSym.SUB);
+            { return getSymbol(ParserSym.SUB,yytext());
             } 
             // fall through
           case 58: break;
           case 19: 
-            { return getSymbol(ParserSym.MOD);
+            { return getSymbol(ParserSym.MOD,yytext());
             } 
             // fall through
           case 59: break;
@@ -757,22 +757,22 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 62: break;
           case 23: 
-            { return getSymbol(ParserSym.EQ);
+            { return getSymbol(ParserSym.EQ,yytext());
             } 
             // fall through
           case 63: break;
           case 24: 
-            { return getSymbol(ParserSym.NE);
+            { return getSymbol(ParserSym.NE,yytext());
             } 
             // fall through
           case 64: break;
           case 25: 
-            { return getSymbol(ParserSym.GE);
+            { return getSymbol(ParserSym.GE,yytext());
             } 
             // fall through
           case 65: break;
           case 26: 
-            { return getSymbol(ParserSym.LE);
+            { return getSymbol(ParserSym.LE,yytext());
             } 
             // fall through
           case 66: break;
@@ -787,7 +787,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 68: break;
           case 29: 
-            { return getSymbol(ParserSym.INT_TYPE);
+            { return getSymbol(ParserSym.INT_TYPE,yytext());
             } 
             // fall through
           case 69: break;
@@ -797,12 +797,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 70: break;
           case 31: 
-            { return getSymbol(ParserSym.VOID_TYPE);
+            { return getSymbol(ParserSym.VOID_TYPE,yytext());
             } 
             // fall through
           case 71: break;
           case 32: 
-            { return getSymbol(ParserSym.BOOL_TYPE);
+            { return getSymbol(ParserSym.BOOL_TYPE,yytext());
             } 
             // fall through
           case 72: break;
@@ -832,7 +832,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 77: break;
           case 38: 
-            { return getSymbol(ParserSym.STR_TYPE);
+            { return getSymbol(ParserSym.STR_TYPE,yytext());
             } 
             // fall through
           case 78: break;

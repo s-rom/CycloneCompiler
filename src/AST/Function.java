@@ -16,24 +16,27 @@ public class Function extends Node{
         this.id = id;
         this.args = args;
         this.b = b;
+        toDot();
     }
-
     
     @Override
     public void toDot() {
-        DOT.writeNode(nodeNumber, "Function");
+        DOT.writeNode(nodeNumber, "{Function | {Type: "+type+" | ID: "+id+" "
+                + "| <a>Args | <b>Block}}","record");
       
-        int idType = DOT.nextNode();
-        int idID = DOT.nextNode();
+//        DOT.writeNode(nodeNumber, "{FunctionCall | { ID: "+id+" | <e> ExprArg}}","record");
 
-        DOT.writeNode(idType, "Type: "+type);
-        DOT.writeNode(idID, "ID: "+id);
-        
-        DOT.writeEdge(nodeNumber, idType);
-        DOT.writeEdge(nodeNumber, idID);
+//        int idType = DOT.nextNode();
+//        int idID = DOT.nextNode();
+//        
+//        DOT.writeNode(idType, "Type: "+type);
+//        DOT.writeNode(idID, "ID: "+id);
+//        
+//        DOT.writeEdge(nodeNumber, idType);
+//        DOT.writeEdge(nodeNumber, idID);
 
-        if (args != null) DOT.writeEdge(nodeNumber, args.getNodeNumber());
-        if (b != null) DOT.writeEdge(nodeNumber, b.getNodeNumber());
-
+        if (args != null)  DOT.writeEdge(nodeNumber,"a", args.getNodeNumber());
+        if (b != null) DOT.writeEdge(nodeNumber, "b",b.getNodeNumber());
     }
+    
 }

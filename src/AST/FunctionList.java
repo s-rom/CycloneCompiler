@@ -4,19 +4,21 @@ import cyclonecompiler.DOT;
 
 public class FunctionList extends Node{
     
-    private FunctionList fl;
     private Function f;
+    private FunctionList fl;
     
     public FunctionList(Function f, FunctionList fl){
         this.f = f;
         this.fl = fl;
+        toDot();
     }
 
     @Override
     public void toDot() {
-        DOT.writeNode(nodeNumber, "FunctionList");
-        if (fl != null) DOT.writeEdge(nodeNumber, fl.getNodeNumber());
-        if (f != null) DOT.writeEdge(nodeNumber, f.getNodeNumber());
+        DOT.writeNode(nodeNumber, "{FunctionList | {<f> Function | <fl> FunctionList}}",
+                "record");
+        if (f != null) DOT.writeEdge(nodeNumber, "f", f.getNodeNumber());
+        if (fl != null) DOT.writeEdge(nodeNumber, "fl", fl.getNodeNumber());
     }
     
 }

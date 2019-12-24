@@ -1,19 +1,21 @@
 
-
-
-func int main(int x)
+func int main(int a, int b)
 {
+    int c = a + b;
 
-
+    if(c > 5){
+        return c;
+    }else{
+        return a;
+    }
 }
 
-func void kek()
+func void prueba(int n)
 {
-    
-}
-
-
-func int prueba(string x)
-{
-    
+    int goal = 100;
+    while (n <= goal)
+    {
+        n = n + 1;
+        output(n);
+    }
 }

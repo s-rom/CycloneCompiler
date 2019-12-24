@@ -12,11 +12,11 @@ import java_cup.runtime.SymbolFactory;
 public class Main {
     
     public static void main (String [] args){
-        final String FILE_NAME = ".\\cyclone_src\\prueba_ast.cc";
+        final String FILE_NAME = ".\\cyclone_src\\prueba_ast2.cc";
+//        final String FILE_NAME = ".\\cyclone_src\\program.cc";
         
         try {
-            
-            DOT.initWriter(".\\dot\\prueba.dot");
+            DOT.initWriter(".\\dot\\prueba_ast2.dot");
             
             SymbolFactory sf = new ComplexSymbolFactory();
             Scanner scanner = new Scanner(new FileReader(FILE_NAME));
