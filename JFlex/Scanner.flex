@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import java_cup.runtime.*;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+import java_cup.runtime.ComplexSymbolFactory.Location;
+
+import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
 
@@ -29,12 +32,19 @@ import Parser.ParserSym;
 
 
 %{
+
     private Symbol getSymbol(int type) {
-        return new ComplexSymbol(ParserSym.terminalNames[type], type);
+        String tokenName = ParserSym.terminalNames[type];
+        InfoDump.addTokenInfo(tokenName, yyline, yycolumn);
+        Location ll = new Location(yyline,yycolumn);
+        return new ComplexSymbol(tokenName, type, ll, ll);
     }
     
     private Symbol getSymbol(int type, Object value) {
-        return new ComplexSymbol(ParserSym.terminalNames[type], type, value);
+        String tokenName = ParserSym.terminalNames[type];
+        InfoDump.addTokenInfo(tokenName, yyline, yycolumn,value);
+        Location ll = new Location(yyline,yycolumn);
+        return new ComplexSymbol(tokenName, type, ll, ll, value);
     }
 %} 
 
@@ -113,4 +123,4 @@ comment2    = "//"[^\n\r]*
 {comment1}  {}
 {comment2}  {}
 
-[^] {System.out.println("Error léxico: \""+yytext()+"\"\nEncontrado en la fila "+yyline+", columna"+yycolumn);}
+[^] {System.out.println("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn);}

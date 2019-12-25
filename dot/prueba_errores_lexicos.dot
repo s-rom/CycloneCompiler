@@ -1,4 +1,20 @@
 digraph ccTree {
 graph[nodesep="1"]
 	node [shape=box]
+	node [shape=box]
+	n0 [label = "Declaration: int y"]
+	n1 [label = "Instruction"]
+	n1-> n0
+	n2 [label = "Statement"]
+	n2-> n1
+	n3 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n3:s-> n2
+	n4 [label = "Block"]
+	n4-> n3
+	n5 [label = "{Function | {Type: void | ID: main | <a>Args | <b>Block}}", shape="record"]
+	n5:b-> n4
+	n6 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n6:f-> n5
+	n7 [label = "Program"]
+	n7-> n6
 }

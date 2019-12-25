@@ -298,6 +298,40 @@ public class Parser extends java_cup.runtime.lr_parser {
   public int error_sym() {return 1;}
 
 
+
+    public String get_report_name(int sym){
+        final String[] report_names = new String[] {
+        "EOF","error","while","if","else","func","output","input","return",
+        "(",")","{","}",", (comma)","; (semicolon)","&&","||","!","+","-","*",
+        "/","%",">=","<=",">","<","!=","==","=","int literal","string literal",
+        "bool literal","-",
+        "ID","string type","int type","void type","bool type"
+        };
+        
+        return report_names[sym];
+    }
+  
+    @Override
+    public void syntax_error(Symbol current){
+        final String C = "\"";
+        ComplexSymbol cs = (ComplexSymbol) current;
+        int sym_code = ((Symbol)this.stack.peek()).sym;
+        Symbol prev_sym = (Symbol) this.stack.peek();
+        String prev = get_report_name(sym_code);
+        String found = get_report_name(cs.sym);
+        System.out.print("Syntax error: ");
+        
+        String found_attr = cs.value != null ? " ("+cs.value.toString()+")" : "";
+        String prev_attr = prev_sym.value != null ? " ("+prev_sym.value.toString()+")" : "";
+        
+        System.out.println("Found "+C+found + found_attr+C
+                +" after "+C+prev+prev_attr+C+" in line "+
+                (cs.xleft.getLine()+1)+", column "+(cs.xleft.getColumn()+1));
+    }
+
+
+
+
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$Parser$actions {
