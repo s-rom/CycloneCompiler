@@ -1,5 +1,5 @@
 ### ---------- Token File ----------
-### Format: (line,colum) TokenName Attribute?
+### Format: (line,colum) TokenName: Attribute?
 
 (0,0)	FUNC
 (0,5)	VOID_TYPE: void
@@ -10,6 +10,17 @@
 (2,4)	INT_TYPE: int
 (2,8)	ID: y
 (2,9)	SEMICOLON
-(3,0)	RCURL
-(3,1)	EOF
-(3,1)	EOF
+(3,4)	INT_TYPE: int
+(3,8)	ID: x
+(3,10)	ASSIGN: =
+(3,12)	INT_LIT: 2
+(3,13)	SEMICOLON
+(4,4)	ID: x
+(4,6)	ASSIGN: =
+(4,8)	ID: x
+(4,10)	SUM: +
+(4,12)	INT_LIT: 1
+(4,13)	SEMICOLON
+(5,0)	RCURL
+(5,1)	EOF
+(5,1)	EOF

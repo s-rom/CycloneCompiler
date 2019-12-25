@@ -4,10 +4,16 @@ import cyclonecompiler.DOT;
 
 public class Declaration extends Node{
 
-    
+    private Assignation assign;
     private String type;
     private String id;
-    private Assignation assign;
+    
+    
+    public Declaration(String type, String id){
+        this.type = type;
+        this.id = id;
+        toDot();
+    }
     
     public Declaration(String type, String id, Assignation assign){
         this.type = type;

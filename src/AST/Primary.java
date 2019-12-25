@@ -75,7 +75,7 @@ public class Primary extends Node {
             String label;
             switch(type){
                 case ID: label = "ID: "+id; break;
-                case STR_LIT: label = "STR_LIT: \""+str_lit+"\""; break;
+                case STR_LIT: label = "STR_LIT: "+str_lit; break;
                 case INT_LIT: label = "INT_LIT: "+int_lit; break;
                 case BOOL_LIT: label = "BOOL_LIT: "+bool_lit; break;
                 default:

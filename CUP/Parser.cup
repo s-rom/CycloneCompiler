@@ -59,7 +59,7 @@ terminal String     STR_TYPE, INT_TYPE, VOID_TYPE, BOOL_TYPE; /* string, int, vo
 non terminal Node     Program, Function, FunctionList;
 non terminal Node     Arg, Args;
 non terminal Node     Block, Statement, StatementList;
-non terminal Node     Loop, Conditional, Declaration, Instruction;
+non terminal Node     Loop, Conditional, Instruction;
 non terminal Node     WhileLoop;
 non terminal Node     IfCondition;
 non terminal Node     Assignation;
@@ -173,9 +173,6 @@ Instruction     ::=   // Llamada a funcion foo(arg1, arg2, ...)
                     | // lhs = rhs
                       Assignation:assign
                         {: RESULT = new Instruction((Assignation)assign); :}
-                    | // type lhs = rhs; type lhs2;
-                      Declaration:declar
-                        {: RESULT = new Instruction((Declaration)declar); :}
                     ;
 
 ExprArg         ::= |
@@ -188,14 +185,12 @@ ExprList        ::= |
                         {: RESULT = new ExprList((Expr)e, (ExprList)el); :}
                   ;
 
-Declaration     ::=   TypeVar:t ID:id 
-                        {: RESULT = new Declaration(t,id,null); :}
-                    | TypeVar:t ID:id Assignation:a
-                        {: RESULT = new Declaration(t,id,(Assignation)a); :}
-                    ;
-
-Assignation     ::=   ASSIGN Expr:e
-                        {: RESULT = new Assignation((Expr)e); :}
+Assignation     ::=   TypeVar:t ID:id //int x;
+                        {: RESULT = new Assignation(t,id,null);:}
+                    | TypeVar:t ID:id ASSIGN Expr:e //int x = ...;
+                        {: RESULT = new Assignation(t,id, (Expr) e);:}
+                    | ID:id ASSIGN Expr:e // x = ...;
+                        {: RESULT = new Assignation(id, (Expr)e); :}
                     ;
 
 /* EXPRESIONES ARITMETICOLÓGICAS */
