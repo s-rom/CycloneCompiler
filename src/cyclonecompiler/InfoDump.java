@@ -68,6 +68,7 @@ public class InfoDump {
         try {
             errorWriter.write(msg);
             errorWriter.newLine();
+            System.out.println(msg+"\n");
         } catch (IOException ex) {
             Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
         }

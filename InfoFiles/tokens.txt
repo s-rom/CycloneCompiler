@@ -7,7 +7,7 @@
 (0,14)	LPAREN
 (0,15)	RPAREN
 (1,0)	LCURL
-(2,4)	INT_TYPE: int
+(2,4)	ID: bla
 (2,8)	ID: y
 (2,9)	SEMICOLON
 (3,4)	INT_TYPE: int
@@ -22,5 +22,7 @@
 (4,12)	INT_LIT: 1
 (4,13)	SEMICOLON
 (5,0)	RCURL
+(5,1)	EOF
+(5,1)	EOF
 (5,1)	EOF
 (5,1)	EOF

@@ -2,22 +2,21 @@ package SymbolTable;
 
 public class TypeDescription extends Description{
 
-    private AtomicType tsb;
+    private AtomicType at;
     
-    
-    public TypeDescription(String typeName, AtomicType tsb){
+    public TypeDescription(String typeName, AtomicType at){
         super(typeName,DescriptionType.D_TYPE);
-        this.tsb = tsb;
+        this.at = at;
     }
     
     
     public AtomicType getAtomicType(){
-        return this.tsb;
+        return this.at;
     }
     
     @Override
     public String toString(){
-        return tsb.toString();
+        return at.toString();
     }
     
 }

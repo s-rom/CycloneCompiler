@@ -59,9 +59,10 @@ public class Main {
         ts = new SymbolTable();
         atomicBool = new AtomicType(Atomic.TS_BOOL, 0, 255, 1);
         atomicChar = new AtomicType(Atomic.TS_CHAR, 0, 255, 1);
-        atomicInt32 = new AtomicType(Atomic.TS_INT, -2147483648, +2147483647, 32);
-        atomicInt16 = new AtomicType(Atomic.TS_INT, -65536, +65535, 32);
+        atomicInt32 = new AtomicType(Atomic.TS_INT, -2147483648, +2147483647, 4);
+        atomicInt16 = new AtomicType(Atomic.TS_INT, -65536, +65535, 2);
         atomicNull = new AtomicType(Atomic.TS_NULL, 0, 0, 1);
+        
         
         
         Description dInt = new TypeDescription("int",atomicInt32); 
