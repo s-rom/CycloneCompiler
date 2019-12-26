@@ -16,5 +16,10 @@ public class Statement extends Node{
         DOT.writeNode(nodeNumber, "Statement");
         if (node != null) DOT.writeEdge(nodeNumber, node.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
         
 }

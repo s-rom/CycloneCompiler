@@ -4,22 +4,23 @@
 package SymbolTable;
 
 public class Description {
-
-    /* De aqui hacia abajo, 100% temporal */
     
-    String name;
-    String type;
+    protected String name;
+    protected DescriptionType dtype;
     
-    public Description(String name, String type){
+    public Description(String name, DescriptionType dtype){
         this.name = name;
-        this.type = type;
+        this.dtype = dtype;
     }
     
     
-    /* PARA PRUEBAS */
+    public DescriptionType getDescriptionType(){
+        return dtype;
+    }
+    
     @Override
     public String toString(){
-        return type+": "+name;
+        return name + " "+dtype;
     }
     
 }

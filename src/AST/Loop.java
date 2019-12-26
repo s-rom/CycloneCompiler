@@ -16,5 +16,10 @@ public class Loop extends Node{
         DOT.writeNode(nodeNumber, "Loop");
         if (wl != null) DOT.writeEdge(nodeNumber, wl.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
         
 }

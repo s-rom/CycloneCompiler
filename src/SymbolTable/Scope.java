@@ -5,6 +5,8 @@
 */
 package SymbolTable;
 
+import cyclonecompiler.InfoDump;
+import cyclonecompiler.InfoDump.ErrorType;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -29,10 +31,12 @@ public class Scope {
      */
     public boolean insert(String id, Description d){
         if (t.containsKey(id)){ // id already exists in this scope
-            System.out.println("[SymbolTable]: id "+id+" already exists in the current scope");
+            InfoDump.reportError("id \""+id+"\" already exists in the current scope", 
+                    ErrorType.SEMANTIC);
             return false;
         } else {
             t.put(id, d);
+            InfoDump.addTableSymbolEntry(id+" | ",d);
             return true;
         }
     }
@@ -57,15 +61,22 @@ public class Scope {
     }
     
     
-    /* PARA PRUEBAS */
     
     @Override
     public String toString(){
+        String spc = getNSpaces(level);
         String res = "LEVEL: "+level+"\n";
         Set<String> keys = t.keySet();
         for(String key: keys){
-            res += key+" -- "+t.get(key)+"\n";
+            res += spc+key+"("+t.get(key).dtype+") "+t.get(key)+"\n";
         }    
         return res;
     }
+    
+    public String getNSpaces(int n){
+        String res ="";
+        for (int i = 0; i<n; i++) res+=" ";
+        return res;
+    }
+    
 }

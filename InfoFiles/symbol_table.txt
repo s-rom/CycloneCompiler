@@ -1,0 +1,9 @@
+### ---------- Symbol Table ----------
+int | TS_INT [2147483647,-2147483648] 32bytes
+bool | TS_BOOL [255,0] 1byte
+true | D_CONST 0
+false | D_CONST 1
+INT32_MAX | D_CONST 2147483647
+INT32_MIN | D_CONST -2147483648
+y | <0> int
+x | <1> int

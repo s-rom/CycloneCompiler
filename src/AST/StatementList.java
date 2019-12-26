@@ -20,5 +20,10 @@ public class StatementList extends Node{
         if (s != null) DOT.writeEdge(nodeNumber,"s", s.getNodeNumber());
         if (sl != null) DOT.writeEdge(nodeNumber, "sl",sl.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

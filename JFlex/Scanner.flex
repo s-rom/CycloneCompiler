@@ -9,6 +9,7 @@ import java_cup.runtime.*;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 
+import cyclonecompiler.InfoDump.*;
 import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
@@ -123,4 +124,4 @@ comment2    = "//"[^\n\r]*
 {comment1}  {}
 {comment2}  {}
 
-[^] {System.out.println("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn);}
+[^] {InfoDump.reportError("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn,ErrorType.LEXIC);}

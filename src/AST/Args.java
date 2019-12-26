@@ -19,5 +19,9 @@ public class Args extends Node{
         if (a != null) DOT.writeEdge(nodeNumber,"a", a.getNodeNumber());
         if (as != null) DOT.writeEdge(nodeNumber,"as", as.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+    }
     
 }

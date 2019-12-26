@@ -1,5 +1,6 @@
 package AST;
 
+import SymbolTable.AtomicType;
 import cyclonecompiler.DOT;
 
 public class Expr extends Node{
@@ -7,13 +8,23 @@ public class Expr extends Node{
     private Expr e;
     private String bo;
     private UnExpr ue;
-
+    private AtomicType type;
+    
     public Expr(Expr e, String bo, UnExpr ue) {
         this.e = e;
         this.bo = bo;
         this.ue = ue;
         toDot();
     }
+    
+    public void setAtomicType(AtomicType type){
+        this.type = type;
+    }
+    
+    public AtomicType getAtomicType(){
+        return this.type;
+    }
+    
 
     @Override
     public void toDot() {
@@ -33,6 +44,11 @@ public class Expr extends Node{
         
         
         if (ue != null) DOT.writeEdge(nodeNumber,"ue", ue.getNodeNumber());
+
+    }
+
+    @Override
+    public void semanticCheck() {
 
     }
     

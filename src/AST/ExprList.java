@@ -21,5 +21,10 @@ public class ExprList extends Node{
         if (e!= null) DOT.writeEdge(nodeNumber,"e", e.getNodeNumber());
         if (el != null) DOT.writeEdge(nodeNumber,"el", el.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

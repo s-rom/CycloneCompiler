@@ -16,5 +16,10 @@ public class Conditional extends Node{
         DOT.writeNode(nodeNumber, "Conditional");
         if (ic != null) DOT.writeEdge(nodeNumber, ic.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
         
 }

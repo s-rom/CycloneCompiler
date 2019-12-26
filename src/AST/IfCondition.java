@@ -35,5 +35,10 @@ public class IfCondition extends Node{
         if (b1 != null) DOT.writeEdge(nodeNumber, "b1",b1.getNodeNumber());
         if (b2 != null) DOT.writeEdge(nodeNumber, "b2",b2.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

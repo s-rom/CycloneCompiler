@@ -27,5 +27,11 @@ public class UnExpr extends Node{
         if (unExpr != null) DOT.writeEdge(nodeNumber, unExpr.getNodeNumber());
         if (p != null) DOT.writeEdge(nodeNumber, p.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
+
     
 }

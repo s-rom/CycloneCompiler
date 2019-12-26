@@ -1,6 +1,13 @@
 package AST;
 
+import SymbolTable.Description;
+import SymbolTable.DescriptionType;
+import SymbolTable.TypeDescription;
+import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
+import cyclonecompiler.InfoDump;
+import cyclonecompiler.InfoDump.ErrorType;
+import static cyclonecompiler.Main.ts;
 
 public class Assignation extends Node{
 
@@ -14,6 +21,7 @@ public class Assignation extends Node{
         this.id = id;
         this.type = type;
         toDot();
+        semanticCheck();
     }
     
     public Assignation(String id, Expr e){
@@ -21,6 +29,7 @@ public class Assignation extends Node{
         this.e = e;
         this.id = id;
         toDot();
+        semanticCheck();
     }
     
     @Override
@@ -37,6 +46,46 @@ public class Assignation extends Node{
         }
         DOT.writeNode(nodeNumber, label);
         if (e != null) DOT.writeEdge(nodeNumber, e.getNodeNumber());
+    }
+
+    @Override
+    public void semanticCheck() {
+        if (type == null){
+            // x = ...;
+            // comprobar que x existe y la expresion devuelve el mismo tipo
+        } else {
+            if (e == null){
+                // int x;
+                // insertar x en la TS;
+                Description dtype = ts.get(type);
+                if (dtype.getDescriptionType() != DescriptionType.D_TYPE){
+                    InfoDump.reportError(type+" must be a valid type",ErrorType.SEMANTIC);
+                }
+                
+                boolean exists = !ts.insert(id, new VarDescription(id,type));
+            } else {
+                // int x = ...;
+                // insertar x en la TS
+                // comprobar que la expresion y x son tipos compatibles
+                // o realizar castings semanticos
+                Description dtype = ts.get(type);
+                if (dtype.getDescriptionType() != DescriptionType.D_TYPE){
+                    InfoDump.reportError(type+" must be a valid type",ErrorType.SEMANTIC);
+                }
+                
+                boolean exists = !ts.insert(id, new VarDescription(id,type));
+                if (exists) return;
+                
+                /* PLACEHOLDER */
+                if (e.getAtomicType() == null) return;
+                
+                TypeDescription td = (TypeDescription) dtype;
+                if (!td.getAtomicType().equals(e.getAtomicType())){
+                    InfoDump.reportError("ID \""+id+"\" type "+type+" doesn't match expression type", ErrorType.SEMANTIC);
+                }
+            }
+        }
+        
     }
     
     

@@ -27,5 +27,10 @@ public class Declaration extends Node{
         DOT.writeNode(nodeNumber, "Declaration: "+type+" "+id);
         if (assign != null) DOT.writeEdge(nodeNumber, assign.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

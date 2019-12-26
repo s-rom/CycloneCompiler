@@ -38,5 +38,10 @@ public class Function extends Node{
         if (args != null)  DOT.writeEdge(nodeNumber,"a", args.getNodeNumber());
         if (b != null) DOT.writeEdge(nodeNumber, "b",b.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

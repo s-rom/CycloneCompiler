@@ -14,6 +14,11 @@ public class Primary extends Node {
     private int int_lit;
     
     private PrimaryType type;
+
+    @Override
+    public void semanticCheck() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public static enum PrimaryType {
         STR_LIT, BOOL_LIT, INT_LIT, FUNCTION_CALL, EXPR, ID

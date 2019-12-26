@@ -26,5 +26,9 @@ public class Arg extends Node{
 //        DOT.writeEdge(nodeNumber, idType);
 //        DOT.writeEdge(nodeNumber, idID);
     }
+
+    @Override
+    public void semanticCheck() {
+    }
     
 }

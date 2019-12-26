@@ -3,6 +3,10 @@ package AST;
 import cyclonecompiler.DOT;
 
 public class Instruction extends Node{
+
+    @Override
+    public void semanticCheck() {
+    }
     
 
     public static enum InstructionType{

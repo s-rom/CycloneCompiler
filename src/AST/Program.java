@@ -15,6 +15,11 @@ public class Program extends Node{
         DOT.writeNode(nodeNumber, "Program");
         if (fl!=null) DOT.writeEdge(nodeNumber,fl.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
     
 }

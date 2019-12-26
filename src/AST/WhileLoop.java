@@ -19,5 +19,10 @@ public class WhileLoop extends Node{
         if (e != null) DOT.writeEdge(nodeNumber, "e", e.getNodeNumber());
         if (b != null) DOT.writeEdge(nodeNumber, "b", b.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

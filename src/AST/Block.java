@@ -16,5 +16,10 @@ public class Block extends Node{
         DOT.writeNode(nodeNumber, "Block");
         if (sl != null) DOT.writeEdge(nodeNumber, sl.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
         
 }

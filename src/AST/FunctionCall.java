@@ -22,4 +22,9 @@ public class FunctionCall extends Node {
         
     }
 
+    @Override
+    public void semanticCheck() {
+
+    }
+
 }

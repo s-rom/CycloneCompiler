@@ -20,5 +20,10 @@ public class FunctionList extends Node{
         if (f != null) DOT.writeEdge(nodeNumber, "f", f.getNodeNumber());
         if (fl != null) DOT.writeEdge(nodeNumber, "fl", fl.getNodeNumber());
     }
+
+    @Override
+    public void semanticCheck() {
+
+    }
     
 }

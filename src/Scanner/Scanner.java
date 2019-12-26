@@ -11,6 +11,7 @@ import java_cup.runtime.*;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 
+import cyclonecompiler.InfoDump.*;
 import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
@@ -713,7 +714,7 @@ public class Scanner implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn);
+            { InfoDump.reportError("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn,ErrorType.LEXIC);
             } 
             // fall through
           case 41: break;
