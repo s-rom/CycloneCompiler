@@ -9,7 +9,7 @@ public class VarDescription extends Description{
     }
     
     private final int varNumber;
-    private final String type;
+    public final String type;
     
     public VarDescription(String name, String type){
         super(name,DescriptionType.D_VAR);

@@ -6,31 +6,32 @@ public class AtomicType {
         TS_BOOL, TS_CHAR, TS_INT, TS_NULL
     }
     
-    private Atomic tsb;
+    private Atomic at;
     private int supLimit;
     private int infLimit;
     private int occupation; //bytes
     
-    public AtomicType(Atomic tsb, int supLimit, int infLimit, int occupation){
-        this.tsb = tsb;
+    public AtomicType(Atomic at, int supLimit, int infLimit, int occupation){
+        this.at = at;
         this.supLimit = supLimit;
         this.infLimit = infLimit;
         this.occupation = occupation;
     }
     
+    @Override
     public boolean equals(Object o){
         AtomicType t = (AtomicType) o;
-        return t.tsb == this.tsb;
+        return t.at == this.at;
     }
     
     public Atomic getDType(){
-        return tsb;
+        return at;
     } 
     
     
     @Override
     public String toString(){
-        return tsb + " ["+infLimit+","+supLimit+"] "+occupation+
+        return at + " ["+infLimit+","+supLimit+"] "+occupation+
                 (occupation > 1? "bytes" : "byte");
     }
 }

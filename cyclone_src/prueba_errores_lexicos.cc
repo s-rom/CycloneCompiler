@@ -1,6 +1,9 @@
 func void main()
 {
-    int y;
-    int x = 2;
-    x = x + 1;
+    bool a = false;
+    bool b = true;
+    int x = 2 + 3;
+
+
+    output(x);
 }

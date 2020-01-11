@@ -20,16 +20,16 @@ public class Assignation extends Node{
         this.e = e;
         this.id = id;
         this.type = type;
-        toDot();
         semanticCheck();
+        toDot();
     }
     
     public Assignation(String id, Expr e){
         this.type = null;
         this.e = e;
         this.id = id;
-        toDot();
         semanticCheck();
+        toDot();
     }
     
     @Override
@@ -53,6 +53,31 @@ public class Assignation extends Node{
         if (type == null){
             // x = ...;
             // comprobar que x existe y la expresion devuelve el mismo tipo
+            if (e == null) {
+                InfoDump.reportSemanticError("Missing expression in assignation of "+id);
+                return;
+            }   
+            
+            Description td = ts.get(id);
+            if (td.getDescriptionType() != DescriptionType.D_VAR){
+                InfoDump.reportSemanticError("Id of an assignation must be a variable ("+id+")");
+                return;
+            }
+            
+            VarDescription vd = (VarDescription) td;
+            td = ts.get(vd.type);
+            if (td == null){
+                InfoDump.reportSemanticError("Type "+vd.type+" is not defined");
+                return;
+            }
+            
+            
+            TypeDescription t = (TypeDescription) ts.get(vd.type);
+            if (!t.getAtomicType().equals(e.getAtomicType())){
+                InfoDump.reportSemanticError("The expression type ("+ e.getAtomicType().getDType()+
+                        ") must be consistent with id ("+id+","+vd.type+")");
+            }
+            
         } else {
             if (e == null){
                 // int x;
@@ -81,7 +106,9 @@ public class Assignation extends Node{
                 
                 TypeDescription td = (TypeDescription) dtype;
                 if (!td.getAtomicType().equals(e.getAtomicType())){
-                    InfoDump.reportError("ID \""+id+"\" type "+type+" doesn't match expression type", ErrorType.SEMANTIC);
+                    InfoDump.reportError("ID \""+id+"\" ("+type+") doesn't match expression type ("
+                            +this.e.getAtomicType().getDType()+")"
+                            ,ErrorType.SEMANTIC);
                 }
             }
         }

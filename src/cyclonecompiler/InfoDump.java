@@ -64,7 +64,6 @@ public class InfoDump {
     public static void reportError(String error_msg, ErrorType errorType){
         String [] errorLabel = {"[Semantic Error]","[Lexic Error]","Syntax error"};
         String msg = errorLabel[errorType.ordinal()]+": "+error_msg;
-        System.out.println(msg);
         try {
             errorWriter.write(msg);
             errorWriter.newLine();
@@ -73,6 +72,24 @@ public class InfoDump {
             Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void reportSemanticError(String error_msg) throws FatalError{
+        reportError(error_msg, ErrorType.SEMANTIC);
+        throw new FatalError();
+
+    }
+    
+    
+    public static void reportSyntacticError(String error_msg){
+        reportError(error_msg, ErrorType.SYNTACTIC);
+    }
+    
+    
+    public static void reportLexicError(String error_msg){
+        reportError(error_msg, ErrorType.LEXIC);
+    }
+    
+    
     
     public static void addTokenInfo(String token,int line, int column){
         try {

@@ -1,19 +1,29 @@
 package AST;
 
 import SymbolTable.AtomicType;
+import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
+import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
 
+/*
+    Expr tiene dos producciones:
+        Expr -> UnExpr
+        Expr -> Expr BinOp UnExpr
+
+*/
 public class Expr extends Node{
     
     private Expr e;
-    private String bo;
+    private String bo; //Operador binario
     private UnExpr ue;
-    private AtomicType type;
+    private AtomicType type; //Tipo de la expresion. Ej: 2+3 (Expr de tipo int)
     
     public Expr(Expr e, String bo, UnExpr ue) {
         this.e = e;
         this.bo = bo;
         this.ue = ue;
+        semanticCheck();
         toDot();
     }
     
@@ -49,7 +59,164 @@ public class Expr extends Node{
 
     @Override
     public void semanticCheck() {
+        this.type = Main.atomicNull;
+        // ** Produccion: Expr -> UnExpr
+        if (bo == null){
+            this.type = this.ue.getAtomicType();
+        }else { // ** Produccion: Expr -> Expr BinOp UnExpr;
+            switch(bo){
+                case ">":
+                case "<":
+                case ">=":
+                case "<=":
+                    comparisonCheck();
+                    break;
 
+                case "==":
+                case "!=":
+                    equalityCheck();
+                    break;
+                    
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                case "%":
+                    arithmeticCheck();
+                    break;
+                    
+                case "||":
+                case "&&":
+                    booleanCheck();
+                    break;
+            }
+        }
+    }
+    
+    
+    
+    /**
+     * Parametros: ambos int
+     * Tipo resultante: bool
+     * 
+     * >,<,>=,<=
+     */
+    private void comparisonCheck(){
+        if (this.e == null || this.ue == null) {
+            InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
+            return;
+        }
+        
+        if (!this.e.type.equals(this.ue.getAtomicType())){
+            InfoDump.reportSemanticError("Operands type must be the same ("+this.bo+")"+
+                    ". Types found: "+this.e.type.getDType()+", "+
+                    this.ue.getAtomicType().getDType());
+            
+            return;
+        }
+        
+        if (this.e.type.getDType() != Atomic.TS_INT || 
+                this.ue.getAtomicType().getDType() != Atomic.TS_INT){
+            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be integer");
+            return;
+        }
+        
+        this.type = Main.atomicBool;
+    }
+    
+    /**
+     * Parametros: ambos bool o ambos int
+     * Tipo resultante: bool
+     * 
+     * ==, !=
+     */
+    private void equalityCheck(){
+        if (this.e == null || this.ue == null) {
+            InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
+            return;
+        }
+        
+        if (!this.e.type.equals(this.ue.getAtomicType())){
+            InfoDump.reportSemanticError("Operands type must be the same ("+this.bo+")"+
+                    ". Types found: "+this.e.type.getDType()+", "+
+                    this.ue.getAtomicType().getDType());
+            
+            return;
+        }
+        
+        this.type = Main.atomicBool;
+    }
+    
+    /**
+     * Parametros: ambos bool
+     * Tipo resultante: bool
+     * 
+     * &&, ||
+     */
+    private void booleanCheck(){
+        if (this.e == null || this.ue == null) {
+            InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
+            return;
+        }
+        
+        if (!this.e.type.equals(this.ue.getAtomicType())){
+            InfoDump.reportSemanticError("Operands type must be the same ("+this.bo+")"+
+                    ". Types found: "+this.e.type.getDType()+", "+
+                    this.ue.getAtomicType().getDType());
+            
+            return;
+        }
+        
+        if (this.e.type.getDType() != Atomic.TS_BOOL || 
+                this.ue.getAtomicType().getDType() != Atomic.TS_BOOL){
+            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be bool");
+            return;
+        }
+        
+        this.type = Main.atomicBool;
+    }
+    
+    /**
+     * Parametros: ambos int
+     * Tipo resultante: int
+     * 
+     * +,-,*,/,%
+     */
+    private void arithmeticCheck(){
+        if (this.e == null || this.ue == null) {
+            InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
+            return;
+        }
+        
+        
+        if (e.type == null){
+            System.out.println("AtomicType de Expr es null");
+            return;
+        }
+        
+        
+        if (ue.getAtomicType() == null){
+            System.out.println("AtomicType de UnExpr es null");
+            return;
+        }
+        
+        
+        
+        if (!this.e.type.equals(this.ue.getAtomicType())){
+            InfoDump.reportSemanticError("Operands type must be the same ("+this.bo+")"+
+                    ". Types found: "+this.e.type.getDType()+", "+
+                    this.ue.getAtomicType().getDType());
+            
+            return;
+        }
+        
+        if (this.e.type.getDType() != Atomic.TS_INT || 
+                this.ue.getAtomicType().getDType() != Atomic.TS_INT){
+            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be integer");
+            return;
+        }
+        
+        this.type = Main.atomicInt;
     }
     
 }

@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sergi/Desktop/CycloneCompiler/src/AST/Instruction.java</file>
             <file>file:/C:/Users/Sergi/Desktop/CycloneCompiler/src/cyclonecompiler/Main.java</file>
+            <file>file:/C:/Users/Sergi/Desktop/CycloneCompiler/src/cyclonecompiler/InfoDump.java</file>
             <file>file:/C:/Users/Sergi/Desktop/CycloneCompiler/src/AST/Assignation.java</file>
+            <file>file:/C:/Users/Sergi/Desktop/CycloneCompiler/src/AST/Primary.java</file>
+            <file>file:/C:/Users/Sergi/Desktop/CycloneCompiler/src/AST/Expr.java</file>
         </group>
     </open-files>
 </project-private>

@@ -23,7 +23,7 @@ public class Main {
     public static AtomicType atomicInt32;
     public static AtomicType atomicInt16;
     public static AtomicType atomicNull;
-    
+    public static AtomicType atomicInt;
     
     
     public static void main (String [] args){
@@ -44,14 +44,15 @@ public class Main {
             Scanner scanner = new Scanner(new FileReader(SRC_FILE));
             Parser parser = new Parser(scanner, sf);
             parser.parse();
-                        
             InfoDump.closeAllWriters();
             DOT.closeWriter();
         } catch (FileNotFoundException ex) {
             System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
-        } catch (Exception ex) {
+        }catch(FatalError f){
+            System.err.println("A fatal error ocurred, compilation halted.");
+        }catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
  
     
@@ -62,7 +63,7 @@ public class Main {
         atomicInt32 = new AtomicType(Atomic.TS_INT, -2147483648, +2147483647, 4);
         atomicInt16 = new AtomicType(Atomic.TS_INT, -65536, +65535, 2);
         atomicNull = new AtomicType(Atomic.TS_NULL, 0, 0, 1);
-        
+        atomicInt = atomicInt32; //alias de int32 bits
         
         
         Description dInt = new TypeDescription("int",atomicInt32); 
@@ -70,8 +71,10 @@ public class Main {
         Description dTrue = new ConstDescription("false","bool",0); 
         Description dFalse = new ConstDescription("true","bool",1);
         Description dIntMax = new ConstDescription("INT32_MAX","int",2147483647);
-        Description dIntMin = new ConstDescription("INT32_MIN","int",-2147483648);  
+        Description dIntMin = new ConstDescription("INT32_MIN","int",-2147483648);
+        Description dChar = new TypeDescription("string",atomicChar);
         
+        ts.insert("string",dChar);
         ts.insert("int", dInt);
         ts.insert("bool", dBool);
         ts.insert("true", dTrue);

@@ -311,7 +311,8 @@ public class Parser extends java_cup.runtime.lr_parser {
         
         return report_names[sym];
     }
-  
+
+    
     @Override
     public void syntax_error(Symbol current){
         final String C = "\"";
@@ -1146,7 +1147,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 RESULT = new Primary(id,PrimaryType.ID); 
+		 RESULT = new Primary(id,PrimaryType.ID);
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Primary",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

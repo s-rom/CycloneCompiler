@@ -18,7 +18,8 @@ parser code {:
         
         return report_names[sym];
     }
-  
+
+    
     @Override
     public void syntax_error(Symbol current){
         final String C = "\"";
@@ -245,7 +246,7 @@ Primary         ::= LPAREN Expr:e RPAREN         // (a+3)
                     | ID:id LPAREN ExprArg:param RPAREN  // foo(x,y)
                         {: RESULT = new Primary(new FunctionCall(id,(ExprArg)param),id); :}
                     | ID:id                        // b
-                        {: RESULT = new Primary(id,PrimaryType.ID); :}
+                        {: RESULT = new Primary(id,PrimaryType.ID);:}
                     | INT_LIT:i                   // 34
                         {: RESULT = new Primary(i); :}
                     | STR_LIT:str                   // "hola"
