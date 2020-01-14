@@ -124,4 +124,4 @@ comment2    = "//"[^\n\r]*
 {comment1}  {}
 {comment2}  {}
 
-[^] {InfoDump.reportError("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn,ErrorType.LEXIC);}
+[^] {InfoDump.reportLexicError("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn);}

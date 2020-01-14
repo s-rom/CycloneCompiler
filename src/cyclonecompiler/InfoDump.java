@@ -61,7 +61,7 @@ public class InfoDump {
         }
     }
     
-    public static void reportError(String error_msg, ErrorType errorType){
+    private static void reportError(String error_msg, ErrorType errorType){
         String [] errorLabel = {"[Semantic Error]","[Lexic Error]","Syntax error"};
         String msg = errorLabel[errorType.ordinal()]+": "+error_msg;
         try {

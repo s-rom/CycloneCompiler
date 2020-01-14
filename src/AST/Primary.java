@@ -2,6 +2,8 @@ package AST;
 
 import SymbolTable.AtomicType;
 import SymbolTable.Description;
+import SymbolTable.DescriptionType;
+import SymbolTable.FuncDescription;
 import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
@@ -25,8 +27,6 @@ public class Primary extends Node {
     private AtomicType type;
     
     
-    
-    
     private int line, column;
     public String getLocationInfo(){
         return "line "+(line+1)+", column "+(column+1);
@@ -35,6 +35,7 @@ public class Primary extends Node {
     
     @Override
     public void semanticCheck() {
+        /* Implementado en cada constructor al haber tantos tipos distintos */
     }
     
     public static enum PrimaryType {
@@ -78,7 +79,6 @@ public class Primary extends Node {
                 if (d == null){
                     InfoDump.reportSemanticError("ID ("+id+") is not defined in "
                             +getLocationInfo());
-                    throw new FatalError();                    
                 }
                 VarDescription vd = (VarDescription)d;
                 TypeDescription td = (TypeDescription) ts.get(vd.type);
@@ -94,15 +94,34 @@ public class Primary extends Node {
     /* 
     Ej: foo(x,y)
     */
-    public Primary(FunctionCall fl, String id,int line, int column){
+    public Primary(FunctionCall fl, String id,int line, int column) throws FatalError{
         this.id = id;
         this.fl = fl;
         this.productionType = PrimaryType.FUNCTION_CALL;
         this.line = line;
         this.column = column;
         // Buscar el tipo de la funcion (retorno) en la ts
+  
         // asignar el tipo de la funcion (retorno) a this.type
+        functionCheck(id);
         toDot();
+    }
+    
+    private void functionCheck(String id) throws FatalError{
+        Description d = Main.ts.get(id);
+        if (d == null){
+            InfoDump.reportSemanticError("Function "+id+" is not declared in "+
+                    this.getLocationInfo());
+        }
+        
+        if (d.getDescriptionType() != DescriptionType.D_FUNC){
+            InfoDump.reportSemanticError(id+" is not a callable function in "+
+                    this.getLocationInfo());
+        }
+        
+        FuncDescription fd = (FuncDescription) d;
+        TypeDescription td = (TypeDescription) Main.ts.get(fd.getReturnType());
+        this.type = td.getAtomicType();
     }
     
     /*

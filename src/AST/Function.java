@@ -1,5 +1,6 @@
 package AST;
 
+import SymbolTable.AtomicType;
 import cyclonecompiler.DOT;
 
 
@@ -9,7 +10,6 @@ public class Function extends Node{
     private String id;
     private Args args;
     private Block b;
-    
     
     public Function(String type, String id, Args args, Block b){
         this.type = type;

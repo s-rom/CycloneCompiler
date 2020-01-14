@@ -7,6 +7,7 @@ false | D_CONST 1
 INT32_MAX | D_CONST 2147483647
 INT32_MIN | D_CONST -2147483648
 x | <0> int
-a | <1> bool
-b | <2> bool
-cond | <3> bool
+y | <1> int
+a | <2> bool
+b | <3> bool
+cond | <4> bool

@@ -5,8 +5,8 @@
 */
 package SymbolTable;
 
+import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
-import cyclonecompiler.InfoDump.ErrorType;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -28,11 +28,11 @@ public class Scope {
      * @param d 
      * @return false if the id is already declared in the current scope, true
      * otherwise
+     * @throws cyclonecompiler.FatalError
      */
-    public boolean insert(String id, Description d){
+    public boolean insert(String id, Description d) throws FatalError{
         if (t.containsKey(id)){ // id already exists in this scope
-            InfoDump.reportError("id \""+id+"\" already exists in the current scope", 
-                    ErrorType.SEMANTIC);
+            InfoDump.reportSemanticError("id \""+id+"\" already exists in the current scope");
             return false;
         } else {
             t.put(id, d);

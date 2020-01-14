@@ -27,12 +27,12 @@ public class Main {
     
     
     public static void main (String [] args){
-        final String SRC_FILE = ".\\cyclone_src\\prueba_errores_lexicos.cc";
+        final String SRC_FILE = ".\\cyclone_src\\test_expresiones.cc";
         final String TOKEN_FILE = ".\\InfoFiles\\tokens.txt";
         final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table.txt";
         final String ERROR_FILE = ".\\InfoFiles\\error_log.txt";
 
-        final String DOT_FILE = ".\\InfoFiles\\prueba_errores_lexicos.dot";
+        final String DOT_FILE = ".\\InfoFiles\\test_expresiones.dot";
         
         
         try {

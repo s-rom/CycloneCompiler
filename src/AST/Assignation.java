@@ -7,7 +7,6 @@ import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
-import cyclonecompiler.InfoDump.ErrorType;
 import static cyclonecompiler.Main.ts;
 
 public class Assignation extends Node{
@@ -85,7 +84,7 @@ public class Assignation extends Node{
                 // insertar x en la TS;
                 Description dtype = ts.get(type);
                 if (dtype.getDescriptionType() != DescriptionType.D_TYPE){
-                    InfoDump.reportError(type+" must be a valid type",ErrorType.SEMANTIC);
+                    InfoDump.reportSemanticError(type+" must be a valid type");
                 }
                 
                 boolean exists = !ts.insert(id, new VarDescription(id,type));
@@ -96,20 +95,20 @@ public class Assignation extends Node{
                 // o realizar castings semanticos
                 Description dtype = ts.get(type);
                 if (dtype.getDescriptionType() != DescriptionType.D_TYPE){
-                    InfoDump.reportError(type+" must be a valid type",ErrorType.SEMANTIC);
+                    InfoDump.reportSemanticError(type+" must be a valid type");
                 }
                 
                 boolean exists = !ts.insert(id, new VarDescription(id,type));
                 if (exists) return;
                 
-                /* PLACEHOLDER */
-                if (e.getAtomicType() == null) return;
+                if (e.getAtomicType() == null){
+                    InfoDump.reportSemanticError("Unknown condition, expresion of assignation has null type");
+                }
                 
                 TypeDescription td = (TypeDescription) dtype;
                 if (!td.getAtomicType().equals(e.getAtomicType())){
-                    InfoDump.reportError("ID \""+id+"\" ("+type+") doesn't match expression type ("
-                            +this.e.getAtomicType().getDType()+")"
-                            ,ErrorType.SEMANTIC);
+                    InfoDump.reportSemanticError("ID \""+id+"\" ("+type+") doesn't match expression type ("
+                            +this.e.getAtomicType().getDType()+")");
                 }
             }
         }

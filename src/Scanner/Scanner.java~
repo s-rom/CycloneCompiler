@@ -779,7 +779,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 53: break;
           case 14: 
-            { return getSymbol(ParserSym.NOT);
+            { return getSymbol(ParserSym.NOT,yytext());
             } 
             // fall through
           case 54: break;
@@ -844,12 +844,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 66: break;
           case 27: 
-            { return getSymbol(ParserSym.AND);
+            { return getSymbol(ParserSym.AND,yytext());
             } 
             // fall through
           case 67: break;
           case 28: 
-            { return getSymbol(ParserSym.OR);
+            { return getSymbol(ParserSym.OR,yytext());
             } 
             // fall through
           case 68: break;
