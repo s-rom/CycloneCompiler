@@ -110,9 +110,9 @@ comment2    = "//"[^\n\r]*
 //"*="        {return getSymbol(ParserSym.MULT_ASSIGN");}
 //"/="        {return getSymbol(ParserSym.DIV_ASSIGN");}
 
-"&&"        {return getSymbol(ParserSym.AND);}
-"||"        {return getSymbol(ParserSym.OR);}
-"!"         {return getSymbol(ParserSym.NOT);}
+"&&"        {return getSymbol(ParserSym.AND,yytext());}
+"||"        {return getSymbol(ParserSym.OR,yytext());}
+"!"         {return getSymbol(ParserSym.NOT,yytext());}
 
 "true"      {return getSymbol(ParserSym.BOOL_LIT, new Boolean(true));}
 "false"     {return getSymbol(ParserSym.BOOL_LIT, new Boolean(false));}

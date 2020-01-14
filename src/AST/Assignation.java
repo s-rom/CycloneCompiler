@@ -5,6 +5,7 @@ import SymbolTable.DescriptionType;
 import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
 import cyclonecompiler.InfoDump.ErrorType;
 import static cyclonecompiler.Main.ts;
@@ -16,7 +17,7 @@ public class Assignation extends Node{
     private Expr e;
     
     
-    public Assignation(String type, String id, Expr e){
+    public Assignation(String type, String id, Expr e)  throws FatalError{
         this.e = e;
         this.id = id;
         this.type = type;
@@ -24,7 +25,7 @@ public class Assignation extends Node{
         toDot();
     }
     
-    public Assignation(String id, Expr e){
+    public Assignation(String id, Expr e)  throws FatalError{
         this.type = null;
         this.e = e;
         this.id = id;
@@ -49,7 +50,7 @@ public class Assignation extends Node{
     }
 
     @Override
-    public void semanticCheck() {
+    public void semanticCheck() throws FatalError{
         if (type == null){
             // x = ...;
             // comprobar que x existe y la expresion devuelve el mismo tipo

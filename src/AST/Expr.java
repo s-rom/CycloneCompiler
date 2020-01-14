@@ -3,6 +3,7 @@ package AST;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
 import cyclonecompiler.Main;
 
@@ -19,7 +20,7 @@ public class Expr extends Node{
     private UnExpr ue;
     private AtomicType type; //Tipo de la expresion. Ej: 2+3 (Expr de tipo int)
     
-    public Expr(Expr e, String bo, UnExpr ue) {
+    public Expr(Expr e, String bo, UnExpr ue)  throws FatalError{
         this.e = e;
         this.bo = bo;
         this.ue = ue;
@@ -58,7 +59,7 @@ public class Expr extends Node{
     }
 
     @Override
-    public void semanticCheck() {
+    public void semanticCheck()  throws FatalError{
         this.type = Main.atomicNull;
         // ** Produccion: Expr -> UnExpr
         if (bo == null){
@@ -101,7 +102,7 @@ public class Expr extends Node{
      * 
      * >,<,>=,<=
      */
-    private void comparisonCheck(){
+    private void comparisonCheck() throws FatalError {
         if (this.e == null || this.ue == null) {
             InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
             return;
@@ -130,7 +131,7 @@ public class Expr extends Node{
      * 
      * ==, !=
      */
-    private void equalityCheck(){
+    private void equalityCheck()  throws FatalError{
         if (this.e == null || this.ue == null) {
             InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
             return;
@@ -153,7 +154,7 @@ public class Expr extends Node{
      * 
      * &&, ||
      */
-    private void booleanCheck(){
+    private void booleanCheck()  throws FatalError{
         if (this.e == null || this.ue == null) {
             InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
             return;
@@ -182,7 +183,7 @@ public class Expr extends Node{
      * 
      * +,-,*,/,%
      */
-    private void arithmeticCheck(){
+    private void arithmeticCheck()  throws FatalError{
         if (this.e == null || this.ue == null) {
             InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
             return;

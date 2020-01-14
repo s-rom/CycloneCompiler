@@ -1,0 +1,47 @@
+### ---------- Token File ----------
+### Format: (line,colum) TokenName: Attribute?
+
+(0,0)	FUNC
+(0,5)	VOID_TYPE: void
+(0,10)	ID: main
+(0,14)	LPAREN
+(0,15)	RPAREN
+(1,0)	LCURL
+(7,4)	INT_TYPE: int
+(7,8)	ID: x
+(7,10)	ASSIGN: =
+(7,12)	SUB: -
+(7,13)	INT_LIT: 3
+(7,14)	SEMICOLON
+(8,4)	BOOL_TYPE: bool
+(8,9)	ID: a
+(8,11)	ASSIGN: =
+(8,13)	BOOL_LIT: true
+(8,17)	SEMICOLON
+(9,4)	BOOL_TYPE: bool
+(9,9)	ID: b
+(9,11)	ASSIGN: =
+(9,13)	ID: x
+(9,15)	LT: <
+(9,17)	INT_LIT: 2
+(9,18)	SEMICOLON
+(10,4)	BOOL_TYPE: bool
+(10,9)	ID: cond
+(10,14)	ASSIGN: =
+(10,16)	LPAREN
+(10,17)	NOT: !
+(10,18)	ID: a
+(10,20)	AND: &&
+(10,23)	ID: b
+(10,24)	RPAREN
+(10,26)	OR: ||
+(10,29)	NOT: !
+(10,30)	LPAREN
+(10,31)	ID: b
+(10,33)	OR: ||
+(10,36)	ID: a
+(10,37)	RPAREN
+(10,38)	SEMICOLON
+(11,0)	RCURL
+(11,1)	EOF
+(11,1)	EOF

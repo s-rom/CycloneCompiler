@@ -1,7 +1,10 @@
 package AST;
 
 import SymbolTable.AtomicType;
+import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
+import cyclonecompiler.InfoDump;
 import cyclonecompiler.Main;
 
 public class UnExpr extends Node{
@@ -11,12 +14,12 @@ public class UnExpr extends Node{
     private Primary p;
     private AtomicType type;
     
-    public UnExpr(String unOp, UnExpr unExpr, Primary p) {
+    public UnExpr(String unOp, UnExpr unExpr, Primary p) throws FatalError {
         this.unOp= unOp;
         this.unExpr =unExpr;
         this.p = p;
         this.type = Main.atomicNull;
-
+        
         semanticCheck();
         toDot();
     }
@@ -43,15 +46,55 @@ public class UnExpr extends Node{
     }
 
     @Override
-    public void semanticCheck() {
+    public void semanticCheck() throws FatalError {
         
         // Producción: UnExpr --> Primary
-        if (this.unOp == null){
+        if (this.p != null && this.unExpr==null && this.unOp == null){
+            
             // heredar tipo de primary
             this.type = this.p.getType();
-        } else { //Producción: UnExpr --> UnOp UnExpr
-            //hacer comprobacion de operadores unarios
+            
+        } else if (this.unOp!= null && this.unExpr !=null){ //Producción: UnExpr --> UnOp UnExpr
+            switch(this.unOp){
+                case "-":
+                    subCheck();
+                    break;
+                case "!":
+                    notCheck();
+                    break;
+            }
         }
+    }
+    
+    private void subCheck() throws FatalError{
+        if (this.unExpr == null){
+            InfoDump.reportSemanticError("Unary expression of binary operator is missing");
+            return;
+        }
+        
+        if (this.unExpr.type.getDType() != Atomic.TS_INT){
+            InfoDump.reportSemanticError("Unary sub operand "
+                    + "("+ unExpr.type.getDType()+") must be integer in "+
+                    this.unExpr.p.getLocationInfo());
+        }
+        
+        this.type = Main.atomicInt;
+    }
+    
+    private void notCheck() throws FatalError{
+        
+        if (this.unExpr == null){
+            InfoDump.reportSemanticError("Unary expression of binary operator is missing");
+            return;
+        }
+        
+        if (this.unExpr.type.getDType() != Atomic.TS_BOOL){
+            InfoDump.reportSemanticError("Unary sub operand ("+ 
+                    unExpr.type.getDType()+") must be bool in "+
+                    this.unExpr.p.getLocationInfo());
+        }
+        
+        this.type = Main.atomicBool;
     }
 
     

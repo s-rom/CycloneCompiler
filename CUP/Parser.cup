@@ -38,6 +38,16 @@ parser code {:
                 (cs.xleft.getLine()+1)+", column "+(cs.xleft.getColumn()+1));
     }
 
+    public int getLine(){
+        ComplexSymbol cs = (ComplexSymbol) this.stack.peek();
+        return cs.xleft.getLine();
+    }
+
+    public int getColumn(){
+        ComplexSymbol cs = (ComplexSymbol) this.stack.peek();
+        return cs.xleft.getColumn();
+    }
+
 
 :}
 
@@ -207,7 +217,7 @@ UnExpr          ::=   UnOp:u UnExpr:e
                     ;
 
 BinOp           ::=   OR:bo
-                        {: RESULT = bo; :}
+                        {: RESULT = bo;:}
                     | AND:bo
                         {: RESULT = bo; :}
                     | SUM:bo
@@ -242,15 +252,15 @@ UnOp            ::=   SUB:s
                     ;
 
 Primary         ::= LPAREN Expr:e RPAREN         // (a+3)
-                        {: RESULT = new Primary((Expr) e); :}
+                        {: RESULT = new Primary((Expr) e,getLine(),getColumn());  :}
                     | ID:id LPAREN ExprArg:param RPAREN  // foo(x,y)
-                        {: RESULT = new Primary(new FunctionCall(id,(ExprArg)param),id); :}
+                        {: RESULT = new Primary(new FunctionCall(id,(ExprArg)param),id,getLine(),getColumn());  :}
                     | ID:id                        // b
-                        {: RESULT = new Primary(id,PrimaryType.ID);:}
+                        {: RESULT = new Primary(id,PrimaryType.ID,getLine(),getColumn()); :}
                     | INT_LIT:i                   // 34
-                        {: RESULT = new Primary(i); :}
+                        {: RESULT = new Primary(i,getLine(),getColumn()); :}
                     | STR_LIT:str                   // "hola"
-                        {: RESULT = new Primary(str,PrimaryType.STR_LIT); :}
+                        {: RESULT = new Primary(str,PrimaryType.STR_LIT,getLine(),getColumn()); :}
                     | BOOL_LIT:b                  // false
-                        {: RESULT = new Primary(b); :}
+                        {: RESULT = new Primary(b,getLine(),getColumn()); :}
                     ;

@@ -46,6 +46,7 @@ public class Main {
             parser.parse();
             InfoDump.closeAllWriters();
             DOT.closeWriter();
+//            System.out.println("Parsing successfull.");
         } catch (FileNotFoundException ex) {
             System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
         }catch(FatalError f){

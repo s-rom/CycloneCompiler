@@ -12,9 +12,9 @@ import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 
 import cyclonecompiler.InfoDump.*;
+import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
-import cyclonecompiler.InfoDump;
 
 
 /**

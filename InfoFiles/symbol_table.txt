@@ -1,0 +1,12 @@
+### ---------- Symbol Table ----------
+string | TS_CHAR [255,0] 1byte
+int | TS_INT [2147483647,-2147483648] 4bytes
+bool | TS_BOOL [255,0] 1byte
+true | D_CONST 0
+false | D_CONST 1
+INT32_MAX | D_CONST 2147483647
+INT32_MIN | D_CONST -2147483648
+x | <0> int
+a | <1> bool
+b | <2> bool
+cond | <3> bool
