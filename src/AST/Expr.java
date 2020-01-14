@@ -105,20 +105,20 @@ public class Expr extends Node{
     private void comparisonCheck() throws FatalError {
         if (this.e == null || this.ue == null) {
             InfoDump.reportSemanticError("Binary operation ("+this.bo+") is missing an operand");
-            return;
         }
         
         if (!this.e.type.equals(this.ue.getAtomicType())){
             InfoDump.reportSemanticError("Operands type must be the same ("+this.bo+")"+
                     ". Types found: "+this.e.type.getDType()+", "+
-                    this.ue.getAtomicType().getDType());
+                    this.ue.getAtomicType().getDType()+" in "+this.e.ue.p.getLocationInfo());
             
             return;
         }
         
         if (this.e.type.getDType() != Atomic.TS_INT || 
                 this.ue.getAtomicType().getDType() != Atomic.TS_INT){
-            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be integer");
+            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be integer in "+
+                    this.ue.p.getLocationInfo());
             return;
         }
         
@@ -206,14 +206,16 @@ public class Expr extends Node{
         if (!this.e.type.equals(this.ue.getAtomicType())){
             InfoDump.reportSemanticError("Operands type must be the same ("+this.bo+")"+
                     ". Types found: "+this.e.type.getDType()+", "+
-                    this.ue.getAtomicType().getDType());
+                    this.ue.getAtomicType().getDType() + " in "+
+                    this.ue.p.getLocationInfo());
             
             return;
         }
         
         if (this.e.type.getDType() != Atomic.TS_INT || 
                 this.ue.getAtomicType().getDType() != Atomic.TS_INT){
-            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be integer");
+            InfoDump.reportSemanticError("Both operands of '"+this.bo+"' must be integer in "+
+                    this.ue.p.getLocationInfo());
             return;
         }
         

@@ -25,17 +25,27 @@ public class Main {
     public static AtomicType atomicNull;
     public static AtomicType atomicInt;
     
+    /*
+        ##__TESTS__##
+         => Expresions: 
+            test_expresiones
+            expr_mal_1
+            expr_mal_2
+    */
     
     public static void main (String [] args){
-        final String SRC_FILE = ".\\cyclone_src\\test_expresiones.cc";
+        final String NAME = "expr_mal_2";
+        
+        final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
         final String TOKEN_FILE = ".\\InfoFiles\\tokens.txt";
         final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table.txt";
         final String ERROR_FILE = ".\\InfoFiles\\error_log.txt";
 
-        final String DOT_FILE = ".\\InfoFiles\\test_expresiones.dot";
+        final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
         
         
         try {
+            
             DOT.initWriter(DOT_FILE);
             InfoDump.initAllWriters(TOKEN_FILE, SYMBOL_TABLE_FILE, ERROR_FILE);
             initSymbolTable();
@@ -44,16 +54,17 @@ public class Main {
             Scanner scanner = new Scanner(new FileReader(SRC_FILE));
             Parser parser = new Parser(scanner, sf);
             parser.parse();
-            InfoDump.closeAllWriters();
-            DOT.closeWriter();
-//            System.out.println("Parsing successfull.");
+           
         } catch (FileNotFoundException ex) {
             System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
         }catch(FatalError f){
             System.err.println("A fatal error ocurred, compilation halted.");
         }catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } finally{
+            InfoDump.closeAllWriters();
+            DOT.closeWriter();
+        }
     }
  
     

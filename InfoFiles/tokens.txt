@@ -1,58 +1,16 @@
 ### ---------- Token File ----------
 ### Format: (line,colum) TokenName: Attribute?
 
-(4,0)	FUNC
-(4,5)	VOID_TYPE: void
-(4,10)	ID: main
-(4,15)	LPAREN
-(4,16)	RPAREN
-(4,18)	LCURL
-(6,4)	INT_TYPE: int
-(6,8)	ID: x
-(6,10)	ASSIGN: =
-(6,12)	SUB: -
-(6,13)	INT_LIT: 7
-(6,14)	SEMICOLON
-(7,4)	INT_TYPE: int
-(7,8)	ID: y
-(7,10)	ASSIGN: =
-(7,12)	ID: x
-(7,14)	MOD: %
-(7,16)	INT_LIT: 2
-(7,17)	SEMICOLON
-(9,4)	BOOL_TYPE: bool
-(9,9)	ID: a
-(9,11)	ASSIGN: =
-(9,13)	LPAREN
-(9,14)	ID: x
-(9,16)	GT: >
-(9,18)	INT_LIT: 8
-(9,19)	RPAREN
-(9,21)	OR: ||
-(9,24)	LPAREN
-(9,25)	ID: y
-(9,27)	GT: >
-(9,29)	INT_LIT: 1
-(9,30)	RPAREN
-(9,31)	SEMICOLON
-(10,4)	BOOL_TYPE: bool
-(10,9)	ID: b
-(10,11)	ASSIGN: =
-(10,13)	NOT: !
-(10,14)	BOOL_LIT: true
-(10,18)	SEMICOLON
-(11,4)	BOOL_TYPE: bool
-(11,9)	ID: cond
-(11,14)	ASSIGN: =
-(11,16)	NOT: !
-(11,17)	LPAREN
-(11,18)	ID: a
-(11,20)	OR: ||
-(11,23)	ID: b
-(11,24)	RPAREN
-(11,26)	AND: &&
-(11,29)	ID: b
-(11,30)	SEMICOLON
-(12,0)	RCURL
-(12,1)	EOF
-(12,1)	EOF
+(0,0)	FUNC
+(0,5)	INT_TYPE: int
+(0,9)	ID: main
+(0,13)	LPAREN
+(0,14)	RPAREN
+(1,0)	LCURL
+(2,4)	BOOL_TYPE: bool
+(2,9)	ID: t
+(2,11)	ASSIGN: =
+(2,13)	INT_LIT: 3
+(2,15)	SUM: +
+(2,17)	INT_LIT: 7
+(2,18)	SEMICOLON

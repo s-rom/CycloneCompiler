@@ -197,11 +197,11 @@ ExprList        ::= |
                   ;
 
 Assignation     ::=   TypeVar:t ID:id //int x;
-                        {: RESULT = new Assignation(t,id,null);:}
+                        {: RESULT = new Assignation(t,id,null,getLine(),getColumn());:}
                     | TypeVar:t ID:id ASSIGN Expr:e //int x = ...;
-                        {: RESULT = new Assignation(t,id, (Expr) e);:}
+                        {: RESULT = new Assignation(t,id, (Expr) e,getLine(),getColumn());:}
                     | ID:id ASSIGN Expr:e // x = ...;
-                        {: RESULT = new Assignation(id, (Expr)e); :}
+                        {: RESULT = new Assignation(id, (Expr)e,getLine(),getColumn()); :}
                     ;
 
 /* EXPRESIONES ARITMETICOLÓGICAS */

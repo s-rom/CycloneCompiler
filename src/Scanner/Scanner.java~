@@ -714,7 +714,7 @@ public class Scanner implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { InfoDump.reportError("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn,ErrorType.LEXIC);
+            { InfoDump.reportLexicError("Lexic error: \""+yytext()+"\"\nfound in line "+yyline+", column"+yycolumn);
             } 
             // fall through
           case 41: break;

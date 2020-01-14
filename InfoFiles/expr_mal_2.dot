@@ -1,0 +1,22 @@
+digraph ccTree {
+graph[nodesep="1"]
+	node [shape=box]
+	node [shape=box]
+	n0 [label = "Primary"]
+	n1 [label = "INT_LIT: 3"]
+	n0-> n1
+	n2 [label = "UnExpr"]
+	n2-> n0
+	n3 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n3:ue-> n2
+	n4 [label = "Primary"]
+	n5 [label = "INT_LIT: 7"]
+	n4-> n5
+	n6 [label = "UnExpr"]
+	n6-> n4
+	n7 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n7:e-> n3
+	n8 [label = "+"]
+	n7:bo-> n8
+	n7:ue-> n6
+}

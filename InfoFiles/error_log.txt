@@ -1,1 +1,2 @@
 ### ---------- Compilation Errors ----------
+[Semantic Error]: ID "t" (bool) doesn't match expression type (TS_INT) in line 3, column 14

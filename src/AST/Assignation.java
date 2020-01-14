@@ -14,20 +14,28 @@ public class Assignation extends Node{
     private String type;
     private String id;
     private Expr e;
+    private int line, column;
     
+    public String getLocationInfo(){
+        return "line "+(line+1)+", column "+(column+1);
+    }
     
-    public Assignation(String type, String id, Expr e)  throws FatalError{
+    public Assignation(String type, String id, Expr e, int line, int column)  throws FatalError{
         this.e = e;
         this.id = id;
         this.type = type;
+        this.line = line;
+        this.column = column;
         semanticCheck();
         toDot();
     }
     
-    public Assignation(String id, Expr e)  throws FatalError{
+    public Assignation(String id, Expr e, int line, int column)  throws FatalError{
         this.type = null;
         this.e = e;
         this.id = id;
+        this.line = line;
+        this.column = column;
         semanticCheck();
         toDot();
     }
@@ -54,20 +62,23 @@ public class Assignation extends Node{
             // x = ...;
             // comprobar que x existe y la expresion devuelve el mismo tipo
             if (e == null) {
-                InfoDump.reportSemanticError("Missing expression in assignation of "+id);
+                InfoDump.reportSemanticError("Missing expression in assignation of "+id+" in "+
+                        this.getLocationInfo());
                 return;
             }   
             
             Description td = ts.get(id);
             if (td.getDescriptionType() != DescriptionType.D_VAR){
-                InfoDump.reportSemanticError("Id of an assignation must be a variable ("+id+")");
+                InfoDump.reportSemanticError("Id of an assignation must be a variable ("+id+")"+" in "+
+                        this.getLocationInfo());
                 return;
             }
             
             VarDescription vd = (VarDescription) td;
             td = ts.get(vd.type);
             if (td == null){
-                InfoDump.reportSemanticError("Type "+vd.type+" is not defined");
+                InfoDump.reportSemanticError("Type "+vd.type+" is not defined"+" in "+
+                        this.getLocationInfo());
                 return;
             }
             
@@ -75,7 +86,8 @@ public class Assignation extends Node{
             TypeDescription t = (TypeDescription) ts.get(vd.type);
             if (!t.getAtomicType().equals(e.getAtomicType())){
                 InfoDump.reportSemanticError("The expression type ("+ e.getAtomicType().getDType()+
-                        ") must be consistent with id ("+id+","+vd.type+")");
+                        ") must be consistent with id ("+id+","+vd.type+")"+" in "+
+                        this.getLocationInfo());
             }
             
         } else {
@@ -84,7 +96,8 @@ public class Assignation extends Node{
                 // insertar x en la TS;
                 Description dtype = ts.get(type);
                 if (dtype.getDescriptionType() != DescriptionType.D_TYPE){
-                    InfoDump.reportSemanticError(type+" must be a valid type");
+                    InfoDump.reportSemanticError(type+" must be a valid type"+" in "+
+                        this.getLocationInfo());
                 }
                 
                 boolean exists = !ts.insert(id, new VarDescription(id,type));
@@ -95,20 +108,23 @@ public class Assignation extends Node{
                 // o realizar castings semanticos
                 Description dtype = ts.get(type);
                 if (dtype.getDescriptionType() != DescriptionType.D_TYPE){
-                    InfoDump.reportSemanticError(type+" must be a valid type");
+                    InfoDump.reportSemanticError(type+" must be a valid type"+" in "+
+                        this.getLocationInfo());
                 }
                 
                 boolean exists = !ts.insert(id, new VarDescription(id,type));
                 if (exists) return;
                 
                 if (e.getAtomicType() == null){
-                    InfoDump.reportSemanticError("Unknown condition, expresion of assignation has null type");
+                    InfoDump.reportSemanticError("Unknown condition, expresion of assignation has null type"+" in "+
+                        this.getLocationInfo());
                 }
                 
                 TypeDescription td = (TypeDescription) dtype;
                 if (!td.getAtomicType().equals(e.getAtomicType())){
                     InfoDump.reportSemanticError("ID \""+id+"\" ("+type+") doesn't match expression type ("
-                            +this.e.getAtomicType().getDType()+")");
+                            +this.e.getAtomicType().getDType()+")"+" in "+
+                        this.getLocationInfo());
                 }
             }
         }

@@ -11,7 +11,7 @@ public class UnExpr extends Node{
 
     private String unOp;
     private UnExpr unExpr;
-    private Primary p;
+    public Primary p;
     private AtomicType type;
     
     public UnExpr(String unOp, UnExpr unExpr, Primary p) throws FatalError {
@@ -68,8 +68,8 @@ public class UnExpr extends Node{
     
     private void subCheck() throws FatalError{
         if (this.unExpr == null){
-            InfoDump.reportSemanticError("Unary expression of binary operator is missing");
-            return;
+            InfoDump.reportSemanticError("Unary expression of binary operator is missing, in "+
+                    this.unExpr.p.getLocationInfo());
         }
         
         if (this.unExpr.type.getDType() != Atomic.TS_INT){
@@ -84,7 +84,8 @@ public class UnExpr extends Node{
     private void notCheck() throws FatalError{
         
         if (this.unExpr == null){
-            InfoDump.reportSemanticError("Unary expression of binary operator is missing");
+            InfoDump.reportSemanticError("Unary expression of binary operator is missing, in "+
+                    this.unExpr.p.getLocationInfo());
             return;
         }
         

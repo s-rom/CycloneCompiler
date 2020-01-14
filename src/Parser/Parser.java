@@ -848,7 +848,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 RESULT = new Assignation(t,id,null);
+		 RESULT = new Assignation(t,id,null,getLine(),getColumn());
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Assignation",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -866,7 +866,7 @@ class CUP$Parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Node e = (Node)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 RESULT = new Assignation(t,id, (Expr) e);
+		 RESULT = new Assignation(t,id, (Expr) e,getLine(),getColumn());
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Assignation",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -881,7 +881,7 @@ class CUP$Parser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Node e = (Node)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		 RESULT = new Assignation(id, (Expr)e); 
+		 RESULT = new Assignation(id, (Expr)e,getLine(),getColumn()); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Assignation",13, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
