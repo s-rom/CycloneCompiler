@@ -1,5 +1,6 @@
 package AST;
 
+import SymbolTable.ConstDescription;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
 import SymbolTable.TypeDescription;
@@ -15,21 +16,31 @@ public class Assignation extends Node{
     private String id;
     private Expr e;
     private int line, column;
+    private boolean constant; // Si el id de la asignacion es una constante
     
     public String getLocationInfo(){
         return "line "+(line+1)+", column "+(column+1);
     }
     
-    public Assignation(String type, String id, Expr e, int line, int column)  throws FatalError{
+    /*
+        type id;
+        type id = expr;
+        const type id = expr;
+    */
+    public Assignation(String type, String id, Expr e, boolean constant, int line, int column)  throws FatalError{
         this.e = e;
         this.id = id;
         this.type = type;
         this.line = line;
         this.column = column;
+        this.constant = constant;
         semanticCheck();
         toDot();
     }
     
+    /*
+        id = expr;
+    */
     public Assignation(String id, Expr e, int line, int column)  throws FatalError{
         this.type = null;
         this.e = e;
@@ -49,7 +60,8 @@ public class Assignation extends Node{
             if (type == null){
                 label = "Assignation: "+id+" = ";
             } else {
-                label = "Declaration: "+type+" "+id+" = ";
+                
+                label = "Declaration: "+(constant?"const":"")+type+" "+id+" = ";
             }
         }
         DOT.writeNode(nodeNumber, label);
@@ -112,7 +124,8 @@ public class Assignation extends Node{
                         this.getLocationInfo());
                 }
                 
-                boolean exists = !ts.insert(id, new VarDescription(id,type));
+                Description nd = constant? new ConstDescription(id,type) : new VarDescription(id,type);
+                boolean exists = !ts.insert(id, nd);
                 if (exists) return;
                 
                 if (e.getAtomicType() == null){

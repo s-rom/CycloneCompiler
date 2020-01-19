@@ -7,10 +7,18 @@
 (0,13)	LPAREN
 (0,14)	RPAREN
 (1,0)	LCURL
-(2,4)	BOOL_TYPE: bool
-(2,9)	ID: t
-(2,11)	ASSIGN: =
-(2,13)	INT_LIT: 3
-(2,15)	SUM: +
-(2,17)	INT_LIT: 7
-(2,18)	SEMICOLON
+(2,4)	CONST: const
+(2,10)	INT_TYPE: int
+(2,14)	ID: x
+(2,16)	ASSIGN: =
+(2,18)	INT_LIT: 2
+(2,19)	SEMICOLON
+(3,4)	CONST: const
+(3,10)	BOOL_TYPE: bool
+(3,15)	ID: y
+(3,17)	ASSIGN: =
+(3,19)	BOOL_LIT: false
+(3,24)	SEMICOLON
+(4,0)	RCURL
+(4,1)	EOF
+(4,1)	EOF

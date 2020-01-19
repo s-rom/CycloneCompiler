@@ -1,5 +1,7 @@
 package SymbolTable;
 
+import cyclonecompiler.FatalError;
+
 public class SymbolTable {
     
     private int level;
@@ -28,7 +30,7 @@ public class SymbolTable {
     }
     
     
-    public boolean insert(String id, Description d){
+    public boolean insert(String id, Description d) throws FatalError{
         return current.insert(id, d);
     }
     

@@ -3,10 +3,7 @@ package SymbolTable;
 import java.util.ArrayList;
 
 public class FuncDescription extends Description{
-    
- 
-    
-    
+  
     /* Para numeración única de las variables */
     private static int funcCounter = -1;
     public static int nextFuncNumber(){

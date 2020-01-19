@@ -71,6 +71,7 @@ comment2    = "//"[^\n\r]*
 "int"       {return getSymbol(ParserSym.INT_TYPE,yytext());}
 "void"      {return getSymbol(ParserSym.VOID_TYPE,yytext());}
 "bool"      {return getSymbol(ParserSym.BOOL_TYPE,yytext());}
+"const"     {return getSymbol(ParserSym.CONST, yytext());}
 
 "while"     {return getSymbol(ParserSym.WHILE);}
 "if"        {return getSymbol(ParserSym.IF);}

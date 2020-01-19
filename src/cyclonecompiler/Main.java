@@ -34,7 +34,7 @@ public class Main {
     */
     
     public static void main (String [] args){
-        final String NAME = "expr_mal_2";
+        final String NAME = "prueba";
         
         final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
         final String TOKEN_FILE = ".\\InfoFiles\\tokens.txt";
@@ -42,7 +42,6 @@ public class Main {
         final String ERROR_FILE = ".\\InfoFiles\\error_log.txt";
 
         final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
-        
         
         try {
             
@@ -86,13 +85,15 @@ public class Main {
         Description dIntMin = new ConstDescription("INT32_MIN","int",-2147483648);
         Description dChar = new TypeDescription("string",atomicChar);
         
-        ts.insert("string",dChar);
-        ts.insert("int", dInt);
-        ts.insert("bool", dBool);
-        ts.insert("true", dTrue);
-        ts.insert("false", dFalse);
-        ts.insert("INT32_MAX",dIntMax);
-        ts.insert("INT32_MIN",dIntMin);
+        try{
+            ts.insert("string",dChar);
+            ts.insert("int", dInt);
+            ts.insert("bool", dBool);
+            ts.insert("true", dTrue);
+            ts.insert("false", dFalse);
+            ts.insert("INT32_MAX",dIntMax);
+            ts.insert("INT32_MIN",dIntMin);
+        }catch(FatalError e){
+        }
     }
-    
 }
