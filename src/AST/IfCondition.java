@@ -1,6 +1,9 @@
 package AST;
 
+import SymbolTable.AtomicType;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
+import cyclonecompiler.InfoDump;
 
 public class IfCondition extends Node{
     
@@ -20,10 +23,11 @@ public class IfCondition extends Node{
     private Block b1;
     private Block b2;
 
-    public IfCondition(Expr e, Block b1, Block b2) {
+    public IfCondition(Expr e, Block b1, Block b2) throws FatalError {
         this.e = e;
         this.b1 = b1;
         this.b2 = b2;
+        semanticCheck();
         toDot();
     }
     
@@ -37,8 +41,14 @@ public class IfCondition extends Node{
     }
 
     @Override
-    public void semanticCheck() {
-
+    public void semanticCheck() throws FatalError {
+           if (this.e == null){
+            InfoDump.reportSemanticError("If conditional without expression, in "+this.e.ue.p.getLocationInfo());
+        }
+        
+        if (this.e.getAtomicType().getDType() != AtomicType.Atomic.TS_BOOL){
+            InfoDump.reportSemanticError("If conditional expression must be bool, in "+this.e.ue.p.getLocationInfo());
+        }
     }
     
 }

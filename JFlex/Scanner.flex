@@ -13,6 +13,7 @@ import cyclonecompiler.InfoDump.*;
 import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
+import cyclonecompiler.Main;
 
 %%
 
@@ -33,6 +34,8 @@ import Parser.ParserSym;
 
 
 %{
+    private boolean funcOpen = false;
+    private boolean inFunc = false;
 
     private Symbol getSymbol(int type) {
         String tokenName = ParserSym.terminalNames[type];
@@ -76,16 +79,31 @@ comment2    = "//"[^\n\r]*
 "while"     {return getSymbol(ParserSym.WHILE);}
 "if"        {return getSymbol(ParserSym.IF);}
 "else"      {return getSymbol(ParserSym.ELSE);}
-"func"      {return getSymbol(ParserSym.FUNC);}
+"func"      {funcOpen = true; return getSymbol(ParserSym.FUNC);}
 "output"    {return getSymbol(ParserSym.OUTPUT);}
 "input"     {return getSymbol(ParserSym.INPUT);}
 "return"    {return getSymbol(ParserSym.RETURN);}
 
 
-"("         {return getSymbol(ParserSym.LPAREN);}
+"("         {    
+                if (funcOpen && !inFunc) {
+                    Main.ts.enterBlock();
+                    inFunc = true;
+                }
+
+                return getSymbol(ParserSym.LPAREN);
+            }
 ")"         {return getSymbol(ParserSym.RPAREN);}
 "{"         {return getSymbol(ParserSym.LCURL);}
-"}"         {return getSymbol(ParserSym.RCURL);}
+"}"         {
+                if (funcOpen) {
+                    Main.ts.exitBlock();
+                    funcOpen = false;
+                    inFunc = false;
+                }
+                return getSymbol(ParserSym.RCURL);
+            }
+
 ";"         {return getSymbol(ParserSym.SEMICOLON);}
 ","         {return getSymbol(ParserSym.COMMA);}
 

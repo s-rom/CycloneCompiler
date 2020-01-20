@@ -12,6 +12,14 @@ public class Args extends Node{
         this.as = as;
         toDot();
     }
+
+    public Arg getA() {
+        return a;
+    }
+
+    public Args getNextArgs() {
+        return as;
+    }
     
     @Override
     public void toDot() {

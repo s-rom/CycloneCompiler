@@ -1,0 +1,58 @@
+digraph ccTree {
+graph[nodesep="1"]
+	node [shape=box]
+	node [shape=box]
+	n0 [label = "Primary"]
+	n1 [label = "STR_LIT: null"]
+	n0-> n1
+	n2 [label = "UnExpr"]
+	n2-> n0
+	n3 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n3:ue-> n2
+	n4 [label = "Instruction"]
+	n5 [label = "OUTPUT"]
+	n4-> n5
+	n5-> n3
+	n6 [label = "Statement"]
+	n6-> n4
+	n7 [label = "Primary"]
+	n8 [label = "INT_LIT: 0"]
+	n7-> n8
+	n9 [label = "UnExpr"]
+	n9-> n7
+	n10 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n10:ue-> n9
+	n11 [label = "Declaration: int x = "]
+	n11-> n10
+	n12 [label = "Instruction"]
+	n12-> n11
+	n13 [label = "Statement"]
+	n13-> n12
+	n14 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n14:s-> n13
+	n15 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n15:s-> n6
+	n15:sl-> n14
+	n16 [label = "Block"]
+	n16-> n15
+	n17 [label = "{Function | {Type: void | ID: prueba | <a>Args | <b>Block}}", shape="record"]
+	n17:b-> n16
+	n18 [label = "{FunctionCall | { ID: prueba | <e>ExprArg}}", shape="record"]
+	n19 [label = "Instruction"]
+	n19-> n18
+	n20 [label = "Statement"]
+	n20-> n19
+	n21 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n21:s-> n20
+	n22 [label = "Block"]
+	n22-> n21
+	n23 [label = "{Function | {Type: void | ID: main | <a>Args | <b>Block}}", shape="record"]
+	n23:b-> n22
+	n24 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n24:f-> n23
+	n25 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n25:f-> n17
+	n25:fl-> n24
+	n26 [label = "Program"]
+	n26-> n25
+}

@@ -61,6 +61,15 @@ public class InfoDump {
         }
     }
     
+      public static void addTableSymbolText(String text){
+        try {
+            tsWriter.write(text);
+        } catch (IOException ex) {
+            Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     private static void reportError(String error_msg, ErrorType errorType){
         String [] errorLabel = {"[Semantic Error]","[Lexic Error]","Syntax error"};
         String msg = errorLabel[errorType.ordinal()]+": "+error_msg;

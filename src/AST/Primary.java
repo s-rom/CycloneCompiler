@@ -1,6 +1,7 @@
 package AST;
 
 import SymbolTable.AtomicType;
+import SymbolTable.ConstDescription;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
 import SymbolTable.FuncDescription;
@@ -80,9 +81,18 @@ public class Primary extends Node {
                     InfoDump.reportSemanticError("ID ("+id+") is not defined in "
                             +getLocationInfo());
                 }
-                VarDescription vd = (VarDescription)d;
-                TypeDescription td = (TypeDescription) ts.get(vd.type);
+                
+                TypeDescription td;
+                
+                if (d.getDescriptionType() == DescriptionType.D_VAR){
+                    VarDescription vd = (VarDescription) d;
+                    td = (TypeDescription) ts.get(vd.type);
+                } else {
+                    ConstDescription cd = (ConstDescription) d;
+                    td = (TypeDescription) ts.get(cd.type);
+                }
                 this.type = td.getAtomicType();                
+                
                 break;
             case STR_LIT:
                 this.type = Main.atomicChar;

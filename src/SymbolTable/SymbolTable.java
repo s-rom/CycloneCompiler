@@ -1,6 +1,7 @@
 package SymbolTable;
 
 import cyclonecompiler.FatalError;
+import cyclonecompiler.InfoDump;
 
 public class SymbolTable {
     
@@ -18,17 +19,31 @@ public class SymbolTable {
         last = current;
         level++;
         current = new Scope(last, level);
+        String spaces = getNSpaces(level*5);
+        InfoDump.addTableSymbolText(spaces+"------------------------\n");
+        InfoDump.addTableSymbolText(spaces+"| LEVEL "+level+"\n");
+    }
+    
+    private String getNSpaces(int n){
+        String res ="";
+        for(int i = 0;i<n; i++) res+= ' ';
+        return res;
     }
     
     public void exitBlock(){
+        
         // level 0 cannot be erased
         if (level > 0){
             current = last;
             last = current.previous;
             level--;
+            InfoDump.addTableSymbolText(getNSpaces((level+1)*5)+"------------------------\n");
         }
     }
     
+    public int getCurrentLevel(){
+        return this.level;
+    }
     
     public boolean insert(String id, Description d) throws FatalError{
         return current.insert(id, d);
@@ -38,10 +53,7 @@ public class SymbolTable {
         return current.get(id);
     }
     
-    
-    
-    
-    /* PARA PRUEBAS */
+        
     @Override
     public String toString(){
         String res = "";

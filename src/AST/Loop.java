@@ -19,7 +19,7 @@ public class Loop extends Node{
 
     @Override
     public void semanticCheck() {
-
+        
     }
         
 }

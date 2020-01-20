@@ -69,6 +69,9 @@ public class Main {
     
     public static void initSymbolTable(){
         ts = new SymbolTable();
+        InfoDump.addTableSymbolText("------------------------\n");
+        InfoDump.addTableSymbolText("| LEVEL 0\n");
+
         atomicBool = new AtomicType(Atomic.TS_BOOL, 0, 255, 1);
         atomicChar = new AtomicType(Atomic.TS_CHAR, 0, 255, 1);
         atomicInt32 = new AtomicType(Atomic.TS_INT, -2147483648, +2147483647, 4);

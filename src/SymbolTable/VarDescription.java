@@ -19,7 +19,7 @@ public class VarDescription extends Description{
     
     @Override
     public String toString(){
-        return "<"+varNumber+"> "+type;
+        return "var <"+varNumber+"> "+type;
     }
     
 }

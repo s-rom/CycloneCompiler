@@ -1,5 +1,6 @@
 package SymbolTable;
 
+import AST.Arg;
 import java.util.ArrayList;
 
 public class FuncDescription extends Description{
@@ -12,16 +13,21 @@ public class FuncDescription extends Description{
     
     private int funcNumber;
     private String returnType;
-    private ArrayList<Parameter> params;
+    private ArrayList<Arg> params;
     
     public FuncDescription(String name, String returnType){
         super(name,DescriptionType.D_FUNC);
         this.returnType = returnType;
         this.funcNumber = nextFuncNumber();
+        params = new ArrayList();
     }
     
     public void addParam(String id, String type){
-        params.add(new Parameter(id,type));
+        params.add(new Arg(id,type));
+    }
+    
+    public void addParam(Arg a){
+        params.add(a);
     }
     
     public String getReturnType(){
@@ -31,6 +37,11 @@ public class FuncDescription extends Description{
     
     @Override
     public String toString(){
-        return "<"+funcNumber+">"+returnType;
+        String ret = "func <"+funcNumber+"> returns "+returnType+", params(";
+        if(params.isEmpty()) return ret + ")";
+        for (Arg a: params){
+            ret += a.toString()+", ";
+        }
+        return ret.substring(0,ret.length()-2)+")";
     }
 }

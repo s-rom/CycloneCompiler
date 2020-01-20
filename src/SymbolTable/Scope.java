@@ -7,6 +7,7 @@ package SymbolTable;
 
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -36,9 +37,19 @@ public class Scope {
             return false;
         } else {
             t.put(id, d);
-            InfoDump.addTableSymbolEntry(id+" | ",d);
+            String pre = getNSpaces(Main.ts.getCurrentLevel()*5)+"| ";
+            String padding = getNSpaces(15 - id.length());
+            InfoDump.addTableSymbolEntry(pre+id+padding+"| ",d);
             return true;
         }
+    }
+    
+    private String getNSpaces(int n){
+        String res ="";
+        for (int i = 0; i<n; i++){
+            res += ' ';
+        }
+        return res;
     }
     
     /**
@@ -68,15 +79,9 @@ public class Scope {
         String res = "LEVEL: "+level+"\n";
         Set<String> keys = t.keySet();
         for(String key: keys){
-            res += spc+key+"("+t.get(key).dtype+") "+t.get(key)+"\n";
+            String padding = getNSpaces(15-key.length());
+            res += spc+key+padding+"("+t.get(key).dtype+") "+t.get(key)+"\n";
         }    
         return res;
     }
-    
-    public String getNSpaces(int n){
-        String res ="";
-        for (int i = 0; i<n; i++) res+=" ";
-        return res;
-    }
-    
 }

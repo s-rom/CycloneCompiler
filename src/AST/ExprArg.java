@@ -22,7 +22,7 @@ public class ExprArg extends Node{
 
     @Override
     public void semanticCheck() {
-
+        
     }
     
 }

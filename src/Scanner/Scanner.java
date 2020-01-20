@@ -15,6 +15,7 @@ import cyclonecompiler.InfoDump.*;
 import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
+import cyclonecompiler.Main;
 
 
 /**
@@ -317,6 +318,8 @@ public class Scanner implements java_cup.runtime.Scanner {
   private int zzFinalHighSurrogate = 0;
 
   /* user code: */
+    private boolean funcOpen = false;
+    private boolean inFunc = false;
 
     private Symbol getSymbol(int type) {
         String tokenName = ParserSym.terminalNames[type];
@@ -749,7 +752,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 47: break;
           case 7: 
-            { return getSymbol(ParserSym.LPAREN);
+            { if (funcOpen && !inFunc) {
+                    Main.ts.enterBlock();
+                    inFunc = true;
+                }
+
+                return getSymbol(ParserSym.LPAREN);
             } 
             // fall through
           case 48: break;
@@ -764,7 +772,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 50: break;
           case 10: 
-            { return getSymbol(ParserSym.RCURL);
+            { if (funcOpen) {
+                    Main.ts.exitBlock();
+                    funcOpen = false;
+                    inFunc = false;
+                }
+                return getSymbol(ParserSym.RCURL);
             } 
             // fall through
           case 51: break;
@@ -884,7 +897,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 74: break;
           case 34: 
-            { return getSymbol(ParserSym.FUNC);
+            { funcOpen = true; return getSymbol(ParserSym.FUNC);
             } 
             // fall through
           case 75: break;

@@ -1,15 +1,20 @@
 package AST;
 
+import SymbolTable.AtomicType;
+import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
+import cyclonecompiler.InfoDump;
 
 public class WhileLoop extends Node{
     
     private Expr e;
     private Block b;
     
-    public WhileLoop(Expr e, Block b) {
+    public WhileLoop(Expr e, Block b) throws FatalError {
         this.e = e;
         this.b = b;
+        semanticCheck();
         toDot();
     }
 
@@ -21,8 +26,14 @@ public class WhileLoop extends Node{
     }
 
     @Override
-    public void semanticCheck() {
-
+    public void semanticCheck() throws FatalError {
+        if (this.e == null){
+            InfoDump.reportSemanticError("While loop without expression, in "+this.e.ue.p.getLocationInfo());
+        }
+        
+        if (this.e.getAtomicType().getDType() != Atomic.TS_BOOL){
+            InfoDump.reportSemanticError("While loop expression must be bool, in "+this.e.ue.p.getLocationInfo());
+        }
     }
     
 }

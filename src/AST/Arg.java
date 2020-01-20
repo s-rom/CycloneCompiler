@@ -1,34 +1,45 @@
 package AST;
 
+import SymbolTable.Description;
+import SymbolTable.DescriptionType;
+import SymbolTable.TypeDescription;
+import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
+import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
 
 public class Arg extends Node{
 
     private String type;
     private String id;
 
-    public Arg(String type, String id) {
+    public Arg(String type, String id) throws FatalError {
         this.type = type;
         this.id = id;
+        semanticCheck();
         toDot();
     }
     
     @Override
     public void toDot() {
         DOT.writeNode(this.nodeNumber, "Arg: "+type+" "+id);
-        
-//        int idType = DOT.nextNode();
-//        int idID = DOT.nextNode();
-//        
-//        DOT.writeNode(idType, "Type: "+type);
-//        DOT.writeNode(idID, "ID: "+id);
-        
-//        DOT.writeEdge(nodeNumber, idType);
-//        DOT.writeEdge(nodeNumber, idID);
     }
 
     @Override
-    public void semanticCheck() {
+    public void semanticCheck() throws FatalError {
+        Description d = Main.ts.get(type);
+        if (d == null || (d!=null && d.getDescriptionType() != DescriptionType.D_TYPE)){
+            InfoDump.reportSemanticError("Type "+type+" is not defined");
+        }
+        
+        VarDescription vd = new VarDescription(id,type);
+        Main.ts.insert(id, vd);
+    }
+    
+    @Override
+    public String toString(){
+        return type+" "+id;
     }
     
 }

@@ -17,7 +17,7 @@ public class Expr extends Node{
     
     private Expr e;
     private String bo; //Operador binario
-    private UnExpr ue;
+    public UnExpr ue;
     private AtomicType type; //Tipo de la expresion. Ej: 2+3 (Expr de tipo int)
     
     public Expr(Expr e, String bo, UnExpr ue)  throws FatalError{
