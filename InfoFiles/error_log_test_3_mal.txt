@@ -1,2 +1,0 @@
-### ---------- Compilation Errors ----------
-[Semantic Error]: Found parameter number 2 in call to function getValor1 of type int but TS_BOOL was expected, in line 20, column 39

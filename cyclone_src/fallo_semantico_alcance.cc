@@ -19,7 +19,7 @@ func void funcionPrueba(int x){
     return x;
 }
 
-func void main()
+func void cyclone()
 {
     funcionPrueba(0);
 }

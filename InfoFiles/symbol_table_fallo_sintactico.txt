@@ -11,20 +11,7 @@
 | INT32_MIN      | const int -2147483648
      ------------------------
      | LEVEL 1
-     | x              | var <0> int
-     | y              | var <1> int
      ------------------------
-| getValor1      | func <0> returns int, params(int x, int y)
      ------------------------
      | LEVEL 1
-     | a              | var <2> int
-     | i              | var <3> int
-          ------------------------
-          | LEVEL 2
-          ------------------------
      ------------------------
-| getValor2      | func <1> returns int, params(int a)
-     ------------------------
-     | LEVEL 1
-     | a              | const int 
-     | b              | const int 

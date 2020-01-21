@@ -83,9 +83,9 @@
 (16,0)	RCURL
 (21,0)	FUNC
 (21,5)	INT_TYPE: int
-(21,9)	ID: main
-(21,13)	LPAREN
-(21,14)	RPAREN
+(21,9)	ID: cyclone
+(21,16)	LPAREN
+(21,17)	RPAREN
 (22,0)	LCURL
 (23,4)	CONST: const
 (23,10)	INT_TYPE: int

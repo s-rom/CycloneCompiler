@@ -11,23 +11,19 @@
 | INT32_MIN      | const int -2147483648
      ------------------------
      | LEVEL 1
-     | x              | var <0> int
-     | y              | var <1> int
+     | x              | var <21> int
+     | y              | var <22> int
      ------------------------
-| getValor1      | func <0> returns int, params(int x, int y)
+| getValor1      | func <7> returns int, params(int x, int y)
      ------------------------
      | LEVEL 1
-     | a              | var <2> int
-     | i              | var <3> int
+     | a              | var <23> int
+     | i              | var <24> int
           ------------------------
           | LEVEL 2
           ------------------------
      ------------------------
-| getValor2      | func <1> returns int, params(int a)
+| getValor2      | func <8> returns int, params(int a)
      ------------------------
      | LEVEL 1
-     | a              | const int 
-     | b              | const int 
-     | x              | var <4> int
      ------------------------
-| main           | func <2> returns void, params()

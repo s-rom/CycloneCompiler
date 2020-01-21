@@ -1,0 +1,13 @@
+### ---------- Compilation Errors ----------
+[Lexic Error]: Lexic error: "͡"
+found in line 18, column19
+[Lexic Error]: Lexic error: "°"
+found in line 18, column20
+[Lexic Error]: Lexic error: "͜"
+found in line 18, column22
+[Lexic Error]: Lexic error: "ʖ"
+found in line 18, column23
+[Lexic Error]: Lexic error: "͡"
+found in line 18, column25
+[Lexic Error]: Lexic error: "°"
+found in line 18, column26

@@ -19,29 +19,11 @@ func void rectBetween(int x1, int y1, int x2, int y2)
 /* 
 * Función principal
 */
-func int main()
+func int cyclone()
 {
-    const int max = INT32_MAX; //constante predefinida
-    int x1 = 0;
-    int y1 = -3;
-
-    int x2 = -3;
-    int y2 = 5;
-
-    output("El maximo de la variable int es: ");
-    output(max);
-
-    rectBetween(x1,y2,x2,y2);
-
-    int x = 0;
-    if (x >= 0)
-    {
-        while (x < 100){
-            x = x + 1;
-            output(x);
-        }
-    }
-
+    //Dará error porque el 4º parametro es string y no int
+    rectBetween(2, 2, 2, "hola");
+   //rectBetween(); otro error
 }
 
 

@@ -11,15 +11,15 @@
 | INT32_MIN      | const int -2147483648
      ------------------------
      | LEVEL 1
-     | x1             | var <0> int
-     | y1             | var <1> int
-     | x2             | var <2> int
-     | y2             | var <3> int
-     | dx             | var <4> int
-     | dy             | var <5> int
-     | slope          | var <6> int
-     | y_intercept    | var <7> int
+     | x1             | var <28> int
+     | y1             | var <29> int
+     | x2             | var <30> int
+     | y2             | var <31> int
+     | dx             | var <32> int
+     | dy             | var <33> int
+     | slope          | var <34> int
+     | y_intercept    | var <35> int
      ------------------------
-| rectBetween    | func <0> returns void, params(int x1, int y1, int x2, int y2)
+| rectBetween    | func <9> returns void, params(int x1, int y1, int x2, int y2)
      ------------------------
      | LEVEL 1

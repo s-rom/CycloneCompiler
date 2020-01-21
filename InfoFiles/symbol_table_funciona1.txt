@@ -36,4 +36,4 @@
                ------------------------
           ------------------------
      ------------------------
-| main           | func <1> returns int, params()
+| cyclone        | func <1> returns int, params()

@@ -2,7 +2,6 @@ package AST;
 
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
-import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;

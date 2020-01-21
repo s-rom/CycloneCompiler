@@ -14,9 +14,9 @@ func int getValor2(int a)
 }
 
 
-func void main()
+func void cyclone()
 {
     const int a = 23;
     const int b = -3;
-    int x = getValor1(getValor2(a),true); //error, el segundo parametro es bool
+    int x = getValor1(getValor2(a),getValor2(b));
 }

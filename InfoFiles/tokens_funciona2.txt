@@ -60,9 +60,9 @@
 (17,0)	RCURL
 (19,0)	FUNC
 (19,5)	VOID_TYPE: void
-(19,10)	ID: main
-(19,14)	LPAREN
-(19,15)	RPAREN
+(19,10)	ID: cyclone
+(19,17)	LPAREN
+(19,18)	RPAREN
 (20,0)	LCURL
 (21,4)	ID: funcionPrueba
 (21,17)	LPAREN

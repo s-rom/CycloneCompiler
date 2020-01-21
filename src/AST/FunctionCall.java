@@ -76,8 +76,12 @@ public class FunctionCall extends Node {
             Arg a = list.get(i);
             TypeDescription td = (TypeDescription)Main.ts.get(a.getType());
             if (listFound.get(i).getAtomicType() != td.getAtomicType()){
-                InfoDump.reportSemanticError("Found parameter number "+(i+1)+" in call to function "+id+" of type "+a.getType()+" but "
-                +listFound.get(i).getAtomicType().getDType()+" was expected, in "+getLocationInfo());
+                
+                
+                InfoDump.reportSemanticError("Error in parameter "+(i+1)+" in function "
+                        + id+" in "+getLocationInfo()+": expected "+
+                        td.getAtomicType().getDType()+", found "+
+                        listFound.get(i).getAtomicType().getDType());
             }
         }
         

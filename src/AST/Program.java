@@ -24,7 +24,7 @@ public class Program extends Node{
 
     @Override
     public void semanticCheck() throws FatalError {
-        Description d = Main.ts.get("main");
+        Description d = Main.ts.get("cyclone");
         if (d == null || (d != null && d.getDescriptionType() != DescriptionType.D_FUNC)){
             InfoDump.reportSemanticError("All Cyclone programs must have a main function");
         }

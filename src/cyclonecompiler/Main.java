@@ -25,19 +25,17 @@ public class Main {
     public static AtomicType atomicNull;
     public static AtomicType atomicInt;
     
-    /*
-        ##__TESTS__##
-         => Expresions: 
-            test_1_bien
-            test_1_mal
-            test_2_bien
-            test_2_mal
-            test_3_bien
-            test_3_mal
-    */
     
     public static void main (String [] args){
-        final String NAME = "test_1_bien";
+        final String[] NAMES = {"funciona1","funciona2","funciona3"
+                ,"fallo_lexico","fallo_semantico_alcance","fallo_semantico_llamada",
+                "fallo_sintactico"};
+        final String NAME = NAMES[0];
+        compilar(NAME);
+    }
+ 
+    
+    public static void compilar(String NAME){
         
         final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
         final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+NAME+".txt";
@@ -47,7 +45,6 @@ public class Main {
         final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
         
         try {
-            
             DOT.initWriter(DOT_FILE);
             InfoDump.initAllWriters(TOKEN_FILE, SYMBOL_TABLE_FILE, ERROR_FILE);
             initSymbolTable();
@@ -68,7 +65,7 @@ public class Main {
             DOT.closeWriter();
         }
     }
- 
+    
     
     public static void initSymbolTable(){
         ts = new SymbolTable();

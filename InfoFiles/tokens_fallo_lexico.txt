@@ -59,33 +59,19 @@
 (13,0)	RCURL
 (16,0)	FUNC
 (16,5)	VOID_TYPE: void
-(16,10)	ID: main
-(16,14)	LPAREN
-(16,15)	RPAREN
+(16,10)	ID: cyclone
+(16,17)	LPAREN
+(16,18)	RPAREN
 (17,0)	LCURL
 (18,4)	CONST: const
-(18,10)	INT_TYPE: int
-(18,14)	ID: a
-(18,16)	ASSIGN: =
-(18,18)	INT_LIT: 23
-(18,20)	SEMICOLON
-(19,4)	CONST: const
-(19,10)	INT_TYPE: int
-(19,14)	ID: b
-(19,16)	ASSIGN: =
-(19,18)	SUB: -
-(19,19)	INT_LIT: 3
-(19,20)	SEMICOLON
-(20,4)	INT_TYPE: int
-(20,8)	ID: x
-(20,10)	ASSIGN: =
-(20,12)	ID: getValor1
-(20,21)	LPAREN
-(20,22)	ID: getValor2
-(20,31)	LPAREN
-(20,32)	ID: a
-(20,33)	RPAREN
-(20,34)	COMMA
-(20,35)	BOOL_LIT: true
-(20,39)	RPAREN
-(20,40)	SEMICOLON
+(18,10)	STR_TYPE: string
+(18,17)	LPAREN
+(18,27)	RPAREN
+(18,29)	ASSIGN: =
+(18,31)	STR_LIT: "apruebanos pls uwu"
+(18,51)	SEMICOLON
+(19,0)	RCURL
+(19,1)	EOF
+(19,1)	EOF
+(19,1)	EOF
+(19,1)	EOF

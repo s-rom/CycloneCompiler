@@ -11,21 +11,21 @@
 | INT32_MIN      | const int -2147483648
      ------------------------
      | LEVEL 1
-     | x              | var <0> int
+     | x              | var <13> int
           ------------------------
           | LEVEL 2
-          | i              | var <1> int
+          | i              | var <14> int
                ------------------------
                | LEVEL 3
-               | l              | var <2> int
+               | l              | var <15> int
                     ------------------------
                     | LEVEL 4
                     ------------------------
                ------------------------
           ------------------------
      ------------------------
-| funcionPrueba  | func <0> returns void, params(int x)
+| funcionPrueba  | func <2> returns void, params(int x)
      ------------------------
      | LEVEL 1
      ------------------------
-| main           | func <1> returns void, params()
+| cyclone        | func <3> returns void, params()

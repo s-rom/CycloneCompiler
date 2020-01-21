@@ -1,0 +1,2 @@
+### ---------- Compilation Errors ----------
+[Semantic Error]: Error in parameter 4 in function rectBetween in line 24, column 31: expected TS_INT, found TS_CHAR

@@ -71,7 +71,7 @@ public class InfoDump {
     
     
     private static void reportError(String error_msg, ErrorType errorType){
-        String [] errorLabel = {"[Semantic Error]","[Lexic Error]","Syntax error"};
+        String [] errorLabel = {"[Semantic Error]","[Lexic Error]","[Syntax error]"};
         String msg = errorLabel[errorType.ordinal()]+": "+error_msg;
         try {
             errorWriter.write(msg);
