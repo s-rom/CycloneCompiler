@@ -1,7 +1,7 @@
 ### ---------- Symbol Table ----------
 ------------------------
 | LEVEL 0
-| void           | TS_NULL [0,0] 1byte
+| void           | TS_NULL [0,0] 0byte
 | string         | TS_CHAR [255,0] 1byte
 | int            | TS_INT [2147483647,-2147483648] 4bytes
 | bool           | TS_BOOL [255,0] 1byte
@@ -22,3 +22,10 @@
                     | LEVEL 4
                     ------------------------
                ------------------------
+          ------------------------
+     ------------------------
+| funcionPrueba  | func <0> returns void, params(int x)
+     ------------------------
+     | LEVEL 1
+     ------------------------
+| main           | func <1> returns void, params()

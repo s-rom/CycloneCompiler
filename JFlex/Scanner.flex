@@ -99,6 +99,7 @@ comment2    = "//"[^\n\r]*
                 return getSymbol(ParserSym.LCURL);
             }
 "}"         {
+                if (funcOpen) funcOpen = false;
                 s.pop();
                 Main.ts.exitBlock();
                 return getSymbol(ParserSym.RCURL);

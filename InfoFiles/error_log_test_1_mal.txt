@@ -1,0 +1,2 @@
+### ---------- Compilation Errors ----------
+[Semantic Error]: ID (x1) is not defined in line 25, column 17

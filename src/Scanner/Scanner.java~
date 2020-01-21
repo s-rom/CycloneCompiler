@@ -774,8 +774,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 50: break;
           case 10: 
-            { System.out.println(s.peek());
-                s.pop();
+            { s.pop();
                 Main.ts.exitBlock();
                 return getSymbol(ParserSym.RCURL);
             } 

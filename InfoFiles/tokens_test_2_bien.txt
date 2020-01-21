@@ -1,0 +1,74 @@
+### ---------- Token File ----------
+### Format: (line,colum) TokenName: Attribute?
+
+(1,0)	FUNC
+(1,5)	VOID_TYPE: void
+(1,10)	ID: funcionPrueba
+(1,23)	LPAREN
+(1,24)	INT_TYPE: int
+(1,28)	ID: x
+(1,29)	RPAREN
+(1,30)	LCURL
+(2,4)	IF
+(2,7)	LPAREN
+(2,8)	ID: x
+(2,10)	LT: <
+(2,12)	INT_LIT: 1
+(2,13)	RPAREN
+(3,4)	LCURL
+(4,8)	INT_TYPE: int
+(4,12)	ID: i
+(4,14)	ASSIGN: =
+(4,16)	INT_LIT: 0
+(4,17)	SEMICOLON
+(5,8)	IF
+(5,11)	LPAREN
+(5,12)	ID: x
+(5,14)	EQ: ==
+(5,17)	INT_LIT: 0
+(5,18)	RPAREN
+(6,8)	LCURL
+(7,12)	INT_TYPE: int
+(7,16)	ID: l
+(7,18)	ASSIGN: =
+(7,20)	INT_LIT: 0
+(7,21)	SEMICOLON
+(8,12)	WHILE
+(8,17)	LPAREN
+(8,18)	ID: l
+(8,19)	LT: <
+(8,20)	INT_LIT: 30
+(8,22)	RPAREN
+(9,12)	LCURL
+(10,16)	OUTPUT
+(10,22)	LPAREN
+(10,23)	ID: l
+(10,24)	RPAREN
+(10,25)	SEMICOLON
+(11,16)	ID: l
+(11,18)	ASSIGN: =
+(11,20)	ID: l
+(11,22)	SUM: +
+(11,24)	INT_LIT: 1
+(11,25)	SEMICOLON
+(12,12)	RCURL
+(13,8)	RCURL
+(14,4)	RCURL
+(16,4)	RETURN
+(16,11)	ID: x
+(16,12)	SEMICOLON
+(17,0)	RCURL
+(19,0)	FUNC
+(19,5)	VOID_TYPE: void
+(19,10)	ID: main
+(19,14)	LPAREN
+(19,15)	RPAREN
+(20,0)	LCURL
+(21,4)	ID: funcionPrueba
+(21,17)	LPAREN
+(21,18)	INT_LIT: 0
+(21,19)	RPAREN
+(21,20)	SEMICOLON
+(22,0)	RCURL
+(22,1)	EOF
+(22,1)	EOF

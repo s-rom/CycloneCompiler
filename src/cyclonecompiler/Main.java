@@ -37,12 +37,12 @@ public class Main {
     */
     
     public static void main (String [] args){
-        final String NAME = "test_2_mal";
+        final String NAME = "test_1_bien";
         
         final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
-        final String TOKEN_FILE = ".\\InfoFiles\\tokens.txt";
-        final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table.txt";
-        final String ERROR_FILE = ".\\InfoFiles\\error_log.txt";
+        final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+NAME+".txt";
+        final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table_"+NAME+".txt";
+        final String ERROR_FILE = ".\\InfoFiles\\error_log_"+NAME+".txt";
 
         final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
         
@@ -79,7 +79,7 @@ public class Main {
         atomicChar = new AtomicType(Atomic.TS_CHAR, 0, 255, 1);
         atomicInt32 = new AtomicType(Atomic.TS_INT, -2147483648, +2147483647, 4);
         atomicInt16 = new AtomicType(Atomic.TS_INT, -65536, +65535, 2);
-        atomicNull = new AtomicType(Atomic.TS_NULL, 0, 0, 1);
+        atomicNull = new AtomicType(Atomic.TS_NULL, 0, 0, 0);
         atomicInt = atomicInt32; //alias de int32 bits
         
         
