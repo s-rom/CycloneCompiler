@@ -1,2 +1,2 @@
 ### ---------- Compilation Errors ----------
-[Semantic Error]: Found parameter number 4 in call to function rectBetween of type int but TS_CHAR was expected, in line 33, column 31
+[Semantic Error]: ID (l) is not defined in line 16, column 16

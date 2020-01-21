@@ -16,6 +16,7 @@ import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
 import cyclonecompiler.Main;
+import java.util.Stack;
 
 
 /**
@@ -318,9 +319,9 @@ public class Scanner implements java_cup.runtime.Scanner {
   private int zzFinalHighSurrogate = 0;
 
   /* user code: */
-    private boolean funcOpen = false;
-    private boolean inFunc = false;
 
+    private boolean funcOpen = false;
+    private Stack<String> s = new Stack();
     private Symbol getSymbol(int type) {
         String tokenName = ParserSym.terminalNames[type];
         InfoDump.addTokenInfo(tokenName, yyline, yycolumn);
@@ -752,12 +753,10 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 47: break;
           case 7: 
-            { if (funcOpen && !inFunc) {
+            { if (s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
-                    funcOpen = false;
-                    inFunc = true;
-                }
-
+                    funcOpen = true;
+                }     
                 return getSymbol(ParserSym.LPAREN);
             } 
             // fall through
@@ -768,16 +767,16 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 49: break;
           case 9: 
-            { return getSymbol(ParserSym.LCURL);
+            { if (s.peek() == "while" || s.peek() == "if" || s.peek() =="else")
+                    Main.ts.enterBlock();
+                return getSymbol(ParserSym.LCURL);
             } 
             // fall through
           case 50: break;
           case 10: 
-            { if (funcOpen) {
-                    Main.ts.exitBlock();
-                    funcOpen = false;
-                    inFunc = false;
-                }
+            { System.out.println(s.peek());
+                s.pop();
+                Main.ts.exitBlock();
                 return getSymbol(ParserSym.RCURL);
             } 
             // fall through
@@ -838,7 +837,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 62: break;
           case 22: 
-            { return getSymbol(ParserSym.IF);
+            { s.push("if"); return getSymbol(ParserSym.IF);
             } 
             // fall through
           case 63: break;
@@ -893,12 +892,12 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 73: break;
           case 33: 
-            { return getSymbol(ParserSym.ELSE);
+            { s.push("else"); return getSymbol(ParserSym.ELSE);
             } 
             // fall through
           case 74: break;
           case 34: 
-            { funcOpen = true; return getSymbol(ParserSym.FUNC);
+            { s.push("func"); return getSymbol(ParserSym.FUNC);
             } 
             // fall through
           case 75: break;
@@ -913,7 +912,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 77: break;
           case 37: 
-            { return getSymbol(ParserSym.WHILE);
+            { s.push("while"); return getSymbol(ParserSym.WHILE);
             } 
             // fall through
           case 78: break;

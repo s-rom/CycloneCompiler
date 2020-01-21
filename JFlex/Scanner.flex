@@ -14,6 +14,7 @@ import cyclonecompiler.InfoDump;
 
 import Parser.ParserSym;
 import cyclonecompiler.Main;
+import java.util.Stack;
 
 %%
 
@@ -34,9 +35,9 @@ import cyclonecompiler.Main;
 
 
 %{
-    private boolean funcOpen = false;
-    private boolean inFunc = false;
 
+    private boolean funcOpen = false;
+    private Stack<String> s = new Stack();
     private Symbol getSymbol(int type) {
         String tokenName = ParserSym.terminalNames[type];
         InfoDump.addTokenInfo(tokenName, yyline, yycolumn);
@@ -76,31 +77,30 @@ comment2    = "//"[^\n\r]*
 "bool"      {return getSymbol(ParserSym.BOOL_TYPE,yytext());}
 "const"     {return getSymbol(ParserSym.CONST, yytext());}
 
-"while"     {return getSymbol(ParserSym.WHILE);}
-"if"        {return getSymbol(ParserSym.IF);}
-"else"      {return getSymbol(ParserSym.ELSE);}
-"func"      {funcOpen = true; return getSymbol(ParserSym.FUNC);}
+"while"     {s.push("while"); return getSymbol(ParserSym.WHILE);}
+"if"        {s.push("if"); return getSymbol(ParserSym.IF);}
+"else"      {s.push("else"); return getSymbol(ParserSym.ELSE);}
+"func"      {s.push("func"); return getSymbol(ParserSym.FUNC);}
 "output"    {return getSymbol(ParserSym.OUTPUT);}
 "input"     {return getSymbol(ParserSym.INPUT);}
 "return"    {return getSymbol(ParserSym.RETURN);}
 
 
-"("         {    
-                if (funcOpen && !inFunc) {
+"("         {   if (s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
-                    inFunc = true;
-                }
-
+                    funcOpen = true;
+                }     
                 return getSymbol(ParserSym.LPAREN);
             }
 ")"         {return getSymbol(ParserSym.RPAREN);}
-"{"         {return getSymbol(ParserSym.LCURL);}
+"{"         {
+                if (s.peek() == "while" || s.peek() == "if" || s.peek() =="else")
+                    Main.ts.enterBlock();
+                return getSymbol(ParserSym.LCURL);
+            }
 "}"         {
-                if (funcOpen) {
-                    Main.ts.exitBlock();
-                    funcOpen = false;
-                    inFunc = false;
-                }
+                s.pop();
+                Main.ts.exitBlock();
                 return getSymbol(ParserSym.RCURL);
             }
 

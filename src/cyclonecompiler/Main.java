@@ -28,13 +28,16 @@ public class Main {
     /*
         ##__TESTS__##
          => Expresions: 
-            test_expresiones
-            expr_mal_1
-            expr_mal_2
+            test_1_bien
+            test_1_mal
+            test_2_bien
+            test_2_mal
+            test_3_bien
+            test_3_mal
     */
     
     public static void main (String [] args){
-        final String NAME = "prueba";
+        final String NAME = "test_2_mal";
         
         final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
         final String TOKEN_FILE = ".\\InfoFiles\\tokens.txt";
@@ -87,8 +90,11 @@ public class Main {
         Description dIntMax = new ConstDescription("INT32_MAX","int",2147483647);
         Description dIntMin = new ConstDescription("INT32_MIN","int",-2147483648);
         Description dChar = new TypeDescription("string",atomicChar);
+        Description dVoid = new TypeDescription("void",atomicNull);
+
         
         try{
+            ts.insert("void",dVoid);
             ts.insert("string",dChar);
             ts.insert("int", dInt);
             ts.insert("bool", dBool);

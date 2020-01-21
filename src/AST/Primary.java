@@ -123,8 +123,11 @@ public class Primary extends Node {
             InfoDump.reportLexicError(funcType+" is not a valid type");
         }
         
-        this.type = ((TypeDescription)d).getAtomicType();
-        
+        if (d != null){
+            this.type = ((TypeDescription)d).getAtomicType();
+        } else{
+            this.type=Main.atomicNull;
+        }
         functionCheck(id);
         toDot();
     }
@@ -142,6 +145,10 @@ public class Primary extends Node {
         }
         
         FuncDescription fd = (FuncDescription) d;
+        if (d == null){
+              InfoDump.reportSemanticError(id+" is not a callable function in "+
+                    this.getLocationInfo());
+        }
         TypeDescription td = (TypeDescription) Main.ts.get(fd.getReturnType());
         this.type = td.getAtomicType();
     }

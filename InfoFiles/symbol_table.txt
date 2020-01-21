@@ -1,6 +1,7 @@
 ### ---------- Symbol Table ----------
 ------------------------
 | LEVEL 0
+| void           | TS_NULL [0,0] 1byte
 | string         | TS_CHAR [255,0] 1byte
 | int            | TS_INT [2147483647,-2147483648] 4bytes
 | bool           | TS_BOOL [255,0] 1byte
@@ -10,20 +11,14 @@
 | INT32_MIN      | const int -2147483648
      ------------------------
      | LEVEL 1
-     | x1             | var <0> int
-     | y1             | var <1> int
-     | x2             | var <2> int
-     | y2             | var <3> int
-     | dx             | var <4> int
-     | dy             | var <5> int
-     | slope          | var <6> int
-     | y_intercept    | var <7> int
-     ------------------------
-| rectBetween    | func <0> returns void, params(int x1, int y1, int x2, int y2)
-     ------------------------
-     | LEVEL 1
-     | max            | const int 
-     | x1             | var <8> int
-     | y1             | var <9> int
-     | x2             | var <10> int
-     | y2             | var <11> int
+     | x              | var <0> int
+          ------------------------
+          | LEVEL 2
+          | i              | var <1> int
+               ------------------------
+               | LEVEL 3
+               | l              | var <2> int
+                    ------------------------
+                    | LEVEL 4
+                    ------------------------
+               ------------------------

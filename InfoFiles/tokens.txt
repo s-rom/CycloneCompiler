@@ -1,138 +1,59 @@
 ### ---------- Token File ----------
 ### Format: (line,colum) TokenName: Attribute?
 
-(4,0)	FUNC
-(4,5)	VOID_TYPE: void
-(4,10)	ID: rectBetween
-(4,21)	LPAREN
-(4,22)	INT_TYPE: int
-(4,26)	ID: x1
-(4,28)	COMMA
-(4,30)	INT_TYPE: int
-(4,34)	ID: y1
-(4,36)	COMMA
-(4,38)	INT_TYPE: int
-(4,42)	ID: x2
-(4,44)	COMMA
-(4,46)	INT_TYPE: int
-(4,50)	ID: y2
-(4,52)	RPAREN
-(5,0)	LCURL
-(6,4)	INT_TYPE: int
-(6,8)	ID: dx
-(6,11)	ASSIGN: =
-(6,13)	ID: x2
-(6,16)	SUB: -
-(6,18)	ID: x1
-(6,20)	SEMICOLON
-(7,4)	INT_TYPE: int
-(7,8)	ID: dy
-(7,11)	ASSIGN: =
-(7,13)	ID: y2
-(7,16)	SUB: -
-(7,18)	ID: y1
-(7,20)	SEMICOLON
-(8,4)	INT_TYPE: int
-(8,8)	ID: slope
-(8,14)	ASSIGN: =
-(8,16)	ID: dy
-(8,19)	DIV: /
-(8,21)	ID: dx
-(8,23)	SEMICOLON
-(9,4)	INT_TYPE: int
-(9,8)	ID: y_intercept
-(9,20)	ASSIGN: =
-(9,22)	ID: y1
-(9,25)	SUB: -
-(9,27)	LPAREN
-(9,28)	ID: slope
-(9,34)	MULT: *
-(9,36)	ID: x1
-(9,38)	RPAREN
-(9,39)	SEMICOLON
-(10,4)	OUTPUT
-(10,10)	LPAREN
-(10,11)	STR_LIT: "rect: "
-(10,19)	RPAREN
-(10,20)	SEMICOLON
-(11,4)	OUTPUT
-(11,10)	LPAREN
-(11,11)	STR_LIT: "y = "
-(11,17)	RPAREN
-(11,18)	SEMICOLON
-(12,4)	OUTPUT
-(12,10)	LPAREN
-(12,11)	ID: slope
-(12,16)	RPAREN
-(12,17)	SEMICOLON
-(13,4)	OUTPUT
-(13,10)	LPAREN
-(13,11)	STR_LIT: "x + "
-(13,17)	RPAREN
-(13,18)	SEMICOLON
-(14,4)	OUTPUT
-(14,10)	LPAREN
-(14,11)	ID: y_intercept
-(14,22)	RPAREN
-(14,23)	SEMICOLON
-(15,4)	OUTPUT
-(15,10)	LPAREN
-(15,11)	STR_LIT: "\n"
-(15,15)	RPAREN
-(15,16)	SEMICOLON
-(16,0)	RCURL
-(21,0)	FUNC
-(21,5)	INT_TYPE: int
-(21,9)	ID: main
-(21,13)	LPAREN
-(21,14)	RPAREN
-(22,0)	LCURL
-(23,4)	CONST: const
-(23,10)	INT_TYPE: int
-(23,14)	ID: max
-(23,18)	ASSIGN: =
-(23,20)	ID: INT32_MAX
-(23,29)	SEMICOLON
-(24,4)	INT_TYPE: int
-(24,8)	ID: x1
-(24,11)	ASSIGN: =
-(24,13)	INT_LIT: 0
-(24,14)	SEMICOLON
-(25,4)	INT_TYPE: int
-(25,8)	ID: y1
-(25,11)	ASSIGN: =
-(25,13)	SUB: -
-(25,14)	INT_LIT: 3
-(25,15)	SEMICOLON
-(27,4)	INT_TYPE: int
-(27,8)	ID: x2
-(27,11)	ASSIGN: =
-(27,13)	SUB: -
-(27,14)	INT_LIT: 3
-(27,15)	SEMICOLON
-(28,4)	INT_TYPE: int
-(28,8)	ID: y2
-(28,11)	ASSIGN: =
-(28,13)	INT_LIT: 5
-(28,14)	SEMICOLON
-(30,4)	OUTPUT
-(30,10)	LPAREN
-(30,11)	STR_LIT: "El maximo de la variable int es: "
-(30,46)	RPAREN
-(30,47)	SEMICOLON
-(31,4)	OUTPUT
-(31,10)	LPAREN
-(31,11)	ID: max
-(31,14)	RPAREN
-(31,15)	SEMICOLON
-(33,4)	ID: rectBetween
-(33,15)	LPAREN
-(33,16)	ID: x1
-(33,18)	COMMA
-(33,19)	ID: y2
-(33,21)	COMMA
-(33,22)	ID: x2
-(33,24)	COMMA
-(33,25)	STR_LIT: "hola"
-(33,31)	RPAREN
-(33,32)	SEMICOLON
+(1,0)	FUNC
+(1,5)	VOID_TYPE: void
+(1,10)	ID: funcionPrueba
+(1,23)	LPAREN
+(1,24)	INT_TYPE: int
+(1,28)	ID: x
+(1,29)	RPAREN
+(1,30)	LCURL
+(2,4)	IF
+(2,7)	LPAREN
+(2,8)	ID: x
+(2,10)	LT: <
+(2,12)	INT_LIT: 1
+(2,13)	RPAREN
+(3,4)	LCURL
+(4,8)	INT_TYPE: int
+(4,12)	ID: i
+(4,14)	ASSIGN: =
+(4,16)	INT_LIT: 0
+(4,17)	SEMICOLON
+(5,8)	IF
+(5,11)	LPAREN
+(5,12)	ID: x
+(5,14)	EQ: ==
+(5,17)	INT_LIT: 0
+(5,18)	RPAREN
+(6,8)	LCURL
+(7,12)	INT_TYPE: int
+(7,16)	ID: l
+(7,18)	ASSIGN: =
+(7,20)	INT_LIT: 0
+(7,21)	SEMICOLON
+(8,12)	WHILE
+(8,17)	LPAREN
+(8,18)	ID: l
+(8,19)	LT: <
+(8,20)	INT_LIT: 30
+(8,22)	RPAREN
+(9,12)	LCURL
+(10,16)	OUTPUT
+(10,22)	LPAREN
+(10,23)	ID: l
+(10,24)	RPAREN
+(10,25)	SEMICOLON
+(11,16)	ID: l
+(11,18)	ASSIGN: =
+(11,20)	ID: l
+(11,22)	SUM: +
+(11,24)	INT_LIT: 1
+(11,25)	SEMICOLON
+(12,12)	RCURL
+(13,8)	RCURL
+(15,8)	OUTPUT
+(15,14)	LPAREN
+(15,15)	ID: l
+(15,16)	RPAREN
