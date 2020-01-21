@@ -21,6 +21,10 @@ public class Arg extends Node{
         toDot();
     }
     
+    public String getType(){
+        return type;
+    }
+    
     @Override
     public void toDot() {
         DOT.writeNode(this.nodeNumber, "Arg: "+type+" "+id);

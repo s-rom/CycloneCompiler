@@ -172,7 +172,7 @@ IfCondition     ::=   IF LPAREN Expr:e RPAREN LCURL Block:b1 RCURL
 
 Instruction     ::=   // Llamada a funcion foo(arg1, arg2, ...)
                       ID:id LPAREN ExprArg:ea RPAREN
-                        {: RESULT = new Instruction(new FunctionCall(id, (ExprArg)ea)); :}
+                        {: RESULT = new Instruction(new FunctionCall(id, (ExprArg)ea,getLine(),getColumn())); :}
                     | // input()
                       INPUT LPAREN RPAREN
                         {: RESULT = new Instruction(InstructionType.INPUT); :}
@@ -257,7 +257,7 @@ UnOp            ::=   SUB:s
 Primary         ::= LPAREN Expr:e RPAREN         // (a+3)
                         {: RESULT = new Primary((Expr) e,getLine(),getColumn());  :}
                     | ID:id LPAREN ExprArg:param RPAREN  // foo(x,y)
-                        {: RESULT = new Primary(new FunctionCall(id,(ExprArg)param),id,getLine(),getColumn());  :}
+                        {: RESULT = new Primary(new FunctionCall(id,(ExprArg)param,getLine(),getColumn()),id,getLine(),getColumn());  :}
                     | ID:id                        // b
                         {: RESULT = new Primary(id,PrimaryType.ID,getLine(),getColumn()); :}
                     | INT_LIT:i                   // 34

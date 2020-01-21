@@ -1,6 +1,7 @@
 package SymbolTable;
 
 import AST.Arg;
+import cyclonecompiler.FatalError;
 import java.util.ArrayList;
 
 public class FuncDescription extends Description{
@@ -22,7 +23,7 @@ public class FuncDescription extends Description{
         params = new ArrayList();
     }
     
-    public void addParam(String id, String type){
+    public void addParam(String id, String type) throws FatalError{
         params.add(new Arg(id,type));
     }
     
@@ -34,6 +35,9 @@ public class FuncDescription extends Description{
         return this.returnType;
     }
     
+    public ArrayList<Arg> getParamList(){
+        return this.params;
+    }
     
     @Override
     public String toString(){

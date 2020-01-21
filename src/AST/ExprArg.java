@@ -13,6 +13,14 @@ public class ExprArg extends Node{
         toDot();
     }
     
+    public Expr getExpr(){
+        return e;
+    }
+    
+    public ExprList getExprList(){
+        return el;
+    }
+    
     @Override
     public void toDot() {
         DOT.writeNode(nodeNumber, "{ExprArg | {<e>Expr | <el>ExprList}}","record");

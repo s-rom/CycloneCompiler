@@ -111,8 +111,20 @@ public class Primary extends Node {
         this.line = line;
         this.column = column;
         // Buscar el tipo de la funcion (retorno) en la ts
-  
+        Description d = Main.ts.get(this.id);
+        if (d == null || d.getDescriptionType() != DescriptionType.D_FUNC){
+            InfoDump.reportSemanticError(id+" is not an existing function, in ");
+        }
         // asignar el tipo de la funcion (retorno) a this.type
+        String funcType= ((FuncDescription)d).getReturnType();
+        
+        d = Main.ts.get(funcType);
+        if (d == null || d.getDescriptionType() != DescriptionType.D_TYPE){
+            InfoDump.reportLexicError(funcType+" is not a valid type");
+        }
+        
+        this.type = ((TypeDescription)d).getAtomicType();
+        
         functionCheck(id);
         toDot();
     }

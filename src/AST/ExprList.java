@@ -9,12 +9,21 @@ public class ExprList extends Node{
     private Expr e;
     private ExprList el;
     
+    
     public ExprList(Expr e, ExprList el){
         this.e = e;
-        this.el = el;
+        this.el = el;        
         toDot();
     }
 
+    public Expr getExpr(){
+        return e;
+    }
+    
+    public ExprList getNext(){
+        return el;
+    }
+    
     @Override
     public void toDot() {
         DOT.writeNode(nodeNumber, "{ExprList |{<e>Expr | <el>ExprList}}","record");

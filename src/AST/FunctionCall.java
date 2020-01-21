@@ -1,16 +1,33 @@
 package AST;
 
+import SymbolTable.Description;
+import SymbolTable.DescriptionType;
+import SymbolTable.FuncDescription;
+import SymbolTable.TypeDescription;
 import cyclonecompiler.DOT;
+import cyclonecompiler.FatalError;
+import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
+import java.util.ArrayList;
 
 public class FunctionCall extends Node {
     
     private String id;
     private ExprArg param;
     
-    public FunctionCall(String id, ExprArg param){
+    private int line, column;
+    
+    public FunctionCall(String id, ExprArg param, int line, int column) throws FatalError{
         this.id = id;
         this.param = param;
+        this.line= line;
+        this.column = column;
+        semanticCheck();
         toDot();
+    }
+    
+    private String getLocationInfo(){
+        return "line "+line+", column "+column;
     }
 
     @Override
@@ -23,8 +40,48 @@ public class FunctionCall extends Node {
     }
 
     @Override
-    public void semanticCheck() {
+    public void semanticCheck() throws FatalError {
+        Description d = Main.ts.get(this.id);
+        if (d == null || d.getDescriptionType() != DescriptionType.D_FUNC){
+            InfoDump.reportSemanticError(id+" is not an existing function, in "+getLocationInfo());
+        }
+        
+        ArrayList<Arg> list = ((FuncDescription) d).getParamList();
+        ArrayList<Expr> listFound = new ArrayList();
+        int numParam = 0;
+        ExprArg ea = this.param;
+        if (ea != null){
+            if (ea.getExpr() != null) {
+                numParam++;
+                listFound.add(ea.getExpr());
+            }
+            ExprList el = ea.getExprList();
+            
+            while (el != null){
+                if (el.getExpr() != null) 
+                {
+                    listFound.add(el.getExpr());
+                    numParam++;
+                }
+                el = el.getNext();
+            }
+        }
+        
 
+        if (numParam != list.size()){
+            InfoDump.reportSemanticError("Function "+id+" requires "+list.size()+" parameters, found "+numParam+
+                    " in "+getLocationInfo());
+        }
+        for (int i = 0; i<numParam; i++){
+            Arg a = list.get(i);
+            TypeDescription td = (TypeDescription)Main.ts.get(a.getType());
+            if (listFound.get(i).getAtomicType() != td.getAtomicType()){
+                InfoDump.reportSemanticError("Found parameter number "+(i+1)+" in call to function "+id+" of type "+a.getType()+" but "
+                +listFound.get(i).getAtomicType().getDType()+" was expected, in "+getLocationInfo());
+            }
+        }
+        
+        
     }
 
 }

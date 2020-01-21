@@ -27,6 +27,3 @@
      | y1             | var <9> int
      | x2             | var <10> int
      | y2             | var <11> int
-     | x              | var <12> int
-     ------------------------
-| main           | func <1> returns int, params()

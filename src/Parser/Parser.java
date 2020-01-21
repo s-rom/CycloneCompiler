@@ -751,7 +751,7 @@ class CUP$Parser$actions {
 		int ealeft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int earight = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Node ea = (Node)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 RESULT = new Instruction(new FunctionCall(id, (ExprArg)ea)); 
+		 RESULT = new Instruction(new FunctionCall(id, (ExprArg)ea,getLine(),getColumn())); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Instruction",10, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1174,7 +1174,7 @@ class CUP$Parser$actions {
 		int paramleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int paramright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Node param = (Node)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 RESULT = new Primary(new FunctionCall(id,(ExprArg)param),id,getLine(),getColumn());  
+		 RESULT = new Primary(new FunctionCall(id,(ExprArg)param,getLine(),getColumn()),id,getLine(),getColumn());  
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("Primary",18, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
