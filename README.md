@@ -1,4 +1,5 @@
 
-## Practica de Compiladores I
+## Compilers I Final Project
 ### Sergi Romero Bonnin y Enrique Boya Falcón
-Proyecto de la práctica
+
+Fully fleshed front-end compiler for C-like simple language as a final project for Compilers I course.
