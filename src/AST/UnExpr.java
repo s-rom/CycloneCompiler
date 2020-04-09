@@ -1,5 +1,6 @@
 package AST;
 
+import IntermediateCode.Opcode;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
@@ -22,6 +23,7 @@ public class UnExpr extends Node{
         
         semanticCheck();
         toDot();
+        generateIntermediateCode();
     }
 
     public AtomicType getAtomicType(){
@@ -100,7 +102,18 @@ public class UnExpr extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.p != null && this.unExpr==null && this.unOp == null){
+            // UnExpr --> Primary
+            this.intermediateVar = p.intermediateVar;
+        } else {
+            // UnExpr --> UnOP UnExpr
+            this.intermediateVar = new IntermediateCode.Variable();
+            if ("-".equals(unOp)){
+                Main.gen.generateBinary(Opcode.SUB, 0, unExpr.intermediateVar, intermediateVar);
+            } else { // !
+                Main.gen.generateUnary(Opcode.NOT, unExpr.intermediateVar, intermediateVar);
+            }
+        }
     }
 
     

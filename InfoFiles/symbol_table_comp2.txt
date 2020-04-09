@@ -13,6 +13,6 @@
      | LEVEL 1
      | f              | const int 
      | x              | var <2> int
-     | c              | var <4> bool
+     | y              | var <5> int
      ------------------------
 | cyclone        | func <0> returns void, params()

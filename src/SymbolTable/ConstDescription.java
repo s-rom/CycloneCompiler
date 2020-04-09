@@ -2,7 +2,6 @@ package SymbolTable;
 
 public class ConstDescription extends Description{
     
-    
     private final Object value;
     public final String type;
     

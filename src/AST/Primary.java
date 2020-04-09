@@ -14,10 +14,7 @@ import cyclonecompiler.Main;
 import static cyclonecompiler.Main.ts;
 
 public class Primary extends Node {
-    
-    
-    public IntermediateCode.Variable intermediateVar;
-    
+       
     private Expr e;
     
     private String id;
@@ -118,6 +115,7 @@ public class Primary extends Node {
                     
                     this.intermediateVar = new IntermediateCode.Variable();
                     Main.gen.generateAssignation(cd.getValue(), intermediateVar);
+                    
                     td = (TypeDescription) ts.get(cd.type);
                 }
                 this.type = td.getAtomicType();                
