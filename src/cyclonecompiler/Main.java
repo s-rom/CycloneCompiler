@@ -1,5 +1,7 @@
 package cyclonecompiler;
 
+import IntermediateCode.Generator;
+import IntermediateCode.Opcode;
 import Parser.*;
 import Scanner.*;
 import SymbolTable.AtomicType;
@@ -27,11 +29,10 @@ public class Main {
     
     
     public static void main (String [] args){
-        final String[] NAMES = {"funciona1","funciona2","funciona3"
-                ,"fallo_lexico","fallo_semantico_alcance","fallo_semantico_llamada",
-                "fallo_sintactico"};
-        final String NAME = NAMES[0];
-        compilar(NAME);
+//        final String NAME = "comp2";
+//        compilar(NAME);
+
+        Generator gen = new Generator(".\\IntermediateCode.ic");
     }
  
     
@@ -83,7 +84,7 @@ public class Main {
         Description dInt = new TypeDescription("int",atomicInt32); 
         Description dBool = new TypeDescription("bool",atomicBool);
         Description dTrue = new ConstDescription("false","bool",0); 
-        Description dFalse = new ConstDescription("true","bool",1);
+        Description dFalse = new ConstDescription("true","bool",-1);
         Description dIntMax = new ConstDescription("INT32_MAX","int",2147483647);
         Description dIntMin = new ConstDescription("INT32_MIN","int",-2147483648);
         Description dChar = new TypeDescription("string",atomicChar);
