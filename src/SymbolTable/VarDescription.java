@@ -8,7 +8,7 @@ public class VarDescription extends Description{
         return ++varCounter;
     }
     
-    private final int varNumber;
+    public final int varNumber;
     public final String type;
     
     public VarDescription(String name, String type){
@@ -16,6 +16,7 @@ public class VarDescription extends Description{
         this.varNumber = nextVarNumber();
         this.type = type;
     }
+    
     
     @Override
     public String toString(){

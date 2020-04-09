@@ -15,6 +15,9 @@ import static cyclonecompiler.Main.ts;
 
 public class Primary extends Node {
     
+    
+    public IntermediateCode.Variable intermediateVar;
+    
     private Expr e;
     
     private String id;
@@ -38,11 +41,19 @@ public class Primary extends Node {
     public void semanticCheck() {
         /* Implementado en cada constructor al haber tantos tipos distintos */
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        /* Implementado en cada constructor al haber tantos tipos distintos */
+    }
     
     public static enum PrimaryType {
         STR_LIT, BOOL_LIT, INT_LIT, FUNCTION_CALL, EXPR, ID
     }
     
+    /*
+    Primary --> int literal
+    */
     public Primary(int int_lit, int line, int column){
         this.int_lit = int_lit;
         this.productionType = PrimaryType.INT_LIT;
@@ -50,8 +61,15 @@ public class Primary extends Node {
         this.line = line;
         this.column = column;
         toDot();
+        
+        // Genera ti = int_lit
+        this.intermediateVar = new IntermediateCode.Variable();
+        Main.gen.generateAssignation(int_lit, intermediateVar);
     }
     
+    /*
+    Primary --> bool literal
+    */
     public Primary(boolean bool_lit, int line, int column){
         this.bool_lit = bool_lit;
         this.productionType = PrimaryType.BOOL_LIT;
@@ -59,6 +77,10 @@ public class Primary extends Node {
         this.line = line;
         this.column = column;
         toDot();
+        
+        // Genera ti = int_lit
+        this.intermediateVar = new IntermediateCode.Variable();
+        Main.gen.generateAssignation(bool_lit, intermediateVar);
     }
     
     /*
@@ -86,15 +108,28 @@ public class Primary extends Node {
                 
                 if (d.getDescriptionType() == DescriptionType.D_VAR){
                     VarDescription vd = (VarDescription) d;
+
+                    // No hace falta crear un id nuevo ni generar una asignación
+                    this.intermediateVar = new IntermediateCode.Variable(vd.varNumber);
+                    
                     td = (TypeDescription) ts.get(vd.type);
                 } else {
                     ConstDescription cd = (ConstDescription) d;
+                    
+                    this.intermediateVar = new IntermediateCode.Variable();
+                    Main.gen.generateAssignation(cd.getValue(), intermediateVar);
                     td = (TypeDescription) ts.get(cd.type);
                 }
                 this.type = td.getAtomicType();                
                 
+                
+                
                 break;
             case STR_LIT:
+                
+                this.intermediateVar = new IntermediateCode.Variable();
+                Main.gen.generateAssignation('$'+id, intermediateVar);
+                
                 this.type = Main.atomicChar;
                 break;
         }

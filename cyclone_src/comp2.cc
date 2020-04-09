@@ -1,10 +1,6 @@
-
-
 func void cyclone()
 {
-    if (true)   
-    {
-        output("Hola");
-    }
-
+    const int f = 2;
+    int x = 3;
+    bool c = x < 7;
 }

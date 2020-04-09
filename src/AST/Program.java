@@ -29,6 +29,11 @@ public class Program extends Node{
             InfoDump.reportSemanticError("All Cyclone programs must have a main function");
         }
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

@@ -7,6 +7,11 @@ public class Instruction extends Node{
     @Override
     public void semanticCheck() {
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 
     public static enum InstructionType{

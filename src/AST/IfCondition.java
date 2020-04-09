@@ -50,5 +50,10 @@ public class IfCondition extends Node{
             InfoDump.reportSemanticError("If conditional expression must be bool, in "+this.e.ue.p.getLocationInfo());
         }
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

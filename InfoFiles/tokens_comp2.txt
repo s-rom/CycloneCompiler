@@ -1,23 +1,30 @@
 ### ---------- Token File ----------
 ### Format: (line,colum) TokenName: Attribute?
 
-(2,0)	FUNC
-(2,5)	VOID_TYPE: void
-(2,10)	ID: cyclone
-(2,17)	LPAREN
-(2,18)	RPAREN
-(3,0)	LCURL
-(4,4)	IF
-(4,7)	LPAREN
-(4,8)	BOOL_LIT: true
-(4,12)	RPAREN
-(5,4)	LCURL
-(6,8)	OUTPUT
-(6,14)	LPAREN
-(6,15)	STR_LIT: "Hola"
-(6,21)	RPAREN
-(6,22)	SEMICOLON
-(7,4)	RCURL
-(9,0)	RCURL
-(9,1)	EOF
-(9,1)	EOF
+(0,0)	FUNC
+(0,5)	VOID_TYPE: void
+(0,10)	ID: cyclone
+(0,17)	LPAREN
+(0,18)	RPAREN
+(1,0)	LCURL
+(2,4)	CONST: const
+(2,10)	INT_TYPE: int
+(2,14)	ID: f
+(2,16)	ASSIGN: =
+(2,18)	INT_LIT: 2
+(2,19)	SEMICOLON
+(3,4)	INT_TYPE: int
+(3,8)	ID: x
+(3,10)	ASSIGN: =
+(3,12)	INT_LIT: 3
+(3,13)	SEMICOLON
+(4,4)	BOOL_TYPE: bool
+(4,9)	ID: c
+(4,11)	ASSIGN: =
+(4,13)	ID: x
+(4,15)	LT: <
+(4,17)	INT_LIT: 7
+(4,18)	SEMICOLON
+(5,0)	RCURL
+(5,1)	EOF
+(5,1)	EOF

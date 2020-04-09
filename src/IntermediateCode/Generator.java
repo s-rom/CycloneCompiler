@@ -3,15 +3,13 @@ package IntermediateCode;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /*
 
 Clase encargada de generar las instrucciones de código intermédio.
-
-Ejemplo de uso:
-    Generator gen = new Generator("IntermediateCode.ic");
-
 
 FORMATO: OPCODE SRC1 SRC2 DST
 
@@ -46,42 +44,71 @@ public class Generator {
         }
     }
     
-    public Generator(){
-        bw = null;
+    public void close(){
+        try {
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void write(String instruction){
+        try {
+            bw.write(instruction);
+            bw.newLine();
+        } catch (IOException ex) {
+            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public String generateAssignation(Object src, Object dst){
-        return dst + " = " + src;
+        String instr = dst + " = " + src;
+        write(instr);
+        return instr;
     }
     
     public String generateBinary(Opcode op, Object src1, Object src2, Object dst){
-        return dst + " = " + src1 + ' ' + equivalenceTable[op.ordinal()]+ ' ' + src2;
+        String instr = dst + " = " + src1 + ' ' + equivalenceTable[op.ordinal()]+ ' ' + src2;
+        write(instr);
+        return instr;
     }
     
     public String generateUnary(Opcode op, Object src1, Object dst){
-        return dst + " = " + equivalenceTable[op.ordinal()] + ' ' + src1;
+        String instr = dst + " = " + equivalenceTable[op.ordinal()] + ' ' + src1;
+        write(instr);
+        return instr;
     }
     
     public String generateRelational(Opcode op, Object src1, Object src2, Tag dst){
-        return "if ( "+src1 + ' ' + equivalenceTable[op.ordinal()] + ' '+src2 + " ) " +
+        String instr = "if ( "+src1 + ' ' + equivalenceTable[op.ordinal()] + ' '+src2 + " ) " +
                 equivalenceTable[Opcode.GOTO.ordinal()] + ' ' + dst;
+        write(instr);
+        return instr;
     }
     
     public String generateGoto(Tag t){
-        return equivalenceTable[Opcode.GOTO.ordinal()]+ ' '+t;
+        String instr =  equivalenceTable[Opcode.GOTO.ordinal()]+ ' '+t;
+        write(instr);
+        return instr;
     }
     
     public String generateCall(Tag t){
-        return equivalenceTable[Opcode.CALL.ordinal()] + ' '+t;
+        String instr = equivalenceTable[Opcode.CALL.ordinal()] + ' '+t;
+        write(instr);
+        return instr;
     }
     
     public String generateReturn(Object returnObject){
-        return equivalenceTable[Opcode.RET.ordinal()] + 
+        String instr = equivalenceTable[Opcode.RET.ordinal()] + 
                 ((returnObject == null)? "" : " " + returnObject);
+        write(instr);
+        return instr;
     }
     
     public String generateParam(Object param){
-        return equivalenceTable[Opcode.PARAM.ordinal()] + ' ' + param;
+        String instr = equivalenceTable[Opcode.PARAM.ordinal()] + ' ' + param;
+        write(instr);
+        return instr;
     }
     
     private void intializeEquivalenceTable(){

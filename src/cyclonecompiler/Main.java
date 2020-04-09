@@ -20,6 +20,9 @@ import java_cup.runtime.SymbolFactory;
 public class Main {
     
     public static SymbolTable ts;
+    
+    public static Generator gen;
+    
     public static AtomicType atomicBool;
     public static AtomicType atomicChar;
     public static AtomicType atomicInt32;
@@ -29,10 +32,8 @@ public class Main {
     
     
     public static void main (String [] args){
-//        final String NAME = "comp2";
-//        compilar(NAME);
-
-        Generator gen = new Generator(".\\IntermediateCode.ic");
+        final String NAME = "comp2";
+        compilar(NAME);
     }
  
     
@@ -42,10 +43,11 @@ public class Main {
         final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+NAME+".txt";
         final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table_"+NAME+".txt";
         final String ERROR_FILE = ".\\InfoFiles\\error_log_"+NAME+".txt";
-
+        final String INTERMEDIATE_FILE = ".\\generated\\"+NAME+".ic";
         final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
         
         try {
+            gen = new Generator(INTERMEDIATE_FILE);
             DOT.initWriter(DOT_FILE);
             InfoDump.initAllWriters(TOKEN_FILE, SYMBOL_TABLE_FILE, ERROR_FILE);
             initSymbolTable();
@@ -54,14 +56,15 @@ public class Main {
             Scanner scanner = new Scanner(new FileReader(SRC_FILE));
             Parser parser = new Parser(scanner, sf);
             parser.parse();
-           
+            
         } catch (FileNotFoundException ex) {
             System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
-        }catch(FatalError f){
+        } catch(FatalError f){
             System.err.println("A fatal error ocurred, compilation halted.");
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
+            gen.close();
             InfoDump.closeAllWriters();
             DOT.closeWriter();
         }

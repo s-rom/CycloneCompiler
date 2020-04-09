@@ -44,5 +44,10 @@ public class Arg extends Node{
     public String toString(){
         return type+" "+id;
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

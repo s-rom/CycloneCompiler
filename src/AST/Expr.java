@@ -221,5 +221,10 @@ public class Expr extends Node{
         
         this.type = Main.atomicInt;
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

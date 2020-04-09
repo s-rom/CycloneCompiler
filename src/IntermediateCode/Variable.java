@@ -5,8 +5,8 @@ import SymbolTable.VarDescription;
 public class Variable {
     
     /**
-     * Esto es así para respetar los identificadores de las variables del 
-     * código fuente.
+     * Esto está así para respetar los id de las variables del 
+     * código fuente sin que se añada a la tabla de símbolos.
      * @return 
      */
     public static int nextId(){
@@ -20,6 +20,14 @@ public class Variable {
      */
     public Variable(){
         id = nextId();
+    }
+    
+    public Variable(int existingId){
+        id = existingId;
+    }
+    
+    public int getId(){
+        return this.id;
     }
     
     @Override

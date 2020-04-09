@@ -18,6 +18,9 @@ public class ConstDescription extends Description{
         this.type = type;
     }
  
+    public Object getValue(){
+        return value;
+    }
     
     @Override
     public String toString(){

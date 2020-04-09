@@ -1,6 +1,5 @@
 package AST;
 
-import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
@@ -34,6 +33,11 @@ public class WhileLoop extends Node{
         if (this.e.getAtomicType().getDType() != Atomic.TS_BOOL){
             InfoDump.reportSemanticError("While loop expression must be bool, in "+this.e.ue.p.getLocationInfo());
         }
+    }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

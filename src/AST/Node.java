@@ -7,6 +7,7 @@ public abstract class Node {
     protected int nodeNumber;
     public abstract void toDot();
     public abstract void semanticCheck() throws FatalError;
+    public abstract void generateIntermediateCode();
     
     public Node(){
         this.nodeNumber = DOT.nextNode();

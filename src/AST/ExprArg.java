@@ -32,5 +32,10 @@ public class ExprArg extends Node{
     public void semanticCheck() {
         
     }
+
+    @Override
+    public void generateIntermediateCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
