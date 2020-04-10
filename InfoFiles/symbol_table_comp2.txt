@@ -15,5 +15,6 @@
      | x              | var <6> int
      | y              | var <9> int
      | z              | var <11> int
+     | w              | var <13> bool
      ------------------------
 | cyclone        | func <0> returns void, params()

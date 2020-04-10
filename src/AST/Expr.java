@@ -1,6 +1,6 @@
 package AST;
 
-import IntermediateCode.Opcode;
+import IntermediateCode.Tag;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
@@ -235,11 +235,26 @@ public class Expr extends Node{
             // Expr --> Expr BinOp UnExpr
             this.intermediateVar = new IntermediateCode.Variable();
             
-            Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 
+            if (!isBinOpRelational()){
+                Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 
                     e.intermediateVar, ue.intermediateVar, intermediateVar);
+            } else {
+                Main.gen.generateCommentary("Relational operation");
+                Main.gen.generateAssignation("0",intermediateVar);
+                Tag t = new Tag(); 
+                Main.gen.generateRelational(Main.gen.getOpcodeEquivalence(bo),
+                        e.intermediateVar, ue.intermediateVar, t);
+                Main.gen.generateAssignation("-1",intermediateVar);
+                Main.gen.generateSkip(t);
+            }
         }
-
-
+    }
+    
+    
+    public boolean isBinOpRelational(){
+        return bo != null && (bo.equals(">") || bo.equals("<") || 
+                bo.equals("==") || bo.equals("!=") ||
+                bo.equals(">=") || bo.equals("<="));
     }
     
 }

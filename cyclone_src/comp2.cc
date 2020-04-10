@@ -5,4 +5,6 @@ func void cyclone()
 
     int y = -1;
     int z = x + y;
+
+    bool w = y < z;
 }

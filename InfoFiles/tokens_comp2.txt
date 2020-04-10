@@ -31,6 +31,13 @@
 (6,14)	SUM: +
 (6,16)	ID: y
 (6,17)	SEMICOLON
-(7,0)	RCURL
-(7,1)	EOF
-(7,1)	EOF
+(8,4)	BOOL_TYPE: bool
+(8,9)	ID: w
+(8,11)	ASSIGN: =
+(8,13)	ID: y
+(8,15)	LT: <
+(8,17)	ID: z
+(8,18)	SEMICOLON
+(9,0)	RCURL
+(9,1)	EOF
+(9,1)	EOF

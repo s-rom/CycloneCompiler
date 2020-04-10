@@ -31,7 +31,7 @@ FORMATO: OPCODE SRC1 SRC2 DST
 public class Generator {
     
     
-    private final int COMMENT_SPACES = 25;
+    private final int COMMENT_SPACES = 30;
     
     String [] keywordTable;
     HashMap<String, Opcode> opcodeTable;
@@ -93,6 +93,10 @@ public class Generator {
         return instr;
     }
     
+    public String generateCommentary(String commentary){
+        write("# "+commentary);
+        return "# "+commentary;
+    }
     
     public String generateBinary(Opcode op, Object src1, Object src2, Object dst){
         String instr = dst + " = " + src1 + ' ' + keywordTable[op.ordinal()]+ ' ' + src2;
@@ -109,6 +113,12 @@ public class Generator {
     public String generateRelational(Opcode op, Object src1, Object src2, Tag dst){
         String instr = "if ( "+src1 + ' ' + keywordTable[op.ordinal()] + ' '+src2 + " ) " +
                 keywordTable[Opcode.GOTO.ordinal()] + ' ' + dst;
+        write(instr);
+        return instr;
+    }
+    
+    public String generateSkip(Tag t){
+        String instr = t+": "+keywordTable[Opcode.SKIP.ordinal()];
         write(instr);
         return instr;
     }
