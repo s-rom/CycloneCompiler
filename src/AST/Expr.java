@@ -1,5 +1,6 @@
 package AST;
 
+import IntermediateCode.Opcode;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
@@ -26,6 +27,7 @@ public class Expr extends Node{
         this.ue = ue;
         semanticCheck();
         toDot();
+        generateIntermediateCode();
     }
     
     public void setAtomicType(AtomicType type){
@@ -224,7 +226,20 @@ public class Expr extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (this.ue != null && this.bo == null && this.e == null){
+            // Expr --> UnExpr
+            this.intermediateVar = ue.intermediateVar;
+            
+        } else {
+            // Expr --> Expr BinOp UnExpr
+            this.intermediateVar = new IntermediateCode.Variable();
+            
+            Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 
+                    e.intermediateVar, ue.intermediateVar, intermediateVar);
+        }
+
+
     }
     
 }

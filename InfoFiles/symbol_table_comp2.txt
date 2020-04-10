@@ -14,5 +14,6 @@
      | f              | const int 
      | x              | var <2> int
      | y              | var <5> int
+     | z              | var <7> int
      ------------------------
 | cyclone        | func <0> returns void, params()

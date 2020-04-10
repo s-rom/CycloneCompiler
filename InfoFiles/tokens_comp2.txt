@@ -24,6 +24,13 @@
 (5,12)	SUB: -
 (5,13)	INT_LIT: 1
 (5,14)	SEMICOLON
-(6,0)	RCURL
-(6,1)	EOF
-(6,1)	EOF
+(6,4)	INT_TYPE: int
+(6,8)	ID: z
+(6,10)	ASSIGN: =
+(6,12)	ID: x
+(6,14)	SUM: +
+(6,16)	ID: y
+(6,17)	SEMICOLON
+(7,0)	RCURL
+(7,1)	EOF
+(7,1)	EOF

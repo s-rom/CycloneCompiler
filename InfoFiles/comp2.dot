@@ -45,20 +45,46 @@ graph[nodesep="1"]
 	n21-> n20
 	n22 [label = "Statement"]
 	n22-> n21
-	n23 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n23:s-> n22
-	n24 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n24:s-> n13
-	n24:sl-> n23
-	n25 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n25:s-> n6
-	n25:sl-> n24
-	n26 [label = "Block"]
-	n26-> n25
-	n27 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
-	n27:b-> n26
-	n28 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n28:f-> n27
-	n29 [label = "Program"]
-	n29-> n28
+	n23 [label = "Primary"]
+	n24 [label = "ID: x"]
+	n23-> n24
+	n25 [label = "UnExpr"]
+	n25-> n23
+	n26 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n26:ue-> n25
+	n27 [label = "Primary"]
+	n28 [label = "ID: y"]
+	n27-> n28
+	n29 [label = "UnExpr"]
+	n29-> n27
+	n30 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n30:e-> n26
+	n31 [label = "+"]
+	n30:bo-> n31
+	n30:ue-> n29
+	n32 [label = "Declaration: int z = "]
+	n32-> n30
+	n33 [label = "Instruction"]
+	n33-> n32
+	n34 [label = "Statement"]
+	n34-> n33
+	n35 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n35:s-> n34
+	n36 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n36:s-> n22
+	n36:sl-> n35
+	n37 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n37:s-> n13
+	n37:sl-> n36
+	n38 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n38:s-> n6
+	n38:sl-> n37
+	n39 [label = "Block"]
+	n39-> n38
+	n40 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n40:b-> n39
+	n41 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n41:f-> n40
+	n42 [label = "Program"]
+	n42-> n41
 }

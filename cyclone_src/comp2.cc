@@ -4,4 +4,5 @@ func void cyclone()
     int x = f;
 
     int y = -1;
+    int z = x + y;
 }
