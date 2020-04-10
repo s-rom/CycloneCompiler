@@ -5,15 +5,15 @@
 | string         | TS_CHAR [255,0] 1byte
 | int            | TS_INT [2147483647,-2147483648] 4bytes
 | bool           | TS_BOOL [255,0] 1byte
-| true           | const bool 0
-| false          | const bool -1
-| INT32_MAX      | const int 2147483647
-| INT32_MIN      | const int -2147483648
+| true           | const <0> bool 0
+| false          | const <1> bool -1
+| INT32_MAX      | const <2> int 2147483647
+| INT32_MIN      | const <3> int -2147483648
      ------------------------
      | LEVEL 1
-     | f              | const int 
-     | x              | var <2> int
-     | y              | var <5> int
-     | z              | var <7> int
+     | f              | const <5> int 
+     | x              | var <6> int
+     | y              | var <9> int
+     | z              | var <11> int
      ------------------------
 | cyclone        | func <0> returns void, params()

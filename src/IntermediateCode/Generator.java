@@ -30,6 +30,9 @@ FORMATO: OPCODE SRC1 SRC2 DST
 
 public class Generator {
     
+    
+    private final int COMMENT_SPACES = 25;
+    
     String [] keywordTable;
     HashMap<String, Opcode> opcodeTable;
     
@@ -77,6 +80,19 @@ public class Generator {
         write(instr);
         return instr;
     }
+    
+    public String generateAssignation(Object src, Object dst, String commentary){
+        String instr = dst + " = " + src;
+        int length = instr.length();
+        for (int spc = 0; spc < (COMMENT_SPACES - length); spc++){
+            instr+=' ';
+        }
+        instr += "# "+commentary;
+        
+        write(instr);
+        return instr;
+    }
+    
     
     public String generateBinary(Opcode op, Object src1, Object src2, Object dst){
         String instr = dst + " = " + src1 + ' ' + keywordTable[op.ordinal()]+ ' ' + src2;
@@ -153,7 +169,6 @@ public class Generator {
             String keyword = keywordTable[idx];
             opcodeTable.put(keyword, op);
         }
-        
     }
 
     

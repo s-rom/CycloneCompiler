@@ -1,5 +1,6 @@
 package AST;
 
+import IntermediateCode.Variable;
 import SymbolTable.ConstDescription;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
@@ -8,6 +9,7 @@ import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
 import static cyclonecompiler.Main.ts;
 
 public class Assignation extends Node{
@@ -36,6 +38,7 @@ public class Assignation extends Node{
         this.constant = constant;
         semanticCheck();
         toDot();
+        generateIntermediateCode();
     }
     
     /*
@@ -49,6 +52,7 @@ public class Assignation extends Node{
         this.column = column;
         semanticCheck();
         toDot();
+        generateIntermediateCode();
     }
     
     @Override
@@ -146,7 +150,32 @@ public class Assignation extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        //const Type ID = Expr;
+        if (this.constant){
+            Description d = Main.ts.get(id);
+            
+            if (d.getDescriptionType() != DescriptionType.D_CONST){
+                System.out.println("Error const bool pero no en la ts");
+                return;
+            }
+            
+            ConstDescription cd = (ConstDescription) d;
+            Main.gen.generateAssignation(e.intermediateVar, new Variable(cd.getConstNum()),
+                    "const \'"+id+"\' = expr");
+            
+            return;
+        }
+        
+        // ID = Expr; o TypeVar ID = Expr;
+        if (e != null){
+            VarDescription vd = (VarDescription) Main.ts.get(id);
+            Main.gen.generateAssignation(e.intermediateVar, new Variable(vd.varNumber),
+                    "\'"+id+"\' = expr");
+        }
+        
+        // Type ID;
+        // Nada
     }
     
     

@@ -61,7 +61,7 @@ public class Primary extends Node {
         
         // Genera ti = int_lit
         this.intermediateVar = new IntermediateCode.Variable();
-        Main.gen.generateAssignation(int_lit, intermediateVar);
+        Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
     }
     
     /*
@@ -77,7 +77,7 @@ public class Primary extends Node {
         
         // Genera ti = int_lit
         this.intermediateVar = new IntermediateCode.Variable();
-        Main.gen.generateAssignation(bool_lit, intermediateVar);
+        Main.gen.generateAssignation(bool_lit, intermediateVar, "Aux var");
     }
     
     /*
@@ -113,8 +113,7 @@ public class Primary extends Node {
                 } else {
                     ConstDescription cd = (ConstDescription) d;
                     
-                    this.intermediateVar = new IntermediateCode.Variable();
-                    Main.gen.generateAssignation(cd.getValue(), intermediateVar);
+                    this.intermediateVar = new IntermediateCode.Variable(cd.getConstNum());
                     
                     td = (TypeDescription) ts.get(cd.type);
                 }
@@ -126,7 +125,7 @@ public class Primary extends Node {
             case STR_LIT:
                 
                 this.intermediateVar = new IntermediateCode.Variable();
-                Main.gen.generateAssignation('$'+id, intermediateVar);
+                Main.gen.generateAssignation('$'+id, intermediateVar, "Aux var");
                 
                 this.type = Main.atomicChar;
                 break;
