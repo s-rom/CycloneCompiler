@@ -36,12 +36,56 @@ public class Primary extends Node {
     
     @Override
     public void semanticCheck() {
-        /* Implementado en cada constructor al haber tantos tipos distintos */
+       
+
     }
 
     @Override
     public void generateIntermediateCode() {
-        /* Implementado en cada constructor al haber tantos tipos distintos */
+        switch(productionType)
+        {
+            case STR_LIT:
+                // Genera ti = str_lit
+                this.intermediateVar = new IntermediateCode.Variable();
+                Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
+                break;
+                
+            case BOOL_LIT:
+                 // Genera ti = bool_lit
+                this.intermediateVar = new IntermediateCode.Variable();
+                Main.gen.generateAssignation(bool_lit, intermediateVar, "Aux var");
+                break;
+                
+            case INT_LIT:
+                 // Genera ti = int_lit
+                System.out.println("Primary genera nueva variable auxiliar");
+                this.intermediateVar = new IntermediateCode.Variable();
+                Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
+                break;
+                
+            case FUNCTION_CALL:
+                System.err.println("F call not implemented yet"); break;
+                
+            case EXPR:
+                // TODO: VIGILAR ESTO QUE SEA ASÍ
+                this.e.generateIntermediateCode();
+                this.intermediateVar = this.e.intermediateVar;
+                
+            case ID:
+                Description d = Main.ts.getForward(id);
+                if (d.getDescriptionType() == DescriptionType.D_VAR){
+                    
+                    VarDescription vd = (VarDescription) d;
+                    this.intermediateVar = new IntermediateCode.Variable(vd.varNumber);
+                    
+                } else if (d.getDescriptionType() == DescriptionType.D_CONST){
+                   
+                    ConstDescription cd = (ConstDescription) d;
+                    this.intermediateVar = new IntermediateCode.Variable(cd.getConstNum());
+                    
+                }
+                    
+        }
     }
     
     public static enum PrimaryType {
@@ -58,10 +102,6 @@ public class Primary extends Node {
         this.line = line;
         this.column = column;
         toDot();
-        
-        // Genera ti = int_lit
-        this.intermediateVar = new IntermediateCode.Variable();
-        Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
     }
     
     /*
@@ -74,10 +114,6 @@ public class Primary extends Node {
         this.line = line;
         this.column = column;
         toDot();
-        
-        // Genera ti = int_lit
-        this.intermediateVar = new IntermediateCode.Variable();
-        Main.gen.generateAssignation(bool_lit, intermediateVar, "Aux var");
     }
     
     /*
@@ -105,9 +141,6 @@ public class Primary extends Node {
                 
                 if (d.getDescriptionType() == DescriptionType.D_VAR){
                     VarDescription vd = (VarDescription) d;
-
-                    // No hace falta crear un id nuevo ni generar una asignación
-                    this.intermediateVar = new IntermediateCode.Variable(vd.varNumber);
                     
                     td = (TypeDescription) ts.get(vd.type);
                 } else {

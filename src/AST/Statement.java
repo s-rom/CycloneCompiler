@@ -24,7 +24,14 @@ public class Statement extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            if (node != null) {
+                System.out.println("Statement genera nodo");
+                node.generateIntermediateCode();
+            }
+        } catch(Exception ex){
+            System.out.println("Loop y conditional not implemented yet!");
+        }
     }
         
 }

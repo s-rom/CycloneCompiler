@@ -11,10 +11,10 @@
 | INT32_MIN      | const <3> int -2147483648
      ------------------------
      | LEVEL 1
-     | f              | const <5> int 
-     | x              | var <6> int
-     | y              | var <9> int
-     | z              | var <11> int
-     | w              | var <13> bool
+     | b              | const <4> int 
+          ------------------------
+          | LEVEL 2
+          | x              | var <5> int
+          ------------------------
      ------------------------
 | cyclone        | func <0> returns void, params()

@@ -9,35 +9,23 @@
 (1,0)	LCURL
 (2,4)	CONST: const
 (2,10)	INT_TYPE: int
-(2,14)	ID: f
+(2,14)	ID: b
 (2,16)	ASSIGN: =
 (2,18)	INT_LIT: 2
 (2,19)	SEMICOLON
-(3,4)	INT_TYPE: int
-(3,8)	ID: x
-(3,10)	ASSIGN: =
-(3,12)	ID: f
-(3,13)	SEMICOLON
-(5,4)	INT_TYPE: int
-(5,8)	ID: y
-(5,10)	ASSIGN: =
-(5,12)	SUB: -
-(5,13)	INT_LIT: 1
-(5,14)	SEMICOLON
-(6,4)	INT_TYPE: int
-(6,8)	ID: z
-(6,10)	ASSIGN: =
+(5,4)	IF
+(5,7)	LPAREN
+(5,8)	ID: b
+(5,10)	EQ: ==
+(5,13)	INT_LIT: 0
+(5,14)	RPAREN
+(5,16)	LCURL
+(6,8)	INT_TYPE: int
 (6,12)	ID: x
-(6,14)	SUM: +
-(6,16)	ID: y
+(6,14)	ASSIGN: =
+(6,16)	INT_LIT: 2
 (6,17)	SEMICOLON
-(8,4)	BOOL_TYPE: bool
-(8,9)	ID: w
-(8,11)	ASSIGN: =
-(8,13)	ID: y
-(8,15)	LT: <
-(8,17)	ID: z
-(8,18)	SEMICOLON
+(7,4)	RCURL
 (9,0)	RCURL
-(9,1)	EOF
-(9,1)	EOF
+(10,0)	EOF
+(10,0)	EOF

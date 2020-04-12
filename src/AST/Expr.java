@@ -27,7 +27,6 @@ public class Expr extends Node{
         this.ue = ue;
         semanticCheck();
         toDot();
-        generateIntermediateCode();
     }
     
     public void setAtomicType(AtomicType type){
@@ -226,13 +225,19 @@ public class Expr extends Node{
 
     @Override
     public void generateIntermediateCode() {
-
+        
         if (this.ue != null && this.bo == null && this.e == null){
             // Expr --> UnExpr
+            System.out.println("Expression genera UnaryExpression");
+            this.ue.generateIntermediateCode();
             this.intermediateVar = ue.intermediateVar;
             
         } else {
             // Expr --> Expr BinOp UnExpr
+            System.out.println("Expression genera Expression y UnaryExpression");
+            this.ue.generateIntermediateCode();
+            this.e.generateIntermediateCode();
+            
             this.intermediateVar = new IntermediateCode.Variable();
             
             if (!isBinOpRelational()){

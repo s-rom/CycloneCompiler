@@ -48,7 +48,11 @@ public class Function extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO: Generate args
+        if (b != null){
+            System.out.println("Function genera Block");
+            b.generateIntermediateCode();
+        }
     }
     
 }

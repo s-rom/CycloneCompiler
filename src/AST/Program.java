@@ -14,6 +14,7 @@ public class Program extends Node{
         this.fl = fl;
         semanticCheck();
         toDot();
+        generateIntermediateCode();
     }
 
     @Override
@@ -32,7 +33,10 @@ public class Program extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (fl != null){
+            System.out.println("Program genera FunctionCall");
+            fl.generateIntermediateCode();
+        }
     }
     
     

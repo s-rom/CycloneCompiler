@@ -38,7 +38,6 @@ public class Assignation extends Node{
         this.constant = constant;
         semanticCheck();
         toDot();
-        generateIntermediateCode();
     }
     
     /*
@@ -52,7 +51,6 @@ public class Assignation extends Node{
         this.column = column;
         semanticCheck();
         toDot();
-        generateIntermediateCode();
     }
     
     @Override
@@ -151,9 +149,19 @@ public class Assignation extends Node{
     @Override
     public void generateIntermediateCode() {
 
+        if (e != null) {
+            System.out.println("Assignation genera Expresion");
+            e.generateIntermediateCode();
+        }
+        
         //const Type ID = Expr;
         if (this.constant){
-            Description d = Main.ts.get(id);
+            Description d = Main.ts.getForward(id);
+            
+            if (d == null){
+                System.err.println("No ha encontrado "+id+" en la ts");
+                return;
+            }
             
             if (d.getDescriptionType() != DescriptionType.D_CONST){
                 System.out.println("Error const bool pero no en la ts");
@@ -169,7 +177,15 @@ public class Assignation extends Node{
         
         // ID = Expr; o TypeVar ID = Expr;
         if (e != null){
-            VarDescription vd = (VarDescription) Main.ts.get(id);
+            Description d = Main.ts.getForward(id);
+            
+            if (d == null){
+                System.err.println("No ha encontrado "+id+" en la ts");
+                return;
+            }
+            
+            VarDescription vd = (VarDescription) d;
+            
             Main.gen.generateAssignation(e.intermediateVar, new Variable(vd.varNumber),
                     "\'"+id+"\' = expr");
         }

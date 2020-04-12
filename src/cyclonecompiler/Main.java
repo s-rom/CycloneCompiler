@@ -57,6 +57,7 @@ public class Main {
             Parser parser = new Parser(scanner, sf);
             parser.parse();
             
+            System.out.println(Main.ts.toString());
         } catch (FileNotFoundException ex) {
             System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
         } catch(FatalError f){

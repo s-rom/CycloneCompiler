@@ -28,7 +28,14 @@ public class FunctionList extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (f != null) {
+            System.out.println("FunctionList genera Function");
+            f.generateIntermediateCode();
+        }
+        if (fl != null) {
+            System.out.println("FunctionList genera FunctionList");
+            f.generateIntermediateCode();
+        }
     }
     
 }

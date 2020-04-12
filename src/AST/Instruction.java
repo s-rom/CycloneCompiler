@@ -10,7 +10,23 @@ public class Instruction extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch(this.type)
+        {
+            case FUNCTION_CALL:
+                break;
+            case INPUT:
+                break;
+            case OUTPUT:
+                break;
+            case RETURN:
+                break;
+            case ASSIGNATION:
+                System.out.println("Instruction genera Assignation");
+                assign.generateIntermediateCode();
+                break;
+            case DECLARATION:
+                break;
+        }
     }
     
 

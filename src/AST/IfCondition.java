@@ -20,13 +20,13 @@ public class IfCondition extends Node{
     */
     
     private Expr e;
-    private Block b1;
-    private Block b2;
+    private Block ifBlock;
+    private Block elseBlock;
 
     public IfCondition(Expr e, Block b1, Block b2) throws FatalError {
         this.e = e;
-        this.b1 = b1;
-        this.b2 = b2;
+        this.ifBlock = b1;
+        this.elseBlock = b2;
         semanticCheck();
         toDot();
     }
@@ -36,8 +36,8 @@ public class IfCondition extends Node{
         DOT.writeNode(nodeNumber, "{IfCondition | {<e>Expr | <b1>BlockIf | <b2>BlockElse}}",
                 "record");
         if (e != null)  DOT.writeEdge(nodeNumber, "e",e.getNodeNumber());
-        if (b1 != null) DOT.writeEdge(nodeNumber, "b1",b1.getNodeNumber());
-        if (b2 != null) DOT.writeEdge(nodeNumber, "b2",b2.getNodeNumber());
+        if (ifBlock != null) DOT.writeEdge(nodeNumber, "b1",ifBlock.getNodeNumber());
+        if (elseBlock != null) DOT.writeEdge(nodeNumber, "b2",elseBlock.getNodeNumber());
     }
 
     @Override
@@ -53,7 +53,9 @@ public class IfCondition extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+
     }
     
 }

@@ -8,16 +8,22 @@ package SymbolTable;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
 import cyclonecompiler.Main;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 
 public class Scope {
     
     private Hashtable<String, Description> t;
+    
+    public ArrayList<Scope> forwardList;
+
+    
     public Scope previous;
     private int level;
     
     public Scope(Scope previous, int level){
+        this.forwardList = new ArrayList<>();
         this.t = new Hashtable();
         this.previous = previous;
         this.level = level;
@@ -42,6 +48,10 @@ public class Scope {
             InfoDump.addTableSymbolEntry(pre+id+padding+"| ",d);
             return true;
         }
+    }
+    
+    public void insertForwardChild(Scope scope){
+        this.forwardList.add(scope);
     }
     
     private String getNSpaces(int n){

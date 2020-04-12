@@ -1,14 +1,2 @@
-t4 = 2                        # Aux var
-t5 = t4                       # const 'f' = expr
-t6 = t5                       # 'x' = expr
-t7 = 1                        # Aux var
-t8 = 0 - t7
-t9 = t8                       # 'y' = expr
-t10 = t6 + t9
-t11 = t10                     # 'z' = expr
-# Relational operation
-t12 = 0
-if ( t9 < t11 ) goto e0
-t12 = -1
-e0: skip
-t13 = t12                     # 'w' = expr
+t6 = 2                        # Aux var
+t4 = t6                       # const 'b' = expr
