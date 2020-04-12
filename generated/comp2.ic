@@ -1,2 +1,9 @@
-t6 = 2                        # Aux var
-t4 = t6                       # const 'b' = expr
+t8 = 2                        # Aux var
+t4 = t8                       # const 'b' = expr
+t9 = 1                        # Aux var
+t5 = t9                       # 'x' = expr
+t10 = 3                       # Aux var
+t6 = t10                      # 'y' = expr
+t11 = t5 + t6
+t12 = t11 + t4
+t7 = t12                      # 'z' = expr

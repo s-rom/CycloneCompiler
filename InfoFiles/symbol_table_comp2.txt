@@ -12,9 +12,8 @@
      ------------------------
      | LEVEL 1
      | b              | const <4> int 
-          ------------------------
-          | LEVEL 2
-          | x              | var <5> int
-          ------------------------
+     | x              | var <5> int
+     | y              | var <6> int
+     | z              | var <7> int
      ------------------------
 | cyclone        | func <0> returns void, params()

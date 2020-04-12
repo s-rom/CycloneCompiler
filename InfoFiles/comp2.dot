@@ -16,57 +16,81 @@ graph[nodesep="1"]
 	n6 [label = "Statement"]
 	n6-> n5
 	n7 [label = "Primary"]
-	n8 [label = "ID: b"]
+	n8 [label = "INT_LIT: 1"]
 	n7-> n8
 	n9 [label = "UnExpr"]
 	n9-> n7
 	n10 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
 	n10:ue-> n9
-	n11 [label = "Primary"]
-	n12 [label = "INT_LIT: 0"]
-	n11-> n12
-	n13 [label = "UnExpr"]
-	n13-> n11
-	n14 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n14:e-> n10
-	n15 [label = "=="]
-	n14:bo-> n15
-	n14:ue-> n13
-	n16 [label = "Primary"]
-	n17 [label = "INT_LIT: 2"]
-	n16-> n17
-	n18 [label = "UnExpr"]
-	n18-> n16
-	n19 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n19:ue-> n18
-	n20 [label = "Declaration: int x = "]
+	n11 [label = "Declaration: int x = "]
+	n11-> n10
+	n12 [label = "Instruction"]
+	n12-> n11
+	n13 [label = "Statement"]
+	n13-> n12
+	n14 [label = "Primary"]
+	n15 [label = "INT_LIT: 3"]
+	n14-> n15
+	n16 [label = "UnExpr"]
+	n16-> n14
+	n17 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n17:ue-> n16
+	n18 [label = "Declaration: int y = "]
+	n18-> n17
+	n19 [label = "Instruction"]
+	n19-> n18
+	n20 [label = "Statement"]
 	n20-> n19
-	n21 [label = "Instruction"]
-	n21-> n20
-	n22 [label = "Statement"]
-	n22-> n21
-	n23 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n23:s-> n22
-	n24 [label = "Block"]
-	n24-> n23
-	n25 [label = "{IfCondition | {<e>Expr | <b1>BlockIf | <b2>BlockElse}}", shape="record"]
-	n25:e-> n14
-	n25:b1-> n24
-	n26 [label = "Conditional"]
-	n26-> n25
-	n27 [label = "Statement"]
-	n27-> n26
-	n28 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n28:s-> n27
-	n29 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n29:s-> n6
-	n29:sl-> n28
-	n30 [label = "Block"]
-	n30-> n29
-	n31 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
-	n31:b-> n30
-	n32 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n32:f-> n31
-	n33 [label = "Program"]
-	n33-> n32
+	n21 [label = "Primary"]
+	n22 [label = "ID: x"]
+	n21-> n22
+	n23 [label = "UnExpr"]
+	n23-> n21
+	n24 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n24:ue-> n23
+	n25 [label = "Primary"]
+	n26 [label = "ID: y"]
+	n25-> n26
+	n27 [label = "UnExpr"]
+	n27-> n25
+	n28 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n28:e-> n24
+	n29 [label = "+"]
+	n28:bo-> n29
+	n28:ue-> n27
+	n30 [label = "Primary"]
+	n31 [label = "ID: b"]
+	n30-> n31
+	n32 [label = "UnExpr"]
+	n32-> n30
+	n33 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n33:e-> n28
+	n34 [label = "+"]
+	n33:bo-> n34
+	n33:ue-> n32
+	n35 [label = "Declaration: int z = "]
+	n35-> n33
+	n36 [label = "Instruction"]
+	n36-> n35
+	n37 [label = "Statement"]
+	n37-> n36
+	n38 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n38:s-> n37
+	n39 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n39:s-> n20
+	n39:sl-> n38
+	n40 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n40:s-> n13
+	n40:sl-> n39
+	n41 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n41:s-> n6
+	n41:sl-> n40
+	n42 [label = "Block"]
+	n42-> n41
+	n43 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n43:b-> n42
+	n44 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n44:f-> n43
+	n45 [label = "Program"]
+	n45-> n44
 }

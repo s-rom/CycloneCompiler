@@ -13,19 +13,25 @@
 (2,16)	ASSIGN: =
 (2,18)	INT_LIT: 2
 (2,19)	SEMICOLON
-(5,4)	IF
-(5,7)	LPAREN
-(5,8)	ID: b
-(5,10)	EQ: ==
-(5,13)	INT_LIT: 0
-(5,14)	RPAREN
-(5,16)	LCURL
-(6,8)	INT_TYPE: int
-(6,12)	ID: x
-(6,14)	ASSIGN: =
-(6,16)	INT_LIT: 2
-(6,17)	SEMICOLON
-(7,4)	RCURL
-(9,0)	RCURL
-(10,0)	EOF
-(10,0)	EOF
+(3,4)	INT_TYPE: int
+(3,8)	ID: x
+(3,10)	ASSIGN: =
+(3,12)	INT_LIT: 1
+(3,13)	SEMICOLON
+(4,4)	INT_TYPE: int
+(4,8)	ID: y
+(4,10)	ASSIGN: =
+(4,12)	INT_LIT: 3
+(4,13)	SEMICOLON
+(5,4)	INT_TYPE: int
+(5,8)	ID: z
+(5,10)	ASSIGN: =
+(5,12)	ID: x
+(5,14)	SUM: +
+(5,16)	ID: y
+(5,18)	SUM: +
+(5,20)	ID: b
+(5,21)	SEMICOLON
+(6,0)	RCURL
+(6,1)	EOF
+(6,1)	EOF

@@ -34,7 +34,7 @@ public class FunctionList extends Node{
         }
         if (fl != null) {
             System.out.println("FunctionList genera FunctionList");
-            f.generateIntermediateCode();
+            fl.generateIntermediateCode();
         }
     }
     
