@@ -32,11 +32,22 @@ public class Generator {
     
     
     private final int COMMENT_SPACES = 30;
+    private final int TAB_SPACES = 4;
+    private final String TAB = this.getNSpaces(TAB_SPACES);
+    public String getTabs() { return TAB; }
     
     String [] keywordTable;
     HashMap<String, Opcode> opcodeTable;
     
     BufferedWriter bw;
+    
+    private String getNSpaces(int n){
+        String res ="";
+        for (int i = 0; i<n; i++){
+            res += ' ';
+        }
+        return res;
+    }
     
     public Generator(String fileName){
         keywordTable = new String[Opcode.values().length];
@@ -76,17 +87,15 @@ public class Generator {
     }
     
     public String generateAssignation(Object src, Object dst){
-        String instr = dst + " = " + src;
+        String instr = TAB + dst + " = " + src;
         write(instr);
         return instr;
     }
     
     public String generateAssignation(Object src, Object dst, String commentary){
-        String instr = dst + " = " + src;
+        String instr = TAB + dst + " = " + src;
         int length = instr.length();
-        for (int spc = 0; spc < (COMMENT_SPACES - length); spc++){
-            instr+=' ';
-        }
+        instr += getNSpaces(COMMENT_SPACES - length);
         instr += "# "+commentary;
         
         write(instr);
@@ -98,52 +107,69 @@ public class Generator {
         return "# "+commentary;
     }
     
+    public String generateTabbedCommentary(String commentary){
+        write(TAB+"# "+commentary);
+        return TAB+"# "+commentary;
+    }
+    
     public String generateBinary(Opcode op, Object src1, Object src2, Object dst){
-        String instr = dst + " = " + src1 + ' ' + keywordTable[op.ordinal()]+ ' ' + src2;
+        String instr = TAB + dst + " = " + src1 + ' ' + keywordTable[op.ordinal()]+ ' ' + src2;
         write(instr);
         return instr;
     }
     
     public String generateUnary(Opcode op, Object src1, Object dst){
-        String instr = dst + " = " + keywordTable[op.ordinal()] + ' ' + src1;
+        String instr = TAB + dst + " = " + keywordTable[op.ordinal()] + ' ' + src1;
         write(instr);
         return instr;
     }
     
     public String generateRelational(Opcode op, Object src1, Object src2, Tag dst){
-        String instr = "if ( "+src1 + ' ' + keywordTable[op.ordinal()] + ' '+src2 + " ) " +
+        String instr = TAB + "if ( "+src1 + ' ' + keywordTable[op.ordinal()] + ' '+src2 + " ) " +
                 keywordTable[Opcode.GOTO.ordinal()] + ' ' + dst;
         write(instr);
         return instr;
     }
     
     public String generateSkip(Tag t){
-        String instr = t+": "+keywordTable[Opcode.SKIP.ordinal()];
+        String instr = t + ": "+keywordTable[Opcode.SKIP.ordinal()];
+        write(instr);
+        return instr;
+    }
+    
+    public String generateSkip(Tag t, String commentary){
+        String instr = t + ": "+keywordTable[Opcode.SKIP.ordinal()];
+        
+        int length = instr.length();
+        instr += getNSpaces(COMMENT_SPACES - length);
+        instr += "# "+commentary;
+        
+        
         write(instr);
         return instr;
     }
     
     public String generateGoto(Tag t){
-        String instr =  keywordTable[Opcode.GOTO.ordinal()]+ ' '+t;
+        String instr = TAB + keywordTable[Opcode.GOTO.ordinal()]+ ' '+t;
         write(instr);
         return instr;
     }
     
     public String generateCall(Tag t){
-        String instr = keywordTable[Opcode.CALL.ordinal()] + ' '+t;
+        String instr = TAB + keywordTable[Opcode.CALL.ordinal()] + ' '+t;
         write(instr);
         return instr;
     }
     
     public String generateReturn(Object returnObject){
-        String instr = keywordTable[Opcode.RET.ordinal()] + 
+        String instr = TAB + keywordTable[Opcode.RET.ordinal()] + 
                 ((returnObject == null)? "" : " " + returnObject);
         write(instr);
         return instr;
     }
     
     public String generateParam(Object param){
-        String instr = keywordTable[Opcode.PARAM.ordinal()] + ' ' + param;
+        String instr = TAB + keywordTable[Opcode.PARAM.ordinal()] + ' ' + param;
         write(instr);
         return instr;
     }

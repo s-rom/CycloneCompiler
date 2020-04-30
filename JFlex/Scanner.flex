@@ -140,7 +140,9 @@ comment2    = "//"[^\n\r]*
 {str_lit}   {return getSymbol(ParserSym.STR_LIT, yytext());}
 
 {ws}        {/* white space */}
-{id}        {return getSymbol(ParserSym.ID, yytext());}
+{id}        { 
+                return getSymbol(ParserSym.ID, yytext());  
+            }
 {comment1}  {}
 {comment2}  {}
 

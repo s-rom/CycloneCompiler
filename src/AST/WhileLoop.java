@@ -1,9 +1,12 @@
 package AST;
 
+import IntermediateCode.Opcode;
+import IntermediateCode.Tag;
 import SymbolTable.AtomicType.Atomic;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
 
 public class WhileLoop extends Node{
     
@@ -37,7 +40,17 @@ public class WhileLoop extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tag eini = new Tag();
+        Tag efin = new Tag();
+        
+        Main.gen.generateSkip(eini, "Loop init");
+        this.e.generateIntermediateCode();
+
+        // TODO: Replace with proper value of false
+        Main.gen.generateRelational(Opcode.EQ, e.intermediateVar, 0, efin);
+        this.b.generateIntermediateCode();
+        Main.gen.generateGoto(eini);
+        Main.gen.generateSkip(efin,"Loop final");
     }
     
 }

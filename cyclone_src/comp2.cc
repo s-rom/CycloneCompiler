@@ -5,3 +5,14 @@ func void cyclone()
     int y = 3;
     int z = x + y + b;
 }
+
+func void prueba(int x)
+{
+    // Aquí x se refiere a la variable local a prueba
+    x = 3;
+    while (x > 0)
+    {
+        x = x - 1;
+    }
+    
+}

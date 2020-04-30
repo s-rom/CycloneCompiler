@@ -17,3 +17,11 @@
      | z              | var <7> int
      ------------------------
 | cyclone        | func <0> returns void, params()
+     ------------------------
+     | LEVEL 1
+     | x              | var <8> int
+          ------------------------
+          | LEVEL 2
+          ------------------------
+     ------------------------
+| prueba         | func <1> returns void, params(int x)

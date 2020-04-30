@@ -244,12 +244,13 @@ public class Expr extends Node{
                 Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 
                     e.intermediateVar, ue.intermediateVar, intermediateVar);
             } else {
-                Main.gen.generateCommentary("Relational operation");
-                Main.gen.generateAssignation("0",intermediateVar);
+                Main.gen.generateTabbedCommentary("Relational");
+                // TODO: replace with proper true/false values
+                Main.gen.generateAssignation("-1",intermediateVar);
                 Tag t = new Tag(); 
                 Main.gen.generateRelational(Main.gen.getOpcodeEquivalence(bo),
                         e.intermediateVar, ue.intermediateVar, t);
-                Main.gen.generateAssignation("-1",intermediateVar);
+                Main.gen.generateAssignation("0",intermediateVar);
                 Main.gen.generateSkip(t);
             }
         }

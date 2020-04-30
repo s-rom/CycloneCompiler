@@ -89,8 +89,88 @@ graph[nodesep="1"]
 	n42-> n41
 	n43 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
 	n43:b-> n42
-	n44 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n44:f-> n43
-	n45 [label = "Program"]
-	n45-> n44
+	n44 [label = "Arg: int x"]
+	n45 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n45:a-> n44
+	n46 [label = "Primary"]
+	n47 [label = "INT_LIT: 3"]
+	n46-> n47
+	n48 [label = "UnExpr"]
+	n48-> n46
+	n49 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n49:ue-> n48
+	n50 [label = "Assignation: x = "]
+	n50-> n49
+	n51 [label = "Instruction"]
+	n51-> n50
+	n52 [label = "Statement"]
+	n52-> n51
+	n53 [label = "Primary"]
+	n54 [label = "ID: x"]
+	n53-> n54
+	n55 [label = "UnExpr"]
+	n55-> n53
+	n56 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n56:ue-> n55
+	n57 [label = "Primary"]
+	n58 [label = "INT_LIT: 0"]
+	n57-> n58
+	n59 [label = "UnExpr"]
+	n59-> n57
+	n60 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n60:e-> n56
+	n61 [label = ">"]
+	n60:bo-> n61
+	n60:ue-> n59
+	n62 [label = "Primary"]
+	n63 [label = "ID: x"]
+	n62-> n63
+	n64 [label = "UnExpr"]
+	n64-> n62
+	n65 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n65:ue-> n64
+	n66 [label = "Primary"]
+	n67 [label = "INT_LIT: 1"]
+	n66-> n67
+	n68 [label = "UnExpr"]
+	n68-> n66
+	n69 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n69:e-> n65
+	n70 [label = "-"]
+	n69:bo-> n70
+	n69:ue-> n68
+	n71 [label = "Assignation: x = "]
+	n71-> n69
+	n72 [label = "Instruction"]
+	n72-> n71
+	n73 [label = "Statement"]
+	n73-> n72
+	n74 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n74:s-> n73
+	n75 [label = "Block"]
+	n75-> n74
+	n76 [label = "{WhileLoop | {<e>Expr | <b>Block}}", shape="record"]
+	n76:e-> n60
+	n76:b-> n75
+	n77 [label = "Loop"]
+	n77-> n76
+	n78 [label = "Statement"]
+	n78-> n77
+	n79 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n79:s-> n78
+	n80 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n80:s-> n52
+	n80:sl-> n79
+	n81 [label = "Block"]
+	n81-> n80
+	n82 [label = "{Function | {Type: void | ID: prueba | <a>Args | <b>Block}}", shape="record"]
+	n82:a-> n45
+	n82:b-> n81
+	n83 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n83:f-> n82
+	n84 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n84:f-> n43
+	n84:fl-> n83
+	n85 [label = "Program"]
+	n85-> n84
 }

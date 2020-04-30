@@ -15,6 +15,7 @@ public class FuncDescription extends Description{
     private int funcNumber;
     private String returnType;
     private ArrayList<Arg> params;
+    private Scope functionScope;
     
     public FuncDescription(String name, String returnType){
         super(name,DescriptionType.D_FUNC);
@@ -25,6 +26,14 @@ public class FuncDescription extends Description{
     
     public void addParam(String id, String type) throws FatalError{
         params.add(new Arg(id,type));
+    }
+    
+    public Scope getScope(){
+        return this.functionScope;
+    }
+    
+    public void linkScope(Scope s){
+        this.functionScope = s;
     }
     
     public void addParam(Arg a){

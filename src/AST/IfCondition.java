@@ -1,9 +1,12 @@
 package AST;
 
+import IntermediateCode.Opcode;
+import IntermediateCode.Tag;
 import SymbolTable.AtomicType;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
+import cyclonecompiler.Main;
 
 public class IfCondition extends Node{
     
@@ -42,7 +45,7 @@ public class IfCondition extends Node{
 
     @Override
     public void semanticCheck() throws FatalError {
-           if (this.e == null){
+        if (this.e == null){
             InfoDump.reportSemanticError("If conditional without expression, in "+this.e.ue.p.getLocationInfo());
         }
         
@@ -52,10 +55,56 @@ public class IfCondition extends Node{
     }
 
     @Override
+    /**
+     * ===========================================
+     * if (E) { Block }
+     * -------------------------------------------
+     *      E 
+     *      if E.intermediateVar == 0 goto efalse
+     *      Block
+     * efalse: skip
+     * 
+     * ============================================
+     * if (E) { Block_if }
+     * else   { Block_else }
+     * --------------------------------------------
+     *      E
+     *      if (E.intermediateVar == 0) goto efalse
+     *      Block_if
+     *      goto efin
+     * efalse: skip
+     *      Block_else
+     * efin: skip
+     */
     public void generateIntermediateCode() {
+        /* E */
+        this.e.generateIntermediateCode();
+        Tag efalse = new Tag();
+        Tag efin = null;
+        // TODO: Replace with proper value of false
+        /* if E.intermediateVar == 0 goto efalse */
+        Main.gen.generateRelational(Opcode.EQ, this.e.intermediateVar, 0, efalse);
+        /* Block_if */
+        this.ifBlock.generateIntermediateCode();
         
+        /* goto efin */
+        if (this.elseBlock != null){
+            efin = new Tag();
+            Main.gen.generateGoto(efin);
+        }
+        /* efalse: skip */
+        Main.gen.generateSkip(efalse);
         
-
+        /* 
+          Block_else
+          efin: skip 
+        */
+        if (this.elseBlock != null)
+        {
+            this.elseBlock.generateIntermediateCode();
+            Main.gen.generateSkip(efin);
+        }
+        
     }
     
 }

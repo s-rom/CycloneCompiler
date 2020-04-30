@@ -4,6 +4,7 @@ import IntermediateCode.Variable;
 import SymbolTable.ConstDescription;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
+import SymbolTable.Scope;
 import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
@@ -156,7 +157,13 @@ public class Assignation extends Node{
         
         //const Type ID = Expr;
         if (this.constant){
-            Description d = Main.ts.getForward(id);
+            
+            if (Main.ts.getCurrentFuncID() == null){
+                System.err.println("Asignación fuera de una función (currentFunc == null)");
+            }
+            
+            Scope funcScope = Main.ts.getCurrentFuncID().getScope();
+            Description d = Main.ts.getForwardStartingFrom(id,funcScope);
             
             if (d == null){
                 System.err.println("No ha encontrado "+id+" en la ts");
@@ -177,7 +184,12 @@ public class Assignation extends Node{
         
         // ID = Expr; o TypeVar ID = Expr;
         if (e != null){
-            Description d = Main.ts.getForward(id);
+            if (Main.ts.getCurrentFuncID() == null){
+                System.err.println("Asignación fuera de una función (currentFunc == null)");
+            }
+            
+            Scope funcScope = Main.ts.getCurrentFuncID().getScope();
+            Description d = Main.ts.getForwardStartingFrom(id,funcScope);
             
             if (d == null){
                 System.err.println("No ha encontrado "+id+" en la ts");

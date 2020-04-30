@@ -5,6 +5,7 @@ import SymbolTable.ConstDescription;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
 import SymbolTable.FuncDescription;
+import SymbolTable.Scope;
 import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
 import cyclonecompiler.DOT;
@@ -72,7 +73,14 @@ public class Primary extends Node {
                 this.intermediateVar = this.e.intermediateVar;
                 
             case ID:
-                Description d = Main.ts.getForward(id);
+                
+                 if (Main.ts.getCurrentFuncID() == null){
+                    System.err.println("Primary id fuera de una función (currentFunc == null)");
+                }
+
+                Scope funcScope = Main.ts.getCurrentFuncID().getScope();
+                Description d = Main.ts.getForwardStartingFrom(id,funcScope);
+
                 if (d.getDescriptionType() == DescriptionType.D_VAR){
                     
                     VarDescription vd = (VarDescription) d;
