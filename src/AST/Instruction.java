@@ -1,6 +1,7 @@
 package AST;
 
 import cyclonecompiler.DOT;
+import cyclonecompiler.Main;
 
 public class Instruction extends Node{
 
@@ -19,6 +20,9 @@ public class Instruction extends Node{
             case OUTPUT:
                 break;
             case RETURN:
+                System.out.println("Instruction genera Return");
+                this.e.generateIntermediateCode();
+                Main.gen.generateReturn(this.e.intermediateVar);
                 break;
             case ASSIGNATION:
                 System.out.println("Instruction genera Assignation");

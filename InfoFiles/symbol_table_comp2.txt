@@ -11,17 +11,5 @@
 | INT32_MIN      | const <3> int -2147483648
      ------------------------
      | LEVEL 1
-     | b              | const <4> int 
-     | x              | var <5> int
-     | y              | var <6> int
-     | z              | var <7> int
-     ------------------------
-| cyclone        | func <0> returns void, params()
-     ------------------------
-     | LEVEL 1
-     | x              | var <8> int
-          ------------------------
-          | LEVEL 2
-          ------------------------
-     ------------------------
-| prueba         | func <1> returns void, params(int x)
+     | x              | var <4> int
+     | y              | var <5> int

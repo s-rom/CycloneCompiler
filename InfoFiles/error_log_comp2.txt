@@ -1,1 +1,2 @@
 ### ---------- Compilation Errors ----------
+[Semantic Error]: mult is not an existing function, in line 4, column 11

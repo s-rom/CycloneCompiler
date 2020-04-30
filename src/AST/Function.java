@@ -68,7 +68,7 @@ public class Function extends Node{
             System.out.println("Function genera Block");
             b.generateIntermediateCode();
         }
-        Main.gen.generateReturn(funcTag);
+        Main.gen.generateReturn("");
         Main.gen.generateCommentary("-------------- END ------------- ");
     }
     
