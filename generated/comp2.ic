@@ -1,0 +1,20 @@
+# ----------- FUNC: add ----------- 
+e0: skip
+    pmb e0
+    t9 = t4 + t5
+    t6 = t9                   # 'res' = expr
+    return t6
+    return
+# -------------- END ------------- 
+# ----------- FUNC: cyclone ----------- 
+e1: skip
+    pmb e1
+    t10 = 7                   # Aux var
+    t7 = t10                  # 'a' = expr
+    t11 = 3                   # Aux var
+    t8 = t11                  # 'b' = expr
+    param t7
+    param t8
+    call e0
+    return
+# -------------- END ------------- 

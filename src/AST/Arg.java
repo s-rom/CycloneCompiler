@@ -3,6 +3,7 @@ package AST;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
 import SymbolTable.VarDescription;
+import SymbolTable.VarDescription.VarSemantics;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
@@ -36,7 +37,7 @@ public class Arg extends Node{
             InfoDump.reportSemanticError("Type "+type+" is not defined");
         }
         
-        VarDescription vd = new VarDescription(id,type);
+        VarDescription vd = new VarDescription(id,type, VarSemantics.INPARAM);
         Main.ts.insert(id, vd);
     }
     

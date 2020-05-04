@@ -21,19 +21,28 @@ public class InfoDump {
     private static BufferedWriter tokenWriter;
     private static BufferedWriter tsWriter;
     private static BufferedWriter errorWriter;
+    private static BufferedWriter icVarWriter;
+    private static BufferedWriter icFuncWriter;
 
     
     public static void initAllWriters(String token_path, String ts_path,
-            String error_path){
+            String error_path, String ic_var_path, String ic_func_path){
         try {
             FileWriter fwriterToken = new FileWriter(new File(token_path));            
             FileWriter fwriterTS = new FileWriter(new File(ts_path));            
             FileWriter fwriterError = new FileWriter(new File(error_path));            
+            FileWriter fwriterIcVar = new FileWriter(new File(ic_var_path));            
+            FileWriter fwriterIcFunc = new FileWriter(new File(ic_func_path));            
 
+            
+            
             errorWriter = new BufferedWriter(fwriterError);
             tokenWriter = new BufferedWriter(fwriterToken);
             tsWriter = new BufferedWriter(fwriterTS);
-
+            icVarWriter = new BufferedWriter(fwriterIcVar);
+            icFuncWriter = new BufferedWriter(fwriterIcFunc);
+            
+            
             errorWriter.write("### ---------- Compilation Errors ----------");
             errorWriter.newLine();
             
@@ -46,10 +55,29 @@ public class InfoDump {
             tokenWriter.newLine();            
             tokenWriter.newLine();
         } catch (IOException ex) {
-            Logger.getLogger(DOT.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
         }
         setNodeStyle("box");
     }
+    
+    public static void addIcVar(IntermediateCode.Variable v){
+        try{
+            icVarWriter.write(v.toStringDetailed());
+            icVarWriter.newLine();
+        } catch(IOException ex) {
+            Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void addIcFunc(IntermediateCode.Function f){
+        try{
+            icFuncWriter.write(f.toStringDetailed());
+            icFuncWriter.newLine();
+        } catch(IOException ex) {
+            Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
     public static void addTableSymbolEntry(String pre,Description d){
         try {
@@ -100,6 +128,7 @@ public class InfoDump {
     
     
     
+    
     public static void addTokenInfo(String token,int line, int column){
         try {
             tokenWriter.write("("+line+","+column+")\t"+token);
@@ -123,8 +152,10 @@ public class InfoDump {
             tokenWriter.close();
             tsWriter.close();
             errorWriter.close();
+            icVarWriter.close();
+            icFuncWriter.close();
         } catch (IOException ex) {
-            Logger.getLogger(DOT.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoDump.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

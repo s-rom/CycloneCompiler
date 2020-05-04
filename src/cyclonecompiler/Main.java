@@ -1,5 +1,8 @@
 package cyclonecompiler;
 
+import AssemblyGeneration.AsmGenerator;
+import AssemblyGeneration.M68kGenerator;
+import IntermediateCode.Function;
 import IntermediateCode.Generator;
 import IntermediateCode.Opcode;
 import Parser.*;
@@ -12,6 +15,7 @@ import SymbolTable.SymbolTable;
 import SymbolTable.TypeDescription;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.ComplexSymbolFactory;
@@ -20,8 +24,8 @@ import java_cup.runtime.SymbolFactory;
 public class Main {
     
     public static SymbolTable ts;
-    
     public static Generator gen;
+    public static AsmGenerator asmGen;
     
     public static AtomicType atomicBool;
     public static AtomicType atomicChar;
@@ -29,6 +33,7 @@ public class Main {
     public static AtomicType atomicInt16;
     public static AtomicType atomicNull;
     public static AtomicType atomicInt;
+    
     
     
     public static void main (String [] args){
@@ -45,17 +50,28 @@ public class Main {
         final String ERROR_FILE = ".\\InfoFiles\\error_log_"+NAME+".txt";
         final String INTERMEDIATE_FILE = ".\\generated\\"+NAME+".ic";
         final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
+        final String IC_VAR = ".\\InfoFiles\\"+NAME+"_IC_Var.txt";
+        final String IC_FUNC = ".\\InfoFiles\\"+NAME+"_IC_Func.txt";
+        final String ASM_MAIN = ".\\generated\\"+NAME.toUpperCase()+"_MAIN.X68";
+
         
         try {
             gen = new Generator(INTERMEDIATE_FILE);
+            asmGen = new M68kGenerator(ASM_MAIN);
             DOT.initWriter(DOT_FILE);
-            InfoDump.initAllWriters(TOKEN_FILE, SYMBOL_TABLE_FILE, ERROR_FILE);
+            InfoDump.initAllWriters
+                (TOKEN_FILE, SYMBOL_TABLE_FILE, ERROR_FILE, IC_VAR, IC_FUNC);
             initSymbolTable();
 
             SymbolFactory sf = new ComplexSymbolFactory();
             Scanner scanner = new Scanner(new FileReader(SRC_FILE));
             Parser parser = new Parser(scanner, sf);
             parser.parse();
+            
+            gen.getFunctionTable().forEach((entry) -> {
+                asmGen.generateFunction(entry.getValue());
+            });
+            asmGen.generateMain();
             
             System.out.println(Main.ts.toString());
         } catch (FileNotFoundException ex) {
@@ -65,7 +81,9 @@ public class Main {
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
+            gen.infoDumpAllFunctions();
             gen.close();
+            asmGen.close();
             InfoDump.closeAllWriters();
             DOT.closeWriter();
         }

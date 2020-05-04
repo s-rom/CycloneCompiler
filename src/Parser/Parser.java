@@ -10,6 +10,7 @@ import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import AST.*;
 import AST.Primary.PrimaryType;
 import AST.Instruction.InstructionType;
+import cyclonecompiler.InfoDump;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -332,12 +333,12 @@ public class Parser extends java_cup.runtime.lr_parser {
         Symbol prev_sym = (Symbol) this.stack.peek();
         String prev = get_report_name(sym_code);
         String found = get_report_name(cs.sym);
-        System.out.print("Syntax error: ");
+        
         
         String found_attr = cs.value != null ? " ("+cs.value.toString()+")" : "";
         String prev_attr = prev_sym.value != null ? " ("+prev_sym.value.toString()+")" : "";
         
-        System.out.println("Found "+C+found + found_attr+C
+        InfoDump.reportSyntacticError("Found "+C+found + found_attr+C
                 +" after "+C+prev+prev_attr+C+" in line "+
                 (cs.xleft.getLine()+1)+", column "+(cs.xleft.getColumn()+1));
     }

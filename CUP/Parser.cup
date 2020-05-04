@@ -4,6 +4,7 @@ import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import AST.*;
 import AST.Primary.PrimaryType;
 import AST.Instruction.InstructionType;
+import cyclonecompiler.InfoDump;
 
 
 parser code {:

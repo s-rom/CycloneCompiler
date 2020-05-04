@@ -5,5 +5,6 @@ public enum Opcode {
     AND, OR, NOT,
     SKIP, GOTO,
     GT, LT, GE, LE, EQ, NE,
-    CALL, FUN, RET, PARAM
+    CALL, FUN, RET, PARAM,
+    ASSIGN, PMB
 }

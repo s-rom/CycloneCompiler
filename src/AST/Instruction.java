@@ -14,6 +14,7 @@ public class Instruction extends Node{
         switch(this.type)
         {
             case FUNCTION_CALL:
+                this.fl.generateIntermediateCode();
                 break;
             case INPUT:
                 break;

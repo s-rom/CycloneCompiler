@@ -1,9 +1,13 @@
 package IntermediateCode;
 
+import cyclonecompiler.InfoDump;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +28,7 @@ FORMATO: OPCODE SRC1 SRC2 DST
                                 goto dst
                                 call dst
                                 param dst
-                                return dst
+                                return [src1], dst (ret value, function)
 */  
 
 
@@ -35,6 +39,18 @@ public class Generator {
     private final int TAB_SPACES = 4;
     private final String TAB = this.getNSpaces(TAB_SPACES);
     public String getTabs() { return TAB; }
+    
+    // key: var ID 
+    // value: list of variables and input parameters
+    private HashMap<Integer, Variable> varTable;
+    
+    // key: func ID
+    // value: list of functions
+    private HashMap<Integer, Function> funcTable;
+    
+    private  Function currentFunction;
+    
+ 
     
     String [] keywordTable;
     HashMap<String, Opcode> opcodeTable;
@@ -50,6 +66,9 @@ public class Generator {
     }
     
     public Generator(String fileName){
+        varTable = new HashMap();
+        funcTable = new HashMap();
+        
         keywordTable = new String[Opcode.values().length];
         opcodeTable = new HashMap();
         this.intializeEquivalenceTable();
@@ -60,6 +79,50 @@ public class Generator {
             System.err.println("Error trying to open "+fileName+": "+ex.getMessage());
         }
     }
+    
+    public void addCurrentFunction(Function f){
+        this.funcTable.put(f.getID(), f);
+        this.currentFunction = f;
+    }
+    
+    public Function getCurrentFunction(){
+        return currentFunction;
+    }
+    
+    public void addVariable(Variable v){
+        if (varTable.get(v.getId()) == null){
+            varTable.put(v.getId(), v);
+            InfoDump.addIcVar(v);
+        }
+    }
+    
+    public Variable getVariable(int id){
+        return varTable.get(id);
+    }
+    
+    public ArrayList<Variable> getFunctionVariables(int funcID){
+        ArrayList<Variable> vars = new ArrayList();
+        for (Map.Entry entry: varTable.entrySet()){
+            Variable v = (Variable)entry.getValue();
+            if (v.getParentFuncID() == funcID){
+                vars.add(v);
+            }
+        }
+        return vars;
+    }
+    
+    public void infoDumpAllFunctions(){
+        for (Map.Entry entry: funcTable.entrySet()){
+            InfoDump.addIcFunc(((Function)entry.getValue()));
+            System.out.println(entry.getValue());
+            ((Function)entry.getValue()).printInstructions();
+        }
+    }
+    
+    public Set<Map.Entry<Integer,Function>> getFunctionTable(){
+        return this.funcTable.entrySet();
+    }
+    
     
     public Opcode getOpcodeEquivalence(String keyword){
         return opcodeTable.get(keyword);
@@ -89,6 +152,15 @@ public class Generator {
     public String generateAssignation(Object src, Object dst){
         String instr = TAB + dst + " = " + src;
         write(instr);
+        
+        currentFunction.addInstruction(new Instruction(Opcode.ASSIGN, src, null, dst));
+        return instr;
+    }
+    
+    public String generatePmb(){
+        String instr = TAB + keywordTable[Opcode.PMB.ordinal()] +" "+currentFunction.getTag();
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.PMB, null, null, currentFunction));
         return instr;
     }
     
@@ -99,6 +171,8 @@ public class Generator {
         instr += "# "+commentary;
         
         write(instr);
+        
+        currentFunction.addInstruction(new Instruction(Opcode.ASSIGN, src, null, dst));
         return instr;
     }
     
@@ -115,12 +189,14 @@ public class Generator {
     public String generateBinary(Opcode op, Object src1, Object src2, Object dst){
         String instr = TAB + dst + " = " + src1 + ' ' + keywordTable[op.ordinal()]+ ' ' + src2;
         write(instr);
+        currentFunction.addInstruction(new Instruction(op, src1, src2, dst));
         return instr;
     }
     
     public String generateUnary(Opcode op, Object src1, Object dst){
         String instr = TAB + dst + " = " + keywordTable[op.ordinal()] + ' ' + src1;
         write(instr);
+        currentFunction.addInstruction(new Instruction(op, src1, null, dst));
         return instr;
     }
     
@@ -128,12 +204,14 @@ public class Generator {
         String instr = TAB + "if ( "+src1 + ' ' + keywordTable[op.ordinal()] + ' '+src2 + " ) " +
                 keywordTable[Opcode.GOTO.ordinal()] + ' ' + dst;
         write(instr);
+        currentFunction.addInstruction(new Instruction(op, src1, src2, dst));
         return instr;
     }
     
     public String generateSkip(Tag t){
         String instr = t + ": "+keywordTable[Opcode.SKIP.ordinal()];
         write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.SKIP, null, null, t));
         return instr;
     }
     
@@ -146,18 +224,22 @@ public class Generator {
         
         
         write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.SKIP, null, null, t));
         return instr;
     }
     
     public String generateGoto(Tag t){
         String instr = TAB + keywordTable[Opcode.GOTO.ordinal()]+ ' '+t;
         write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.GOTO, null, null, t));
+
         return instr;
     }
     
     public String generateCall(Tag t){
         String instr = TAB + keywordTable[Opcode.CALL.ordinal()] + ' '+t;
         write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.CALL, null, null, t));
         return instr;
     }
     
@@ -165,12 +247,14 @@ public class Generator {
         String instr = TAB + keywordTable[Opcode.RET.ordinal()] + 
                 ((returnObject == null)? "" : " " + returnObject);
         write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.RET, returnObject, null, this.currentFunction));
         return instr;
     }
     
     public String generateParam(Object param){
         String instr = TAB + keywordTable[Opcode.PARAM.ordinal()] + ' ' + param;
         write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.PARAM, null, null, param));
         return instr;
     }
     
@@ -198,7 +282,9 @@ public class Generator {
         keywordTable[(Opcode.RET).ordinal()] = "return";
         keywordTable[(Opcode.FUN).ordinal()] = "fun";
         keywordTable[(Opcode.PARAM).ordinal()] = "param";
-        
+        keywordTable[(Opcode.ASSIGN).ordinal()] = "assign";
+        keywordTable[(Opcode.PMB).ordinal()] = "pmb";
+
         
         for (Opcode op: Opcode.values()){
             int idx = op.ordinal();

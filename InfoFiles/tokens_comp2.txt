@@ -1,26 +1,51 @@
 ### ---------- Token File ----------
 ### Format: (line,colum) TokenName: Attribute?
 
-(0,0)	FUNC
-(0,5)	VOID_TYPE: void
-(0,10)	ID: cyclone
-(0,17)	LPAREN
-(0,18)	RPAREN
-(1,0)	LCURL
-(2,3)	INT_TYPE: int
-(2,7)	ID: x
-(2,9)	ASSIGN: =
-(2,11)	INT_LIT: 2
-(2,12)	SEMICOLON
-(3,3)	INT_TYPE: int
-(3,7)	ID: y
-(3,9)	ASSIGN: =
-(3,11)	INT_LIT: 3
-(3,12)	SEMICOLON
-(4,3)	ID: mult
-(4,7)	LPAREN
-(4,8)	ID: x
-(4,9)	COMMA
-(4,10)	ID: y
-(4,11)	RPAREN
-(4,12)	SEMICOLON
+(1,0)	FUNC
+(1,5)	INT_TYPE: int
+(1,9)	ID: add
+(1,12)	LPAREN
+(1,13)	INT_TYPE: int
+(1,17)	ID: a
+(1,18)	COMMA
+(1,20)	INT_TYPE: int
+(1,24)	ID: b
+(1,25)	RPAREN
+(2,0)	LCURL
+(3,4)	INT_TYPE: int
+(3,8)	ID: res
+(3,12)	ASSIGN: =
+(3,14)	ID: a
+(3,16)	SUM: +
+(3,18)	ID: b
+(3,19)	SEMICOLON
+(4,4)	RETURN
+(4,11)	ID: res
+(4,14)	SEMICOLON
+(5,0)	RCURL
+(9,0)	FUNC
+(9,5)	VOID_TYPE: void
+(9,10)	ID: cyclone
+(9,17)	LPAREN
+(9,18)	RPAREN
+(10,0)	LCURL
+(11,3)	INT_TYPE: int
+(11,7)	ID: a
+(11,9)	ASSIGN: =
+(11,11)	INT_LIT: 7
+(11,12)	SEMICOLON
+(12,3)	INT_TYPE: int
+(12,7)	ID: b
+(12,9)	ASSIGN: =
+(12,11)	INT_LIT: 3
+(12,12)	SEMICOLON
+(13,3)	ID: add
+(13,6)	LPAREN
+(13,7)	ID: a
+(13,8)	COMMA
+(13,10)	ID: b
+(13,11)	RPAREN
+(13,12)	SEMICOLON
+(14,0)	RCURL
+(14,1)	EOF
+(14,1)	EOF

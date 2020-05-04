@@ -14,14 +14,14 @@ public class SymbolTable {
     private Scope last; 
     
    
-    private FuncDescription currentFuncID;
+    private FuncDescription currentFunc;
 
-    public FuncDescription getCurrentFuncID() {
-        return currentFuncID;
+    public FuncDescription getCurrentFunc() {
+        return currentFunc;
     }
 
-    public void setCurrentFuncID(FuncDescription newID) {
-        this.currentFuncID = newID;
+    public void setCurrentFunc(FuncDescription newFunc) {
+        this.currentFunc = newFunc;
     }
     
     private Scope lastLevel1Scope;     
@@ -32,7 +32,7 @@ public class SymbolTable {
         ROOT = current;
         last = current;
         lastLevel1Scope = null;
-        currentFuncID = null;
+        currentFunc = null;
     }
     
     public void enterBlock(){

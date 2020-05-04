@@ -7,6 +7,7 @@ import SymbolTable.DescriptionType;
 import SymbolTable.Scope;
 import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
+import SymbolTable.VarDescription.VarSemantics;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
@@ -115,7 +116,8 @@ public class Assignation extends Node{
                         this.getLocationInfo());
                 }
                 
-                boolean exists = !ts.insert(id, new VarDescription(id,type));
+                boolean exists = !ts.insert(id, 
+                        new VarDescription(id,type, VarSemantics.LOCAL));
             } else {
                 // int x = ...;
                 // insertar x en la TS
@@ -127,7 +129,8 @@ public class Assignation extends Node{
                         this.getLocationInfo());
                 }
                 
-                Description nd = constant? new ConstDescription(id,type) : new VarDescription(id,type);
+                Description nd = constant? new ConstDescription(id,type) : 
+                        new VarDescription(id,type, VarSemantics.LOCAL);
                 boolean exists = !ts.insert(id, nd);
                 if (exists) return;
                 
@@ -151,18 +154,17 @@ public class Assignation extends Node{
     public void generateIntermediateCode() {
 
         if (e != null) {
-            System.out.println("Assignation genera Expresion");
             e.generateIntermediateCode();
         }
         
         //const Type ID = Expr;
         if (this.constant){
             
-            if (Main.ts.getCurrentFuncID() == null){
+            if (Main.ts.getCurrentFunc() == null){
                 System.err.println("Asignación fuera de una función (currentFunc == null)");
             }
             
-            Scope funcScope = Main.ts.getCurrentFuncID().getScope();
+            Scope funcScope = Main.ts.getCurrentFunc().getScope();
             Description d = Main.ts.getForwardStartingFrom(id,funcScope);
             
             if (d == null){
@@ -176,19 +178,27 @@ public class Assignation extends Node{
             }
             
             ConstDescription cd = (ConstDescription) d;
-            Main.gen.generateAssignation(e.intermediateVar, new Variable(cd.getConstNum()),
+            Variable v = Main.gen.getVariable(cd.getConstNum());
+            if (v == null){
+                System.out.println("const ID = Expr, id ic_var not found!");
+                v = new Variable(cd.getConstNum(), VarSemantics.LOCAL);
+            }
+            Main.gen.generateAssignation(e.intermediateVar, v,
                     "const \'"+id+"\' = expr");
+            
+//            Main.gen.generateAssignation(e.intermediateVar, new Variable(cd.getConstNum(), VarSemantics.LOCAL),
+//                    "const \'"+id+"\' = expr");
             
             return;
         }
         
         // ID = Expr; o TypeVar ID = Expr;
         if (e != null){
-            if (Main.ts.getCurrentFuncID() == null){
+            if (Main.ts.getCurrentFunc() == null){
                 System.err.println("Asignación fuera de una función (currentFunc == null)");
             }
             
-            Scope funcScope = Main.ts.getCurrentFuncID().getScope();
+            Scope funcScope = Main.ts.getCurrentFunc().getScope();
             Description d = Main.ts.getForwardStartingFrom(id,funcScope);
             
             if (d == null){
@@ -198,8 +208,15 @@ public class Assignation extends Node{
             
             VarDescription vd = (VarDescription) d;
             
-            Main.gen.generateAssignation(e.intermediateVar, new Variable(vd.varNumber),
+            Variable v = Main.gen.getVariable(vd.varNumber);
+            if (v == null){
+                System.out.println("ID = Expr, id ic_var not found!");
+                v = new Variable(vd.varNumber, vd.getVarSemantics());
+            }
+            Main.gen.generateAssignation(e.intermediateVar, v,
                     "\'"+id+"\' = expr");
+//            Main.gen.generateAssignation(e.intermediateVar, new Variable(vd.varNumber, vd.getVarSemantics()),
+//                    "\'"+id+"\' = expr");
         }
         
         // Type ID;

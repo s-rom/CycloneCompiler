@@ -1,5 +1,6 @@
 package AST;
 
+import IntermediateCode.Opcode;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
 import SymbolTable.FuncDescription;
@@ -14,7 +15,7 @@ public class FunctionCall extends Node {
     
     private String id;
     private ExprArg param;
-    
+    private ArrayList<Expr> listFound; 
     private int line, column;
     
     public FunctionCall(String id, ExprArg param, int line, int column) throws FatalError{
@@ -47,7 +48,7 @@ public class FunctionCall extends Node {
         }
         
         ArrayList<Arg> list = ((FuncDescription) d).getParamList();
-        ArrayList<Expr> listFound = new ArrayList();
+        listFound = new ArrayList();
         int numParam = 0;
         ExprArg ea = this.param;
         if (ea != null){
@@ -67,7 +68,6 @@ public class FunctionCall extends Node {
             }
         }
         
-
         if (numParam != list.size()){
             InfoDump.reportSemanticError("Function "+id+" requires "+list.size()+" parameters, found "+numParam+
                     " in "+getLocationInfo());
@@ -90,7 +90,15 @@ public class FunctionCall extends Node {
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Llamada a "+this.id);
+
+        FuncDescription fd = (FuncDescription) Main.ts.getForward(this.id);
+        for (Expr arg : this.listFound){
+            arg.generateIntermediateCode();
+            Main.gen.generateParam(arg.intermediateVar);
+        }
+        
+        Main.gen.generateCall(fd.getTag());
     }
 
 }

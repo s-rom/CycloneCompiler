@@ -1,13 +1,15 @@
 
-func void cyclone()
+func int add(int a, int b)
 {
-   int x = 2;
-   int y = 3;
-   mult(x,y);
+    int res = a + b;
+    return res;
 }
 
-func int mult(int a, int b)
+
+
+func void cyclone()
 {
-    int res = a * b;
-    return res;
+   int a = 7;
+   int b = 3;
+   add(a, b);
 }

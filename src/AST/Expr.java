@@ -3,6 +3,8 @@ package AST;
 import IntermediateCode.Tag;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
+import SymbolTable.VarDescription;
+import SymbolTable.VarDescription.VarSemantics;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
@@ -238,7 +240,7 @@ public class Expr extends Node{
             this.ue.generateIntermediateCode();
             this.e.generateIntermediateCode();
             
-            this.intermediateVar = new IntermediateCode.Variable();
+            this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
             
             if (!isBinOpRelational()){
                 Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 

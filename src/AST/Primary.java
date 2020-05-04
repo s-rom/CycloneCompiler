@@ -8,6 +8,7 @@ import SymbolTable.FuncDescription;
 import SymbolTable.Scope;
 import SymbolTable.TypeDescription;
 import SymbolTable.VarDescription;
+import SymbolTable.VarDescription.VarSemantics;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
@@ -47,20 +48,28 @@ public class Primary extends Node {
         {
             case STR_LIT:
                 // Genera ti = str_lit
-                this.intermediateVar = new IntermediateCode.Variable();
+                // local
+                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
                 Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
                 break;
                 
             case BOOL_LIT:
-                 // Genera ti = bool_lit
-                this.intermediateVar = new IntermediateCode.Variable();
-                Main.gen.generateAssignation(bool_lit, intermediateVar, "Aux var");
+                // Genera ti = bool_lit
+                // local
+                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
+                
+                int intEquiv;
+                if (bool_lit) intEquiv = -1;
+                else intEquiv = 0;
+                
+                Main.gen.generateAssignation(intEquiv, intermediateVar, "Aux var");
                 break;
                 
             case INT_LIT:
-                 // Genera ti = int_lit
+                // Genera ti = int_lit
+                // local
                 System.out.println("Primary genera nueva variable auxiliar");
-                this.intermediateVar = new IntermediateCode.Variable();
+                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
                 Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
                 break;
                 
@@ -74,22 +83,28 @@ public class Primary extends Node {
                 
             case ID:
                 
-                 if (Main.ts.getCurrentFuncID() == null){
+                 if (Main.ts.getCurrentFunc() == null){
                     System.err.println("Primary id fuera de una función (currentFunc == null)");
                 }
 
-                Scope funcScope = Main.ts.getCurrentFuncID().getScope();
+                Scope funcScope = Main.ts.getCurrentFunc().getScope();
                 Description d = Main.ts.getForwardStartingFrom(id,funcScope);
 
                 if (d.getDescriptionType() == DescriptionType.D_VAR){
                     
+                    // Ver si es local o global
                     VarDescription vd = (VarDescription) d;
-                    this.intermediateVar = new IntermediateCode.Variable(vd.varNumber);
+                    this.intermediateVar = Main.gen.getVariable(vd.varNumber);
+                    if (this.intermediateVar == null)
+                        this.intermediateVar = new IntermediateCode.Variable(vd.varNumber, vd.getVarSemantics());
                     
                 } else if (d.getDescriptionType() == DescriptionType.D_CONST){
                    
+                    // TODO: no se si es local o  no, cuidao
                     ConstDescription cd = (ConstDescription) d;
-                    this.intermediateVar = new IntermediateCode.Variable(cd.getConstNum());
+                    this.intermediateVar = Main.gen.getVariable(cd.getConstNum());
+                    if (this.intermediateVar == null)
+                        this.intermediateVar = new IntermediateCode.Variable(cd.getConstNum(), VarSemantics.LOCAL);
                     
                 }
                     
@@ -154,7 +169,8 @@ public class Primary extends Node {
                 } else {
                     ConstDescription cd = (ConstDescription) d;
                     
-                    this.intermediateVar = new IntermediateCode.Variable(cd.getConstNum());
+                    /* ESTO NO DEBERIA ESTAR AQUI */
+                    //this.intermediateVar = new IntermediateCode.Variable(cd.getConstNum());
                     
                     td = (TypeDescription) ts.get(cd.type);
                 }
@@ -165,8 +181,9 @@ public class Primary extends Node {
                 break;
             case STR_LIT:
                 
-                this.intermediateVar = new IntermediateCode.Variable();
-                Main.gen.generateAssignation('$'+id, intermediateVar, "Aux var");
+                /* ESTO NO DEBERIA ESTAR AQUI */
+                //this.intermediateVar = new IntermediateCode.Variable();
+                //Main.gen.generateAssignation('$'+id, intermediateVar, "Aux var");
                 
                 this.type = Main.atomicChar;
                 break;

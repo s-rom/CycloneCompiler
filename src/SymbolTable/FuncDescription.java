@@ -1,6 +1,7 @@
 package SymbolTable;
 
 import AST.Arg;
+import IntermediateCode.Tag;
 import cyclonecompiler.FatalError;
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class FuncDescription extends Description{
     private String returnType;
     private ArrayList<Arg> params;
     private Scope functionScope;
+    private Tag tag;
     
     public FuncDescription(String name, String returnType){
         super(name,DescriptionType.D_FUNC);
@@ -26,6 +28,10 @@ public class FuncDescription extends Description{
     
     public void addParam(String id, String type) throws FatalError{
         params.add(new Arg(id,type));
+    }
+    
+    public int getID(){
+        return funcNumber;
     }
     
     public Scope getScope(){
@@ -42,6 +48,14 @@ public class FuncDescription extends Description{
     
     public String getReturnType(){
         return this.returnType;
+    }
+    
+    public Tag getTag(){
+       return tag;
+    }
+    
+    public void setTag(Tag t){
+        this.tag = t;
     }
     
     public ArrayList<Arg> getParamList(){

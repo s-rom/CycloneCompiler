@@ -3,6 +3,8 @@ package AST;
 import IntermediateCode.Opcode;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
+import SymbolTable.VarDescription;
+import SymbolTable.VarDescription.VarSemantics;
 import cyclonecompiler.DOT;
 import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
@@ -110,7 +112,7 @@ public class UnExpr extends Node{
             // UnExpr --> UnOP UnExpr
             System.out.println("UnaryExpression genera UnaryExpression");
             this.unExpr.generateIntermediateCode();
-            this.intermediateVar = new IntermediateCode.Variable();
+            this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
             if ("-".equals(unOp)){
                 Main.gen.generateBinary(Opcode.SUB, 0, unExpr.intermediateVar, intermediateVar);
             } else { // !

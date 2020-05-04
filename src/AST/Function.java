@@ -55,20 +55,29 @@ public class Function extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        // TODO: Generate args
-        
-        FuncDescription fd = (FuncDescription) Main.ts.getForward(id);
-        Main.ts.setCurrentFuncID(fd);
-        
-        
         Tag funcTag = new Tag();
+
+        /* -- TS -- */
+        FuncDescription fd = (FuncDescription) Main.ts.getForward(id);
+        Main.ts.setCurrentFunc(fd);
+        fd.setTag(funcTag);
+        /* -------- */
+        
+        IntermediateCode.Function icFunc = 
+                new IntermediateCode.Function(fd.getID(), id, funcTag);
+        
+        
+        
+        Main.gen.addCurrentFunction(icFunc);
+        
         Main.gen.generateCommentary("----------- FUNC: "+ this.id +" ----------- ");
         Main.gen.generateSkip(funcTag);
+        Main.gen.generatePmb();
         if (b != null){
             System.out.println("Function genera Block");
             b.generateIntermediateCode();
         }
-        Main.gen.generateReturn("");
+        Main.gen.generateReturn(null);
         Main.gen.generateCommentary("-------------- END ------------- ");
     }
     
