@@ -11,14 +11,6 @@
 | INT32_MIN      | const <3> int -2147483648
      ------------------------
      | LEVEL 1
-     | a              | input param <4> int
-     | b              | input param <5> int
-     | res            | local var <6> int
+     | x              | local var <4> string
      ------------------------
-| add            | func <0> returns int, params(int a, int b)
-     ------------------------
-     | LEVEL 1
-     | a              | local var <7> int
-     | b              | local var <8> int
-     ------------------------
-| cyclone        | func <1> returns void, params()
+| cyclone        | func <0> returns void, params()

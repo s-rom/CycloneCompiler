@@ -39,6 +39,7 @@ public class Main {
     public static void main (String [] args){
         final String NAME = "comp2";
         compilar(NAME);
+
     }
  
     

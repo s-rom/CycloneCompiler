@@ -60,6 +60,14 @@ public class InfoDump {
         setNodeStyle("box");
     }
     
+    public static void addIcFileText(String text){
+        try{
+            icVarWriter.write(text);
+        }catch(IOException ex){
+            System.err.println("Error writing to IC var file: "+ex.getMessage());
+        }
+    }
+    
     public static void addIcVar(IntermediateCode.Variable v){
         try{
             icVarWriter.write(v.toStringDetailed());

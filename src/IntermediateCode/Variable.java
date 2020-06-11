@@ -31,13 +31,13 @@ public class Variable {
         id = nextId();
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
-        
+        occupation = 4;
         switch(varSemantics){
             case LOCAL: 
-                offset = Main.gen.getCurrentFunction().getNexVarOffset(4);
+                offset = Main.gen.getCurrentFunction().getNexVarOffset(occupation);
                 break;
             case INPARAM: 
-                offset = Main.gen.getCurrentFunction().getNextParamOffset(4);
+                offset = Main.gen.getCurrentFunction().getNextParamOffset(occupation);
                 break;
             default: 
                 offset = Integer.MAX_VALUE;
@@ -51,14 +51,14 @@ public class Variable {
         id = existingId;
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
-
+        occupation = 4;
         
         switch(varSemantics){
             case LOCAL: 
-                offset = Main.gen.getCurrentFunction().getNexVarOffset(4);
+                offset = Main.gen.getCurrentFunction().getNexVarOffset(occupation);
                 break;
             case INPARAM: 
-                offset = Main.gen.getCurrentFunction().getNextParamOffset(4);
+                offset = Main.gen.getCurrentFunction().getNextParamOffset(occupation);
                 break;
             default: 
                 offset = Integer.MAX_VALUE;
@@ -102,8 +102,8 @@ public class Variable {
             = {"local", "param"};
     
     public String toStringDetailed(){
-        String res = "type: "+SEMANTICS_EQUIVALENT[this.varSemantics.ordinal()]+
-                " | t"+id+" | off: "+offset+" | bytes: "+occupation;
+        String res = "t"+id+"\t| type: "+SEMANTICS_EQUIVALENT[this.varSemantics.ordinal()]+
+                " | off: "+offset+" | bytes: "+occupation;
         res+= " | local to: "+parentFunctionID;
         if (atomicType != null) res+=" | "+atomicType.getDType();
         return res;

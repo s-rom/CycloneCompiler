@@ -29,6 +29,7 @@ FORMATO: OPCODE SRC1 SRC2 DST
                                 call dst
                                 param dst
                                 return [src1], dst (ret value, function)
+                                output dst
 */  
 
 
@@ -236,6 +237,13 @@ public class Generator {
         return instr;
     }
     
+    public String generateOutput(Object var){
+        String instr = TAB + keywordTable[Opcode.OUTPUT.ordinal()]+' '+var.toString();
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.OUTPUT, null, null, var));
+        return instr;
+    }
+    
     public String generateCall(Tag t){
         String instr = TAB + keywordTable[Opcode.CALL.ordinal()] + ' '+t;
         write(instr);
@@ -284,6 +292,8 @@ public class Generator {
         keywordTable[(Opcode.PARAM).ordinal()] = "param";
         keywordTable[(Opcode.ASSIGN).ordinal()] = "assign";
         keywordTable[(Opcode.PMB).ordinal()] = "pmb";
+        keywordTable[(Opcode.OUTPUT).ordinal()] = "output";
+        keywordTable[(Opcode.INPUT).ordinal()] = "input";
 
         
         for (Opcode op: Opcode.values()){

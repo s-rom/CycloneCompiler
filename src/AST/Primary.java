@@ -142,14 +142,14 @@ public class Primary extends Node {
     /*
     Primary --> id
     */
-    public Primary(String id, PrimaryType type,int line, int column) throws FatalError{
+    public Primary(String id, PrimaryType type, int line, int column) throws FatalError{
         this.id = id;
         this.productionType = type;
         this.type = Main.atomicNull;
         this.line = line;
         this.column = column;
-        if (null == type){
-            
+        
+        if (null == type){    
             this.type = Main.atomicNull;
         
         } else switch (type) {
@@ -184,7 +184,8 @@ public class Primary extends Node {
                 /* ESTO NO DEBERIA ESTAR AQUI */
                 //this.intermediateVar = new IntermediateCode.Variable();
                 //Main.gen.generateAssignation('$'+id, intermediateVar, "Aux var");
-                
+                this.str_lit = id;
+                this.productionType = PrimaryType.STR_LIT;
                 this.type = Main.atomicChar;
                 break;
         }

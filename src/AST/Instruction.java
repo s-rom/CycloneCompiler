@@ -19,6 +19,9 @@ public class Instruction extends Node{
             case INPUT:
                 break;
             case OUTPUT:
+                System.out.println("Instruction genera Output");
+                this.e.generateIntermediateCode();
+                Main.gen.generateOutput(this.e.intermediateVar);
                 break;
             case RETURN:
                 System.out.println("Instruction genera Return");

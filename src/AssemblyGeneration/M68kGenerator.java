@@ -138,7 +138,7 @@ public class M68kGenerator extends AsmGenerator{
         String instrAsm;
         if (o instanceof Variable)
             instrAsm = loadVar((Variable) o, register);
-        else 
+        else
             instrAsm = loadConstant(o.toString(), D_REG_1);
         
         
@@ -190,6 +190,29 @@ public class M68kGenerator extends AsmGenerator{
         return asmInstr;
     }
     
+    private String generateGoto(Instruction instr){
+        Tag t = (Tag) instr.getDst();
+        String asmInstr = "JMP "+ t.toString().toUpperCase();
+        String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
+        return BEFORE_TAB + asmInstr + tabs + ";"+instr.toString()+"\n";
+    }
+    
+    private String generateIfGoto(Instruction instr){
+        String asmInstr = "";
+        asmInstr += BEFORE_TAB + load(instr.getSrc1(), D_REG_1, instr.toString());
+        asmInstr += BEFORE_TAB + load(instr.getSrc2(), D_REG_2);
+        asmInstr += BEFORE_TAB + "CMP.L "+D_REG_2+", "+D_REG_1 + "\n";
+      
+      
+        // if ( a op b ) goto e
+        // MOVE.L a, D_REG_1
+        // MOVE.L b, D_REG_2
+        // CMP.L  D_REG_2, D_REG_1
+        // Bop e
+        
+        return asmInstr;
+    }
+    
     @Override
     protected void generateAsmEquivalent(Instruction instr) {
         System.out.println("Converting "+instr.toString());
@@ -226,6 +249,7 @@ public class M68kGenerator extends AsmGenerator{
                 break;
             
             case GOTO:
+                writeAsm(generateGoto(instr));
                 break;
             
             case GT:
