@@ -1,7 +1,11 @@
 # ----------- FUNC: cyclone ----------- 
 e0: skip
     pmb e0
-    t4 = "abcd"               # Aux var
+    t4 = "a"                  # Aux var
     output t4
+    t5 = 6                    # Aux var
+    output t5
+    t6 = "b"                  # Aux var
+    output t6
     return
 # -------------- END ------------- 

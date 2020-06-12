@@ -1,1 +1,3 @@
-t4	| type: local | off: -6 | bytes: 6 | local to: 0
+t4	| type: local | off: -2 | bytes: 2 | local to: 0
+t5	| type: local | off: -6 | bytes: 4 | local to: 0
+t6	| type: local | off: -8 | bytes: 2 | local to: 0

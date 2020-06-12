@@ -1,22 +1,31 @@
-0000101E Starting Address
+0000103A Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 12/06/2020 17:45:51
+Created On: 12/06/2020 18:08:06
 
 00001000                             1              ORG $1000
 00001000                             2  E0: 
 00001000                             3                                            ;<PMB, e0(cyclone)>
 00001000                             4  
-00001000  2F7C 00000000 FFFC         5              MOVE.L #0,-4(A7)
-00001008  2F7C 61626300 FFFC         6              MOVE.L #'abc',-4(A7)
-00001010  224F                       7              MOVE.L A7, A1
-00001012  D3FC FFFFFFFC              8              ADDA.L #-4, A1
-00001018  700E                       9              MOVE.L #14, D0
-0000101A  4E4F                      10              TRAP #15
-0000101C  4E75                      11              RTS
-0000101E                            12  
-0000101E  4EB8 1000                 13  START:      JSR E0
-00001022  FFFF FFFF                 14              SIMHALT
-00001026                            15              END START
+00001000  3F7C 6100 FFFE             5              MOVE.W #$6100,-2(A7)
+00001006  224F                       6              MOVE.L A7, A1
+00001008  D3FC FFFFFFFE              7              ADDA.L #-2, A1
+0000100E  700E                       8              MOVE.L #14, D0
+00001010  4E4F                       9              TRAP #15
+00001012  2F7C 5C6E0000 FFFA        10              MOVE.L #$5c6e0000,-6(A7)
+0000101A  224F                      11              MOVE.L A7, A1
+0000101C  D3FC FFFFFFFA             12              ADDA.L #-6, A1
+00001022  700E                      13              MOVE.L #14, D0
+00001024  4E4F                      14              TRAP #15
+00001026  3F7C 6200 FFF8            15              MOVE.W #$6200,-8(A7)
+0000102C  224F                      16              MOVE.L A7, A1
+0000102E  D3FC FFFFFFF8             17              ADDA.L #-8, A1
+00001034  700E                      18              MOVE.L #14, D0
+00001036  4E4F                      19              TRAP #15
+00001038  4E75                      20              RTS
+0000103A                            21  
+0000103A  4EB8 1000                 22  START:      JSR E0
+0000103E  FFFF FFFF                 23              SIMHALT
+00001042                            24              END START
 
 No errors detected
 No warnings generated
@@ -26,4 +35,4 @@ SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
 E0                  1000
-START               101E
+START               103A

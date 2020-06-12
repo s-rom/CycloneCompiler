@@ -136,17 +136,21 @@ public class M68kGenerator extends AsmGenerator{
             bytes -= dec;
             
             
-            String subStr = str_lit.substring(0, dec).replace("\0", "");
-            int diff = dec - subStr.length();
-            int shift = dec == 2 ? 8 * diff : 0;
+            String subStr = str_lit.substring(0, dec);
+            String hexStr = "";
+            for (int i = 0 ; i < subStr.length(); i++){
+                String hex = Integer.toHexString(subStr.charAt(i));
+                if (hex.length() < 2){
+                    hex = "0"+hex;
+                }
+                
+                hexStr += hex;
+            }
             
-            String piece = "#\'"+ subStr + "\'"+(shift > 0? "<<"+shift : "");
             str_lit = str_lit.substring(dec);
             
             
-            if (diff != 0)
-                asmInstr += BEFORE_TAB + "MOVE"+mod+" #0,"+off+"(A7)\n";
-            asmInstr += BEFORE_TAB + "MOVE"+mod+" "+piece+","+off+"(A7)\n";
+            asmInstr += BEFORE_TAB + "MOVE"+mod+" #$"+hexStr+","+off+"(A7)\n";
             off += dec;
         }
         
@@ -264,7 +268,11 @@ public class M68kGenerator extends AsmGenerator{
 //            ADDA.L  #-14, A1
 //                    
             Variable v = (Variable)dst;
-            asmInstr += BEFORE_TAB + "MOVE.L A7, A1\n";
+            asmInstr +=  "MOVE.L A7, A1";
+            String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
+            asmInstr += tabs+";"+instr.toString()+"\n";
+            asmInstr = BEFORE_TAB+asmInstr;
+            
             asmInstr += BEFORE_TAB + "ADDA.L #"+v.getOffset()+", A1\n";
             trapNum = 14;
         } else if (dst instanceof Integer){

@@ -3,7 +3,7 @@ graph[nodesep="1"]
 	node [shape=box]
 	node [shape=box]
 	n0 [label = "Primary"]
-	n1 [label = "STR_LIT: abcd"]
+	n1 [label = "STR_LIT: a"]
 	n0-> n1
 	n2 [label = "UnExpr"]
 	n2-> n0
@@ -15,14 +15,46 @@ graph[nodesep="1"]
 	n5-> n3
 	n6 [label = "Statement"]
 	n6-> n4
-	n7 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n7:s-> n6
-	n8 [label = "Block"]
-	n8-> n7
-	n9 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
-	n9:b-> n8
-	n10 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n10:f-> n9
-	n11 [label = "Program"]
-	n11-> n10
+	n7 [label = "Primary"]
+	n8 [label = "INT_LIT: 6"]
+	n7-> n8
+	n9 [label = "UnExpr"]
+	n9-> n7
+	n10 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n10:ue-> n9
+	n11 [label = "Instruction"]
+	n12 [label = "OUTPUT"]
+	n11-> n12
+	n12-> n10
+	n13 [label = "Statement"]
+	n13-> n11
+	n14 [label = "Primary"]
+	n15 [label = "STR_LIT: b"]
+	n14-> n15
+	n16 [label = "UnExpr"]
+	n16-> n14
+	n17 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n17:ue-> n16
+	n18 [label = "Instruction"]
+	n19 [label = "OUTPUT"]
+	n18-> n19
+	n19-> n17
+	n20 [label = "Statement"]
+	n20-> n18
+	n21 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n21:s-> n20
+	n22 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n22:s-> n13
+	n22:sl-> n21
+	n23 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n23:s-> n6
+	n23:sl-> n22
+	n24 [label = "Block"]
+	n24-> n23
+	n25 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n25:b-> n24
+	n26 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n26:f-> n25
+	n27 [label = "Program"]
+	n27-> n26
 }
