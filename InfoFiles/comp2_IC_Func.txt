@@ -1,1 +1,1 @@
-f0 | cyclone | tag: e0 | local bytes: 8 | parameter bytes: 0
+f0 | cyclone | tag: e0 | local bytes: 4 | parameter bytes: 0

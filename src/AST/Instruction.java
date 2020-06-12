@@ -34,18 +34,23 @@ public class Instruction extends Node{
                 break;
             case DECLARATION:
                 break;
+            case ALLOCATION:
+                System.out.println("Instruction genera Allocation");
+                alloc.generateIntermediateCode();
+                break;
         }
     }
     
 
     public static enum InstructionType{
-        FUNCTION_CALL, INPUT, OUTPUT, RETURN, ASSIGNATION, DECLARATION;
+        FUNCTION_CALL, INPUT, OUTPUT, RETURN, ASSIGNATION, DECLARATION, ALLOCATION;
     }
     
     private FunctionCall fl;
     private Expr e;
     private Assignation assign;
     private Declaration declar;
+    private Allocation alloc;
     
     private InstructionType type;
     
@@ -58,6 +63,12 @@ public class Instruction extends Node{
     public Instruction(Expr e, InstructionType type){
         this.e = e;
         this.type = type;
+        toDot();
+    }
+    
+        public Instruction(Allocation alloc){
+        this.alloc = alloc;
+        this.type = InstructionType.ALLOCATION;
         toDot();
     }
     
@@ -114,7 +125,9 @@ public class Instruction extends Node{
             case DECLARATION:
                 if(declar!=null)DOT.writeEdge(nodeNumber, declar.getNodeNumber());
                 break;
-        
+            case ALLOCATION:
+                if (alloc != null) DOT.writeEdge(nodeNumber, alloc.getNodeNumber());
+                break;
         }
     }
     

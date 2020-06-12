@@ -28,10 +28,17 @@ public class Variable {
      * @param varSemantics
      */
     public Variable(VarSemantics varSemantics){
+        this(varSemantics, 4);
+    }
+    
+    
+    public Variable(VarSemantics varSemantics, int bytes){
         id = nextId();
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
-        occupation = 4;
+        occupation = bytes;
+        occupation += bytes % 2 == 1 ? 1 : 0;
+
         switch(varSemantics){
             case LOCAL: 
                 offset = Main.gen.getCurrentFunction().getNexVarOffset(occupation);
@@ -48,10 +55,15 @@ public class Variable {
     }
     
     public Variable(int existingId, VarSemantics varSemantics){
+        this(existingId, varSemantics, 4);
+    }
+    
+    public Variable(int existingId, VarSemantics varSemantics, int bytes){
         id = existingId;
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
-        occupation = 4;
+        occupation = bytes;
+        occupation += bytes % 2 == 1 ? 1 : 0;
         
         switch(varSemantics){
             case LOCAL: 

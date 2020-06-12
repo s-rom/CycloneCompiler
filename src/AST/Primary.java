@@ -26,7 +26,7 @@ public class Primary extends Node {
     private boolean bool_lit;
     private int int_lit;
     
-    private PrimaryType productionType;
+    public PrimaryType productionType;
     private AtomicType type;
     
     
@@ -47,9 +47,9 @@ public class Primary extends Node {
         switch(productionType)
         {
             case STR_LIT:
-                // Genera ti = str_lit
-                // local
-                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
+                this.intermediateVar = 
+                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1);
+                
                 Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
                 break;
                 
@@ -74,12 +74,14 @@ public class Primary extends Node {
                 break;
                 
             case FUNCTION_CALL:
-                System.err.println("F call not implemented yet"); break;
+                System.err.println("F call not implemented yet"); 
+                break;
                 
             case EXPR:
                 // TODO: VIGILAR ESTO QUE SEA ASÍ
                 this.e.generateIntermediateCode();
                 this.intermediateVar = this.e.intermediateVar;
+                break;
                 
             case ID:
                 
@@ -180,16 +182,30 @@ public class Primary extends Node {
                 
                 break;
             case STR_LIT:
-                
-                /* ESTO NO DEBERIA ESTAR AQUI */
-                //this.intermediateVar = new IntermediateCode.Variable();
-                //Main.gen.generateAssignation('$'+id, intermediateVar, "Aux var");
                 this.str_lit = id;
+
+                int len = str_lit.length();
+                if (str_lit.charAt(0) == '\"' && str_lit.charAt(len-1) == '\"'){
+                    str_lit = str_lit.substring(1, len-1);
+                }
+                
                 this.productionType = PrimaryType.STR_LIT;
                 this.type = Main.atomicChar;
                 break;
         }
         toDot();
+    }
+    
+    public Object getValue(){
+        switch(this.productionType){
+            case ID: return id;
+            case STR_LIT: return str_lit;
+            case BOOL_LIT: return bool_lit;
+            case INT_LIT: return int_lit;
+            case FUNCTION_CALL: return this.fl;
+            case EXPR: return this.e;
+        }
+        return null;
     }
     
     /* 

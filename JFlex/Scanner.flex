@@ -105,6 +105,10 @@ comment2    = "//"[^\n\r]*
                 return getSymbol(ParserSym.RCURL);
             }
 
+"["         {return getSymbol(ParserSym.LBRACKET);}
+"]"         {return getSymbol(ParserSym.RBRACKET);}
+
+
 ";"         {return getSymbol(ParserSym.SEMICOLON);}
 ","         {return getSymbol(ParserSym.COMMA);}
 

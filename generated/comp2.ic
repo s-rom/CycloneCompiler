@@ -1,8 +1,7 @@
 # ----------- FUNC: cyclone ----------- 
 e0: skip
     pmb e0
-    t5 = "Hola que tal"       # Aux var
-    t4 = t5                   # 'x' = expr
+    t4 = "abcd"               # Aux var
     output t4
     return
 # -------------- END ------------- 

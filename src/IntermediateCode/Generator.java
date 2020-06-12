@@ -151,7 +151,10 @@ public class Generator {
     }
     
     public String generateAssignation(Object src, Object dst){
-        String instr = TAB + dst + " = " + src;
+        boolean isStr = src instanceof String;
+        String srcString = (isStr ? "\"":"") + src +  (isStr ? "\"":"");
+        String instr = TAB + dst + " = " + srcString;
+        
         write(instr);
         
         currentFunction.addInstruction(new Instruction(Opcode.ASSIGN, src, null, dst));
@@ -166,7 +169,9 @@ public class Generator {
     }
     
     public String generateAssignation(Object src, Object dst, String commentary){
-        String instr = TAB + dst + " = " + src;
+          boolean isStr = src instanceof String;
+        String srcString = (isStr ? "\"":"") + src +  (isStr ? "\"":"");
+        String instr = TAB + dst + " = " + srcString;
         int length = instr.length();
         instr += getNSpaces(COMMENT_SPACES - length);
         instr += "# "+commentary;

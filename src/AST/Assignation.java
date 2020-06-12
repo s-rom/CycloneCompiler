@@ -1,5 +1,6 @@
 package AST;
 
+import AST.Primary.PrimaryType;
 import IntermediateCode.Variable;
 import SymbolTable.ConstDescription;
 import SymbolTable.Description;
@@ -76,6 +77,7 @@ public class Assignation extends Node{
     public void semanticCheck() throws FatalError{
         if (type == null){
             // x = ...;
+            
             // comprobar que x existe y la expresion devuelve el mismo tipo
             if (e == null) {
                 InfoDump.reportSemanticError("Missing expression in assignation of "+id+" in "+
@@ -83,6 +85,7 @@ public class Assignation extends Node{
                 return;
             }   
             
+            // comprobar que x sea variable y no constante
             Description td = ts.get(id);
             if (td.getDescriptionType() != DescriptionType.D_VAR){
                 InfoDump.reportSemanticError("Id of an assignation must be a variable ("+id+")"+" in "+
@@ -90,6 +93,7 @@ public class Assignation extends Node{
                 return;
             }
             
+            // comprobar que tenga un tipo definido en la ts
             VarDescription vd = (VarDescription) td;
             td = ts.get(vd.type);
             if (td == null){
@@ -98,7 +102,7 @@ public class Assignation extends Node{
                 return;
             }
             
-            
+            // comprobar que si x = src --> tipo(x) == tipo(src)
             TypeDescription t = (TypeDescription) ts.get(vd.type);
             if (!t.getAtomicType().equals(e.getAtomicType())){
                 InfoDump.reportSemanticError("The expression type ("+ e.getAtomicType().getDType()+
@@ -116,8 +120,13 @@ public class Assignation extends Node{
                         this.getLocationInfo());
                 }
                 
+                if (type.equals("string")){
+                    InfoDump.reportSemanticError("In "+getLocationInfo()+": 0 length strings are not allowed."
+                            + " Use string "+id+"[size] instead.");
+                }
+                
                 boolean exists = !ts.insert(id, 
-                        new VarDescription(id,type, VarSemantics.LOCAL));
+                        new VarDescription(id, type, VarSemantics.LOCAL));
             } else {
                 // int x = ...;
                 // insertar x en la TS
@@ -131,8 +140,7 @@ public class Assignation extends Node{
                 
                 Description nd = constant? new ConstDescription(id,type) : 
                         new VarDescription(id,type, VarSemantics.LOCAL);
-                boolean exists = !ts.insert(id, nd);
-                if (exists) return;
+               
                 
                 if (e.getAtomicType() == null){
                     InfoDump.reportSemanticError("Unknown condition, expresion of assignation has null type"+" in "+
@@ -145,9 +153,27 @@ public class Assignation extends Node{
                             +this.e.getAtomicType().getDType()+")"+" in "+
                         this.getLocationInfo());
                 }
-            }
+                
+                if (this.type.equals("string")){
+                    if (this.e.ue.p.productionType != PrimaryType.STR_LIT){
+                        InfoDump.reportSemanticError("In "+getLocationInfo()+": "
+                                + "strings must be allocated first. Try string id[size] or string id = \"literal\" ");
+                    }
+                    
+                    String str_lit = (String) this.e.ue.p.getValue();
+                    if (constant){
+                        // TODO
+                    } else {
+                        int len = str_lit.length();
+                        VarDescription vd = (VarDescription) nd;
+                        vd.setLength(str_lit.length());
+                    }
+                }
+                
+                
+                boolean exists = !ts.insert(id, nd);
+            }            
         }
-        
     }
 
     @Override
@@ -208,15 +234,16 @@ public class Assignation extends Node{
             
             VarDescription vd = (VarDescription) d;
             
-            Variable v = Main.gen.getVariable(vd.varNumber);
-            if (v == null){
-                System.out.println("ID = Expr, id ic_var not found!");
-                v = new Variable(vd.varNumber, vd.getVarSemantics());
+            Variable thisVar = Main.gen.getVariable(vd.varNumber); 
+            
+            if (thisVar == null){
+                System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
+                thisVar = new Variable(vd.varNumber, vd.getVarSemantics(), vd.getLength()+1);
             }
-            Main.gen.generateAssignation(e.intermediateVar, v,
+            
+            // ID.v = Expr.v
+            Main.gen.generateAssignation(e.intermediateVar, thisVar,
                     "\'"+id+"\' = expr");
-//            Main.gen.generateAssignation(e.intermediateVar, new Variable(vd.varNumber, vd.getVarSemantics()),
-//                    "\'"+id+"\' = expr");
         }
         
         // Type ID;

@@ -11,6 +11,5 @@
 | INT32_MIN      | const <3> int -2147483648
      ------------------------
      | LEVEL 1
-     | x              | local var <4> string
      ------------------------
 | cyclone        | func <0> returns void, params()
