@@ -3,20 +3,20 @@ graph[nodesep="1"]
 	node [shape=box]
 	node [shape=box]
 	n0 [label = "Primary"]
-	n1 [label = "STR_LIT: a"]
+	n1 [label = "INT_LIT: 6"]
 	n0-> n1
 	n2 [label = "UnExpr"]
 	n2-> n0
 	n3 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
 	n3:ue-> n2
-	n4 [label = "Instruction"]
-	n5 [label = "OUTPUT"]
-	n4-> n5
-	n5-> n3
+	n4 [label = "Declaration: int x = "]
+	n4-> n3
+	n5 [label = "Instruction"]
+	n5-> n4
 	n6 [label = "Statement"]
-	n6-> n4
+	n6-> n5
 	n7 [label = "Primary"]
-	n8 [label = "INT_LIT: 6"]
+	n8 [label = "ID: x"]
 	n7-> n8
 	n9 [label = "UnExpr"]
 	n9-> n7
@@ -28,33 +28,17 @@ graph[nodesep="1"]
 	n12-> n10
 	n13 [label = "Statement"]
 	n13-> n11
-	n14 [label = "Primary"]
-	n15 [label = "STR_LIT: b"]
-	n14-> n15
-	n16 [label = "UnExpr"]
-	n16-> n14
-	n17 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n17:ue-> n16
-	n18 [label = "Instruction"]
-	n19 [label = "OUTPUT"]
-	n18-> n19
-	n19-> n17
-	n20 [label = "Statement"]
-	n20-> n18
-	n21 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n21:s-> n20
-	n22 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n22:s-> n13
-	n22:sl-> n21
-	n23 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n23:s-> n6
-	n23:sl-> n22
-	n24 [label = "Block"]
-	n24-> n23
-	n25 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
-	n25:b-> n24
-	n26 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n26:f-> n25
-	n27 [label = "Program"]
-	n27-> n26
+	n14 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n14:s-> n13
+	n15 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n15:s-> n6
+	n15:sl-> n14
+	n16 [label = "Block"]
+	n16-> n15
+	n17 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n17:b-> n16
+	n18 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n18:f-> n17
+	n19 [label = "Program"]
+	n19-> n18
 }

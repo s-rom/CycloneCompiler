@@ -1,0 +1,2 @@
+c:\EASy68K\SIM68K.exe COMP2_MAIN.S68 /e /r
+exit

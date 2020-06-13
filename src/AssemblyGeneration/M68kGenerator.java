@@ -263,11 +263,10 @@ public class M68kGenerator extends AsmGenerator{
         String asmInstr = "";
         int trapNum = 0;
         Object dst = instr.getDst();
+        
         if (dst instanceof Variable){
-//            MOVE.L  A7, A1
-//            ADDA.L  #-14, A1
-//                    
-            Variable v = (Variable)dst;
+            
+            Variable v = (Variable) dst;
             asmInstr +=  "MOVE.L A7, A1";
             String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
             asmInstr += tabs+";"+instr.toString()+"\n";
@@ -275,9 +274,12 @@ public class M68kGenerator extends AsmGenerator{
             
             asmInstr += BEFORE_TAB + "ADDA.L #"+v.getOffset()+", A1\n";
             trapNum = 14;
+            
         } else if (dst instanceof Integer){
+            
             asmInstr += BEFORE_TAB + load(dst, "D1", instr.toString());
             trapNum = 3;
+        
         } 
         
         asmInstr += BEFORE_TAB + "MOVE.L #"+trapNum+", D0\n";

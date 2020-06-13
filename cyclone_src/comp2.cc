@@ -1,8 +1,7 @@
 func void cyclone()
 {
-    output("a");
-    output(6);
-    output("b");
+    int x = 6;
+    output(x);
 
     /* El IC está listo en cuanto a strings */
     /* IC --> 68K */
