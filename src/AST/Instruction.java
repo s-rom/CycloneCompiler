@@ -13,29 +13,37 @@ public class Instruction extends Node{
     public void generateIntermediateCode() {
         switch(this.type)
         {
+            case OUTPUTLN:
+                this.e.generateIntermediateCode();
+                Main.gen.generateOutputLn(this.e.intermediateVar);
+                System.err.println("Generated outputLN");
+                break;
+                
             case FUNCTION_CALL:
                 this.fl.generateIntermediateCode();
                 break;
+            
             case INPUT:
                 break;
+            
             case OUTPUT:
-                System.out.println("Instruction genera Output");
                 this.e.generateIntermediateCode();
                 Main.gen.generateOutput(this.e.intermediateVar);
                 break;
+            
             case RETURN:
-                System.out.println("Instruction genera Return");
                 this.e.generateIntermediateCode();
                 Main.gen.generateReturn(this.e.intermediateVar);
                 break;
+            
             case ASSIGNATION:
-                System.out.println("Instruction genera Assignation");
                 assign.generateIntermediateCode();
                 break;
+            
             case DECLARATION:
                 break;
+            
             case ALLOCATION:
-                System.out.println("Instruction genera Allocation");
                 alloc.generateIntermediateCode();
                 break;
         }
@@ -43,7 +51,8 @@ public class Instruction extends Node{
     
 
     public static enum InstructionType{
-        FUNCTION_CALL, INPUT, OUTPUT, RETURN, ASSIGNATION, DECLARATION, ALLOCATION;
+        FUNCTION_CALL, INPUT, OUTPUT, OUTPUTLN,
+        RETURN, ASSIGNATION, DECLARATION, ALLOCATION;
     }
     
     private FunctionCall fl;
@@ -66,7 +75,7 @@ public class Instruction extends Node{
         toDot();
     }
     
-        public Instruction(Allocation alloc){
+    public Instruction(Allocation alloc){
         this.alloc = alloc;
         this.type = InstructionType.ALLOCATION;
         toDot();
@@ -104,6 +113,13 @@ public class Instruction extends Node{
                 DOT.writeEdge(nodeNumber, aux_node_id);
                 break;
             
+            case OUTPUTLN:
+                aux_node_id = DOT.nextNode();
+                DOT.writeNode(aux_node_id, "OUTPUTLN");
+                DOT.writeEdge(nodeNumber, aux_node_id);
+                if (e != null) DOT.writeEdge(aux_node_id, e.getNodeNumber());
+                break;
+                
             case OUTPUT:
                 aux_node_id = DOT.nextNode();
                 DOT.writeNode(aux_node_id, "OUTPUT");

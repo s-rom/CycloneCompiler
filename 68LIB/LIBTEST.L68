@@ -1,0 +1,80 @@
+0000103A Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 13/06/2020 13:22:33
+
+00001000                             1              ORG    $1000
+00001000                             2  
+00001000                             3              INCLUDE "PRNTLIB.X68"
+00001000                             4  ; -----------------------------------------------------------------------------
+00001000                             5  PRINTB:   
+00001000                             6  ; PRINTS A BOOL VARIABLE
+00001000                             7  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+00001000                             8  ;          - D0.L TRAP NUMBER #14 or #13
+00001000                             9  ; Output   - PRINTS 'true' or 'false' to the screen
+00001000                            10  ; Modifies - D0.L, D1.L, A1.L
+00001000                            11  ; -----------------------------------------------------------------------------
+00001000  43F9 0000101C             12              LEA.L   .TRSTR, A1
+00001006  B2BC 00000000             13              CMP.L   #0, D1
+0000100C  6600 0008                 14              BNE     .PRINT
+00001010  43F9 00001022             15              LEA.L   .FSSTR, A1       
+00001016  4E4F                      16  .PRINT:     TRAP    #15
+00001018  6000 000E                 17              BRA     .END
+0000101C                            18  
+0000101C= 74 72 75 65 00            19  .TRSTR      DC.B 'true',0
+00001022                            20              DS.W 0
+00001022                            21  
+00001022= 66 61 6C 73 65 00         22  .FSSTR      DC.B 'false',0
+00001028                            23              DS.W 0
+00001028                            24  
+00001028                            25  .END:       
+00001028  4E75                      26              RTS
+0000102A                            27  
+0000102A                            28  ; -----------------------------------------------------------------------------
+0000102A                            29  PRNTBOOL:   
+0000102A                            30  ; PRINTS A BOOL VARIABLE
+0000102A                            31  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+0000102A                            32  ; Output   - PRINTS 'true' or 'false' to the screen
+0000102A                            33  ; Modifies - D0.L, D1.L, A1.L
+0000102A                            34  ; -----------------------------------------------------------------------------
+0000102A  700E                      35              MOVE.L  #14, D0
+0000102C  4EB8 1000                 36              JSR     PRINTB
+00001030  4E75                      37              RTS
+00001032                            38  
+00001032                            39  
+00001032                            40  ; -----------------------------------------------------------------------------
+00001032                            41  PRNTBOLN:   
+00001032                            42  ; PRINTS A BOOL VARIABLE ENDING WITH LF,CR
+00001032                            43  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+00001032                            44  ; Output   - PRINTS 'true' or 'false' to the screen
+00001032                            45  ; Modifies - D0.L, D1.L, A1.L
+00001032                            46  ; -----------------------------------------------------------------------------
+00001032  700D                      47              MOVE.L  #13, D0
+00001034  4EB8 1000                 48              JSR     PRINTB
+00001038  4E75                      49              RTS
+0000103A                            50  
+0000103A                            51  
+0000103A                            52  
+0000103A                            53  -------------------- end include --------------------
+0000103A                            54  
+0000103A  72FF                      55  START:      MOVE.L  #-1, D1
+0000103C  4EB8 1032                 56              JSR     PRNTBOLN
+00001040  4EB8 1032                 57              JSR     PRNTBOLN
+00001044                            58  
+00001044  FFFF FFFF                 59              SIMHALT             
+00001048                            60              END    START  
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+PRINTB              1000
+PRINTB:END          1028
+PRINTB:FSSTR        1022
+PRINTB:PRINT        1016
+PRINTB:TRSTR        101C
+PRNTBOLN            1032
+PRNTBOOL            102A
+START               103A

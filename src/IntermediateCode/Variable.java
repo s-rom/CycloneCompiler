@@ -20,24 +20,26 @@ public class Variable {
     private int parentFunctionID;
     private int occupation; // bytes
     private final int offset; // bytes
-    private AtomicType atomicType;
     private VarSemantics varSemantics;
+    private VarType type;
     
     /**
      * Cada variable de código intermedio és único con este constructor.
      * @param varSemantics
+     * @param type
      */
-    public Variable(VarSemantics varSemantics){
-        this(varSemantics, 4);
+    public Variable(VarSemantics varSemantics, VarType type){
+        this(varSemantics, 4, type);
     }
     
     
-    public Variable(VarSemantics varSemantics, int bytes){
+    public Variable(VarSemantics varSemantics, int bytes, VarType type){
         id = nextId();
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
         occupation = bytes;
         occupation += bytes % 2 == 1 ? 1 : 0;
+        this.type = type;
 
         switch(varSemantics){
             case LOCAL: 
@@ -54,16 +56,17 @@ public class Variable {
         Main.gen.addVariable(this);
     }
     
-    public Variable(int existingId, VarSemantics varSemantics){
-        this(existingId, varSemantics, 4);
+    public Variable(int existingId, VarSemantics varSemantics, VarType type){
+        this(existingId, varSemantics, 4, type);
     }
     
-    public Variable(int existingId, VarSemantics varSemantics, int bytes){
+    public Variable(int existingId, VarSemantics varSemantics, int bytes, VarType type){
         id = existingId;
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
         occupation = bytes;
         occupation += bytes % 2 == 1 ? 1 : 0;
+        this.type = type;
         
         switch(varSemantics){
             case LOCAL: 
@@ -107,8 +110,10 @@ public class Variable {
     public int getOffset() {
         return offset;
     }
-    
-    
+
+    public VarType getType() {
+        return type;
+    }
        
     private final static String SEMANTICS_EQUIVALENT [] 
             = {"local", "param"};
@@ -116,8 +121,7 @@ public class Variable {
     public String toStringDetailed(){
         String res = "t"+id+"\t| type: "+SEMANTICS_EQUIVALENT[this.varSemantics.ordinal()]+
                 " | off: "+offset+" | bytes: "+occupation;
-        res+= " | local to: "+parentFunctionID;
-        if (atomicType != null) res+=" | "+atomicType.getDType();
+        res+= " | local to: "+parentFunctionID + " | "+type.name();
         return res;
     }
     

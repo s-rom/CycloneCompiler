@@ -1,26 +1,109 @@
-00001026 Starting Address
+000010C2 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 13/06/2020 9:01:21
+Created On: 13/06/2020 13:41:11
 
 00001000                             1              ORG $1000
-00001000                             2  E0: 
-00001000                             3                                            ;<PMB, e0(cyclone)>
-00001000                             4  
-00001000  3F7C 6100 FFFE             5              MOVE.W #$6100,-2(A7)
-00001006  224F                       6              MOVE.L A7, A1                 ;<OUTPUT, t4>
-00001008  D3FC FFFFFFFE              7              ADDA.L #-2, A1
-0000100E  700E                       8              MOVE.L #14, D0
-00001010  4E4F                       9              TRAP #15
-00001012  3F7C 6200 FFFC            10              MOVE.W #$6200,-4(A7)
-00001018  224F                      11              MOVE.L A7, A1                 ;<OUTPUT, t5>
-0000101A  D3FC FFFFFFFC             12              ADDA.L #-4, A1
-00001020  700E                      13              MOVE.L #14, D0
-00001022  4E4F                      14              TRAP #15
-00001024  4E75                      15              RTS
-00001026                            16  
-00001026  4EB8 1000                 17  START:      JSR E0
-0000102A  FFFF FFFF                 18              SIMHALT
-0000102E                            19              END START
+00001000                             2              INCLUDE "../68LIB/PRNTLIB.X68"
+00001000                             3  ; -----------------------------------------------------------------------------
+00001000                             4  PRINTB:   
+00001000                             5  ; PRINTS A BOOL VARIABLE
+00001000                             6  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+00001000                             7  ;          - D0.L TRAP NUMBER #14 or #13
+00001000                             8  ; Output   - PRINTS 'true' or 'false' to the screen
+00001000                             9  ; Modifies - D0.L, D1.L, A1.L
+00001000                            10  ; -----------------------------------------------------------------------------
+00001000  43F9 0000101C             11              LEA.L   .TRSTR, A1
+00001006  B2BC 00000000             12              CMP.L   #0, D1
+0000100C  6600 0008                 13              BNE     .PRINT
+00001010  43F9 00001022             14              LEA.L   .FSSTR, A1       
+00001016  4E4F                      15  .PRINT:     TRAP    #15
+00001018  6000 000E                 16              BRA     .END
+0000101C                            17  
+0000101C= 74 72 75 65 00            18  .TRSTR      DC.B 'true',0
+00001022                            19              DS.W 0
+00001022                            20  
+00001022= 66 61 6C 73 65 00         21  .FSSTR      DC.B 'false',0
+00001028                            22              DS.W 0
+00001028                            23  
+00001028                            24  .END:       
+00001028  4E75                      25              RTS
+0000102A                            26  
+0000102A                            27  ; -----------------------------------------------------------------------------
+0000102A                            28  PRNTBOOL:   
+0000102A                            29  ; PRINTS A BOOL VARIABLE
+0000102A                            30  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+0000102A                            31  ; Output   - PRINTS 'true' or 'false' to the screen
+0000102A                            32  ; Modifies - D0.L, D1.L, A1.L
+0000102A                            33  ; -----------------------------------------------------------------------------
+0000102A  700E                      34              MOVE.L  #14, D0
+0000102C  4EB8 1000                 35              JSR     PRINTB
+00001030  4E75                      36              RTS
+00001032                            37  
+00001032                            38  
+00001032                            39  ; -----------------------------------------------------------------------------
+00001032                            40  PRNTBOLN:   
+00001032                            41  ; PRINTS A BOOL VARIABLE ENDING WITH LF,CR
+00001032                            42  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+00001032                            43  ; Output   - PRINTS 'true' or 'false' to the screen
+00001032                            44  ; Modifies - D0.L, D1.L, A1.L
+00001032                            45  ; -----------------------------------------------------------------------------
+00001032  700D                      46              MOVE.L  #13, D0
+00001034  4EB8 1000                 47              JSR     PRINTB
+00001038  4E75                      48              RTS
+0000103A                            49  
+0000103A                            50  ; -----------------------------------------------------------------------------
+0000103A                            51  NEWLN:   
+0000103A                            52  ; INSERTS A NEW LINE 
+0000103A                            53  ; Input    - NONE
+0000103A                            54  ; Output   - INCREASES THE CURSOR'S CURRENT ROW
+0000103A                            55  ; Modifies - D0.L, D1.L
+0000103A                            56  ; -----------------------------------------------------------------------------
+0000103A  700B                      57              MOVE.L  #11,D0
+0000103C  323C 00FF                 58              MOVE.W  #$00FF,D1
+00001040  4E4F                      59              TRAP    #15
+00001042  C2BC 0000000F             60              AND.L   #$0000000F,D1
+00001048  5281                      61              ADDQ.L  #1, D1
+0000104A  4E4F                      62              TRAP    #15
+0000104C  4E75                      63              RTS
+0000104E                            64  
+0000104E                            65  
+0000104E                            66  
+0000104E                            67  
+0000104E                            68  -------------------- end include --------------------
+0000104E                            69  E0: 
+0000104E                            70                                            ;<PMB, e0(cyclone)>
+0000104E                            71  
+0000104E  2F7C 4573746F FFEA        72              MOVE.L #$4573746f,-22(A7)
+00001056  2F7C 20746572 FFEE        73              MOVE.L #$20746572,-18(A7)
+0000105E  2F7C 6D696E61 FFF2        74              MOVE.L #$6d696e61,-14(A7)
+00001066  2F7C 20656E20 FFF6        75              MOVE.L #$20656e20,-10(A7)
+0000106E  2F7C 6CED6E69 FFFA        76              MOVE.L #$6ced6e69,-6(A7)
+00001076  3F7C 6100 FFFE            77              MOVE.W #$6100,-2(A7)
+0000107C  224F                      78              MOVE.L A7, A1                 ;<OUTPUTLN, t4>
+0000107E  D3FC FFFFFFEA             79              ADDA.L #-22, A1
+00001084  700D                      80              MOVE.L #13, D0
+00001086  4E4F                      81              TRAP #15
+00001088  7C00                      82              MOVE.L #0, D6                 ;<ASSIGN, 0, t5>
+0000108A  2F46 FFE6                 83              MOVE.L D6, -26(A7)
+0000108E  222F FFE6                 84              MOVE.L -26(A7), D1            ;<OUTPUTLN, t5>
+00001092  4EB8 1032                 85              JSR PRNTBOLN
+00001096                            86  
+00001096  7C08                      87              MOVE.L #8, D6                 ;<ASSIGN, 8, t6>
+00001098  2F46 FFE2                 88              MOVE.L D6, -30(A7)
+0000109C  222F FFE2                 89              MOVE.L -30(A7), D1            ;<OUTPUT, t6>
+000010A0  7003                      90              MOVE.L #3, D0
+000010A2  4E4F                      91              TRAP #15
+000010A4  2F7C 3A20486F FFDA        92              MOVE.L #$3a20486f,-38(A7)
+000010AC  2F7C 6C610000 FFDE        93              MOVE.L #$6c610000,-34(A7)
+000010B4  224F                      94              MOVE.L A7, A1                 ;<OUTPUT, t7>
+000010B6  D3FC FFFFFFDA             95              ADDA.L #-38, A1
+000010BC  700E                      96              MOVE.L #14, D0
+000010BE  4E4F                      97              TRAP #15
+000010C0  4E75                      98              RTS
+000010C2                            99  
+000010C2  4EB8 104E                100  START:      JSR E0
+000010C6  FFFF FFFF                101              SIMHALT
+000010CA                           102              END START
 
 No errors detected
 No warnings generated
@@ -29,5 +112,13 @@ No warnings generated
 SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
-E0                  1000
-START               1026
+E0                  104E
+NEWLN               103A
+PRINTB              1000
+PRINTB:END          1028
+PRINTB:FSSTR        1022
+PRINTB:PRINT        1016
+PRINTB:TRSTR        101C
+PRNTBOLN            1032
+PRNTBOOL            102A
+START               10C2

@@ -240,7 +240,10 @@ public class Expr extends Node{
             this.ue.generateIntermediateCode();
             this.e.generateIntermediateCode();
             
-            this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL);
+            // Asunción: Expr y UnExpr tendrán que tener el mismo tipo (detectado en semanticCheck)
+            // Si no, habría que determinar el tipo de la expresión en función de sus operandos
+            this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, 
+                    this.ue.intermediateVar.getType());
             
             if (!isBinOpRelational()){
                 Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 

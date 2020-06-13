@@ -10,7 +10,8 @@ import cyclonecompiler.Main;
 public class M68kGenerator extends AsmGenerator{
     
     private final int START_PROG_ADRESS = 0x1000;
-    
+    private final String LIB_PATH = "../68LIB/";
+    private final String PRINT_LIB = "PRNTLIB.X68";
     private final String [] SIZE_MODIFIERS = {"B", "W", "L"};
     private final String STACK_REG = "A7";
     private final String OUT_PARAM_REG = "D7";
@@ -42,6 +43,8 @@ public class M68kGenerator extends AsmGenerator{
     public M68kGenerator(String filePath){
         super(filePath);
         writeAsm(BEFORE_TAB+"ORG $"+Integer.toHexString(START_PROG_ADRESS)+"\n");
+        writeAsm(BEFORE_TAB+"INCLUDE \""+LIB_PATH+PRINT_LIB+"\"\n");
+
     }
     
     public String generatePmb(Instruction instr){
@@ -259,32 +262,45 @@ public class M68kGenerator extends AsmGenerator{
         return asmInstr;
     }
     
-    private String generateOutput(Instruction instr){
+    private String generateOutput(Instruction instr, boolean ln){
         String asmInstr = "";
         int trapNum = 0;
         Object dst = instr.getDst();
         
-        if (dst instanceof Variable){
-            
-            Variable v = (Variable) dst;
-            asmInstr +=  "MOVE.L A7, A1";
-            String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
-            asmInstr += tabs+";"+instr.toString()+"\n";
-            asmInstr = BEFORE_TAB+asmInstr;
-            
-            asmInstr += BEFORE_TAB + "ADDA.L #"+v.getOffset()+", A1\n";
-            trapNum = 14;
-            
-        } else if (dst instanceof Integer){
-            
-            asmInstr += BEFORE_TAB + load(dst, "D1", instr.toString());
-            trapNum = 3;
+        if (! (dst instanceof Variable))
+            return asmInstr;
         
-        } 
-        
-        asmInstr += BEFORE_TAB + "MOVE.L #"+trapNum+", D0\n";
-        asmInstr += BEFORE_TAB + "TRAP #15";
+        Variable vDst = (Variable) dst;
+        switch(vDst.getType()){
+            case INT:
+                asmInstr += BEFORE_TAB + load(dst, "D1", instr.toString());
+                trapNum = 3;
+                asmInstr += BEFORE_TAB + "MOVE.L #"+trapNum+", D0\n";
+                asmInstr += BEFORE_TAB + "TRAP #15";
+                if (ln)
+                    asmInstr += "\n" + BEFORE_TAB + "JSR NEWLN\n"; 
+                break;
+                
+            case BOOL:
+                String sub = ln ? "PRNTBOLN" : "PRNTBOOL";
+                asmInstr += BEFORE_TAB + load(dst, "D1", instr.toString());
+                asmInstr += BEFORE_TAB + "JSR "+sub+"\n";
+                break;
 
+            case STRING:
+                asmInstr +=  "MOVE.L A7, A1";
+                String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
+                asmInstr += tabs+";"+instr.toString()+"\n";
+                asmInstr = BEFORE_TAB+asmInstr;
+
+                asmInstr += BEFORE_TAB + "ADDA.L #"+vDst.getOffset()+", A1\n";
+                trapNum = ln ? 13 : 14;
+                asmInstr += BEFORE_TAB + "MOVE.L #"+trapNum+", D0\n";
+                asmInstr += BEFORE_TAB + "TRAP #15";
+                break;
+        }
+        
+       
         
         return asmInstr;
     }
@@ -370,7 +386,11 @@ public class M68kGenerator extends AsmGenerator{
                 break;
                 
             case OUTPUT:
-                writeAsm(generateOutput(instr)+"\n");
+                writeAsm(generateOutput(instr,false)+"\n");
+                break;
+                
+            case OUTPUTLN:
+                writeAsm(generateOutput(instr,true)+"\n");
                 break;
         }
     }

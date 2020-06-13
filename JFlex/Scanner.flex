@@ -82,6 +82,7 @@ comment2    = "//"[^\n\r]*
 "else"      {s.push("else"); return getSymbol(ParserSym.ELSE);}
 "func"      {s.push("func"); return getSymbol(ParserSym.FUNC);}
 "output"    {return getSymbol(ParserSym.OUTPUT);}
+"outputln"  {return getSymbol(ParserSym.OUTPUTLN);}
 "input"     {return getSymbol(ParserSym.INPUT);}
 "return"    {return getSymbol(ParserSym.RETURN);}
 

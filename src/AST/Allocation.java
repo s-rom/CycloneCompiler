@@ -1,6 +1,7 @@
 
 package AST;
 
+import IntermediateCode.VarType;
 import IntermediateCode.Variable;
 import SymbolTable.Description;
 import SymbolTable.Scope;
@@ -66,7 +67,8 @@ public class Allocation extends Node{
         Variable v = Main.gen.getVariable(vd.varNumber);
         if (v == null){
             System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
-            v = new Variable(vd.varNumber, vd.getVarSemantics(), vd.getLength());
+            v = new Variable(vd.varNumber, vd.getVarSemantics(), vd.getLength(), 
+                VarType.stringToVarType(type));
         }
     }
     

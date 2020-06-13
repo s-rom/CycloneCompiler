@@ -7,5 +7,5 @@ public enum Opcode {
     GT, LT, GE, LE, EQ, NE,
     CALL, FUN, RET, PARAM,
     ASSIGN, PMB,
-    OUTPUT, INPUT
+    OUTPUT, OUTPUTLN, INPUT
 }

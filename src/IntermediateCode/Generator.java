@@ -249,6 +249,13 @@ public class Generator {
         return instr;
     }
     
+    public String generateOutputLn(Object var){
+        String instr = TAB + keywordTable[Opcode.OUTPUTLN.ordinal()]+' '+var.toString();
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.OUTPUTLN, null, null, var));
+        return instr;
+    }
+    
     public String generateCall(Tag t){
         String instr = TAB + keywordTable[Opcode.CALL.ordinal()] + ' '+t;
         write(instr);
@@ -298,6 +305,7 @@ public class Generator {
         keywordTable[(Opcode.ASSIGN).ordinal()] = "assign";
         keywordTable[(Opcode.PMB).ordinal()] = "pmb";
         keywordTable[(Opcode.OUTPUT).ordinal()] = "output";
+        keywordTable[(Opcode.OUTPUTLN).ordinal()] = "outputln";
         keywordTable[(Opcode.INPUT).ordinal()] = "input";
 
         

@@ -11,7 +11,7 @@ parser code {:
     public String get_report_name(int sym){
         final String[] report_names = new String[] {
         "EOF","error","while","if","else","func","output","input","return",
-        "(",")","{","}",", (comma)","; (semicolon)","&&","||","!","+","-","*",
+        "(",")","{","}", "outputln", ", (comma)","; (semicolon)","&&","||","!","+","-","*",
         "/","%",">=","<=",">","<","!=","==","=","int literal","string literal",
         "bool literal","-",
         "ID","string type","int type","void type","bool type"
@@ -58,6 +58,7 @@ parser code {:
 terminal            WHILE, IF, ELSE, FUNC, OUTPUT, INPUT, RETURN; /* while, if, else, func, intput(), output() */
 terminal            LPAREN, RPAREN, LCURL, RCURL, COMMA, SEMICOLON; /* ( ) { } , ; */
 terminal            CONST, LBRACKET, RBRACKET; /* const [ ] */
+terminal            OUTPUTLN; /* outputln() */
 terminal String     AND, OR, NOT;
 terminal String     SUM, SUB, MULT, DIV, MOD; /* +, -, *, /, %  */
 terminal String     GE, LE, GT, LT, NE, EQ; /* >=, <=, >, <, !=, == */
@@ -181,6 +182,9 @@ Instruction     ::=   // Llamada a funcion foo(arg1, arg2, ...)
                     | // output(bla)
                       OUTPUT LPAREN Expr:e RPAREN
                         {: RESULT = new Instruction((Expr)e, InstructionType.OUTPUT); :}
+                    | // outputln(bla)
+                      OUTPUTLN LPAREN Expr:e RPAREN
+                        {: RESULT = new Instruction((Expr)e, InstructionType.OUTPUTLN); :}
                     | // return bla
                       RETURN Expr:e
                         {: RESULT = new Instruction((Expr)e, InstructionType.RETURN); :}
@@ -217,8 +221,6 @@ Allocation      ::=   TypeVar:t ID:id LBRACKET INT_LIT:i RBRACKET
                         {: RESULT = new Allocation(t, id, i, getLine(), getColumn()); :}
                     | TypeVar:t LBRACKET INT_LIT:i RBRACKET ID:id
                         {: RESULT = new Allocation(t, id, i, getLine(), getColumn()); :}
-                    | TypeVar:t ID:id ASSIGN STR_LIT
-                        {: :}
                     ;
 
 /* EXPRESIONES ARITMETICOLÓGICAS */

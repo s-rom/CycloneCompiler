@@ -1,6 +1,7 @@
 package AST;
 
 import AST.Primary.PrimaryType;
+import IntermediateCode.VarType;
 import IntermediateCode.Variable;
 import SymbolTable.ConstDescription;
 import SymbolTable.Description;
@@ -207,7 +208,8 @@ public class Assignation extends Node{
             Variable v = Main.gen.getVariable(cd.getConstNum());
             if (v == null){
                 System.out.println("const ID = Expr, id ic_var not found!");
-                v = new Variable(cd.getConstNum(), VarSemantics.LOCAL);
+                VarType vt = VarType.stringToVarType(type);
+                v = new Variable(cd.getConstNum(), VarSemantics.LOCAL, vt);
             }
             Main.gen.generateAssignation(e.intermediateVar, v,
                     "const \'"+id+"\' = expr");
@@ -237,8 +239,12 @@ public class Assignation extends Node{
             Variable thisVar = Main.gen.getVariable(vd.varNumber); 
             
             if (thisVar == null){
+                int len = 4;
+                if (type != null && type.equals("string")) len = vd.getLength() + 1;
+                
                 System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
-                thisVar = new Variable(vd.varNumber, vd.getVarSemantics(), vd.getLength()+1);
+                thisVar = new Variable(vd.varNumber, vd.getVarSemantics(), len,
+                    VarType.stringToVarType(type));
             }
             
             // ID.v = Expr.v
