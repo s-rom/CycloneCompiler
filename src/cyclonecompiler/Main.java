@@ -11,6 +11,7 @@ import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import SymbolTable.ConstDescription;
 import SymbolTable.Description;
+import SymbolTable.FuncDescription;
 import SymbolTable.SymbolTable;
 import SymbolTable.TypeDescription;
 import java.io.FileNotFoundException;
@@ -41,45 +42,6 @@ public class Main {
 
     }
  
-   public static String storeStringLiteral( String str_lit) {
-        String asmInstr = "";
-        final String BEFORE_TAB = "    ";
-        int bytes = str_lit.length();
-        bytes += bytes % 2 == 1 ? 1 : 0;
-        
-        int off = -bytes;
-        
-        // Sets null padding
-        while (str_lit.length() < bytes)
-            str_lit += "\0";
-        
-        
-        while (bytes > 0){
-            int dec; // 4 or 2
-            String mod; // .L or .W
-            
-            int len = str_lit.length();
-
-            if (bytes - 4 >= 0) { // string of 4 bytes
-                dec = 4;
-                mod = ".L";
-            } else { // string of 2 bytes
-                dec = 2;
-                mod = ".W";
-            }
-            
-            bytes -= dec;
-            
-            int start = 0;
-            int end = dec;
-            String piece = str_lit.substring(0, dec) /*+ (dec == 2 ? "<<8" : "")*/;
-            str_lit = str_lit.substring(dec);
-            asmInstr +=BEFORE_TAB + "MOVE"+mod+" #\'"+piece+"\',"+off+"(A7)\n";
-            off += dec;
-        }
-        
-        return asmInstr;
-    }
     public static void compilar(String NAME){
         
         final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
@@ -105,6 +67,7 @@ public class Main {
             Scanner scanner = new Scanner(new FileReader(SRC_FILE));
             Parser parser = new Parser(scanner, sf);
             parser.parse();
+            
             
             gen.getFunctionTable().forEach((entry) -> {
                 asmGen.generateFunction(entry.getValue());
@@ -160,6 +123,7 @@ public class Main {
             ts.insert("false", dFalse);
             ts.insert("INT32_MAX",dIntMax);
             ts.insert("INT32_MIN",dIntMin);
+
         }catch(FatalError e){
         }
     }

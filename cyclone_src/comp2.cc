@@ -1,8 +1,22 @@
-/*func void prueba(int a, int b)
+functions 
 {
+    void cyclone ();
+    void prueba(int a, int b);
+}
+
+
+_internal void 68K_set_text_color(int r, int g, int b) -> "SETCOL";
+
+
+
+func void prueba(int a, int b)
+{
+    output("A: ")
     outputln(a);
+
+    output("B: ")
     outputln(b);
-}*/
+}
 
 func void cyclone()
 {

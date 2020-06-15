@@ -33,11 +33,3 @@ E0:
             ADDA.L #-74, A1
             MOVE.L #13, D0
             TRAP #15
-            MOVE.L A6, A7                 ;<RET, e0(cyclone)>
-            MOVE.L (A7)+, A6
-            RTS
-
-START:      MOVE.L A7, A6
-            JSR E0
-            SIMHALT
-            END START

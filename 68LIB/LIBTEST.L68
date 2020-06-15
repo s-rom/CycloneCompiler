@@ -1,6 +1,6 @@
-0000103A Starting Address
+00001096 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 13/06/2020 13:22:33
+Created On: 15/06/2020 14:26:24
 
 00001000                             1              ORG    $1000
 00001000                             2  
@@ -52,16 +52,115 @@ Created On: 13/06/2020 13:22:33
 00001034  4EB8 1000                 48              JSR     PRINTB
 00001038  4E75                      49              RTS
 0000103A                            50  
-0000103A                            51  
-0000103A                            52  
-0000103A                            53  -------------------- end include --------------------
-0000103A                            54  
-0000103A  72FF                      55  START:      MOVE.L  #-1, D1
-0000103C  4EB8 1032                 56              JSR     PRNTBOLN
-00001040  4EB8 1032                 57              JSR     PRNTBOLN
-00001044                            58  
-00001044  FFFF FFFF                 59              SIMHALT             
-00001048                            60              END    START  
+0000103A                            51  ; -----------------------------------------------------------------------------
+0000103A                            52  NEWLN:   
+0000103A                            53  ; INSERTS A NEW LINE 
+0000103A                            54  ; Input    - NONE
+0000103A                            55  ; Output   - INCREASES THE CURSOR'S CURRENT ROW
+0000103A                            56  ; Modifies - D0.L, D1.L
+0000103A                            57  ; -----------------------------------------------------------------------------
+0000103A  700B                      58              MOVE.L  #11,D0
+0000103C  323C 00FF                 59              MOVE.W  #$00FF,D1
+00001040  4E4F                      60              TRAP    #15
+00001042  C2BC 0000000F             61              AND.L   #$0000000F,D1
+00001048  5281                      62              ADDQ.L  #1, D1
+0000104A  4E4F                      63              TRAP    #15
+0000104C  4E75                      64              RTS
+0000104E                            65              
+0000104E                            66              
+0000104E                            67              
+0000104E                            68  ; -----------------------------------------------------------------------------
+0000104E                            69  SETTXTCL:   
+0000104E                            70  ; [_INTERNAL API] 
+0000104E                            71  ; Input    - RED:   +4(A7)
+0000104E                            72  ;          - GREEN: +8(A7)
+0000104E                            73  ;          - BLUE:  +12(A7)
+0000104E                            74  ; Output   - NONE
+0000104E                            75  ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+0000104E                            76  ; -----------------------------------------------------------------------------
+0000104E  4281                      77              CLR.L   D1
+00001050  222F 000C                 78              MOVE.L  12(A7), D1
+00001054  E189                      79              LSL.L   #8, D1
+00001056  E189                      80              LSL.L   #8, D1
+00001058                            81              
+00001058                            82              
+00001058  202F 0008                 83              MOVE.L  8(A7), D0            
+0000105C  E188                      84              LSL.L   #8, D0
+0000105E  8280                      85              OR.L    D0, D1
+00001060                            86              
+00001060  82AF 0004                 87              OR.L    4(A7), D1
+00001064  4282                      88              CLR.L   D2
+00001066  7015                      89              MOVE.L  #21, D0
+00001068  4E4F                      90              TRAP    #15
+0000106A  4E75                      91              RTS
+0000106C                            92              
+0000106C                            93  ; -----------------------------------------------------------------------------
+0000106C                            94  INITSCRN:   
+0000106C                            95  ; [_INTERNAL API] 
+0000106C                            96  ; Input    - WIDTH:   +4(A7)
+0000106C                            97  ;          - HEIGHT:  +8(A7)
+0000106C                            98  ;          - MODE:    +12(A7)  (1 Windowed, 2 Full Screen) 
+0000106C                            99  ; Output   - NONE
+0000106C                           100  ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+0000106C                           101  ; -----------------------------------------------------------------------------
+0000106C  222F 0004                102              MOVE.L  4(A7), D1
+00001070  E189                     103              LSL.L   #8,D1
+00001072  E189                     104              LSL.L   #8,D1
+00001074  82AF 0008                105              OR.L    8(A7), D1
+00001078  7021                     106              MOVE.L  #33, D0
+0000107A  4E4F                     107              TRAP    #15
+0000107C                           108  
+0000107C                           109  
+0000107C                           110  
+0000107C                           111  
+0000107C                           112  
+0000107C                           113  
+0000107C                           114  
+0000107C                           115  
+0000107C                           116  -------------------- end include --------------------
+0000107C                           117              INCLUDE "STRLIB.X68"
+0000107C                           118  ; -----------------------------------------------------------------------------
+0000107C                           119  STRCPY:  
+0000107C                           120  ; COPIES THE CONTENT POINTED BY A2 INTO A1
+0000107C                           121  ; Input    - A1.L ADDRESS OF DST
+0000107C                           122  ;          - A2.L ADDRESS OF SRC
+0000107C                           123  ; Output   - (A1) CONTAINS THE STRING IN (A2). 
+0000107C                           124  ;           IF SIZE (A1) < SIZE (A2) THEN (A2) IS TRUNCATED TO FIT (A1)
+0000107C                           125  ; Modifies - A1.L, A2.L
+0000107C                           126  ; -----------------------------------------------------------------------------
+0000107C  0C11 0000                127  .LOOP       CMP.B   #0, (A1)
+00001080  6700 0012                128              BEQ     .EXIT
+00001084  1292                     129              MOVE.B  (A2),(A1)
+00001086  0C11 0000                130              CMP.B   #0,(A1)
+0000108A  6700 0008                131              BEQ     .EXIT
+0000108E  5249                     132              ADDA    #1,A1
+00001090  524A                     133              ADDA    #1,A2
+00001092  60E8                     134              BRA     .LOOP
+00001094  4E75                     135  .EXIT:      RTS
+00001096                           136  
+00001096                           137  -------------------- end include --------------------
+00001096                           138              
+00001096                           139  
+00001096  2F3C 000002BC            140  START:      MOVE.L  #700, -(A7)
+0000109C  2F3C 000002BC            141              MOVE.L  #700, -(A7)
+000010A2  4EB8 106C                142              JSR     INITSCRN
+000010A6                           143              
+000010A6  508F                     144              ADD.L   #8, A7
+000010A8  2F3C 000000AE            145              MOVE.L  #174, -(A7)             ; RED
+000010AE  2F3C 00000001            146              MOVE.L  #1, -(A7)               ; GREEN
+000010B4  2F3C 0000006E            147              MOVE.L  #110, -(A7)             ; BLUE
+000010BA                           148              
+000010BA  4EB8 104E                149              JSR     SETTXTCL
+000010BE  43F9 000010CC            150              LEA     MSG, A1
+000010C4  700E                     151              MOVE.L  #14, D0
+000010C6  4E4F                     152              TRAP    #15
+000010C8                           153             
+000010C8                           154              
+000010C8  FFFF FFFF                155              SIMHALT
+000010CC                           156               
+000010CC= 48 6F 6C 61 20 71 ...    157  MSG:        DC.B 'Hola que tal',0
+000010DA                           158              DS.W 0  
+000010DA                           159              END    START  
 
 No errors detected
 No warnings generated
@@ -70,6 +169,9 @@ No warnings generated
 SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
+INITSCRN            106C
+MSG                 10CC
+NEWLN               103A
 PRINTB              1000
 PRINTB:END          1028
 PRINTB:FSSTR        1022
@@ -77,4 +179,8 @@ PRINTB:PRINT        1016
 PRINTB:TRSTR        101C
 PRNTBOLN            1032
 PRNTBOOL            102A
-START               103A
+SETTXTCL            104E
+START               1096
+STRCPY              107C
+STRCPY:EXIT         1094
+STRCPY:LOOP         107C

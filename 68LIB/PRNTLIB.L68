@@ -1,0 +1,160 @@
+00001084 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 15/06/2020 14:12:27
+
+00000000                             1  ; -----------------------------------------------------------------------------
+00000000                             2  PRINTB:   
+00000000                             3  ; PRINTS A BOOL VARIABLE
+00000000                             4  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+00000000                             5  ;          - D0.L TRAP NUMBER #14 or #13
+00000000                             6  ; Output   - PRINTS 'true' or 'false' to the screen
+00000000                             7  ; Modifies - D0.L, D1.L, A1.L
+00000000                             8  ; -----------------------------------------------------------------------------
+00000000  43F9 0000001C              9              LEA.L   .TRSTR, A1
+00000006  B2BC 00000000             10              CMP.L   #0, D1
+0000000C  6600 0008                 11              BNE     .PRINT
+00000010  43F9 00000022             12              LEA.L   .FSSTR, A1       
+00000016  4E4F                      13  .PRINT:     TRAP    #15
+00000018  6000 000E                 14              BRA     .END
+0000001C                            15  
+0000001C= 74 72 75 65 00            16  .TRSTR      DC.B 'true',0
+00000022                            17              DS.W 0
+00000022                            18  
+00000022= 66 61 6C 73 65 00         19  .FSSTR      DC.B 'false',0
+00000028                            20              DS.W 0
+00000028                            21  
+00000028                            22  .END:       
+00000028  4E75                      23              RTS
+0000002A                            24  
+0000002A                            25  ; -----------------------------------------------------------------------------
+0000002A                            26  PRNTBOOL:   
+0000002A                            27  ; PRINTS A BOOL VARIABLE
+0000002A                            28  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+0000002A                            29  ; Output   - PRINTS 'true' or 'false' to the screen
+0000002A                            30  ; Modifies - D0.L, D1.L, A1.L
+0000002A                            31  ; -----------------------------------------------------------------------------
+0000002A  700E                      32              MOVE.L  #14, D0
+0000002C  4EB8 0000                 33              JSR     PRINTB
+00000030  4E75                      34              RTS
+00000032                            35  
+00000032                            36  
+00000032                            37  ; -----------------------------------------------------------------------------
+00000032                            38  PRNTBOLN:   
+00000032                            39  ; PRINTS A BOOL VARIABLE ENDING WITH LF,CR
+00000032                            40  ; Input    - D1.L FFFFFFFF (#-1) or 00000000 (#0)
+00000032                            41  ; Output   - PRINTS 'true' or 'false' to the screen
+00000032                            42  ; Modifies - D0.L, D1.L, A1.L
+00000032                            43  ; -----------------------------------------------------------------------------
+00000032  700D                      44              MOVE.L  #13, D0
+00000034  4EB8 0000                 45              JSR     PRINTB
+00000038  4E75                      46              RTS
+0000003A                            47  
+0000003A                            48  ; -----------------------------------------------------------------------------
+0000003A                            49  NEWLN:   
+0000003A                            50  ; INSERTS A NEW LINE 
+0000003A                            51  ; Input    - NONE
+0000003A                            52  ; Output   - INCREASES THE CURSOR'S CURRENT ROW
+0000003A                            53  ; Modifies - D0.L, D1.L
+0000003A                            54  ; -----------------------------------------------------------------------------
+0000003A  700B                      55              MOVE.L  #11,D0
+0000003C  323C 00FF                 56              MOVE.W  #$00FF,D1
+00000040  4E4F                      57              TRAP    #15
+00000042  C2BC 0000000F             58              AND.L   #$0000000F,D1
+00000048  5281                      59              ADDQ.L  #1, D1
+0000004A  4E4F                      60              TRAP    #15
+0000004C  4E75                      61              RTS
+0000004E                            62              
+0000004E                            63              
+0000004E                            64            
+0000004E                            65  ; -----------------------------------------------------------------------------
+0000004E                            66  GETCOLOR    MACRO
+0000004E                            67  ; [_INTERNAL MACRO] 
+0000004E                            68  ; Input    - \0:   RED
+0000004E                            69  ;          - \1:   GREEN
+0000004E                            70  ;          - \2:   BLUE
+0000004E                            71  ; Output   - COLOR CONDENSED AS $0x00BBGGRR IN D1.L
+0000004E                            72  ; Modifies - D1.L, D2.L, D0.L
+0000004E                            73  ; -----------------------------------------------------------------------------
+0000004E                            74              IFNE NARG-3
+0000004E                            75                  FAIL ERROR, GETCOLOR REQUIRES 3 ARGS
+0000004E                            76                  MEXIT
+0000004E                            77              ENDC
+0000004E                            78              CLR.L   D1
+0000004E                            79              MOVE.L  \2, D1
+0000004E                            80              LSL.L   #8, D1
+0000004E                            81              LSL.L   #8, D1
+0000004E                            82              
+0000004E                            83              
+0000004E                            84              MOVE.L  \1, D0            
+0000004E                            85              LSL.L   #8, D0
+0000004E                            86              OR.L    D0, D1
+0000004E                            87              
+0000004E                            88              OR.L    \0, D1
+0000004E                            89              ENDM
+0000004E                            90  
+0000004E                            91   
+0000004E                            92  ; -----------------------------------------------------------------------------
+0000004E                            93  SETTXTCL:   
+0000004E                            94  ; [_INTERNAL API] 
+0000004E                            95  ; Input    - RED:   +4(A7)
+0000004E                            96  ;          - GREEN: +8(A7)
+0000004E                            97  ;          - BLUE:  +12(A7)
+0000004E                            98  ; Output   - NONE
+0000004E                            99  ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+0000004E                           100  ; -----------------------------------------------------------------------------
+0000004E                           101              OPT MEX
+0000004E                           102m             GETCOLOR    A7, A7, A7            
+0000004E                           103m ; [_INTERNAL MACRO] 
+0000004E                           104m ; INPUT    - W:   RED
+0000004E                           105m ;          - A7:   GREEN
+0000004E                           106m ;          - A7:   BLUE
+0000004E                           107m ; OUTPUT   - COLOR CONDENSED AS $0X00BBGGRR IN D1.L
+0000004E                           108m ; MODIFIES - D1.L, D2.L, D0.L
+0000004E                           109m ; -----------------------------------------------------------------------------
+0000004E                 FALSE     110m             IFNE 3-3
+0000004E                           111m             ENDC
+0000004E  4281                     112m             CLR.L   D1
+00000050  220F                     113m             MOVE.L  A7, D1
+00000052  E189                     114m             LSL.L   #8, D1
+00000054  E189                     115m             LSL.L   #8, D1
+00000056                           116m             
+00000056                           117m             
+00000056  200F                     118m             MOVE.L  A7, D0            
+00000058  E188                     119m             LSL.L   #8, D0
+0000005A  8280                     120m             OR.L    D0, D1
+0000005C                           121m             
+Line 122 ERROR: Undefined symbol
+0000005C  82B9 004DBD16            122m             OR.L    W, D1
+00000062                           123m             ENDM
+00000062                           124              OPT NOMEX
+00000062  4282                     125              CLR.L   D2
+00000064  7015                     126              MOVE.L  #21, D0
+00000066  4E4F                     127              TRAP    #15
+00000068  4E75                     128              RTS
+0000006A                           129              
+0000006A                           130  
+0000006A                           131  
+0000006A                           132  
+0000006A                           133  
+0000006A                           134  
+0000006A                           135  
+0000006A                           136  
+Line 137 WARNING: END directive missing, starting address not set
+
+1 error detected
+1 warning generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+GETCOLOR            0
+NEWLN               3A
+PRINTB              0
+PRINTB:END          28
+PRINTB:FSSTR        22
+PRINTB:PRINT        16
+PRINTB:TRSTR        1C
+PRNTBOLN            32
+PRNTBOOL            2A
+SETTXTCL            4E

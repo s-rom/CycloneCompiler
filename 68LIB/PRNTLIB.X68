@@ -59,6 +59,50 @@ NEWLN:
             ADDQ.L  #1, D1
             TRAP    #15
             RTS
+            
+            
+            
+; -----------------------------------------------------------------------------
+SETTXTCL:   
+; [_INTERNAL API] 
+; Input    - RED:   +4(A7)
+;          - GREEN: +8(A7)
+;          - BLUE:  +12(A7)
+; Output   - NONE
+; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+; -----------------------------------------------------------------------------
+            CLR.L   D1
+            MOVE.L  12(A7), D1
+            LSL.L   #8, D1
+            LSL.L   #8, D1
+            
+            
+            MOVE.L  8(A7), D0            
+            LSL.L   #8, D0
+            OR.L    D0, D1
+            
+            OR.L    4(A7), D1
+            CLR.L   D2
+            MOVE.L  #21, D0
+            TRAP    #15
+            RTS
+            
+; -----------------------------------------------------------------------------
+INITSCRN:   
+; [_INTERNAL API] 
+; Input    - WIDTH:   +4(A7)
+;          - HEIGHT:  +8(A7)
+; Output   - NONE
+; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+; -----------------------------------------------------------------------------
+            MOVE.L  4(A7), D1
+            LSL.L   #8,D1
+            LSL.L   #8,D1
+            OR.L    8(A7), D1
+            MOVE.L  #33, D0
+            TRAP    #15
+
+
 
 
 
