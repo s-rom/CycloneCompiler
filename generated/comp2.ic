@@ -1,13 +1,9 @@
 # ----------- FUNC: cyclone ----------- 
 e0: skip
     pmb e0
-    t4 = "Esto termina en línia"# Aux var
+    t4 = "   No te voy a mentir, se ve bien fresco este código"# Aux var
     outputln t4
-    t5 = 0                    # Aux var
+    t5 = "   Me alegro por el"# Aux var
     outputln t5
-    t6 = 8                    # Aux var
-    output t6
-    t7 = ": Hola"             # Aux var
-    output t7
     return
 # -------------- END ------------- 

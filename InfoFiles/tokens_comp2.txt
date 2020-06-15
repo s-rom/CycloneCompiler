@@ -1,32 +1,22 @@
 ### ---------- Token File ----------
 ### Format: (line,colum) TokenName: Attribute?
 
-(0,0)	FUNC
-(0,5)	VOID_TYPE: void
-(0,10)	ID: cyclone
-(0,17)	LPAREN
-(0,18)	RPAREN
-(1,0)	LCURL
-(2,4)	OUTPUTLN
-(2,12)	LPAREN
-(2,13)	STR_LIT: "Esto termina en línia"
-(2,36)	RPAREN
-(2,37)	SEMICOLON
-(3,4)	OUTPUTLN
-(3,12)	LPAREN
-(3,13)	BOOL_LIT: false
-(3,18)	RPAREN
-(3,19)	SEMICOLON
-(4,4)	OUTPUT
-(4,10)	LPAREN
-(4,11)	INT_LIT: 8
-(4,12)	RPAREN
-(4,13)	SEMICOLON
-(5,4)	OUTPUT
-(5,10)	LPAREN
-(5,11)	STR_LIT: ": Hola"
-(5,19)	RPAREN
-(5,20)	SEMICOLON
-(6,0)	RCURL
-(6,1)	EOF
-(6,1)	EOF
+(6,0)	FUNC
+(6,5)	VOID_TYPE: void
+(6,10)	ID: cyclone
+(6,17)	LPAREN
+(6,18)	RPAREN
+(7,0)	LCURL
+(8,4)	OUTPUTLN
+(8,12)	LPAREN
+(8,13)	STR_LIT: "   No te voy a mentir, se ve bien fresco este código"
+(8,67)	RPAREN
+(8,68)	SEMICOLON
+(9,4)	OUTPUTLN
+(9,12)	LPAREN
+(9,13)	STR_LIT: "   Me alegro por el"
+(9,34)	RPAREN
+(9,35)	SEMICOLON
+(10,0)	RCURL
+(10,1)	EOF
+(10,1)	EOF

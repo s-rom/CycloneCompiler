@@ -21,6 +21,10 @@ public class Tag {
         return "e"+id; 
     }
     
+    public int getID(){
+        return this.id;
+    }
+    
     public static boolean equals(Tag t1, Tag t2){
         return t1.id == t2.id;
     }

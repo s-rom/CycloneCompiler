@@ -22,19 +22,23 @@ public class Variable {
     private final int offset; // bytes
     private VarSemantics varSemantics;
     private VarType type;
+    private String originalID = null;
     
+   
     /**
      * Cada variable de código intermedio és único con este constructor.
      * @param varSemantics
      * @param type
+     * @param originalID
      */
-    public Variable(VarSemantics varSemantics, VarType type){
-        this(varSemantics, 4, type);
+    public Variable(VarSemantics varSemantics, VarType type, String originalID){
+        this(varSemantics, 4, type, originalID);
     }
     
     
-    public Variable(VarSemantics varSemantics, int bytes, VarType type){
+    public Variable(VarSemantics varSemantics, int bytes, VarType type, String originalID){
         id = nextId();
+        this.originalID = originalID;
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
         occupation = bytes;
@@ -56,12 +60,13 @@ public class Variable {
         Main.gen.addVariable(this);
     }
     
-    public Variable(int existingId, VarSemantics varSemantics, VarType type){
-        this(existingId, varSemantics, 4, type);
+    public Variable(int existingId, VarSemantics varSemantics, VarType type, String originalID){
+        this(existingId, varSemantics, 4, type, originalID);
     }
     
-    public Variable(int existingId, VarSemantics varSemantics, int bytes, VarType type){
+    public Variable(int existingId, VarSemantics varSemantics, int bytes, VarType type, String originalID){
         id = existingId;
+        this.originalID = originalID;
         this.varSemantics = varSemantics;
         parentFunctionID = Main.gen.getCurrentFunction().getID();
         occupation = bytes;
@@ -81,6 +86,11 @@ public class Variable {
         
         Main.gen.addVariable(this);
     }
+    
+    public void setOriginalID(String id){
+        this.originalID = id;
+    }
+    
     
     public void setParentFuncID(int parentId){
         this.parentFunctionID = parentId;
@@ -121,7 +131,8 @@ public class Variable {
     public String toStringDetailed(){
         String res = "t"+id+"\t| type: "+SEMANTICS_EQUIVALENT[this.varSemantics.ordinal()]+
                 " | off: "+offset+" | bytes: "+occupation;
-        res+= " | local to: "+parentFunctionID + " | "+type.name();
+        res+= " | local to: "+parentFunctionID + " | "+type.name().toLowerCase();
+        if (originalID != null) res += " | original: "+originalID;
         return res;
     }
     

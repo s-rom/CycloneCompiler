@@ -1,5 +1,6 @@
 package AST;
 
+import IntermediateCode.VarType;
 import SymbolTable.Description;
 import SymbolTable.DescriptionType;
 import SymbolTable.VarDescription;
@@ -48,7 +49,6 @@ public class Arg extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

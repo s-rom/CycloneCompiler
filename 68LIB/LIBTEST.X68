@@ -1,6 +1,7 @@
 	ORG    $1000
 
             INCLUDE "PRNTLIB.X68"
+            INCLUDE "STRLIB.X68"
 
 START:	MOVE.L  #-1, D1
             JSR     PRNTBOLN
@@ -8,6 +9,7 @@ START:	MOVE.L  #-1, D1
 
 	SIMHALT             
 	END    START  
+
 
 
 *~Font name~Courier New~

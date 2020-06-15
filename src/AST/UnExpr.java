@@ -113,7 +113,7 @@ public class UnExpr extends Node{
             System.out.println("UnaryExpression genera UnaryExpression");
             this.unExpr.generateIntermediateCode();
             this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL,
-                    this.unExpr.intermediateVar.getType());
+                    this.unExpr.intermediateVar.getType(), null);
             if ("-".equals(unOp)){
                 Main.gen.generateBinary(Opcode.SUB, 0, unExpr.intermediateVar, intermediateVar);
             } else { // !

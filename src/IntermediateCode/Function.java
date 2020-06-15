@@ -1,10 +1,8 @@
 package IntermediateCode;
 
-import SymbolTable.VarDescription;
 import SymbolTable.VarDescription.VarSemantics;
 import cyclonecompiler.Main;
 import java.awt.Point;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class Function {
@@ -27,7 +25,7 @@ public class Function {
         this.name = name;
         this.initTag = initTag;
     
-        nextParamOffset = 0;
+        nextParamOffset = 4;
         nextLocalVarOffset = 0;
     }
     
@@ -50,9 +48,9 @@ public class Function {
         int paramBytes = 0;
         for (Variable v : Main.gen.getFunctionVariables(this.id)){
             if (v.getVarSemantics() == VarSemantics.LOCAL){
-                localBytes += 4;
+                localBytes += v.getOccupation();
             } else {
-                paramBytes += 4;
+                paramBytes += v.getOccupation();
             }
         }
         return new Point(localBytes, paramBytes);

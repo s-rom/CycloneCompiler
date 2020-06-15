@@ -3,7 +3,7 @@ graph[nodesep="1"]
 	node [shape=box]
 	node [shape=box]
 	n0 [label = "Primary"]
-	n1 [label = "STR_LIT: Esto termina en línia"]
+	n1 [label = "STR_LIT:    No te voy a mentir, se ve bien fresco este código"]
 	n0-> n1
 	n2 [label = "UnExpr"]
 	n2-> n0
@@ -16,7 +16,7 @@ graph[nodesep="1"]
 	n6 [label = "Statement"]
 	n6-> n4
 	n7 [label = "Primary"]
-	n8 [label = "BOOL_LIT: false"]
+	n8 [label = "STR_LIT:    Me alegro por el"]
 	n7-> n8
 	n9 [label = "UnExpr"]
 	n9-> n7
@@ -28,49 +28,17 @@ graph[nodesep="1"]
 	n12-> n10
 	n13 [label = "Statement"]
 	n13-> n11
-	n14 [label = "Primary"]
-	n15 [label = "INT_LIT: 8"]
-	n14-> n15
-	n16 [label = "UnExpr"]
-	n16-> n14
-	n17 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n17:ue-> n16
-	n18 [label = "Instruction"]
-	n19 [label = "OUTPUT"]
-	n18-> n19
-	n19-> n17
-	n20 [label = "Statement"]
-	n20-> n18
-	n21 [label = "Primary"]
-	n22 [label = "STR_LIT: : Hola"]
-	n21-> n22
-	n23 [label = "UnExpr"]
-	n23-> n21
-	n24 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n24:ue-> n23
-	n25 [label = "Instruction"]
-	n26 [label = "OUTPUT"]
-	n25-> n26
-	n26-> n24
-	n27 [label = "Statement"]
-	n27-> n25
-	n28 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n28:s-> n27
-	n29 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n29:s-> n20
-	n29:sl-> n28
-	n30 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n30:s-> n13
-	n30:sl-> n29
-	n31 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n31:s-> n6
-	n31:sl-> n30
-	n32 [label = "Block"]
-	n32-> n31
-	n33 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
-	n33:b-> n32
-	n34 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n34:f-> n33
-	n35 [label = "Program"]
-	n35-> n34
+	n14 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n14:s-> n13
+	n15 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n15:s-> n6
+	n15:sl-> n14
+	n16 [label = "Block"]
+	n16-> n15
+	n17 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n17:b-> n16
+	n18 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n18:f-> n17
+	n19 [label = "Program"]
+	n19-> n18
 }

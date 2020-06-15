@@ -1,4 +1,2 @@
-t4	| type: local | off: -22 | bytes: 22 | local to: 0 | STRING
-t5	| type: local | off: -26 | bytes: 4 | local to: 0 | BOOL
-t6	| type: local | off: -30 | bytes: 4 | local to: 0 | INT
-t7	| type: local | off: -38 | bytes: 8 | local to: 0 | STRING
+t4	| type: local | off: -54 | bytes: 54 | local to: 0 | string
+t5	| type: local | off: -74 | bytes: 20 | local to: 0 | string

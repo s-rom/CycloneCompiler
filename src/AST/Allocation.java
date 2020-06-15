@@ -68,7 +68,7 @@ public class Allocation extends Node{
         if (v == null){
             System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
             v = new Variable(vd.varNumber, vd.getVarSemantics(), vd.getLength(), 
-                VarType.stringToVarType(type));
+                VarType.stringToVarType(type), id);
         }
     }
     

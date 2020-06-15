@@ -50,7 +50,7 @@ public class Primary extends Node {
         {
             case STR_LIT:
                 this.intermediateVar = 
-                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING);
+                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING, null);
                 
                 Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
                 break;
@@ -58,7 +58,7 @@ public class Primary extends Node {
             case BOOL_LIT:
                 // Genera ti = bool_lit
                 // local
-                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.BOOL);
+                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.BOOL, null);
                 
                 int intEquiv;
                 if (bool_lit) intEquiv = -1;
@@ -71,7 +71,7 @@ public class Primary extends Node {
                 // Genera ti = int_lit
                 // local
                 System.out.println("Primary genera nueva variable auxiliar");
-                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.INT);
+                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.INT, null);
                 Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
                 break;
                 
@@ -100,7 +100,7 @@ public class Primary extends Node {
                     VarDescription vd = (VarDescription) d;
                     this.intermediateVar = Main.gen.getVariable(vd.varNumber);
                     if (this.intermediateVar == null)
-                        this.intermediateVar = new Variable (vd.varNumber,vd.getVarSemantics(), VarType.UNKNOWN);
+                        this.intermediateVar = new Variable (vd.varNumber,vd.getVarSemantics(),VarType.stringToVarType(vd.type), null);
                     
                 } else if (d.getDescriptionType() == DescriptionType.D_CONST){
                    
@@ -108,7 +108,7 @@ public class Primary extends Node {
                     ConstDescription cd = (ConstDescription) d;
                     this.intermediateVar = Main.gen.getVariable(cd.getConstNum());
                     if (this.intermediateVar == null)
-                        this.intermediateVar = new Variable(cd.getConstNum(), VarSemantics.LOCAL, VarType.UNKNOWN);
+                        this.intermediateVar = new Variable(cd.getConstNum(), VarSemantics.LOCAL, VarType.UNKNOWN, null);
                     
                 }
                     

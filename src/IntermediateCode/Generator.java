@@ -30,6 +30,7 @@ FORMATO: OPCODE SRC1 SRC2 DST
                                 param dst
                                 return [src1], dst (ret value, function)
                                 output dst
+                                
 */  
 
 
@@ -88,6 +89,10 @@ public class Generator {
     
     public Function getCurrentFunction(){
         return currentFunction;
+    }
+    
+    public Function getFunctionByTag(Tag t){
+        return this.funcTable.get(t.getID());
     }
     
     public void addVariable(Variable v){

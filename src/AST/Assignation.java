@@ -209,53 +209,44 @@ public class Assignation extends Node{
             if (v == null){
                 System.out.println("const ID = Expr, id ic_var not found!");
                 VarType vt = VarType.stringToVarType(type);
-                v = new Variable(cd.getConstNum(), VarSemantics.LOCAL, vt);
+                v = new Variable(cd.getConstNum(), VarSemantics.LOCAL, vt, null);
             }
             Main.gen.generateAssignation(e.intermediateVar, v,
                     "const \'"+id+"\' = expr");
             
-//            Main.gen.generateAssignation(e.intermediateVar, new Variable(cd.getConstNum(), VarSemantics.LOCAL),
-//                    "const \'"+id+"\' = expr");
-            
             return;
         }
         
-        // ID = Expr; o TypeVar ID = Expr;
-        if (e != null){
-            if (Main.ts.getCurrentFunc() == null){
-                System.err.println("Asignación fuera de una función (currentFunc == null)");
-            }
-            
-            Scope funcScope = Main.ts.getCurrentFunc().getScope();
-            Description d = Main.ts.getForwardStartingFrom(id,funcScope);
-            
-            if (d == null){
-                System.err.println("No ha encontrado "+id+" en la ts");
-                return;
-            }
-            
-            VarDescription vd = (VarDescription) d;
-            
-            Variable thisVar = Main.gen.getVariable(vd.varNumber); 
-            
-            if (thisVar == null){
-                int len = 4;
-                if (type != null && type.equals("string")) len = vd.getLength() + 1;
-                
-                System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
-                thisVar = new Variable(vd.varNumber, vd.getVarSemantics(), len,
-                    VarType.stringToVarType(type));
-            }
-            
-            // ID.v = Expr.v
-            Main.gen.generateAssignation(e.intermediateVar, thisVar,
-                    "\'"+id+"\' = expr");
-        }
+        // ID = Expr; o TypeVar ID = Expr; o TypeVar ID;
         
-        // Type ID;
-        // Nada
+        if (Main.ts.getCurrentFunc() == null){
+            System.err.println("Asignación fuera de una función (currentFunc == null)");
+        }
+
+        Scope funcScope = Main.ts.getCurrentFunc().getScope();
+        Description d = Main.ts.getForwardStartingFrom(id,funcScope);
+
+        if (d == null){
+            System.err.println("No ha encontrado "+id+" en la ts");
+            return;
+        }
+
+        VarDescription vd = (VarDescription) d;
+
+        Variable thisVar = Main.gen.getVariable(vd.varNumber); 
+
+        if (thisVar == null){
+            int len = 4;
+            if (type != null && type.equals("string")) len = vd.getLength() + 1;
+
+            System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
+            thisVar = new Variable(vd.varNumber, vd.getVarSemantics(), len,
+                VarType.stringToVarType(type), id);
+            
+        }
+
+        if (e != null)
+            Main.gen.generateAssignation(e.intermediateVar, thisVar,
+                "\'"+id+"\' = expr");
     }
-    
-    
-    
 }
