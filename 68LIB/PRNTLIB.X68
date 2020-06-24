@@ -59,29 +59,39 @@ NEWLN:
             ADDQ.L  #1, D1
             TRAP    #15
             RTS
-            
-            
-            
+       
+
 ; -----------------------------------------------------------------------------
-SETTXTCL:   
-; [_INTERNAL API] 
-; Input    - RED:   +4(A7)
-;          - GREEN: +8(A7)
-;          - BLUE:  +12(A7)
-; Output   - NONE
-; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+SETCOL      MACRO
+; SETS COLOR INTO D1.L WITH THE REQUIRED FORMAT FOR SIM DRAW FUNCTIONS
+; Input     - \1 RED
+;           - \2 GREEN
+;           - \3 BLUE
+; Output    - COLOR IN D1.L AS $00BBGGRR
+; Modifies  - D1.L, D0,L
 ; -----------------------------------------------------------------------------
             CLR.L   D1
-            MOVE.L  12(A7), D1
+            MOVE.L  \3, D1
             LSL.L   #8, D1
             LSL.L   #8, D1
             
-            
-            MOVE.L  8(A7), D0            
+            MOVE.L  \2, D0            
             LSL.L   #8, D0
             OR.L    D0, D1
             
-            OR.L    4(A7), D1
+            OR.L    \1, D1
+            ENDM            
+            
+; -----------------------------------------------------------------------------
+SETTXTCL:   
+; [_INTERNAL API] SETS THE CURRENT TEXT COLOR
+; Input    - RED:   +12(A7)
+;          - GREEN: +8(A7)
+;          - BLUE:  +4(A7)
+; Output   - NONE
+; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+; -----------------------------------------------------------------------------
+            SETCOL  12(A7), 8(A7), 4(A7)            
             CLR.L   D2
             MOVE.L  #21, D0
             TRAP    #15
@@ -90,8 +100,8 @@ SETTXTCL:
 ; -----------------------------------------------------------------------------
 INITSCRN:   
 ; [_INTERNAL API] 
-; Input    - WIDTH:   +4(A7)
-;          - HEIGHT:  +8(A7)
+; Input    - WIDTH:   +8(A7)
+;          - HEIGHT:  +4(A7)
 ; Output   - NONE
 ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
 ; -----------------------------------------------------------------------------
@@ -104,6 +114,39 @@ INITSCRN:
 
 
 
+
+
+
+; -----------------------------------------------------------------------------
+SETTXTPR:   
+; [_INTERNAL API] SETS THE CURRENT TEXT SIZE
+; Input    - RED:   +24(A7)
+;          - GREEN: +20(A7)
+;          - BLUE:  +16(A7)
+;          - SIZE:  +12(A7)
+;          - FONT:  +8(A7)
+;          - STYLE: +4(A7)
+; Output   - NONE
+; Modifies - CURRENT TEXT SIZE, D1.L, D2.L, D0.L
+; -----------------------------------------------------------------------------
+            SETCOL  24(A7), 20(A7), 16(A7)            
+            MOVE.L  8(A7), D2              ; FONT
+            LSL.L   #8, D2
+            LSL.L   #8, D2
+            LSL.L   #8, D2
+            
+            MOVE.L  12(A7), D0              ; SIZE
+            AND.L   #$000000FF, D0
+            LSL.L   #8, D0
+            LSL.L   #8, D0
+            OR.L    D0, D2
+            
+            MOVE.L  4(A7), D0              ; STYLE
+            AND.L   #$000000FF, D0
+            OR.L    D0, D2
+            MOVE.L  #21, D0
+            TRAP    #15
+            RTS
 
 
 

@@ -8,17 +8,17 @@ import cyclonecompiler.InfoDump;
 
 
 parser code {:
-    public String get_report_name(int sym){
-        final String[] report_names = new String[] {
-        "EOF","error","while","if","else","func","output","input","return",
-        "(",")","{","}", "outputln", ", (comma)","; (semicolon)","&&","||","!","+","-","*",
-        "/","%",">=","<=",">","<","!=","==","=","int literal","string literal",
-        "bool literal","-",
-        "ID","string type","int type","void type","bool type"
-        };
+    // public String get_report_name(int sym){
+    //     final String[] report_names = new String[] {
+    //     "EOF","error","while","if","else","func","output","input","return",
+    //     "(",")","{","}", "outputln", ", (comma)","; (semicolon)","&&","||","!","+","-","*",
+    //     "/","%",">=","<=",">","<","!=","==","=","int literal","string literal",
+    //     "bool literal","-",
+    //     "ID","string type","int type","void type","bool type","declare"
+    //     };
         
-        return report_names[sym];
-    }
+    //     return report_names[sym];
+    // }
 
     
     @Override
@@ -27,8 +27,8 @@ parser code {:
         ComplexSymbol cs = (ComplexSymbol) current;
         int sym_code = ((Symbol)this.stack.peek()).sym;
         Symbol prev_sym = (Symbol) this.stack.peek();
-        String prev = get_report_name(sym_code);
-        String found = get_report_name(cs.sym);
+        String prev = ParserSym.terminalNames[sym_code]; //get_report_name(sym_code);
+        String found = ParserSym.terminalNames[cs.sym]; //get_report_name(cs.sym);
         
         
         String found_attr = cs.value != null ? " ("+cs.value.toString()+")" : "";
@@ -55,10 +55,11 @@ parser code {:
 
 /* ------------- TERMINALS ------------- */
 
-terminal            WHILE, IF, ELSE, FUNC, OUTPUT, INPUT, RETURN; /* while, if, else, func, intput(), output() */
+terminal            WHILE, IF, ELSE, FUNC, OUTPUT, RETURN; /* while, if, else, func, output() */
 terminal            LPAREN, RPAREN, LCURL, RCURL, COMMA, SEMICOLON; /* ( ) { } , ; */
 terminal            CONST, LBRACKET, RBRACKET; /* const [ ] */
 terminal            OUTPUTLN; /* outputln() */
+terminal            READ_STRING, READ_INT; /* read_string(), read_int(); */
 terminal String     AND, OR, NOT;
 terminal String     SUM, SUB, MULT, DIV, MOD; /* +, -, *, /, %  */
 terminal String     GE, LE, GT, LT, NE, EQ; /* >=, <=, >, <, !=, == */
@@ -69,6 +70,8 @@ terminal Boolean    BOOL_LIT; /* true, false */
 terminal String     UNARI_SUB; /*-3, -a*b*/
 terminal String     ID; /* hola */
 terminal String     STR_TYPE, INT_TYPE, VOID_TYPE, BOOL_TYPE; /* string, int, void, bool */
+terminal            INTERNAL, ARROW; /* _internal, ->*/
+
 
 non terminal Node     Program, Function, FunctionList;
 non terminal Node     Arg, Args;
@@ -125,6 +128,8 @@ FunctionList    ::=   Function:f FunctionList:fl
 
 Function        ::=   FUNC TypeFunc:t ID:id LPAREN Args:args RPAREN LCURL Block:b RCURL
                         {: RESULT = new Function(t, id, (Args) args, (Block) b); :}
+                    | INTERNAL TypeFunc:t ID:id LPAREN Args:args RPAREN ARROW STR_LIT:subroutine SEMICOLON
+                        {: RESULT = new Function(t, id, (Args) args, subroutine); :}
                     ;
 
 Args            ::= | 
@@ -176,15 +181,11 @@ IfCondition     ::=   IF LPAREN Expr:e RPAREN LCURL Block:b1 RCURL
 Instruction     ::=   // Llamada a funcion foo(arg1, arg2, ...)
                       ID:id LPAREN ExprArg:ea RPAREN
                         {: RESULT = new Instruction(new FunctionCall(id, (ExprArg)ea,getLine(),getColumn())); :}
-                    | // input()
-                      INPUT LPAREN RPAREN
-                        {: RESULT = new Instruction(InstructionType.INPUT); :}
-                    | // output(bla)
-                      OUTPUT LPAREN Expr:e RPAREN
-                        {: RESULT = new Instruction((Expr)e, InstructionType.OUTPUT); :}
+                    | OUTPUT LPAREN ExprArg:ea RPAREN
+                        {: RESULT = new Instruction((ExprArg)ea, InstructionType.OUTPUT);:}
                     | // outputln(bla)
-                      OUTPUTLN LPAREN Expr:e RPAREN
-                        {: RESULT = new Instruction((Expr)e, InstructionType.OUTPUTLN); :}
+                      OUTPUTLN LPAREN ExprArg:ea RPAREN
+                        {: RESULT = new Instruction((ExprArg)ea, InstructionType.OUTPUTLN); :}
                     | // return bla
                       RETURN Expr:e
                         {: RESULT = new Instruction((Expr)e, InstructionType.RETURN); :}
@@ -283,4 +284,10 @@ Primary         ::= LPAREN Expr:e RPAREN         // (a+3)
                         {: RESULT = new Primary(str,PrimaryType.STR_LIT,getLine(),getColumn()); :}
                     | BOOL_LIT:b                  // false
                         {: RESULT = new Primary(b,getLine(),getColumn()); :}
+                    | // read_string()
+                      READ_STRING LPAREN RPAREN
+                        {: RESULT = new Primary(PrimaryType.READ_STRING, getLine(), getColumn()); :}
+                    | // read_int()
+                      READ_INT LPAREN RPAREN
+                        {: RESULT = new Primary(PrimaryType.READ_INT, getLine(), getColumn()); :}
                     ;

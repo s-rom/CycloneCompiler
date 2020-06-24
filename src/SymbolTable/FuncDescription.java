@@ -1,7 +1,7 @@
 package SymbolTable;
 
 import AST.Arg;
-import IntermediateCode.Tag;
+import IntermediateCode.FuncTag;
 import cyclonecompiler.FatalError;
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class FuncDescription extends Description{
     private String returnType;
     private ArrayList<Arg> params;
     private Scope functionScope;
-    private Tag tag;
+    private FuncTag tag;
     
     public FuncDescription(String name, String returnType){
         super(name,DescriptionType.D_FUNC);
@@ -50,11 +50,11 @@ public class FuncDescription extends Description{
         return this.returnType;
     }
     
-    public Tag getTag(){
+    public FuncTag getTag(){
        return tag;
     }
     
-    public void setTag(Tag t){
+    public void setTag(FuncTag t){
         this.tag = t;
     }
     

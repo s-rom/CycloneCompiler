@@ -6,20 +6,24 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public class Function {
-
+    
     private int id;
     private String name;
-    private Tag initTag;
+    private FuncTag initTag;
     
     
     private int nextParamOffset;
     private int nextLocalVarOffset;
     
+    private int localBytes = 0, paramBytes = 0;
+    private boolean isUserDefined;
+    private String subroutine = null;
+   
     private ArrayList<Instruction> instructions;
     
     private boolean hasReturnValue;
     
-    public Function(int id, String name, Tag initTag) {
+    public Function(int id, String name, FuncTag initTag) {
         instructions = new ArrayList();
         this.id = id;
         this.name = name;
@@ -27,9 +31,26 @@ public class Function {
     
         nextParamOffset = 4;
         nextLocalVarOffset = 0;
+        isUserDefined = true;
+    }
+
+    public String getSubroutine() {
+        return subroutine;
+    }
+
+    public void setSubroutine(String subroutine) {
+        this.subroutine = subroutine;
+    }
+
+    public boolean isUserDefined() {
+        return isUserDefined;
+    }
+
+    public void setIsUserDefined(boolean isUserDefined) {
+        this.isUserDefined = isUserDefined;
     }
     
-    public Tag getTag(){
+    public FuncTag getTag(){
         return this.initTag;
     }
     
@@ -43,9 +64,22 @@ public class Function {
         return nextParamOffset;
     }
     
-    public Point getLocalOccupation() {
-        int localBytes = 0;
-        int paramBytes = 0;
+    public void setOccupationInternalAPI(int local, int param){
+        this.localBytes = local;
+        this.paramBytes = param;
+        this.isUserDefined = false;
+    }
+    
+    public Point getLocalOccupationInternalAPI(){
+        return new Point(localBytes, paramBytes);
+    }
+    
+    
+    public Point computeLocalOccupation() {
+        if (!isUserDefined) return getLocalOccupationInternalAPI();
+        
+        localBytes = 0;
+        paramBytes = 0;
         for (Variable v : Main.gen.getFunctionVariables(this.id)){
             if (v.getVarSemantics() == VarSemantics.LOCAL){
                 localBytes += v.getOccupation();
@@ -74,7 +108,6 @@ public class Function {
     
     public void printInstructions(){
         for (Instruction instr: instructions){
-            System.out.println(instr.toString()+"\n");
         }
     }
     
@@ -88,8 +121,8 @@ public class Function {
     }
     
     public String toStringDetailed(){
-        Point occup = getLocalOccupation();
-        return "f"+id+" | "+name+" | tag: "+initTag.toString()+
+        Point occup = computeLocalOccupation();
+        return "f"+id+" | "+name+
                 " | local bytes: "+(int)occup.getX()+" | parameter bytes: "+(int)occup.getY();
     }
 }

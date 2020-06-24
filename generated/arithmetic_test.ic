@@ -1,0 +1,53 @@
+# ----------- FUNC: cyclone ----------- 
+f1: skip
+    pmb f1
+    t14 = 6                   # Aux var
+    t10 = t14                 # const 'CONSOLAS' = expr
+    t15 = 255                 # Aux var
+    param t15
+    t16 = 255                 # Aux var
+    param t16
+    t17 = 255                 # Aux var
+    param t17
+    t18 = 14                  # Aux var
+    param t18
+    param t10
+    t19 = 0                   # Aux var
+    param t19
+    call f0
+    t20 = 7                   # Aux var
+    t11 = t20                 # 'x' = expr
+    t21 = 3                   # Aux var
+    t12 = t21                 # 'y' = expr
+    t22 = t11 - t12
+    t13 = t22                 # 'r' = expr
+    t23 = " 7 - 3"            # Aux var
+    output t23
+    t24 = " = "               # Aux var
+    output t24
+    outputln t13
+    t25 = t11 + t12
+    t13 = t25                 # 'r' = expr
+    t26 = " 7 + 3"            # Aux var
+    output t26
+    t27 = " = "               # Aux var
+    output t27
+    outputln t13
+    t28 = 0 - t12
+    t12 = t28                 # 'y' = expr
+    t29 = t11 - t12
+    t13 = t29                 # 'r' = expr
+    t30 = " 7 - (-3)"         # Aux var
+    output t30
+    t31 = " = "               # Aux var
+    output t31
+    outputln t13
+    t32 = t11 + t12
+    t13 = t32                 # 'r' = expr
+    t33 = " 7 + (-3)"         # Aux var
+    output t33
+    t34 = " = "               # Aux var
+    output t34
+    outputln t13
+    return
+# -------------- END ------------- 

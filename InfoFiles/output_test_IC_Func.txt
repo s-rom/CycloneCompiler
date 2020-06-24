@@ -1,0 +1,3 @@
+f0 | M68K_set_text_color | local bytes: 0 | parameter bytes: 12
+f1 | M68K_set_text_properties | local bytes: 0 | parameter bytes: 24
+f2 | cyclone | local bytes: 74 | parameter bytes: 0

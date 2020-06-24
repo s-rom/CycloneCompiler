@@ -230,13 +230,11 @@ public class Expr extends Node{
         
         if (this.ue != null && this.bo == null && this.e == null){
             // Expr --> UnExpr
-            System.out.println("Expression genera UnaryExpression");
             this.ue.generateIntermediateCode();
             this.intermediateVar = ue.intermediateVar;
             
         } else {
             // Expr --> Expr BinOp UnExpr
-            System.out.println("Expression genera Expression y UnaryExpression");
             this.ue.generateIntermediateCode();
             this.e.generateIntermediateCode();
             
@@ -250,12 +248,11 @@ public class Expr extends Node{
                     e.intermediateVar, ue.intermediateVar, intermediateVar);
             } else {
                 Main.gen.generateTabbedCommentary("Relational");
-                // TODO: replace with proper true/false values
-                Main.gen.generateAssignation("-1",intermediateVar);
+                Main.gen.generateAssignation(-1,intermediateVar);
                 Tag t = new Tag(); 
                 Main.gen.generateRelational(Main.gen.getOpcodeEquivalence(bo),
                         e.intermediateVar, ue.intermediateVar, t);
-                Main.gen.generateAssignation("0",intermediateVar);
+                Main.gen.generateAssignation(0,intermediateVar);
                 Main.gen.generateSkip(t);
             }
         }

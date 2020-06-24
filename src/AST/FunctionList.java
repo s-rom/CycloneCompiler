@@ -29,11 +29,9 @@ public class FunctionList extends Node{
     @Override
     public void generateIntermediateCode() {
         if (f != null) {
-            System.out.println("FunctionList genera Function");
             f.generateIntermediateCode();
         }
         if (fl != null) {
-            System.out.println("FunctionList genera FunctionList");
             fl.generateIntermediateCode();
         }
     }

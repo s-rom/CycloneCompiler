@@ -105,12 +105,10 @@ public class UnExpr extends Node{
     public void generateIntermediateCode() {
         if (this.p != null && this.unExpr==null && this.unOp == null){
             // UnExpr --> Primary
-            System.out.println("UnaryExpression genera Primary");
             p.generateIntermediateCode();
             this.intermediateVar = p.intermediateVar;
         } else {
             // UnExpr --> UnOP UnExpr
-            System.out.println("UnaryExpression genera UnaryExpression");
             this.unExpr.generateIntermediateCode();
             this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL,
                     this.unExpr.intermediateVar.getType(), null);

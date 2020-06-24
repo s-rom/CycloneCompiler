@@ -3,17 +3,21 @@
             INCLUDE "PRNTLIB.X68"
             INCLUDE "STRLIB.X68"
             
-
-START:	MOVE.L  #700, -(A7)
-            MOVE.L  #700, -(A7)
-            JSR     INITSCRN
+            OPT MEX
+START:	MOVE.L  #255, -(A7)             ; RED
+            MOVE.L  #255, -(A7)             ; GREEN
+            MOVE.L  #255, -(A7)             ; BLUE
+            MOVE.L  #14, -(A7)              ; SIZE
+            MOVE.L  #6,-(A7)                ; FONT = CONSOLAS
+            MOVE.L  #0,-(A7)                ; STYLE
+            JSR     SETTXTPR
             
-            ADD.L   #8, A7
-            MOVE.L  #174, -(A7)             ; RED
-            MOVE.L  #1, -(A7)               ; GREEN
-            MOVE.L  #110, -(A7)             ; BLUE
+            MOVE.L  #$00FFFFFF,D1
+            MOVE.L  #21, D0
+            MOVE.L  #$060C0000, D2
+            TRAP    #15
             
-            JSR     SETTXTCL
+            
             LEA     MSG, A1
             MOVE.L  #14, D0
             TRAP    #15
@@ -24,6 +28,8 @@ START:	MOVE.L  #700, -(A7)
 MSG:        DC.B 'Hola que tal',0
             DS.W 0  
             END    START  
+
+
 
 
 

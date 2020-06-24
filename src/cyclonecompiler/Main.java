@@ -4,18 +4,17 @@ import AssemblyGeneration.AsmGenerator;
 import AssemblyGeneration.M68kGenerator;
 import IntermediateCode.Function;
 import IntermediateCode.Generator;
-import IntermediateCode.Opcode;
 import Parser.*;
 import Scanner.*;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import SymbolTable.ConstDescription;
 import SymbolTable.Description;
-import SymbolTable.FuncDescription;
 import SymbolTable.SymbolTable;
 import SymbolTable.TypeDescription;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.ComplexSymbolFactory;
@@ -33,13 +32,10 @@ public class Main {
     public static AtomicType atomicInt16;
     public static AtomicType atomicNull;
     public static AtomicType atomicInt;
-    
-    
-    
-    public static void main (String [] args){
-        final String NAME = "comp2";
-        compilar(NAME);
 
+    public static void main (String [] args){
+        final String NAME = "pyramid";
+        compilar(NAME);
     }
  
     public static void compilar(String NAME){
@@ -69,12 +65,35 @@ public class Main {
             parser.parse();
             
             
-            gen.getFunctionTable().forEach((entry) -> {
+            Description cycloneFunc = Main.ts.getForward("cyclone");
+            if (cycloneFunc == null) InfoDump.reportSemanticError("cyclone function not found!");
+            
+            final int TOTAL = gen.getFunctionTable().size();
+            String tabs;
+            int generated = 0;
+            int percentage = 0;
+            
+            long elapsed;
+            
+            for (Entry<Integer,Function> entry : gen.getFunctionTable()){
+                elapsed = System.nanoTime();
                 asmGen.generateFunction(entry.getValue());
-            });
+                elapsed = System.nanoTime() - elapsed;
+                
+                generated++;
+                
+                tabs = "";
+                percentage = (int) ((float) generated / (float) TOTAL * 100);
+                String fName = "--> Generated: "+entry.getValue().toString();
+                for (int i = 0; i < 50 - fName.length(); i++) tabs += ' ';
+                System.out.println(fName+tabs+" elapsed: "+elapsed/1000000+" ms ... "+
+                        percentage+"%");
+            }
+            
+            System.out.println("\nCompilation successful");
+            
             asmGen.generateMain();
             
-            System.out.println(Main.ts.toString());
         } catch (FileNotFoundException ex) {
             System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
         } catch(FatalError f){

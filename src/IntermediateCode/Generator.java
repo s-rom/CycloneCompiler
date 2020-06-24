@@ -27,10 +27,12 @@ FORMATO: OPCODE SRC1 SRC2 DST
     * Control de programa:      dst: skip    
                                 goto dst
                                 call dst
+                                src1 = fun dst
                                 param dst
                                 return [src1], dst (ret value, function)
                                 output dst
-                                
+                                dst = read_string
+                                dst = read_int
 */  
 
 
@@ -87,12 +89,21 @@ public class Generator {
         this.currentFunction = f;
     }
     
+    public void addFunction(Function f){
+        this.funcTable.put(f.getID(), f);
+    }
+    
+    
     public Function getCurrentFunction(){
         return currentFunction;
     }
     
-    public Function getFunctionByTag(Tag t){
+    public Function getFunctionByTag(FuncTag t){
         return this.funcTable.get(t.getID());
+    }
+    
+    public Function getFunctionByID(int id){
+        return this.funcTable.get(id);
     }
     
     public void addVariable(Variable v){
@@ -120,7 +131,6 @@ public class Generator {
     public void infoDumpAllFunctions(){
         for (Map.Entry entry: funcTable.entrySet()){
             InfoDump.addIcFunc(((Function)entry.getValue()));
-            System.out.println(entry.getValue());
             ((Function)entry.getValue()).printInstructions();
         }
     }
@@ -165,6 +175,22 @@ public class Generator {
         currentFunction.addInstruction(new Instruction(Opcode.ASSIGN, src, null, dst));
         return instr;
     }
+    
+    private String generateRead(Opcode op, Object dst){
+        String instr = TAB + keywordTable[op.ordinal()] + " " + dst;
+        write(instr);
+        currentFunction.addInstruction(new Instruction(op, null, null, dst));
+        return instr;
+    }
+    
+    public String generateReadString(Object dst){
+       return generateRead(Opcode.READ_STRING, dst);
+    }
+    
+    public String generateReadInt(Object dst){
+       return generateRead(Opcode.READ_INT, dst);
+    }
+    
     
     public String generatePmb(){
         String instr = TAB + keywordTable[Opcode.PMB.ordinal()] +" "+currentFunction.getTag();
@@ -226,6 +252,13 @@ public class Generator {
         return instr;
     }
     
+     public String generateSkip(FuncTag t){
+        String instr = t + ": "+keywordTable[Opcode.SKIP.ordinal()];
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.SKIP, null, null, t));
+        return instr;
+    }
+    
     public String generateSkip(Tag t, String commentary){
         String instr = t + ": "+keywordTable[Opcode.SKIP.ordinal()];
         
@@ -261,10 +294,25 @@ public class Generator {
         return instr;
     }
     
-    public String generateCall(Tag t){
+    
+    public String generateFun(Variable src, FuncTag t){
+        String instr = TAB + src + " = " + keywordTable[Opcode.CALL.ordinal()] + ' '+t;
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.FUN, src, null, t));
+        return instr;
+    }
+    
+    public String generateCall(FuncTag t){
         String instr = TAB + keywordTable[Opcode.CALL.ordinal()] + ' '+t;
         write(instr);
         currentFunction.addInstruction(new Instruction(Opcode.CALL, null, null, t));
+        return instr;
+    }
+    
+    public String generateCall(String subroutine){
+        String instr = TAB + keywordTable[Opcode.CALL.ordinal()] + ' '+subroutine;
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.CALL, null, null, subroutine));
         return instr;
     }
     
@@ -289,7 +337,7 @@ public class Generator {
         keywordTable[(Opcode.MULT).ordinal()] = "*";
         keywordTable[(Opcode.DIV).ordinal()] = "/";
         keywordTable[(Opcode.MOD).ordinal()] = "%";
-        
+
         keywordTable[(Opcode.AND).ordinal()] = "&&";
         keywordTable[(Opcode.OR).ordinal()] = "||";
         keywordTable[(Opcode.NOT).ordinal()] = "!";
@@ -311,7 +359,8 @@ public class Generator {
         keywordTable[(Opcode.PMB).ordinal()] = "pmb";
         keywordTable[(Opcode.OUTPUT).ordinal()] = "output";
         keywordTable[(Opcode.OUTPUTLN).ordinal()] = "outputln";
-        keywordTable[(Opcode.INPUT).ordinal()] = "input";
+        keywordTable[(Opcode.READ_STRING).ordinal()] = "read_string";
+        keywordTable[(Opcode.READ_INT).ordinal()] = "read_int";
 
         
         for (Opcode op: Opcode.values()){

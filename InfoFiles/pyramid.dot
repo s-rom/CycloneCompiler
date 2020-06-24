@@ -1,0 +1,1076 @@
+digraph ccTree {
+graph[nodesep="1"]
+	node [shape=box]
+	node [shape=box]
+	n0 [label = "Arg: int r"]
+	n1 [label = "Arg: int g"]
+	n2 [label = "Arg: int b"]
+	n3 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n3:a-> n2
+	n4 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n4:a-> n1
+	n4:as-> n3
+	n5 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n5:a-> n0
+	n5:as-> n4
+	n7 [label = "Internal subroutine: SETTXTCL"]
+	n6 [label = "{Function | {Type: void | ID: M68K_set_text_color | <a>Args | <b> Call }}", shape="record"]
+	n6:b-> n7
+	n6:a-> n5
+	n8 [label = "Arg: int red"]
+	n9 [label = "Arg: int green"]
+	n10 [label = "Arg: int blue"]
+	n11 [label = "Arg: int size"]
+	n12 [label = "Arg: int font"]
+	n13 [label = "Arg: int style"]
+	n14 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n14:a-> n13
+	n15 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n15:a-> n12
+	n15:as-> n14
+	n16 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n16:a-> n11
+	n16:as-> n15
+	n17 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n17:a-> n10
+	n17:as-> n16
+	n18 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n18:a-> n9
+	n18:as-> n17
+	n19 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n19:a-> n8
+	n19:as-> n18
+	n21 [label = "Internal subroutine: SETTXTPR"]
+	n20 [label = "{Function | {Type: void | ID: M68K_set_text_properties | <a>Args | <b> Call }}", shape="record"]
+	n20:b-> n21
+	n20:a-> n19
+	n22 [label = "Arg: int n"]
+	n23 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n23:a-> n22
+	n24 [label = "Primary"]
+	n25 [label = "STR_LIT:  "]
+	n24-> n25
+	n26 [label = "UnExpr"]
+	n26-> n24
+	n27 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n27:ue-> n26
+	n28 [label = "Declaration: string space = "]
+	n28-> n27
+	n29 [label = "Instruction"]
+	n29-> n28
+	n30 [label = "Statement"]
+	n30-> n29
+	n31 [label = "Primary"]
+	n32 [label = "INT_LIT: 0"]
+	n31-> n32
+	n33 [label = "UnExpr"]
+	n33-> n31
+	n34 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n34:ue-> n33
+	n35 [label = "Declaration: int spc = "]
+	n35-> n34
+	n36 [label = "Instruction"]
+	n36-> n35
+	n37 [label = "Statement"]
+	n37-> n36
+	n38 [label = "Primary"]
+	n39 [label = "ID: spc"]
+	n38-> n39
+	n40 [label = "UnExpr"]
+	n40-> n38
+	n41 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n41:ue-> n40
+	n42 [label = "Primary"]
+	n43 [label = "ID: n"]
+	n42-> n43
+	n44 [label = "UnExpr"]
+	n44-> n42
+	n45 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n45:e-> n41
+	n46 [label = "<"]
+	n45:bo-> n46
+	n45:ue-> n44
+	n47 [label = "Primary"]
+	n48 [label = "STR_LIT:  "]
+	n47-> n48
+	n49 [label = "UnExpr"]
+	n49-> n47
+	n50 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n50:ue-> n49
+	n51 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n51:e-> n50
+	n52 [label = "Instruction"]
+	n53 [label = "OUTPUT"]
+	n52-> n53
+	n52-> n51
+	n54 [label = "Statement"]
+	n54-> n52
+	n55 [label = "Primary"]
+	n56 [label = "ID: spc"]
+	n55-> n56
+	n57 [label = "UnExpr"]
+	n57-> n55
+	n58 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n58:ue-> n57
+	n59 [label = "Primary"]
+	n60 [label = "INT_LIT: 1"]
+	n59-> n60
+	n61 [label = "UnExpr"]
+	n61-> n59
+	n62 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n62:e-> n58
+	n63 [label = "+"]
+	n62:bo-> n63
+	n62:ue-> n61
+	n64 [label = "Assignation: spc = "]
+	n64-> n62
+	n65 [label = "Instruction"]
+	n65-> n64
+	n66 [label = "Statement"]
+	n66-> n65
+	n67 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n67:s-> n66
+	n68 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n68:s-> n54
+	n68:sl-> n67
+	n69 [label = "Block"]
+	n69-> n68
+	n70 [label = "{WhileLoop | {<e>Expr | <b>Block}}", shape="record"]
+	n70:e-> n45
+	n70:b-> n69
+	n71 [label = "Loop"]
+	n71-> n70
+	n72 [label = "Statement"]
+	n72-> n71
+	n73 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n73:s-> n72
+	n74 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n74:s-> n37
+	n74:sl-> n73
+	n75 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n75:s-> n30
+	n75:sl-> n74
+	n76 [label = "Block"]
+	n76-> n75
+	n77 [label = "{Function | {Type: void | ID: print_n_spaces | <a>Args | <b>Block}}", shape="record"]
+	n77:b-> n76
+	n77:a-> n23
+	n78 [label = "Arg: int base"]
+	n79 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n79:a-> n78
+	n80 [label = "Primary"]
+	n81 [label = "INT_LIT: 0"]
+	n80-> n81
+	n82 [label = "UnExpr"]
+	n82-> n80
+	n83 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n83:ue-> n82
+	n84 [label = "Declaration: int row = "]
+	n84-> n83
+	n85 [label = "Instruction"]
+	n85-> n84
+	n86 [label = "Statement"]
+	n86-> n85
+	n87 [label = "Declaration: int col"]
+	n88 [label = "Instruction"]
+	n88-> n87
+	n89 [label = "Statement"]
+	n89-> n88
+	n90 [label = "Primary"]
+	n91 [label = "INT_LIT: 0"]
+	n90-> n91
+	n92 [label = "UnExpr"]
+	n92-> n90
+	n93 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n93:ue-> n92
+	n94 [label = "Declaration: int left_spaces = "]
+	n94-> n93
+	n95 [label = "Instruction"]
+	n95-> n94
+	n96 [label = "Statement"]
+	n96-> n95
+	n97 [label = "Declaration: int spc"]
+	n98 [label = "Instruction"]
+	n98-> n97
+	n99 [label = "Statement"]
+	n99-> n98
+	n100 [label = "Primary"]
+	n101 [label = "STR_LIT: o "]
+	n100-> n101
+	n102 [label = "UnExpr"]
+	n102-> n100
+	n103 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n103:ue-> n102
+	n104 [label = "Declaration: string symbol = "]
+	n104-> n103
+	n105 [label = "Instruction"]
+	n105-> n104
+	n106 [label = "Statement"]
+	n106-> n105
+	n107 [label = "Primary"]
+	n108 [label = "INT_LIT: 6"]
+	n107-> n108
+	n109 [label = "UnExpr"]
+	n109-> n107
+	n110 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n110:ue-> n109
+	n111 [label = "Declaration: constint CONSOLAS = "]
+	n111-> n110
+	n112 [label = "Instruction"]
+	n112-> n111
+	n113 [label = "Statement"]
+	n113-> n112
+	n114 [label = "Primary"]
+	n115 [label = "INT_LIT: 0"]
+	n114-> n115
+	n116 [label = "UnExpr"]
+	n116-> n114
+	n117 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n117:ue-> n116
+	n118 [label = "Declaration: int r = "]
+	n118-> n117
+	n119 [label = "Instruction"]
+	n119-> n118
+	n120 [label = "Statement"]
+	n120-> n119
+	n121 [label = "Primary"]
+	n122 [label = "INT_LIT: 0"]
+	n121-> n122
+	n123 [label = "UnExpr"]
+	n123-> n121
+	n124 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n124:ue-> n123
+	n125 [label = "Declaration: int g = "]
+	n125-> n124
+	n126 [label = "Instruction"]
+	n126-> n125
+	n127 [label = "Statement"]
+	n127-> n126
+	n128 [label = "Primary"]
+	n129 [label = "INT_LIT: 255"]
+	n128-> n129
+	n130 [label = "UnExpr"]
+	n130-> n128
+	n131 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n131:ue-> n130
+	n132 [label = "Declaration: int b = "]
+	n132-> n131
+	n133 [label = "Instruction"]
+	n133-> n132
+	n134 [label = "Statement"]
+	n134-> n133
+	n135 [label = "Primary"]
+	n136 [label = "ID: row"]
+	n135-> n136
+	n137 [label = "UnExpr"]
+	n137-> n135
+	n138 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n138:ue-> n137
+	n139 [label = "Primary"]
+	n140 [label = "ID: base"]
+	n139-> n140
+	n141 [label = "UnExpr"]
+	n141-> n139
+	n142 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n142:e-> n138
+	n143 [label = "<="]
+	n142:bo-> n143
+	n142:ue-> n141
+	n144 [label = "Primary"]
+	n145 [label = "ID: base"]
+	n144-> n145
+	n146 [label = "UnExpr"]
+	n146-> n144
+	n147 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n147:ue-> n146
+	n148 [label = "Primary"]
+	n149 [label = "ID: row"]
+	n148-> n149
+	n150 [label = "UnExpr"]
+	n150-> n148
+	n151 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n151:e-> n147
+	n152 [label = "-"]
+	n151:bo-> n152
+	n151:ue-> n150
+	n153 [label = "Assignation: left_spaces = "]
+	n153-> n151
+	n154 [label = "Instruction"]
+	n154-> n153
+	n155 [label = "Statement"]
+	n155-> n154
+	n156 [label = "Primary"]
+	n157 [label = "ID: left_spaces"]
+	n156-> n157
+	n158 [label = "UnExpr"]
+	n158-> n156
+	n159 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n159:ue-> n158
+	n160 [label = "Primary"]
+	n161 [label = "INT_LIT: 2"]
+	n160-> n161
+	n162 [label = "UnExpr"]
+	n162-> n160
+	n163 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n163:e-> n159
+	n164 [label = "+"]
+	n163:bo-> n164
+	n163:ue-> n162
+	n165 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n165:e-> n163
+	n166 [label = "{FunctionCall | { ID: print_n_spaces | <e>ExprArg}}", shape="record"]
+	n166:e-> n165
+	n167 [label = "Instruction"]
+	n167-> n166
+	n168 [label = "Statement"]
+	n168-> n167
+	n169 [label = "Primary"]
+	n170 [label = "INT_LIT: 0"]
+	n169-> n170
+	n171 [label = "UnExpr"]
+	n171-> n169
+	n172 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n172:ue-> n171
+	n173 [label = "Assignation: col = "]
+	n173-> n172
+	n174 [label = "Instruction"]
+	n174-> n173
+	n175 [label = "Statement"]
+	n175-> n174
+	n176 [label = "Primary"]
+	n177 [label = "ID: col"]
+	n176-> n177
+	n178 [label = "UnExpr"]
+	n178-> n176
+	n179 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n179:ue-> n178
+	n180 [label = "Primary"]
+	n181 [label = "ID: row"]
+	n180-> n181
+	n182 [label = "UnExpr"]
+	n182-> n180
+	n183 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n183:e-> n179
+	n184 [label = "<"]
+	n183:bo-> n184
+	n183:ue-> n182
+	n185 [label = "Primary"]
+	n186 [label = "ID: row"]
+	n185-> n186
+	n187 [label = "UnExpr"]
+	n187-> n185
+	n188 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n188:ue-> n187
+	n189 [label = "Primary"]
+	n190 [label = "INT_LIT: 2"]
+	n189-> n190
+	n191 [label = "UnExpr"]
+	n191-> n189
+	n192 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n192:e-> n188
+	n193 [label = "%"]
+	n192:bo-> n193
+	n192:ue-> n191
+	n194 [label = "Primary"]
+	n194-> n192
+	n195 [label = "UnExpr"]
+	n195-> n194
+	n196 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n196:ue-> n195
+	n197 [label = "Primary"]
+	n198 [label = "ID: col"]
+	n197-> n198
+	n199 [label = "UnExpr"]
+	n199-> n197
+	n200 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n200:ue-> n199
+	n201 [label = "Primary"]
+	n202 [label = "INT_LIT: 2"]
+	n201-> n202
+	n203 [label = "UnExpr"]
+	n203-> n201
+	n204 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n204:e-> n200
+	n205 [label = "%"]
+	n204:bo-> n205
+	n204:ue-> n203
+	n206 [label = "Primary"]
+	n206-> n204
+	n207 [label = "UnExpr"]
+	n207-> n206
+	n208 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n208:e-> n196
+	n209 [label = "=="]
+	n208:bo-> n209
+	n208:ue-> n207
+	n210 [label = "Primary"]
+	n211 [label = "INT_LIT: 160"]
+	n210-> n211
+	n212 [label = "UnExpr"]
+	n212-> n210
+	n213 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n213:ue-> n212
+	n214 [label = "Assignation: r = "]
+	n214-> n213
+	n215 [label = "Instruction"]
+	n215-> n214
+	n216 [label = "Statement"]
+	n216-> n215
+	n217 [label = "Primary"]
+	n218 [label = "INT_LIT: 54"]
+	n217-> n218
+	n219 [label = "UnExpr"]
+	n219-> n217
+	n220 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n220:ue-> n219
+	n221 [label = "Assignation: g = "]
+	n221-> n220
+	n222 [label = "Instruction"]
+	n222-> n221
+	n223 [label = "Statement"]
+	n223-> n222
+	n224 [label = "Primary"]
+	n225 [label = "INT_LIT: 210"]
+	n224-> n225
+	n226 [label = "UnExpr"]
+	n226-> n224
+	n227 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n227:ue-> n226
+	n228 [label = "Assignation: b = "]
+	n228-> n227
+	n229 [label = "Instruction"]
+	n229-> n228
+	n230 [label = "Statement"]
+	n230-> n229
+	n231 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n231:s-> n230
+	n232 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n232:s-> n223
+	n232:sl-> n231
+	n233 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n233:s-> n216
+	n233:sl-> n232
+	n234 [label = "Block"]
+	n234-> n233
+	n235 [label = "Primary"]
+	n236 [label = "INT_LIT: 215"]
+	n235-> n236
+	n237 [label = "UnExpr"]
+	n237-> n235
+	n238 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n238:ue-> n237
+	n239 [label = "Assignation: r = "]
+	n239-> n238
+	n240 [label = "Instruction"]
+	n240-> n239
+	n241 [label = "Statement"]
+	n241-> n240
+	n242 [label = "Primary"]
+	n243 [label = "INT_LIT: 155"]
+	n242-> n243
+	n244 [label = "UnExpr"]
+	n244-> n242
+	n245 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n245:ue-> n244
+	n246 [label = "Assignation: g = "]
+	n246-> n245
+	n247 [label = "Instruction"]
+	n247-> n246
+	n248 [label = "Statement"]
+	n248-> n247
+	n249 [label = "Primary"]
+	n250 [label = "INT_LIT: 235"]
+	n249-> n250
+	n251 [label = "UnExpr"]
+	n251-> n249
+	n252 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n252:ue-> n251
+	n253 [label = "Assignation: b = "]
+	n253-> n252
+	n254 [label = "Instruction"]
+	n254-> n253
+	n255 [label = "Statement"]
+	n255-> n254
+	n256 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n256:s-> n255
+	n257 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n257:s-> n248
+	n257:sl-> n256
+	n258 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n258:s-> n241
+	n258:sl-> n257
+	n259 [label = "Block"]
+	n259-> n258
+	n260 [label = "{IfCondition | {<e>Expr | <b1>BlockIf | <b2>BlockElse}}", shape="record"]
+	n260:e-> n208
+	n260:b1-> n234
+	n260:b2-> n259
+	n261 [label = "Conditional"]
+	n261-> n260
+	n262 [label = "Statement"]
+	n262-> n261
+	n263 [label = "Primary"]
+	n264 [label = "ID: r"]
+	n263-> n264
+	n265 [label = "UnExpr"]
+	n265-> n263
+	n266 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n266:ue-> n265
+	n267 [label = "Primary"]
+	n268 [label = "ID: g"]
+	n267-> n268
+	n269 [label = "UnExpr"]
+	n269-> n267
+	n270 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n270:ue-> n269
+	n271 [label = "Primary"]
+	n272 [label = "ID: b"]
+	n271-> n272
+	n273 [label = "UnExpr"]
+	n273-> n271
+	n274 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n274:ue-> n273
+	n275 [label = "Primary"]
+	n276 [label = "INT_LIT: 14"]
+	n275-> n276
+	n277 [label = "UnExpr"]
+	n277-> n275
+	n278 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n278:ue-> n277
+	n279 [label = "Primary"]
+	n280 [label = "ID: CONSOLAS"]
+	n279-> n280
+	n281 [label = "UnExpr"]
+	n281-> n279
+	n282 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n282:ue-> n281
+	n283 [label = "Primary"]
+	n284 [label = "INT_LIT: 0"]
+	n283-> n284
+	n285 [label = "UnExpr"]
+	n285-> n283
+	n286 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n286:ue-> n285
+	n287 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n287:e-> n286
+	n288 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n288:e-> n282
+	n288:el-> n287
+	n289 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n289:e-> n278
+	n289:el-> n288
+	n290 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n290:e-> n274
+	n290:el-> n289
+	n291 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n291:e-> n270
+	n291:el-> n290
+	n292 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n292:e-> n266
+	n292:el-> n291
+	n293 [label = "{FunctionCall | { ID: M68K_set_text_properties | <e>ExprArg}}", shape="record"]
+	n293:e-> n292
+	n294 [label = "Instruction"]
+	n294-> n293
+	n295 [label = "Statement"]
+	n295-> n294
+	n296 [label = "Primary"]
+	n297 [label = "ID: symbol"]
+	n296-> n297
+	n298 [label = "UnExpr"]
+	n298-> n296
+	n299 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n299:ue-> n298
+	n300 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n300:e-> n299
+	n301 [label = "Instruction"]
+	n302 [label = "OUTPUT"]
+	n301-> n302
+	n301-> n300
+	n303 [label = "Statement"]
+	n303-> n301
+	n304 [label = "Primary"]
+	n305 [label = "ID: col"]
+	n304-> n305
+	n306 [label = "UnExpr"]
+	n306-> n304
+	n307 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n307:ue-> n306
+	n308 [label = "Primary"]
+	n309 [label = "INT_LIT: 1"]
+	n308-> n309
+	n310 [label = "UnExpr"]
+	n310-> n308
+	n311 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n311:e-> n307
+	n312 [label = "+"]
+	n311:bo-> n312
+	n311:ue-> n310
+	n313 [label = "Assignation: col = "]
+	n313-> n311
+	n314 [label = "Instruction"]
+	n314-> n313
+	n315 [label = "Statement"]
+	n315-> n314
+	n316 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n316:s-> n315
+	n317 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n317:s-> n303
+	n317:sl-> n316
+	n318 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n318:s-> n295
+	n318:sl-> n317
+	n319 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n319:s-> n262
+	n319:sl-> n318
+	n320 [label = "Block"]
+	n320-> n319
+	n321 [label = "{WhileLoop | {<e>Expr | <b>Block}}", shape="record"]
+	n321:e-> n183
+	n321:b-> n320
+	n322 [label = "Loop"]
+	n322-> n321
+	n323 [label = "Statement"]
+	n323-> n322
+	n324 [label = "Primary"]
+	n325 [label = "ID: row"]
+	n324-> n325
+	n326 [label = "UnExpr"]
+	n326-> n324
+	n327 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n327:ue-> n326
+	n328 [label = "Primary"]
+	n329 [label = "INT_LIT: 1"]
+	n328-> n329
+	n330 [label = "UnExpr"]
+	n330-> n328
+	n331 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n331:e-> n327
+	n332 [label = "+"]
+	n331:bo-> n332
+	n331:ue-> n330
+	n333 [label = "Assignation: row = "]
+	n333-> n331
+	n334 [label = "Instruction"]
+	n334-> n333
+	n335 [label = "Statement"]
+	n335-> n334
+	n336 [label = "Primary"]
+	n337 [label = "STR_LIT: "]
+	n336-> n337
+	n338 [label = "UnExpr"]
+	n338-> n336
+	n339 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n339:ue-> n338
+	n340 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n340:e-> n339
+	n341 [label = "Instruction"]
+	n342 [label = "OUTPUTLN"]
+	n341-> n342
+	n341-> n340
+	n343 [label = "Statement"]
+	n343-> n341
+	n344 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n344:s-> n343
+	n345 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n345:s-> n335
+	n345:sl-> n344
+	n346 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n346:s-> n323
+	n346:sl-> n345
+	n347 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n347:s-> n175
+	n347:sl-> n346
+	n348 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n348:s-> n168
+	n348:sl-> n347
+	n349 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n349:s-> n155
+	n349:sl-> n348
+	n350 [label = "Block"]
+	n350-> n349
+	n351 [label = "{WhileLoop | {<e>Expr | <b>Block}}", shape="record"]
+	n351:e-> n142
+	n351:b-> n350
+	n352 [label = "Loop"]
+	n352-> n351
+	n353 [label = "Statement"]
+	n353-> n352
+	n354 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n354:s-> n353
+	n355 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n355:s-> n134
+	n355:sl-> n354
+	n356 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n356:s-> n127
+	n356:sl-> n355
+	n357 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n357:s-> n120
+	n357:sl-> n356
+	n358 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n358:s-> n113
+	n358:sl-> n357
+	n359 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n359:s-> n106
+	n359:sl-> n358
+	n360 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n360:s-> n99
+	n360:sl-> n359
+	n361 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n361:s-> n96
+	n361:sl-> n360
+	n362 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n362:s-> n89
+	n362:sl-> n361
+	n363 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n363:s-> n86
+	n363:sl-> n362
+	n364 [label = "Block"]
+	n364-> n363
+	n365 [label = "{Function | {Type: void | ID: pyramid | <a>Args | <b>Block}}", shape="record"]
+	n365:b-> n364
+	n365:a-> n79
+	n366 [label = "Primary"]
+	n367 [label = "INT_LIT: 6"]
+	n366-> n367
+	n368 [label = "UnExpr"]
+	n368-> n366
+	n369 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n369:ue-> n368
+	n370 [label = "Declaration: constint CONSOLAS = "]
+	n370-> n369
+	n371 [label = "Instruction"]
+	n371-> n370
+	n372 [label = "Statement"]
+	n372-> n371
+	n373 [label = "Primary"]
+	n374 [label = "INT_LIT: 255"]
+	n373-> n374
+	n375 [label = "UnExpr"]
+	n375-> n373
+	n376 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n376:ue-> n375
+	n377 [label = "Primary"]
+	n378 [label = "INT_LIT: 255"]
+	n377-> n378
+	n379 [label = "UnExpr"]
+	n379-> n377
+	n380 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n380:ue-> n379
+	n381 [label = "Primary"]
+	n382 [label = "INT_LIT: 255"]
+	n381-> n382
+	n383 [label = "UnExpr"]
+	n383-> n381
+	n384 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n384:ue-> n383
+	n385 [label = "Primary"]
+	n386 [label = "INT_LIT: 14"]
+	n385-> n386
+	n387 [label = "UnExpr"]
+	n387-> n385
+	n388 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n388:ue-> n387
+	n389 [label = "Primary"]
+	n390 [label = "ID: CONSOLAS"]
+	n389-> n390
+	n391 [label = "UnExpr"]
+	n391-> n389
+	n392 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n392:ue-> n391
+	n393 [label = "Primary"]
+	n394 [label = "INT_LIT: 0"]
+	n393-> n394
+	n395 [label = "UnExpr"]
+	n395-> n393
+	n396 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n396:ue-> n395
+	n397 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n397:e-> n396
+	n398 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n398:e-> n392
+	n398:el-> n397
+	n399 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n399:e-> n388
+	n399:el-> n398
+	n400 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n400:e-> n384
+	n400:el-> n399
+	n401 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n401:e-> n380
+	n401:el-> n400
+	n402 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n402:e-> n376
+	n402:el-> n401
+	n403 [label = "{FunctionCall | { ID: M68K_set_text_properties | <e>ExprArg}}", shape="record"]
+	n403:e-> n402
+	n404 [label = "Instruction"]
+	n404-> n403
+	n405 [label = "Statement"]
+	n405-> n404
+	n406 [label = "Primary"]
+	n407 [label = "STR_LIT: Introduce un entero entre 1 y 16: "]
+	n406-> n407
+	n408 [label = "UnExpr"]
+	n408-> n406
+	n409 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n409:ue-> n408
+	n410 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n410:e-> n409
+	n411 [label = "Instruction"]
+	n412 [label = "OUTPUT"]
+	n411-> n412
+	n411-> n410
+	n413 [label = "Statement"]
+	n413-> n411
+	n414 [label = "Primary"]
+	n415 [label = "READ_INT"]
+	n414-> n415
+	n416 [label = "UnExpr"]
+	n416-> n414
+	n417 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n417:ue-> n416
+	n418 [label = "Declaration: int levels = "]
+	n418-> n417
+	n419 [label = "Instruction"]
+	n419-> n418
+	n420 [label = "Statement"]
+	n420-> n419
+	n421 [label = "Primary"]
+	n422 [label = "ID: levels"]
+	n421-> n422
+	n423 [label = "UnExpr"]
+	n423-> n421
+	n424 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n424:ue-> n423
+	n425 [label = "Primary"]
+	n426 [label = "INT_LIT: 0"]
+	n425-> n426
+	n427 [label = "UnExpr"]
+	n427-> n425
+	n428 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n428:e-> n424
+	n429 [label = "<="]
+	n428:bo-> n429
+	n428:ue-> n427
+	n430 [label = "Primary"]
+	n430-> n428
+	n431 [label = "UnExpr"]
+	n431-> n430
+	n432 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n432:ue-> n431
+	n433 [label = "Primary"]
+	n434 [label = "ID: levels"]
+	n433-> n434
+	n435 [label = "UnExpr"]
+	n435-> n433
+	n436 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n436:ue-> n435
+	n437 [label = "Primary"]
+	n438 [label = "INT_LIT: 16"]
+	n437-> n438
+	n439 [label = "UnExpr"]
+	n439-> n437
+	n440 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n440:e-> n436
+	n441 [label = ">"]
+	n440:bo-> n441
+	n440:ue-> n439
+	n442 [label = "Primary"]
+	n442-> n440
+	n443 [label = "UnExpr"]
+	n443-> n442
+	n444 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n444:e-> n432
+	n445 [label = "||"]
+	n444:bo-> n445
+	n444:ue-> n443
+	n446 [label = "Primary"]
+	n447 [label = "STR_LIT: Número inválido : "]
+	n446-> n447
+	n448 [label = "UnExpr"]
+	n448-> n446
+	n449 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n449:ue-> n448
+	n450 [label = "Primary"]
+	n451 [label = "ID: levels"]
+	n450-> n451
+	n452 [label = "UnExpr"]
+	n452-> n450
+	n453 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n453:ue-> n452
+	n454 [label = "Primary"]
+	n455 [label = "STR_LIT: . Por defecto n = 8"]
+	n454-> n455
+	n456 [label = "UnExpr"]
+	n456-> n454
+	n457 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n457:ue-> n456
+	n458 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n458:e-> n457
+	n459 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n459:e-> n453
+	n459:el-> n458
+	n460 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n460:e-> n449
+	n460:el-> n459
+	n461 [label = "Instruction"]
+	n462 [label = "OUTPUT"]
+	n461-> n462
+	n461-> n460
+	n463 [label = "Statement"]
+	n463-> n461
+	n464 [label = "Primary"]
+	n465 [label = "STR_LIT: "]
+	n464-> n465
+	n466 [label = "UnExpr"]
+	n466-> n464
+	n467 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n467:ue-> n466
+	n468 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n468:e-> n467
+	n469 [label = "Instruction"]
+	n470 [label = "OUTPUTLN"]
+	n469-> n470
+	n469-> n468
+	n471 [label = "Statement"]
+	n471-> n469
+	n472 [label = "Primary"]
+	n473 [label = "INT_LIT: 8"]
+	n472-> n473
+	n474 [label = "UnExpr"]
+	n474-> n472
+	n475 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n475:ue-> n474
+	n476 [label = "Assignation: levels = "]
+	n476-> n475
+	n477 [label = "Instruction"]
+	n477-> n476
+	n478 [label = "Statement"]
+	n478-> n477
+	n479 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n479:s-> n478
+	n480 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n480:s-> n471
+	n480:sl-> n479
+	n481 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n481:s-> n463
+	n481:sl-> n480
+	n482 [label = "Block"]
+	n482-> n481
+	n483 [label = "{IfCondition | {<e>Expr | <b1>BlockIf | <b2>BlockElse}}", shape="record"]
+	n483:e-> n444
+	n483:b1-> n482
+	n484 [label = "Conditional"]
+	n484-> n483
+	n485 [label = "Statement"]
+	n485-> n484
+	n486 [label = "Primary"]
+	n487 [label = "STR_LIT: Pirámide de "]
+	n486-> n487
+	n488 [label = "UnExpr"]
+	n488-> n486
+	n489 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n489:ue-> n488
+	n490 [label = "Primary"]
+	n491 [label = "ID: levels"]
+	n490-> n491
+	n492 [label = "UnExpr"]
+	n492-> n490
+	n493 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n493:ue-> n492
+	n494 [label = "Primary"]
+	n495 [label = "STR_LIT:  niveles"]
+	n494-> n495
+	n496 [label = "UnExpr"]
+	n496-> n494
+	n497 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n497:ue-> n496
+	n498 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n498:e-> n497
+	n499 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n499:e-> n493
+	n499:el-> n498
+	n500 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n500:e-> n489
+	n500:el-> n499
+	n501 [label = "Instruction"]
+	n502 [label = "OUTPUT"]
+	n501-> n502
+	n501-> n500
+	n503 [label = "Statement"]
+	n503-> n501
+	n504 [label = "Primary"]
+	n505 [label = "STR_LIT: "]
+	n504-> n505
+	n506 [label = "UnExpr"]
+	n506-> n504
+	n507 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n507:ue-> n506
+	n508 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n508:e-> n507
+	n509 [label = "Instruction"]
+	n510 [label = "OUTPUTLN"]
+	n509-> n510
+	n509-> n508
+	n511 [label = "Statement"]
+	n511-> n509
+	n512 [label = "Primary"]
+	n513 [label = "ID: levels"]
+	n512-> n513
+	n514 [label = "UnExpr"]
+	n514-> n512
+	n515 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n515:ue-> n514
+	n516 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n516:e-> n515
+	n517 [label = "{FunctionCall | { ID: pyramid | <e>ExprArg}}", shape="record"]
+	n517:e-> n516
+	n518 [label = "Instruction"]
+	n518-> n517
+	n519 [label = "Statement"]
+	n519-> n518
+	n520 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n520:s-> n519
+	n521 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n521:s-> n511
+	n521:sl-> n520
+	n522 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n522:s-> n503
+	n522:sl-> n521
+	n523 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n523:s-> n485
+	n523:sl-> n522
+	n524 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n524:s-> n420
+	n524:sl-> n523
+	n525 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n525:s-> n413
+	n525:sl-> n524
+	n526 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n526:s-> n405
+	n526:sl-> n525
+	n527 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n527:s-> n372
+	n527:sl-> n526
+	n528 [label = "Block"]
+	n528-> n527
+	n529 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n529:b-> n528
+	n530 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n530:f-> n529
+	n531 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n531:f-> n365
+	n531:fl-> n530
+	n532 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n532:f-> n77
+	n532:fl-> n531
+	n533 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n533:f-> n20
+	n533:fl-> n532
+	n534 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n534:f-> n6
+	n534:fl-> n533
+	n535 [label = "Program"]
+	n535-> n534
+}

@@ -1,2 +1,0 @@
-### ---------- Compilation Errors ----------
-[Semantic Error]: ID (l) is not defined in line 16, column 16

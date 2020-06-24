@@ -16,6 +16,7 @@ import cyclonecompiler.FatalError;
 import cyclonecompiler.InfoDump;
 import cyclonecompiler.Main;
 import static cyclonecompiler.Main.ts;
+import java.util.ArrayList;
 
 public class Primary extends Node {
        
@@ -48,6 +49,18 @@ public class Primary extends Node {
     public void generateIntermediateCode() {
         switch(productionType)
         {
+            case READ_STRING:
+                this.intermediateVar = 
+                        new IntermediateCode.Variable(VarSemantics.LOCAL, 82, VarType.STRING, null);
+                Main.gen.generateReadString(this.intermediateVar);
+                break;
+                
+            case READ_INT:
+                this.intermediateVar = 
+                    new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.INT, null);
+                    Main.gen.generateReadInt(this.intermediateVar);
+                break;
+                
             case STR_LIT:
                 this.intermediateVar = 
                         new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING, null);
@@ -70,13 +83,23 @@ public class Primary extends Node {
             case INT_LIT:
                 // Genera ti = int_lit
                 // local
-                System.out.println("Primary genera nueva variable auxiliar");
                 this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.INT, null);
                 Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
                 break;
                 
             case FUNCTION_CALL:
-                System.err.println("F call not implemented yet"); 
+                ArrayList<Expr> listFound = fl.getExpressionList();
+                FuncDescription fd = (FuncDescription) Main.ts.getForward(this.id);
+                
+                for (Expr arg : listFound){
+                    arg.generateIntermediateCode();
+                    Main.gen.generateParam(arg.intermediateVar);
+                }
+
+                String retType = fd.getReturnType();
+                this.intermediateVar = new IntermediateCode.Variable
+                    (VarSemantics.LOCAL, VarType.stringToVarType(retType), null);
+                Main.gen.generateFun(this.intermediateVar, fd.getTag());
                 break;
                 
             case EXPR:
@@ -116,7 +139,8 @@ public class Primary extends Node {
     }
     
     public static enum PrimaryType {
-        STR_LIT, BOOL_LIT, INT_LIT, FUNCTION_CALL, EXPR, ID
+        STR_LIT, BOOL_LIT, INT_LIT, FUNCTION_CALL, EXPR, ID, 
+        READ_STRING, READ_INT
     }
     
     /*
@@ -274,6 +298,17 @@ public class Primary extends Node {
         toDot();
     }
 
+    /*
+    Primary --> READ_STRING || READ_INT
+    */
+    public Primary(PrimaryType type, int line, int column){
+        this.productionType = type;
+        this.line = line;
+        this.column = column;
+        this.type = type == PrimaryType.READ_INT ? Main.atomicInt : Main.atomicChar;
+        toDot();
+    }
+    
     public AtomicType getType() {
         return type;
     }
@@ -291,6 +326,8 @@ public class Primary extends Node {
             case INT_LIT: return "INT_LIT: "+this.int_lit;
             case FUNCTION_CALL: return "FUNCTION_CALL: "+this.fl;
             case EXPR: return "( EXPRESSION )";
+            case READ_STRING: return "READ_STRING";
+            case READ_INT: return "READ_INT";
         }
         return "";
     }
@@ -312,6 +349,8 @@ public class Primary extends Node {
                 case STR_LIT: label = "STR_LIT: "+str_lit; break;
                 case INT_LIT: label = "INT_LIT: "+int_lit; break;
                 case BOOL_LIT: label = "BOOL_LIT: "+bool_lit; break;
+                case READ_STRING: label = "READ_STRING"; break;
+                case READ_INT: label = "READ_INT"; break;
                 default:
                     label = "error ???";
             }

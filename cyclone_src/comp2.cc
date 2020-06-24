@@ -1,25 +1,35 @@
-functions 
-{
-    void cyclone ();
-    void prueba(int a, int b);
-}
+// _internal void M68K_set_text_color(int r, int g, int b) -> "SETTXTCL";
+// _internal void M68K_set_text_properties 
+//     (int red, int green, int blue, int size, int font, int style) -> "SETTXTPR";
 
-
-_internal void 68K_set_text_color(int r, int g, int b) -> "SETCOL";
-
-
-
-func void prueba(int a, int b)
-{
-    output("A: ")
-    outputln(a);
-
-    output("B: ")
-    outputln(b);
-}
+// func bool isSumZero(int a, int b)
+// {
+//     return (a + b) == 0;
+// }
 
 func void cyclone()
 {
-    outputln("   No te voy a mentir, se ve bien fresco este código");
-    outputln("   Me alegro por el");
+    // const int CONSOLAS = 6;
+    // M68K_set_text_properties(255, 255, 255, 14, CONSOLAS, 0);
+    
+    // out("resultado de isSumZero(3,-3): ", isSumZero(3,-3));
+    // outln("");
+    // out("resultado de isSumZero(7, 9): ", isSumZero(7,9));
+
+
+    /* INPUT */
+    // Método 1: Que sea una una funcion _internal
+    // Método 2: Construcción del lenguaje
+    
+
+    // Para read_string
+    /*
+        D0.L <- 2
+        A1 <- @STR
+        TRAP #15
+    */
+
+    outln("Introduce un número: ");
+    int x = read_int();
+    output("Introducido: ", x);
 }

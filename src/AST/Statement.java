@@ -24,13 +24,8 @@ public class Statement extends Node{
 
     @Override
     public void generateIntermediateCode() {
-        try{
-            if (node != null) {
-                System.out.println("Statement genera nodo");
-                node.generateIntermediateCode();
-            }
-        } catch(Exception ex){
-            System.out.println("Loop y conditional not implemented yet!");
+        if (node != null) {
+            node.generateIntermediateCode();
         }
     }
         

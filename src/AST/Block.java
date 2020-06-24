@@ -25,7 +25,6 @@ public class Block extends Node{
     @Override
     public void generateIntermediateCode() {
         if (sl != null){
-            System.out.println("Block genera StatementList");
             this.sl.generateIntermediateCode();
         }
     }

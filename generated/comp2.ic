@@ -1,10 +1,12 @@
 # ----------- FUNC: cyclone ----------- 
-e0: skip
-    pmb e0
-    t4 = "   No te voy a mentir, se ve bien fresco este código"# Aux var
-    outputln t4
-    t5 = "   Me alegro por el"# Aux var
+f0: skip
+    pmb f0
+    t5 = "Introduce un número: "# Aux var
     outputln t5
-    call null
+    read_int t6
+    t4 = t6                   # 'x' = expr
+    t7 = "Introducido: "      # Aux var
+    output t7
+    output t4
     return
 # -------------- END ------------- 

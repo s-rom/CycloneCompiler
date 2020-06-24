@@ -8,17 +8,24 @@ public class Tag {
     }
    
     private int id;
+    private String tag = "e";
     
     /**
      * Cada Tag creado és único.
      */
     public Tag(){
         id = nextId();
+        tag += id;
+    }
+    
+    public Tag(String subroutine){
+        id = nextId();
+        tag = subroutine;
     }
     
     @Override
     public String toString(){
-        return "e"+id; 
+        return tag; 
     }
     
     public int getID(){

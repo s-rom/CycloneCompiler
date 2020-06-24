@@ -81,13 +81,24 @@ comment2    = "//"[^\n\r]*
 "if"        {s.push("if"); return getSymbol(ParserSym.IF);}
 "else"      {s.push("else"); return getSymbol(ParserSym.ELSE);}
 "func"      {s.push("func"); return getSymbol(ParserSym.FUNC);}
+
+// Alias
 "output"    {return getSymbol(ParserSym.OUTPUT);}
 "outputln"  {return getSymbol(ParserSym.OUTPUTLN);}
-"input"     {return getSymbol(ParserSym.INPUT);}
+"out"       {return getSymbol(ParserSym.OUTPUT);}
+"outln"     {return getSymbol(ParserSym.OUTPUTLN);}
+"print"     {return getSymbol(ParserSym.OUTPUT);}
+"println"   {return getSymbol(ParserSym.OUTPUTLN);}
+
+
+"read_string" {return getSymbol(ParserSym.READ_STRING);}
+"read_int"     {return getSymbol(ParserSym.READ_INT);}
 "return"    {return getSymbol(ParserSym.RETURN);}
+"_internal" {return getSymbol(ParserSym.INTERNAL);}
+"->"        {return getSymbol(ParserSym.ARROW);}
 
 
-"("         {   if (s.peek() == "func" && !funcOpen){
+"("         {   if (!s.empty() && s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
                     funcOpen = true;
                 }     

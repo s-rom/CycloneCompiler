@@ -1,11 +1,14 @@
 package AssemblyGeneration;
 
+import IntermediateCode.FuncTag;
 import IntermediateCode.Instruction;
 import IntermediateCode.Tag;
 import IntermediateCode.Variable;
 import IntermediateCode.Function;
+import IntermediateCode.Opcode;
 import IntermediateCode.VarType;
 import SymbolTable.FuncDescription;
+import cyclonecompiler.InfoDump;
 import cyclonecompiler.Main;
 
 public class M68kGenerator extends AsmGenerator{
@@ -44,7 +47,10 @@ public class M68kGenerator extends AsmGenerator{
     private String getNTabs(int n){
         return getNChars(n, '\t');
     }
-  
+    
+    private String getBranchEquivalent(Opcode op){
+        return "B"+op.name().toUpperCase();
+    }
      
     public M68kGenerator(String filePath){
         super(filePath);
@@ -54,9 +60,9 @@ public class M68kGenerator extends AsmGenerator{
     }
     
     public String generatePmb(Instruction instr){
-        String asmInstr = "";
+        String asmInstr;
         Function f = (Function) instr.getDst();
-        int localBytes = f.getLocalOccupation().x;
+        int localBytes = f.computeLocalOccupation().x;
         
         asmInstr = "MOVE.L "+BP+", -("+SP+")";
         asmInstr = getCommentedLine(asmInstr, ";"+instr.toString());
@@ -73,14 +79,30 @@ public class M68kGenerator extends AsmGenerator{
         return BEFORE_TAB + line + tabs + commentary + "\n";
     }   
     
+    public String generateFun(Instruction instr){
+        FuncTag funcTag = (FuncTag) instr.getDst();
+        
+        String asmInstr = "JSR " + funcTag.toString().toUpperCase();
+        String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
+        asmInstr =  BEFORE_TAB + asmInstr + tabs + ";"+instr.toString()+"\n";
+        asmInstr += BEFORE_TAB + store(OUT_PARAM_REG, instr.getSrc1());
+        return asmInstr;
+    }
+    
     public String generateCall(Instruction instr){
-        Tag funcTag = (Tag) instr.getDst();
+        FuncTag funcTag = (FuncTag) instr.getDst();
         Function f = Main.gen.getFunctionByTag(funcTag);
-        String asmInstr = "JSR "+funcTag.toString().toUpperCase();
+        String asmInstr;
+        
+        if (f.isUserDefined())
+            asmInstr = "JSR "+funcTag.toString().toUpperCase();
+        else 
+            asmInstr = "JSR "+f.getSubroutine();  
+        
         
         String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
         asmInstr =  BEFORE_TAB + asmInstr + tabs + ";"+instr.toString()+"\n";
-        asmInstr += BEFORE_TAB + "ADD.L #" + f.getLocalOccupation().y + ", "+SP+"\n";
+        asmInstr += BEFORE_TAB + "ADD.L #" + f.computeLocalOccupation().y + ", "+SP+"\n";
         return asmInstr;
     }
     
@@ -92,25 +114,53 @@ public class M68kGenerator extends AsmGenerator{
     
     public String generateReturn(Instruction instr){
         String asmInstr;
-        Function f = (Function) instr.getDst();
 
-        //TODO: Gestionar valor devuelto
-//        Object retVal = instr.getSrc1(); 
-//        if (retVal != null){
-//            asmInstr += BEFORE_TAB+load(retVal, OUT_PARAM_REG, instr.toString());
-//        }
-       
-        asmInstr = "MOVE.L "+BP+", "+SP;
-        asmInstr = getCommentedLine(asmInstr, instr.toString());
+        if (instr.getSrc1() != null) {
+            asmInstr = BEFORE_TAB + load(instr.getSrc1(), OUT_PARAM_REG, instr.toString());
+            asmInstr += BEFORE_TAB + "MOVE.L "+BP+", "+SP+"\n";
+        } else{
+            asmInstr = "MOVE.L "+BP+", "+SP;
+            asmInstr = getCommentedLine(asmInstr, instr.toString());
+        }        
+        
         asmInstr += BEFORE_TAB+"MOVE.L ("+SP+")+, A6\n";
         asmInstr += BEFORE_TAB+"RTS";
         return asmInstr;
     }
     
-  
-    public String generateTag(Tag t){
-        return t.toString().toUpperCase()+": ";
+    
+    public String generateRead(Instruction instr){
+        String asmInstr = "";
+        Variable vDst = (Variable) instr.getDst();
+        int trapNum = instr.getOp() == Opcode.READ_STRING ? 2 : 4;
+        asmInstr = this.getCommentedLine("MOVE.L #"+trapNum+", D0", instr.toString());
+        
+        if (instr.getOp() == Opcode.READ_STRING) {
+            asmInstr += BEFORE_TAB + "MOVE.L  A6, A1\n";
+            asmInstr += BEFORE_TAB + "ADD.L #"+vDst.getOffset()+", A1\n";
+        } 
+            
+        asmInstr += BEFORE_TAB + "TRAP #15";
+        
+        if (instr.getOp() == Opcode.READ_INT){
+            asmInstr += "\n"+BEFORE_TAB+store("D1",vDst);
+        }
+        return asmInstr;
     }
+  
+    public String generateTag(Object t){
+        if (t instanceof Tag)
+            return ((Tag)t).toString().toUpperCase()+": ";
+        else if (t instanceof FuncTag)
+            return ((FuncTag)t).toString().toUpperCase()+": ";
+        else 
+        {
+            System.out.println("t: "+t);
+            System.err.println("generateTag error");
+            return "";
+        }
+    }
+    
     
     public String loadConstant(String literal, String register){
         String asmInstr = "MOVE."+getSizeModifier(4);
@@ -196,7 +246,7 @@ public class M68kGenerator extends AsmGenerator{
         if (o instanceof Variable)
             return loadVar((Variable) o, register) + "\n";
         else 
-            return loadConstant(o.toString(), D_REG_1) + "\n";
+            return loadConstant(o.toString(), register) + "\n";
     }
     
     private String load(Object o, String register, String commentary){
@@ -204,40 +254,94 @@ public class M68kGenerator extends AsmGenerator{
         if (o instanceof Variable)
             instrAsm = loadVar((Variable) o, register);
         else
-            instrAsm = loadConstant(o.toString(), D_REG_1);
+            instrAsm = loadConstant(o.toString(), register);
         
         
         String tabs = getNSpaces(AFTER_TAB - instrAsm.length());
         return instrAsm + tabs + ";"+commentary+"\n";
     }
     
-    private String generateAdd(Instruction instr){
+    private String generateSub(Instruction instr){
         String asmInstr = "";
-        // a = b + c
-        
-        // LD b, REG
         Object src1 = instr.getSrc1();
         Object src2 = instr.getSrc2();
         Variable vDst = (Variable) instr.getDst();
         
         asmInstr += BEFORE_TAB+load(src1, D_REG_1, instr.toString());
         asmInstr += BEFORE_TAB+load(src2, D_REG_2);
-        asmInstr += BEFORE_TAB+"ADD.L "+D_REG_1+", "+D_REG_2+"\n";
-        asmInstr += BEFORE_TAB+store(D_REG_2, vDst);
-                
-        // LD c, REG2
-        // ADD REG, REG2
-        // ST REG2, a
-        
+        asmInstr += BEFORE_TAB+"SUB.L"+" "+D_REG_2+", "+D_REG_1+"\n";
+        asmInstr += BEFORE_TAB+store(D_REG_1, vDst);        
         return asmInstr;
     }
+    
+    private String generateBinaryOpcode(Instruction instr, String opcode, String size){
+        String asmInstr = "";
+        Object src1 = instr.getSrc1();
+        Object src2 = instr.getSrc2();
+        Variable vDst = (Variable) instr.getDst();
+        
+        asmInstr += BEFORE_TAB+load(src1, D_REG_1, instr.toString());
+        asmInstr += BEFORE_TAB+load(src2, D_REG_2);
+        asmInstr += BEFORE_TAB+opcode+size+" "+D_REG_1+", "+D_REG_2+"\n";
+        asmInstr += BEFORE_TAB+store(D_REG_2, vDst);        
+        return asmInstr;
+    }
+    
+    private String generateDiv(Instruction instr){
+        String asmInstr = "";
+        Object src1 = instr.getSrc1();
+        Object src2 = instr.getSrc2();
+        Variable vDst = (Variable) instr.getDst();
+        asmInstr += BEFORE_TAB+load(src1, D_REG_2, instr.toString());
+        asmInstr += BEFORE_TAB+load(src2, D_REG_1);
+        
+        asmInstr += BEFORE_TAB+"DIVS "+D_REG_1+", "+D_REG_2+"\n";
+        asmInstr += BEFORE_TAB+"AND.L #$0000FFFF, "+D_REG_2+"\n";
+        
+        asmInstr += BEFORE_TAB+store(D_REG_2, vDst);        
+        return asmInstr;
+    }
+    
+    
+      private String generateMod(Instruction instr){
+        String asmInstr = "";
+        Object src1 = instr.getSrc1();
+        Object src2 = instr.getSrc2();
+        Variable vDst = (Variable) instr.getDst();
+        asmInstr += BEFORE_TAB+load(src1, D_REG_2, instr.toString());
+        asmInstr += BEFORE_TAB+load(src2, D_REG_1);
+        
+        asmInstr += BEFORE_TAB+"DIVS "+D_REG_1+", "+D_REG_2+"\n";
+        asmInstr += BEFORE_TAB+"LSR.L  #8, "+D_REG_2+"\n";
+        asmInstr += BEFORE_TAB+"LSR.L  #8, "+D_REG_2+"\n";
+        asmInstr += BEFORE_TAB+store(D_REG_2, vDst);        
+        return asmInstr;
+    }
+    
+    private String generateBinaryOpcode(Instruction instr, String opcode){
+        return generateBinaryOpcode(instr,opcode,".L");
+    }
+    
+    
+   private String generateNot(Instruction instr){
+        String asmInstr = "";
+        Object src1 = instr.getSrc1();
+        Variable vDst = (Variable) instr.getDst();
+
+        asmInstr += BEFORE_TAB+load(src1, D_REG_1, instr.toString());
+        asmInstr += BEFORE_TAB+"NOT.L "+D_REG_1+"\n";
+        asmInstr += BEFORE_TAB+store(D_REG_2, vDst);        
+
+        return asmInstr;
+   }
     
     @Override
     public void generateMain(){
         writeAsm("\nSTART:");
         String tabs = getNSpaces((BEFORE_TAB.length()) - ("START:".length()));
         FuncDescription cycloneFunc = (FuncDescription) Main.ts.getForward("cyclone");
-        Tag cycloneTag = cycloneFunc.getTag();
+       
+        FuncTag cycloneTag = cycloneFunc.getTag();
         writeAsm(tabs+"MOVE.L "+SP+", "+BP+"\n");
         writeAsm(BEFORE_TAB+"JSR "+cycloneTag.toString().toUpperCase()+"\n");
         writeAsm(BEFORE_TAB+"SIMHALT\n");
@@ -290,17 +394,19 @@ public class M68kGenerator extends AsmGenerator{
     
     private String generateIfGoto(Instruction instr){
         String asmInstr = "";
-        asmInstr += BEFORE_TAB + load(instr.getSrc1(), D_REG_1, instr.toString());
-        asmInstr += BEFORE_TAB + load(instr.getSrc2(), D_REG_2);
-        asmInstr += BEFORE_TAB + "CMP.L "+D_REG_2+", "+D_REG_1 + "\n";
-      
-      
+        Tag dstTag = (Tag) instr.getDst();
+        
         // if ( a op b ) goto e
         // MOVE.L a, D_REG_1
         // MOVE.L b, D_REG_2
         // CMP.L  D_REG_2, D_REG_1
-        // Bop e
+        // Bcc e
         
+        asmInstr += BEFORE_TAB + load(instr.getSrc1(), D_REG_1, instr.toString());
+        asmInstr += BEFORE_TAB + load(instr.getSrc2(), D_REG_2);
+        asmInstr += BEFORE_TAB + "CMP.L "+D_REG_2+", "+D_REG_1 + "\n";
+        asmInstr += BEFORE_TAB + getBranchEquivalent(instr.getOp()) +" "+dstTag.toString().toUpperCase() + "\n";
+      
         return asmInstr;
     }
     
@@ -349,36 +455,42 @@ public class M68kGenerator extends AsmGenerator{
     
     @Override
     protected void generateAsmEquivalent(Instruction instr) {
-        System.out.println("Converting "+instr.toString());
         switch(instr.getOp())
         {
             case ADD:
-                //writeAsm(generateAdd(instr));
+                writeAsm(generateBinaryOpcode(instr, "ADD"));
                 break;
             
             case SUB:
+                writeAsm(generateSub(instr));
                 break;
             
             case MULT:
+                writeAsm(generateBinaryOpcode(instr, "MULS", ""));
                 break;
             
             case DIV:
+                writeAsm(generateDiv(instr));
                 break;
             
             case MOD:
+                writeAsm(generateMod(instr));
                 break;
             
             case AND:
+                writeAsm(generateBinaryOpcode(instr, "AND"));
                 break;
             
             case OR:
+                writeAsm(generateBinaryOpcode(instr, "OR"));
                 break;
             
             case NOT:
+                writeAsm(generateNot(instr));
                 break;
                 
             case SKIP:
-                String skipStr = generateTag((Tag) instr.getDst());
+                String skipStr = generateTag(instr.getDst());
                 writeAsm(skipStr + "\n");
                 break;
             
@@ -387,21 +499,12 @@ public class M68kGenerator extends AsmGenerator{
                 break;
             
             case GT:
-                break;
-            
             case LT:
-                break;
-            
             case GE:
-                break;
-            
-            case LE: 
-                break;
-            
+            case LE:
             case EQ:
-                break;
-            
             case NE:
+                writeAsm(generateIfGoto(instr)+"\n");
                 break;
             
             case CALL:
@@ -409,6 +512,7 @@ public class M68kGenerator extends AsmGenerator{
                 break;
             
             case FUN:
+                writeAsm(generateFun(instr)+"\n");
                 break;
             
             case RET:
@@ -434,6 +538,18 @@ public class M68kGenerator extends AsmGenerator{
             case OUTPUTLN:
                 writeAsm(generateOutput(instr,true)+"\n");
                 break;
+            case READ_STRING:
+            case READ_INT:
+                writeAsm(generateRead(instr)+"\n");
         }
     }
+    
+    private String generateUnarySub(Instruction instr) {
+        String asmInstr = BEFORE_TAB + load(instr.getSrc1(), D_REG_1, instr.toString());
+        asmInstr += BEFORE_TAB + load(0, D_REG_2);
+        asmInstr += BEFORE_TAB + "SUB.L "+ D_REG_1 + ", " + D_REG_2 + "\n";
+        asmInstr += BEFORE_TAB +store(D_REG_2, instr.getDst());
+        return asmInstr;
+    }
+
 }

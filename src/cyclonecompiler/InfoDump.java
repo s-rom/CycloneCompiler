@@ -17,13 +17,28 @@ public class InfoDump {
     
     public static BufferedWriter br; 
 
-
+    private static boolean anySyntaxError = false, 
+                           anySemanticError = false,
+                           anyLexicError = false;
+    
     private static BufferedWriter tokenWriter;
     private static BufferedWriter tsWriter;
     private static BufferedWriter errorWriter;
     private static BufferedWriter icVarWriter;
     private static BufferedWriter icFuncWriter;
 
+    public boolean IsAnySyntaxError(){
+        return anySyntaxError;
+    }
+    
+    public boolean IsAnyLexicError(){
+        return anyLexicError;
+    }
+   
+    public boolean IsAnySemanticError(){
+        return anySemanticError;
+    }
+   
     
     public static void initAllWriters(String token_path, String ts_path,
             String error_path, String ic_var_path, String ic_func_path){
@@ -119,6 +134,7 @@ public class InfoDump {
     }
     
     public static void reportSemanticError(String error_msg) throws FatalError{
+        anySemanticError = true;
         reportError(error_msg, ErrorType.SEMANTIC);
         throw new FatalError();
 
@@ -126,11 +142,13 @@ public class InfoDump {
     
     
     public static void reportSyntacticError(String error_msg){
+        anySyntaxError = true;
         reportError(error_msg, ErrorType.SYNTACTIC);
     }
     
     
-    public static void reportLexicError(String error_msg){
+    public static void reportLexicError(String error_msg) {
+        anyLexicError = true;
         reportError(error_msg, ErrorType.LEXIC);
     }
     

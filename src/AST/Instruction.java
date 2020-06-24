@@ -5,6 +5,8 @@ import cyclonecompiler.Main;
 
 public class Instruction extends Node{
 
+    private ExprArg ea;
+    
     @Override
     public void semanticCheck() {
     }
@@ -13,22 +15,42 @@ public class Instruction extends Node{
     public void generateIntermediateCode() {
         switch(this.type)
         {
-            case OUTPUTLN:
-                this.e.generateIntermediateCode();
-                Main.gen.generateOutputLn(this.e.intermediateVar);
-                System.err.println("Generated outputLN");
-                break;
-                
             case FUNCTION_CALL:
                 this.fl.generateIntermediateCode();
                 break;
-            
-            case INPUT:
-                break;
-            
+                
+            case OUTPUTLN:
             case OUTPUT:
-                this.e.generateIntermediateCode();
-                Main.gen.generateOutput(this.e.intermediateVar);
+                //this.e.generateIntermediateCode();
+                
+                Expr oe;
+                
+                if (ea != null){
+                    if (ea.getExpr() != null) {
+                        oe = ea.getExpr();
+                        oe.generateIntermediateCode();
+                        if (this.type == InstructionType.OUTPUT)
+                            Main.gen.generateOutput(oe.intermediateVar);
+                        else
+                            Main.gen.generateOutputLn(oe.intermediateVar);
+                    }
+                    
+                    ExprList el = ea.getExprList();
+
+                    while (el != null){
+                        if (el.getExpr() != null) 
+                        {
+                            oe = el.getExpr();
+                            oe.generateIntermediateCode();
+                        if (this.type == InstructionType.OUTPUT)
+                            Main.gen.generateOutput(oe.intermediateVar);
+                        else
+                            Main.gen.generateOutputLn(oe.intermediateVar);                        
+                        }
+                        el = el.getNext();
+                    }
+                }
+                
                 break;
             
             case RETURN:
@@ -51,7 +73,7 @@ public class Instruction extends Node{
     
 
     public static enum InstructionType{
-        FUNCTION_CALL, INPUT, OUTPUT, OUTPUTLN,
+        FUNCTION_CALL, OUTPUT, OUTPUTLN,
         RETURN, ASSIGNATION, DECLARATION, ALLOCATION;
     }
     
@@ -71,6 +93,12 @@ public class Instruction extends Node{
     
     public Instruction(Expr e, InstructionType type){
         this.e = e;
+        this.type = type;
+        toDot();
+    }
+    
+      public Instruction(ExprArg ea, InstructionType type){
+        this.ea = ea;
         this.type = type;
         toDot();
     }
@@ -106,25 +134,19 @@ public class Instruction extends Node{
             case FUNCTION_CALL:
                 if(fl!= null)DOT.writeEdge(nodeNumber, fl.getNodeNumber());
                 break;
-            
-            case INPUT:
-                aux_node_id = DOT.nextNode();
-                DOT.writeNode(aux_node_id, "INPUT");
-                DOT.writeEdge(nodeNumber, aux_node_id);
-                break;
-            
+                
             case OUTPUTLN:
                 aux_node_id = DOT.nextNode();
                 DOT.writeNode(aux_node_id, "OUTPUTLN");
                 DOT.writeEdge(nodeNumber, aux_node_id);
-                if (e != null) DOT.writeEdge(aux_node_id, e.getNodeNumber());
+                if (ea != null) DOT.writeEdge(nodeNumber, ea.getNodeNumber());
                 break;
                 
             case OUTPUT:
                 aux_node_id = DOT.nextNode();
                 DOT.writeNode(aux_node_id, "OUTPUT");
                 DOT.writeEdge(nodeNumber, aux_node_id);
-                if (e != null) DOT.writeEdge(aux_node_id, e.getNodeNumber());
+                if (ea != null) DOT.writeEdge(nodeNumber, ea.getNodeNumber());
                 break;
                 
             case RETURN:

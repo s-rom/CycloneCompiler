@@ -8,49 +8,52 @@ package Parser;
 /** CUP generated class containing symbol constants. */
 public class ParserSym {
   /* terminals */
-  public static final int BOOL_TYPE = 42;
-  public static final int LBRACKET = 16;
-  public static final int MULT = 24;
-  public static final int CONST = 15;
-  public static final int GE = 27;
+  public static final int BOOL_TYPE = 43;
+  public static final int LBRACKET = 15;
+  public static final int MULT = 25;
+  public static final int CONST = 14;
+  public static final int GE = 28;
   public static final int OUTPUT = 6;
-  public static final int INPUT = 7;
-  public static final int LPAREN = 9;
-  public static final int RPAREN = 10;
-  public static final int NOT = 21;
-  public static final int LCURL = 11;
-  public static final int SEMICOLON = 14;
-  public static final int AND = 19;
-  public static final int LT = 30;
-  public static final int OR = 20;
-  public static final int COMMA = 13;
-  public static final int STR_TYPE = 39;
-  public static final int OUTPUTLN = 18;
-  public static final int DIV = 25;
-  public static final int VOID_TYPE = 41;
-  public static final int ASSIGN = 33;
+  public static final int LPAREN = 8;
+  public static final int READ_STRING = 18;
+  public static final int RPAREN = 9;
+  public static final int NOT = 22;
+  public static final int LCURL = 10;
+  public static final int SEMICOLON = 13;
+  public static final int AND = 20;
+  public static final int LT = 31;
+  public static final int OR = 21;
+  public static final int COMMA = 12;
+  public static final int STR_TYPE = 40;
+  public static final int OUTPUTLN = 17;
+  public static final int DIV = 26;
+  public static final int VOID_TYPE = 42;
+  public static final int ASSIGN = 34;
   public static final int IF = 3;
-  public static final int ID = 38;
-  public static final int LE = 28;
+  public static final int ID = 39;
+  public static final int LE = 29;
   public static final int EOF = 0;
-  public static final int RETURN = 8;
-  public static final int RBRACKET = 17;
+  public static final int RETURN = 7;
+  public static final int RBRACKET = 16;
   public static final int error = 1;
-  public static final int MOD = 26;
-  public static final int INT_TYPE = 40;
-  public static final int STR_LIT = 35;
-  public static final int EQ = 32;
-  public static final int RCURL = 12;
+  public static final int MOD = 27;
+  public static final int INT_TYPE = 41;
+  public static final int STR_LIT = 36;
+  public static final int EQ = 33;
+  public static final int RCURL = 11;
+  public static final int ARROW = 45;
+  public static final int READ_INT = 19;
   public static final int ELSE = 4;
   public static final int FUNC = 5;
-  public static final int UNARI_SUB = 37;
+  public static final int UNARI_SUB = 38;
   public static final int WHILE = 2;
-  public static final int NE = 31;
-  public static final int BOOL_LIT = 36;
-  public static final int SUM = 22;
-  public static final int INT_LIT = 34;
-  public static final int GT = 29;
-  public static final int SUB = 23;
+  public static final int NE = 32;
+  public static final int BOOL_LIT = 37;
+  public static final int SUM = 23;
+  public static final int INT_LIT = 35;
+  public static final int GT = 30;
+  public static final int SUB = 24;
+  public static final int INTERNAL = 44;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -59,7 +62,6 @@ public class ParserSym {
   "ELSE",
   "FUNC",
   "OUTPUT",
-  "INPUT",
   "RETURN",
   "LPAREN",
   "RPAREN",
@@ -71,6 +73,8 @@ public class ParserSym {
   "LBRACKET",
   "RBRACKET",
   "OUTPUTLN",
+  "READ_STRING",
+  "READ_INT",
   "AND",
   "OR",
   "NOT",
@@ -94,7 +98,9 @@ public class ParserSym {
   "STR_TYPE",
   "INT_TYPE",
   "VOID_TYPE",
-  "BOOL_TYPE"
+  "BOOL_TYPE",
+  "INTERNAL",
+  "ARROW"
   };
 }
 

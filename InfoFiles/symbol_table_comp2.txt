@@ -9,8 +9,8 @@
 | false          | const <1> bool -1
 | INT32_MAX      | const <2> int 2147483647
 | INT32_MIN      | const <3> int -2147483648
-| STRCPY         | func <0> returns void, params()
      ------------------------
      | LEVEL 1
+     | x              | local var <4> int
      ------------------------
-| cyclone        | func <1> returns void, params()
+| cyclone        | func <0> returns void, params()

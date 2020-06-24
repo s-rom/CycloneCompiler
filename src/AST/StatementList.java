@@ -28,11 +28,9 @@ public class StatementList extends Node{
     @Override
     public void generateIntermediateCode() {
         if (s != null) {
-            System.out.println("StatementList genera Statement");
             s.generateIntermediateCode();
         }
         if (sl != null) {
-            System.out.println("StatementList genera StatementList");
             sl.generateIntermediateCode();
         }
     }

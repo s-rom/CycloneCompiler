@@ -18,6 +18,14 @@ public class FunctionCall extends Node {
     private ArrayList<Expr> listFound; 
     private int line, column;
     
+    public ArrayList<Expr> getExpressionList(){
+        return listFound;
+    }
+    
+    public String getID(){
+        return id;
+    }
+    
     public FunctionCall(String id, ExprArg param, int line, int column) throws FatalError{
         this.id = id;
         this.param = param;
@@ -90,14 +98,13 @@ public class FunctionCall extends Node {
 
     @Override
     public void generateIntermediateCode() {
-        System.out.println("Llamada a "+this.id);
 
         FuncDescription fd = (FuncDescription) Main.ts.getForward(this.id);
         for (Expr arg : this.listFound){
             arg.generateIntermediateCode();
             Main.gen.generateParam(arg.intermediateVar);
         }
-        
+                
         Main.gen.generateCall(fd.getTag());
     }
 

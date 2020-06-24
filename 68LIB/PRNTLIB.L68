@@ -1,6 +1,6 @@
-00001084 Starting Address
+00000000 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 15/06/2020 14:12:27
+Created On: 22/06/2020 9:30:17
 
 00000000                             1  ; -----------------------------------------------------------------------------
 00000000                             2  PRINTB:   
@@ -63,92 +63,122 @@ Created On: 15/06/2020 14:12:27
 00000048  5281                      59              ADDQ.L  #1, D1
 0000004A  4E4F                      60              TRAP    #15
 0000004C  4E75                      61              RTS
-0000004E                            62              
-0000004E                            63              
-0000004E                            64            
-0000004E                            65  ; -----------------------------------------------------------------------------
-0000004E                            66  GETCOLOR    MACRO
-0000004E                            67  ; [_INTERNAL MACRO] 
-0000004E                            68  ; Input    - \0:   RED
-0000004E                            69  ;          - \1:   GREEN
-0000004E                            70  ;          - \2:   BLUE
-0000004E                            71  ; Output   - COLOR CONDENSED AS $0x00BBGGRR IN D1.L
-0000004E                            72  ; Modifies - D1.L, D2.L, D0.L
-0000004E                            73  ; -----------------------------------------------------------------------------
-0000004E                            74              IFNE NARG-3
-0000004E                            75                  FAIL ERROR, GETCOLOR REQUIRES 3 ARGS
-0000004E                            76                  MEXIT
-0000004E                            77              ENDC
-0000004E                            78              CLR.L   D1
-0000004E                            79              MOVE.L  \2, D1
-0000004E                            80              LSL.L   #8, D1
-0000004E                            81              LSL.L   #8, D1
-0000004E                            82              
-0000004E                            83              
-0000004E                            84              MOVE.L  \1, D0            
-0000004E                            85              LSL.L   #8, D0
-0000004E                            86              OR.L    D0, D1
-0000004E                            87              
-0000004E                            88              OR.L    \0, D1
-0000004E                            89              ENDM
-0000004E                            90  
-0000004E                            91   
-0000004E                            92  ; -----------------------------------------------------------------------------
-0000004E                            93  SETTXTCL:   
-0000004E                            94  ; [_INTERNAL API] 
-0000004E                            95  ; Input    - RED:   +4(A7)
-0000004E                            96  ;          - GREEN: +8(A7)
-0000004E                            97  ;          - BLUE:  +12(A7)
-0000004E                            98  ; Output   - NONE
-0000004E                            99  ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
-0000004E                           100  ; -----------------------------------------------------------------------------
-0000004E                           101              OPT MEX
-0000004E                           102m             GETCOLOR    A7, A7, A7            
-0000004E                           103m ; [_INTERNAL MACRO] 
-0000004E                           104m ; INPUT    - W:   RED
-0000004E                           105m ;          - A7:   GREEN
-0000004E                           106m ;          - A7:   BLUE
-0000004E                           107m ; OUTPUT   - COLOR CONDENSED AS $0X00BBGGRR IN D1.L
-0000004E                           108m ; MODIFIES - D1.L, D2.L, D0.L
-0000004E                           109m ; -----------------------------------------------------------------------------
-0000004E                 FALSE     110m             IFNE 3-3
-0000004E                           111m             ENDC
-0000004E  4281                     112m             CLR.L   D1
-00000050  220F                     113m             MOVE.L  A7, D1
-00000052  E189                     114m             LSL.L   #8, D1
-00000054  E189                     115m             LSL.L   #8, D1
-00000056                           116m             
-00000056                           117m             
-00000056  200F                     118m             MOVE.L  A7, D0            
-00000058  E188                     119m             LSL.L   #8, D0
-0000005A  8280                     120m             OR.L    D0, D1
-0000005C                           121m             
-Line 122 ERROR: Undefined symbol
-0000005C  82B9 004DBD16            122m             OR.L    W, D1
-00000062                           123m             ENDM
-00000062                           124              OPT NOMEX
-00000062  4282                     125              CLR.L   D2
-00000064  7015                     126              MOVE.L  #21, D0
-00000066  4E4F                     127              TRAP    #15
-00000068  4E75                     128              RTS
-0000006A                           129              
-0000006A                           130  
-0000006A                           131  
-0000006A                           132  
-0000006A                           133  
-0000006A                           134  
-0000006A                           135  
-0000006A                           136  
-Line 137 WARNING: END directive missing, starting address not set
+0000004E                            62         
+0000004E                            63  
+0000004E                            64  ; -----------------------------------------------------------------------------
+0000004E                            65  SETCOL      MACRO
+0000004E                            66  ; SETS COLOR INTO D1.L WITH THE REQUIRED FORMAT FOR SIM DRAW FUNCTIONS
+0000004E                            67  ; Input     - \1 RED
+0000004E                            68  ;           - \2 GREEN
+0000004E                            69  ;           - \3 BLUE
+0000004E                            70  ; Output    - COLOR IN D1.L AS $00BBGGRR
+0000004E                            71  ; Modifies  - D1.L, D0,L
+0000004E                            72  ; -----------------------------------------------------------------------------
+0000004E                            73              CLR.L   D1
+0000004E                            74              MOVE.L  \3, D1
+0000004E                            75              LSL.L   #8, D1
+0000004E                            76              LSL.L   #8, D1
+0000004E                            77              
+0000004E                            78              MOVE.L  \2, D0            
+0000004E                            79              LSL.L   #8, D0
+0000004E                            80              OR.L    D0, D1
+0000004E                            81              
+0000004E                            82              OR.L    \1, D1
+0000004E                            83              ENDM            
+0000004E                            84              
+0000004E                            85  ; -----------------------------------------------------------------------------
+0000004E                            86  SETTXTCL:   
+0000004E                            87  ; [_INTERNAL API] SETS THE CURRENT TEXT COLOR
+0000004E                            88  ; Input    - RED:   +4(A7)
+0000004E                            89  ;          - GREEN: +8(A7)
+0000004E                            90  ;          - BLUE:  +12(A7)
+0000004E                            91  ; Output   - NONE
+0000004E                            92  ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+0000004E                            93  ; -----------------------------------------------------------------------------
+0000004E                            94m             SETCOL  4(A7), 8(A7), 12(A7)            
+0000004E                            95m ; SETS COLOR INTO D1.L WITH THE REQUIRED FORMAT FOR SIM DRAW FUNCTIONS
+0000004E                            96m ; INPUT     - 4(A7) RED
+0000004E                            97m ;           - 8(A7) GREEN
+0000004E                            98m ;           - 12(A7) BLUE
+0000004E                            99m ; OUTPUT    - COLOR IN D1.L AS $00BBGGRR
+0000004E                           100m ; MODIFIES  - D1.L, D0,L
+0000004E                           101m ; -----------------------------------------------------------------------------
+00000064  4282                     102              CLR.L   D2
+00000066  7015                     103              MOVE.L  #21, D0
+00000068  4E4F                     104              TRAP    #15
+0000006A  4E75                     105              RTS
+0000006C                           106              
+0000006C                           107  ; -----------------------------------------------------------------------------
+0000006C                           108  INITSCRN:   
+0000006C                           109  ; [_INTERNAL API] 
+0000006C                           110  ; Input    - WIDTH:   +4(A7)
+0000006C                           111  ;          - HEIGHT:  +8(A7)
+0000006C                           112  ; Output   - NONE
+0000006C                           113  ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
+0000006C                           114  ; -----------------------------------------------------------------------------
+0000006C  222F 0004                115              MOVE.L  4(A7), D1
+00000070  E189                     116              LSL.L   #8,D1
+00000072  E189                     117              LSL.L   #8,D1
+00000074  82AF 0008                118              OR.L    8(A7), D1
+00000078  7021                     119              MOVE.L  #33, D0
+0000007A  4E4F                     120              TRAP    #15
+0000007C                           121  
+0000007C                           122  
+0000007C                           123  
+0000007C                           124  
+0000007C                           125  
+0000007C                           126  
+0000007C                           127  ; -----------------------------------------------------------------------------
+0000007C                           128  SETTXTPR:   
+0000007C                           129  ; [_INTERNAL API] SETS THE CURRENT TEXT SIZE
+0000007C                           130  ; Input    - RED:   +4(A7)
+0000007C                           131  ;          - GREEN: +8(A7)
+0000007C                           132  ;          - BLUE:  +12(A7)
+0000007C                           133  ;          - SIZE:  +16(A7)
+0000007C                           134  ;          - FONT:  +20(A7)
+0000007C                           135  ;          - STYLE: +24(A7)
+0000007C                           136  ; Output   - NONE
+0000007C                           137  ; Modifies - CURRENT TEXT SIZE, D1.L, D2.L, D0.L
+0000007C                           138  ; -----------------------------------------------------------------------------
+0000007C                           139m             SETCOL  4(A7), 8(A7), 12(A7)            
+0000007C                           140m ; SETS COLOR INTO D1.L WITH THE REQUIRED FORMAT FOR SIM DRAW FUNCTIONS
+0000007C                           141m ; INPUT     - 4(A7) RED
+0000007C                           142m ;           - 8(A7) GREEN
+0000007C                           143m ;           - 12(A7) BLUE
+0000007C                           144m ; OUTPUT    - COLOR IN D1.L AS $00BBGGRR
+0000007C                           145m ; MODIFIES  - D1.L, D0,L
+0000007C                           146m ; -----------------------------------------------------------------------------
+00000092  242F 0014                147              MOVE.L  20(A7), D2              ; FONT
+00000096  E18A                     148              LSL.L   #8, D2
+00000098  E18A                     149              LSL.L   #8, D2
+0000009A  E18A                     150              LSL.L   #8, D2
+0000009C                           151              
+0000009C  202F 0010                152              MOVE.L  16(A7), D0              ; SIZE
+000000A0  C0BC 000000FF            153              AND.L   #$000000FF, D0
+000000A6  E188                     154              LSL.L   #8, D0
+000000A8  E188                     155              LSL.L   #8, D0
+000000AA  8480                     156              OR.L    D0, D2
+000000AC                           157              
+000000AC  202F 0018                158              MOVE.L  24(A7), D0              ; STYLE
+000000B0  C0BC 000000FF            159              AND.L   #$000000FF, D0
+000000B6  8480                     160              OR.L    D0, D2
+000000B8  7015                     161              MOVE.L  #21, D0
+000000BA  4E4F                     162              TRAP    #15
+000000BC  4E75                     163              RTS
+000000BE                           164  
+000000BE                           165  
+000000BE                           166  
+000000BE                           167  
+Line 168 WARNING: END directive missing, starting address not set
 
-1 error detected
+No errors detected
 1 warning generated
 
 
 SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
-GETCOLOR            0
+INITSCRN            6C
 NEWLN               3A
 PRINTB              0
 PRINTB:END          28
@@ -157,4 +187,6 @@ PRINTB:PRINT        16
 PRINTB:TRSTR        1C
 PRNTBOLN            32
 PRNTBOOL            2A
+SETCOL              0
 SETTXTCL            4E
+SETTXTPR            7C

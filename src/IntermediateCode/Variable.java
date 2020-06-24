@@ -52,6 +52,7 @@ public class Variable {
             case INPARAM: 
                 offset = Main.gen.getCurrentFunction().getNextParamOffset(occupation);
                 break;
+           
             default: 
                 offset = Integer.MAX_VALUE;
         }
@@ -126,7 +127,7 @@ public class Variable {
     }
        
     private final static String SEMANTICS_EQUIVALENT [] 
-            = {"local", "param"};
+            = {"local", "param", "return"};
     
     public String toStringDetailed(){
         String res = "t"+id+"\t| type: "+SEMANTICS_EQUIVALENT[this.varSemantics.ordinal()]+

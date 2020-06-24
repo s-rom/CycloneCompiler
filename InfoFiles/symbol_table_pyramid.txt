@@ -1,0 +1,69 @@
+### ---------- Symbol Table ----------
+------------------------
+| LEVEL 0
+| void           | TS_NULL [0,0] 0byte
+| string         | TS_CHAR [255,0] 1byte
+| int            | TS_INT [2147483647,-2147483648] 4bytes
+| bool           | TS_BOOL [255,0] 1byte
+| true           | const <0> bool 0
+| false          | const <1> bool -1
+| INT32_MAX      | const <2> int 2147483647
+| INT32_MIN      | const <3> int -2147483648
+| r              | input param <4> int
+| g              | input param <5> int
+| b              | input param <6> int
+| M68K_set_text_color| func <0> returns void, params(int r, int g, int b)
+| red            | input param <7> int
+| green          | input param <8> int
+| blue           | input param <9> int
+| size           | input param <10> int
+| font           | input param <11> int
+| style          | input param <12> int
+| M68K_set_text_properties| func <1> returns void, params(int red, int green, int blue, int size, int font, int style)
+     ------------------------
+     | LEVEL 1
+     | n              | input param <13> int
+     | space          | local var <14> string
+     | spc            | local var <15> int
+          ------------------------
+          | LEVEL 2
+          ------------------------
+     ------------------------
+| print_n_spaces | func <2> returns void, params(int n)
+     ------------------------
+     | LEVEL 1
+     | base           | input param <16> int
+     | row            | local var <17> int
+     | col            | local var <18> int
+     | left_spaces    | local var <19> int
+     | spc            | local var <20> int
+     | symbol         | local var <21> string[2]
+     | CONSOLAS       | const <22> int 
+     | r              | local var <23> int
+     | g              | local var <24> int
+     | b              | local var <25> int
+          ------------------------
+          | LEVEL 2
+               ------------------------
+               | LEVEL 3
+                    ------------------------
+                    | LEVEL 4
+                    ------------------------
+                    ------------------------
+                    | LEVEL 4
+                    ------------------------
+               ------------------------
+          ------------------------
+     ------------------------
+| pyramid        | func <3> returns void, params(int base)
+     ------------------------
+     | LEVEL 1
+     | CONSOLAS       | const <26> int 
+     | levels         | local var <27> int
+          ------------------------
+          | LEVEL 2
+          ------------------------
+          ------------------------
+          | LEVEL 2
+          ------------------------
+     | cyclone        | func <4> returns void, params()

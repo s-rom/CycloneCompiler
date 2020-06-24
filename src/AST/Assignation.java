@@ -88,6 +88,12 @@ public class Assignation extends Node{
             
             // comprobar que x sea variable y no constante
             Description td = ts.get(id);
+            if (td == null)
+            {
+                 InfoDump.reportSemanticError("'"+id+"' not found in the current scope ("+
+                        this.getLocationInfo()+")");
+            }
+            
             if (td.getDescriptionType() != DescriptionType.D_VAR){
                 InfoDump.reportSemanticError("Id of an assignation must be a variable ("+id+")"+" in "+
                         this.getLocationInfo());
@@ -207,7 +213,6 @@ public class Assignation extends Node{
             ConstDescription cd = (ConstDescription) d;
             Variable v = Main.gen.getVariable(cd.getConstNum());
             if (v == null){
-                System.out.println("const ID = Expr, id ic_var not found!");
                 VarType vt = VarType.stringToVarType(type);
                 v = new Variable(cd.getConstNum(), VarSemantics.LOCAL, vt, null);
             }
@@ -239,7 +244,6 @@ public class Assignation extends Node{
             int len = 4;
             if (type != null && type.equals("string")) len = vd.getLength() + 1;
 
-            System.out.println("ID = Expr, id ic_var not found! (id: \""+id+"\")");
             thisVar = new Variable(vd.varNumber, vd.getVarSemantics(), len,
                 VarType.stringToVarType(type), id);
             
