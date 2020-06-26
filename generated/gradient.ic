@@ -1,0 +1,152 @@
+# ----------- FUNC: draw_board ----------- 
+f11: skip
+    pmb f11
+    t36 = t35                 # 'rows' = expr
+    t37 = t36                 # 'cols' = expr
+    t49 = t33 / t36
+    t38 = t49                 # 'side' = expr
+    t50 = 255                 # Aux var
+    t51 = t50 / t35
+    t39 = t51                 # 'aux' = expr
+    t52 = 0                   # Aux var
+    t40 = t52                 # 'iteration' = expr
+e0: skip                      # Loop init
+    t53 = -1                  # Aux var
+    if ( t53 == 0 ) goto e1
+    t54 = 0                   # Aux var
+    param t54
+    t55 = 0                   # Aux var
+    param t55
+    t56 = 0                   # Aux var
+    param t56
+    call f3
+    t57 = 0                   # Aux var
+    param t57
+    t58 = 0                   # Aux var
+    param t58
+    t59 = 0                   # Aux var
+    param t59
+    call f4
+    t60 = 0                   # Aux var
+    param t60
+    t61 = 0                   # Aux var
+    param t61
+    param t33
+    param t34
+    call f5
+    t62 = 255                 # Aux var
+    param t62
+    t63 = 255                 # Aux var
+    param t63
+    t64 = 255                 # Aux var
+    param t64
+    call f3
+    t65 = 3                   # Aux var
+    t66 = t40 % t65
+    t44 = t66                 # 'mod_iter' = expr
+    t67 = 0                   # Aux var
+    t45 = t67                 # 'r' = expr
+e2: skip                      # Loop init
+    # Relational
+    t68 = -1
+    if ( t45 < t36 ) goto e4
+    t68 = 0
+e4: skip
+    if ( t68 == 0 ) goto e3
+    t69 = 0                   # Aux var
+    t46 = t69                 # 'c' = expr
+e5: skip                      # Loop init
+    # Relational
+    t70 = -1
+    if ( t46 < t37 ) goto e7
+    t70 = 0
+e7: skip
+    if ( t70 == 0 ) goto e6
+    t71 = 0                   # Aux var
+    # Relational
+    t72 = -1
+    if ( t44 == t71 ) goto e8
+    t72 = 0
+e8: skip
+    if ( t72 == 0 ) goto e9
+    t73 = t45 * t39
+    param t73
+    t74 = t46 * t39
+    param t74
+    t75 = 255                 # Aux var
+    param t75
+    call f4
+    goto e10
+e9: skip
+    t76 = 1                   # Aux var
+    # Relational
+    t77 = -1
+    if ( t44 == t76 ) goto e11
+    t77 = 0
+e11: skip
+    if ( t77 == 0 ) goto e12
+    t78 = t35 - t46
+    t79 = t78 * t39
+    param t79
+    t80 = t35 - t45
+    t81 = t80 * t39
+    param t81
+    t82 = 255                 # Aux var
+    param t82
+    call f4
+    goto e13
+e12: skip
+    t83 = t46 * t39
+    param t83
+    t84 = t45 * t39
+    param t84
+    t85 = 255                 # Aux var
+    param t85
+    call f4
+e13: skip
+e10: skip
+    t86 = t46 * t38
+    param t86
+    t87 = t45 * t38
+    param t87
+    param t38
+    param t38
+    call f5
+    t88 = 1                   # Aux var
+    t89 = t46 + t88
+    t46 = t89                 # 'c' = expr
+    goto e5
+e6: skip                      # Loop final
+    t90 = 1                   # Aux var
+    t91 = t45 + t90
+    t45 = t91                 # 'r' = expr
+    goto e2
+e3: skip                      # Loop final
+    call f9
+    t92 = 500                 # Aux var
+    param t92
+    call f10
+    t93 = 1                   # Aux var
+    t94 = t40 + t93
+    t40 = t94                 # 'iteration' = expr
+    goto e0
+e1: skip                      # Loop final
+    return
+# -------------- END ------------- 
+# ----------- FUNC: cyclone ----------- 
+f12: skip
+    pmb f12
+    t95 = 640                 # Aux var
+    t47 = t95                 # const 'W' = expr
+    t48 = t47                 # const 'H' = expr
+    param t47
+    param t48
+    call f2
+    call f8
+    param t47
+    param t48
+    t96 = 16                  # Aux var
+    param t96
+    call f11
+    return
+# -------------- END ------------- 

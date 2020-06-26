@@ -1,1 +1,2 @@
 ### ---------- Compilation Errors ----------
+[Semantic Error]: All Cyclone programs must have a main function

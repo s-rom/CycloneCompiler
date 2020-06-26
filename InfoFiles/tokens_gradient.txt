@@ -1,0 +1,451 @@
+### ---------- Token File ----------
+### Format: (line,colum) TokenName: Attribute?
+
+(2,0)	INTERNAL
+(2,10)	VOID_TYPE: void
+(2,15)	ID: M68K_set_text_color
+(2,34)	LPAREN
+(2,35)	INT_TYPE: int
+(2,39)	ID: r
+(2,40)	COMMA
+(2,42)	INT_TYPE: int
+(2,46)	ID: g
+(2,47)	COMMA
+(2,49)	INT_TYPE: int
+(2,53)	ID: b
+(2,54)	RPAREN
+(2,56)	ARROW
+(2,59)	STR_LIT: "SETTXTCL"
+(2,69)	SEMICOLON
+(3,0)	INTERNAL
+(3,10)	VOID_TYPE: void
+(3,15)	ID: M68K_set_text_properties
+(3,40)	LPAREN
+(3,41)	INT_TYPE: int
+(3,45)	ID: red
+(3,48)	COMMA
+(3,50)	INT_TYPE: int
+(3,54)	ID: green
+(3,59)	COMMA
+(3,61)	INT_TYPE: int
+(3,65)	ID: blue
+(3,69)	COMMA
+(3,71)	INT_TYPE: int
+(3,75)	ID: size
+(3,79)	COMMA
+(3,81)	INT_TYPE: int
+(3,85)	ID: font
+(3,89)	COMMA
+(3,91)	INT_TYPE: int
+(3,95)	ID: style
+(3,100)	RPAREN
+(3,102)	ARROW
+(3,105)	STR_LIT: "SETTXTPR"
+(3,115)	SEMICOLON
+(4,0)	INTERNAL
+(4,10)	VOID_TYPE: void
+(4,15)	ID: M68K_set_screen_size
+(4,35)	LPAREN
+(4,36)	INT_TYPE: int
+(4,40)	ID: width
+(4,45)	COMMA
+(4,47)	INT_TYPE: int
+(4,51)	ID: height
+(4,57)	RPAREN
+(4,59)	ARROW
+(4,62)	STR_LIT: "INITSCRN"
+(4,72)	SEMICOLON
+(5,0)	INTERNAL
+(5,10)	VOID_TYPE: void
+(5,15)	ID: M68K_set_stroke
+(5,30)	LPAREN
+(5,31)	INT_TYPE: int
+(5,35)	ID: r
+(5,36)	COMMA
+(5,38)	INT_TYPE: int
+(5,42)	ID: g
+(5,43)	COMMA
+(5,45)	INT_TYPE: int
+(5,49)	ID: b
+(5,50)	RPAREN
+(5,52)	ARROW
+(5,55)	STR_LIT: "SETSTRK"
+(5,64)	SEMICOLON
+(6,0)	INTERNAL
+(6,10)	VOID_TYPE: void
+(6,15)	ID: M68K_set_fill
+(6,28)	LPAREN
+(6,29)	INT_TYPE: int
+(6,33)	ID: r
+(6,34)	COMMA
+(6,36)	INT_TYPE: int
+(6,40)	ID: g
+(6,41)	COMMA
+(6,43)	INT_TYPE: int
+(6,47)	ID: b
+(6,48)	RPAREN
+(6,50)	ARROW
+(6,53)	STR_LIT: "SETFILL"
+(6,62)	SEMICOLON
+(7,0)	INTERNAL
+(7,10)	VOID_TYPE: void
+(7,15)	ID: M68K_draw_rect
+(7,29)	LPAREN
+(7,30)	INT_TYPE: int
+(7,34)	ID: x
+(7,35)	COMMA
+(7,37)	INT_TYPE: int
+(7,41)	ID: y
+(7,42)	COMMA
+(7,44)	INT_TYPE: int
+(7,48)	ID: width
+(7,53)	COMMA
+(7,55)	INT_TYPE: int
+(7,59)	ID: height
+(7,65)	RPAREN
+(7,67)	ARROW
+(7,70)	STR_LIT: "DRAWRECT"
+(7,80)	SEMICOLON
+(8,0)	INTERNAL
+(8,10)	BOOL_TYPE: bool
+(8,15)	ID: M68K_pixel_not_black
+(8,35)	LPAREN
+(8,36)	INT_TYPE: int
+(8,40)	ID: x
+(8,41)	COMMA
+(8,43)	INT_TYPE: int
+(8,47)	ID: y
+(8,48)	RPAREN
+(8,50)	ARROW
+(8,53)	STR_LIT: "BLACKPIX"
+(8,63)	SEMICOLON
+(9,0)	INTERNAL
+(9,10)	VOID_TYPE: void
+(9,15)	ID: M68K_set_pixel
+(9,29)	LPAREN
+(9,30)	INT_TYPE: int
+(9,34)	ID: x
+(9,35)	COMMA
+(9,37)	INT_TYPE: int
+(9,41)	ID: y
+(9,42)	COMMA
+(9,44)	INT_TYPE: int
+(9,48)	ID: r
+(9,49)	COMMA
+(9,51)	INT_TYPE: int
+(9,55)	ID: g
+(9,56)	COMMA
+(9,58)	INT_TYPE: int
+(9,62)	ID: b
+(9,63)	RPAREN
+(9,65)	ARROW
+(9,68)	STR_LIT: "SETPIXEL"
+(9,78)	SEMICOLON
+(10,0)	INTERNAL
+(10,10)	VOID_TYPE: void
+(10,15)	ID: M68K_enable_double_buffer
+(10,40)	LPAREN
+(10,41)	RPAREN
+(10,43)	ARROW
+(10,46)	STR_LIT: "DBENABLE"
+(10,56)	SEMICOLON
+(11,0)	INTERNAL
+(11,10)	VOID_TYPE: void
+(11,15)	ID: M68K_show_double_buffer
+(11,38)	LPAREN
+(11,39)	RPAREN
+(11,41)	ARROW
+(11,44)	STR_LIT: "DBDRAW"
+(11,52)	SEMICOLON
+(12,0)	INTERNAL
+(12,10)	VOID_TYPE: void
+(12,15)	ID: M68K_sleep
+(12,25)	LPAREN
+(12,26)	INT_TYPE: int
+(12,30)	ID: millis
+(12,36)	RPAREN
+(12,38)	ARROW
+(12,41)	STR_LIT: "DELAY"
+(12,48)	SEMICOLON
+(16,0)	FUNC
+(16,5)	VOID_TYPE: void
+(16,10)	ID: draw_board
+(16,20)	LPAREN
+(16,21)	INT_TYPE: int
+(16,25)	ID: w
+(16,26)	COMMA
+(16,28)	INT_TYPE: int
+(16,32)	ID: h
+(16,33)	COMMA
+(16,35)	INT_TYPE: int
+(16,39)	ID: dim
+(16,42)	RPAREN
+(17,0)	LCURL
+(18,4)	INT_TYPE: int
+(18,8)	ID: rows
+(18,13)	ASSIGN: =
+(18,15)	ID: dim
+(18,18)	SEMICOLON
+(19,4)	INT_TYPE: int
+(19,8)	ID: cols
+(19,13)	ASSIGN: =
+(19,15)	ID: rows
+(19,19)	SEMICOLON
+(20,4)	INT_TYPE: int
+(20,8)	ID: side
+(20,13)	ASSIGN: =
+(20,15)	ID: w
+(20,17)	DIV: /
+(20,19)	ID: rows
+(20,23)	SEMICOLON
+(21,4)	INT_TYPE: int
+(21,8)	ID: aux
+(21,12)	ASSIGN: =
+(21,14)	INT_LIT: 255
+(21,18)	DIV: /
+(21,20)	ID: dim
+(21,23)	SEMICOLON
+(23,4)	INT_TYPE: int
+(23,8)	ID: iteration
+(23,18)	ASSIGN: =
+(23,20)	INT_LIT: 0
+(23,21)	SEMICOLON
+(24,4)	INT_TYPE: int
+(24,8)	ID: red
+(24,11)	SEMICOLON
+(24,13)	INT_TYPE: int
+(24,17)	ID: green
+(24,22)	SEMICOLON
+(24,24)	INT_TYPE: int
+(24,28)	ID: blue
+(24,32)	SEMICOLON
+(25,4)	WHILE
+(25,10)	LPAREN
+(25,11)	BOOL_LIT: true
+(25,15)	RPAREN
+(26,4)	LCURL
+(28,8)	ID: M68K_set_stroke
+(28,23)	LPAREN
+(28,24)	INT_LIT: 0
+(28,25)	COMMA
+(28,27)	INT_LIT: 0
+(28,28)	COMMA
+(28,30)	INT_LIT: 0
+(28,31)	RPAREN
+(28,32)	SEMICOLON
+(29,8)	ID: M68K_set_fill
+(29,21)	LPAREN
+(29,22)	INT_LIT: 0
+(29,23)	COMMA
+(29,25)	INT_LIT: 0
+(29,26)	COMMA
+(29,28)	INT_LIT: 0
+(29,29)	RPAREN
+(29,30)	SEMICOLON
+(30,8)	ID: M68K_draw_rect
+(30,22)	LPAREN
+(30,23)	INT_LIT: 0
+(30,24)	COMMA
+(30,25)	INT_LIT: 0
+(30,26)	COMMA
+(30,27)	ID: w
+(30,28)	COMMA
+(30,29)	ID: h
+(30,30)	RPAREN
+(30,31)	SEMICOLON
+(31,8)	ID: M68K_set_stroke
+(31,23)	LPAREN
+(31,24)	INT_LIT: 255
+(31,27)	COMMA
+(31,29)	INT_LIT: 255
+(31,32)	COMMA
+(31,34)	INT_LIT: 255
+(31,37)	RPAREN
+(31,38)	SEMICOLON
+(33,8)	INT_TYPE: int
+(33,12)	ID: mod_iter
+(33,21)	ASSIGN: =
+(33,23)	ID: iteration
+(33,33)	MOD: %
+(33,35)	INT_LIT: 3
+(33,36)	SEMICOLON
+(35,8)	INT_TYPE: int
+(35,12)	ID: r
+(35,14)	ASSIGN: =
+(35,16)	INT_LIT: 0
+(35,17)	SEMICOLON
+(36,8)	WHILE
+(36,14)	LPAREN
+(36,15)	ID: r
+(36,17)	LT: <
+(36,19)	ID: rows
+(36,23)	RPAREN
+(37,8)	LCURL
+(38,12)	INT_TYPE: int
+(38,16)	ID: c
+(38,18)	ASSIGN: =
+(38,20)	INT_LIT: 0
+(38,21)	SEMICOLON
+(39,12)	WHILE
+(39,18)	LPAREN
+(39,19)	ID: c
+(39,21)	LT: <
+(39,23)	ID: cols
+(39,27)	RPAREN
+(40,12)	LCURL
+(41,16)	IF
+(41,19)	LPAREN
+(41,20)	ID: mod_iter
+(41,29)	EQ: ==
+(41,32)	INT_LIT: 0
+(41,33)	RPAREN
+(42,20)	LCURL
+(42,21)	ID: M68K_set_fill
+(42,34)	LPAREN
+(42,35)	ID: r
+(42,37)	MULT: *
+(42,39)	ID: aux
+(42,42)	COMMA
+(42,44)	ID: c
+(42,46)	MULT: *
+(42,48)	ID: aux
+(42,51)	COMMA
+(42,53)	INT_LIT: 255
+(42,56)	RPAREN
+(42,57)	SEMICOLON
+(42,58)	RCURL
+(43,16)	ELSE
+(43,21)	LCURL
+(44,20)	IF
+(44,23)	LPAREN
+(44,24)	ID: mod_iter
+(44,33)	EQ: ==
+(44,36)	INT_LIT: 1
+(44,37)	RPAREN
+(45,24)	LCURL
+(45,25)	ID: M68K_set_fill
+(45,38)	LPAREN
+(45,39)	LPAREN
+(45,40)	ID: dim
+(45,44)	SUB: -
+(45,46)	ID: c
+(45,47)	RPAREN
+(45,49)	MULT: *
+(45,51)	ID: aux
+(45,54)	COMMA
+(45,56)	LPAREN
+(45,57)	ID: dim
+(45,61)	SUB: -
+(45,63)	ID: r
+(45,64)	RPAREN
+(45,66)	MULT: *
+(45,68)	ID: aux
+(45,71)	COMMA
+(45,73)	INT_LIT: 255
+(45,76)	RPAREN
+(45,77)	SEMICOLON
+(45,78)	RCURL
+(46,20)	ELSE
+(47,24)	LCURL
+(47,25)	ID: M68K_set_fill
+(47,38)	LPAREN
+(47,39)	ID: c
+(47,41)	MULT: *
+(47,43)	ID: aux
+(47,46)	COMMA
+(47,48)	ID: r
+(47,50)	MULT: *
+(47,52)	ID: aux
+(47,55)	COMMA
+(47,57)	INT_LIT: 255
+(47,60)	RPAREN
+(47,61)	SEMICOLON
+(47,62)	RCURL
+(48,16)	RCURL
+(50,16)	ID: M68K_draw_rect
+(50,30)	LPAREN
+(50,31)	ID: c
+(50,33)	MULT: *
+(50,35)	ID: side
+(50,39)	COMMA
+(50,41)	ID: r
+(50,43)	MULT: *
+(50,45)	ID: side
+(50,49)	COMMA
+(50,51)	ID: side
+(50,55)	COMMA
+(50,57)	ID: side
+(50,61)	RPAREN
+(50,62)	SEMICOLON
+(52,16)	ID: c
+(52,18)	ASSIGN: =
+(52,20)	ID: c
+(52,22)	SUM: +
+(52,24)	INT_LIT: 1
+(52,25)	SEMICOLON
+(53,12)	RCURL
+(54,12)	ID: r
+(54,14)	ASSIGN: =
+(54,16)	ID: r
+(54,18)	SUM: +
+(54,20)	INT_LIT: 1
+(54,21)	SEMICOLON
+(55,8)	RCURL
+(57,8)	ID: M68K_show_double_buffer
+(57,31)	LPAREN
+(57,32)	RPAREN
+(57,33)	SEMICOLON
+(58,8)	ID: M68K_sleep
+(58,18)	LPAREN
+(58,19)	INT_LIT: 500
+(58,22)	RPAREN
+(58,23)	SEMICOLON
+(59,8)	ID: iteration
+(59,18)	ASSIGN: =
+(59,20)	ID: iteration
+(59,30)	SUM: +
+(59,32)	INT_LIT: 1
+(59,33)	SEMICOLON
+(60,4)	RCURL
+(61,0)	RCURL
+(63,0)	FUNC
+(63,5)	VOID_TYPE: void
+(63,10)	ID: cyclone
+(63,17)	LPAREN
+(63,18)	RPAREN
+(64,0)	LCURL
+(65,4)	CONST: const
+(65,10)	INT_TYPE: int
+(65,14)	ID: W
+(65,16)	ASSIGN: =
+(65,18)	INT_LIT: 640
+(65,21)	SEMICOLON
+(66,4)	CONST: const
+(66,10)	INT_TYPE: int
+(66,14)	ID: H
+(66,16)	ASSIGN: =
+(66,18)	ID: W
+(66,19)	SEMICOLON
+(67,4)	ID: M68K_set_screen_size
+(67,24)	LPAREN
+(67,25)	ID: W
+(67,26)	COMMA
+(67,28)	ID: H
+(67,29)	RPAREN
+(67,30)	SEMICOLON
+(68,4)	ID: M68K_enable_double_buffer
+(68,29)	LPAREN
+(68,30)	RPAREN
+(68,31)	SEMICOLON
+(69,4)	ID: draw_board
+(69,14)	LPAREN
+(69,15)	ID: W
+(69,16)	COMMA
+(69,17)	ID: H
+(69,18)	COMMA
+(69,19)	INT_LIT: 16
+(69,21)	RPAREN
+(69,22)	SEMICOLON
+(70,0)	RCURL
+(70,1)	EOF
+(70,1)	EOF

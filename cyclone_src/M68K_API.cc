@@ -13,8 +13,3 @@ _internal void M68K_show_double_buffer() -> "DBDRAW";
 _internal void M68K_sleep(int millis) -> "DELAY";
 
 // ---------------
-
-func void cyclone()
-{
-
-}

@@ -1,0 +1,87 @@
+# ----------- FUNC: draw_chessboard ----------- 
+f6: skip
+    pmb f6
+    t28 = t27                 # 'rows' = expr
+    t29 = t28                 # 'cols' = expr
+    t37 = t25 / t28
+    t30 = t37                 # 'side' = expr
+    t38 = 255                 # Aux var
+    param t38
+    t39 = 255                 # Aux var
+    param t39
+    t40 = 255                 # Aux var
+    param t40
+    call f4
+    t41 = 255                 # Aux var
+    param t41
+    t42 = 255                 # Aux var
+    param t42
+    t43 = 255                 # Aux var
+    param t43
+    call f3
+    t44 = 0                   # Aux var
+    t31 = t44                 # 'r' = expr
+e0: skip                      # Loop init
+    # Relational
+    t45 = -1
+    if ( t31 < t28 ) goto e2
+    t45 = 0
+e2: skip
+    if ( t45 == 0 ) goto e1
+    t46 = 0                   # Aux var
+    t32 = t46                 # 'c' = expr
+e3: skip                      # Loop init
+    # Relational
+    t47 = -1
+    if ( t32 < t29 ) goto e5
+    t47 = 0
+e5: skip
+    if ( t47 == 0 ) goto e4
+    t48 = 2                   # Aux var
+    t49 = t31 % t48
+    t50 = 2                   # Aux var
+    t51 = t32 % t50
+    # Relational
+    t52 = -1
+    if ( t51 == t49 ) goto e6
+    t52 = 0
+e6: skip
+    if ( t52 == 0 ) goto e7
+    t53 = t32 * t30
+    t33 = t53                 # 'x' = expr
+    t54 = t31 * t30
+    t34 = t54                 # 'y' = expr
+    param t33
+    param t34
+    param t30
+    param t30
+    call f5
+e7: skip
+    t55 = 1                   # Aux var
+    t56 = t32 + t55
+    t32 = t56                 # 'c' = expr
+    goto e3
+e4: skip                      # Loop final
+    t57 = 1                   # Aux var
+    t58 = t31 + t57
+    t31 = t58                 # 'r' = expr
+    goto e0
+e1: skip                      # Loop final
+    return
+# -------------- END ------------- 
+# ----------- FUNC: cyclone ----------- 
+f7: skip
+    pmb f7
+    t59 = 640                 # Aux var
+    t35 = t59                 # const 'W' = expr
+    t36 = t35                 # const 'H' = expr
+    param t35
+    param t36
+    call f2
+    param t35
+    param t36
+    t60 = 8                   # Aux var
+    param t60
+    call f6
+    return
+# -------------- END ------------- 

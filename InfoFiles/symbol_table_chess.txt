@@ -1,0 +1,85 @@
+### ---------- Symbol Table ----------
+------------------------
+| LEVEL 0
+| void           | TS_NULL [0,0] 0byte
+| string         | TS_CHAR [255,0] 1byte
+| int            | TS_INT [2147483647,-2147483648] 4bytes
+| bool           | TS_BOOL [255,0] 1byte
+| true           | const <0> bool 0
+| false          | const <1> bool -1
+| INT32_MAX      | const <2> int 2147483647
+| INT32_MIN      | const <3> int -2147483648
+     ------------------------
+     | LEVEL 1
+     | r              | input param <4> int
+     | g              | input param <5> int
+     | b              | input param <6> int
+     ------------------------
+| M68K_set_text_color| func <0> returns void, params(int r, int g, int b)
+     ------------------------
+     | LEVEL 1
+     | red            | input param <7> int
+     | green          | input param <8> int
+     | blue           | input param <9> int
+     | size           | input param <10> int
+     | font           | input param <11> int
+     | style          | input param <12> int
+     ------------------------
+| M68K_set_text_properties| func <1> returns void, params(int red, int green, int blue, int size, int font, int style)
+     ------------------------
+     | LEVEL 1
+     | width          | input param <13> int
+     | height         | input param <14> int
+     ------------------------
+| M68K_set_screen_size| func <2> returns void, params(int width, int height)
+     ------------------------
+     | LEVEL 1
+     | r              | input param <15> int
+     | g              | input param <16> int
+     | b              | input param <17> int
+     ------------------------
+| M68K_set_stroke| func <3> returns void, params(int r, int g, int b)
+     ------------------------
+     | LEVEL 1
+     | r              | input param <18> int
+     | g              | input param <19> int
+     | b              | input param <20> int
+     ------------------------
+| M68K_set_fill  | func <4> returns void, params(int r, int g, int b)
+     ------------------------
+     | LEVEL 1
+     | x              | input param <21> int
+     | y              | input param <22> int
+     | width          | input param <23> int
+     | height         | input param <24> int
+     ------------------------
+| M68K_draw_rect | func <5> returns void, params(int x, int y, int width, int height)
+     ------------------------
+     | LEVEL 1
+     | w              | input param <25> int
+     | h              | input param <26> int
+     | dim            | input param <27> int
+     | rows           | local var <28> int
+     | cols           | local var <29> int
+     | side           | local var <30> int
+     | r              | local var <31> int
+          ------------------------
+          | LEVEL 2
+          | c              | local var <32> int
+               ------------------------
+               | LEVEL 3
+                    ------------------------
+                    | LEVEL 4
+                    | x              | local var <33> int
+                    | y              | local var <34> int
+                    ------------------------
+               ------------------------
+          ------------------------
+     ------------------------
+| draw_chessboard| func <6> returns void, params(int w, int h, int dim)
+     ------------------------
+     | LEVEL 1
+     | W              | const <35> int 
+     | H              | const <36> int 
+     ------------------------
+| cyclone        | func <7> returns void, params()

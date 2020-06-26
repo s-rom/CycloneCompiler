@@ -1,3 +1,4 @@
+
 ; -----------------------------------------------------------------------------
 PRINTB:   
 ; PRINTS A BOOL VARIABLE
@@ -105,17 +106,12 @@ INITSCRN:
 ; Output   - NONE
 ; Modifies - CURRENT TEXT COLOR, D1.L, D2.L, D0.L
 ; -----------------------------------------------------------------------------
-            MOVE.L  4(A7), D1
+            MOVE.L  8(A7), D1
             LSL.L   #8,D1
             LSL.L   #8,D1
-            OR.L    8(A7), D1
+            OR.L    4(A7), D1
             MOVE.L  #33, D0
             TRAP    #15
-
-
-
-
-
 
 ; -----------------------------------------------------------------------------
 SETTXTPR:   
@@ -147,6 +143,141 @@ SETTXTPR:
             MOVE.L  #21, D0
             TRAP    #15
             RTS
+
+; -----------------------------------------------------------------------------
+SETSTRK:   
+; [_INTERNAL API] SETS THE CURRENT STROKE COLOR
+; Input    - RED:   +12(A7)
+;          - GREEN: +8(A7)
+;          - BLUE:  +4(A7
+; Output   - NONE
+; Modifies - CURRENT PEN COLOR, D1.L, D0.L
+; -----------------------------------------------------------------------------
+            SETCOL  12(A7), 8(A7), 4(A7)  
+            MOVE.L  #80,D0
+            TRAP    #15
+            RTS    
+
+; -----------------------------------------------------------------------------
+SETFILL:   
+; [_INTERNAL API] SETS THE CURRENT FILL COLOR
+; Input    - RED:   +12(A7)
+;          - GREEN: +8(A7)
+;          - BLUE:  +4(A7
+; Output   - NONE
+; Modifies - CURRENT FILL COLOR, D1.L, D0.L
+; -----------------------------------------------------------------------------
+            SETCOL  12(A7), 8(A7), 4(A7)  
+            MOVE.L  #81, D0
+            TRAP    #15
+            RTS    
+
+
+; -----------------------------------------------------------------------------
+DRAWRECT:   
+; [_INTERNAL API] DRAWS A FILLED RECTANGLE DEFINED BY ITS 
+; X,Y (LEFT-UPPER CORNER) AND ITS SIZE
+; Input    - X:      +16(A7)
+;          - Y:      +12(A7)
+;          - WIDTH:  +8(A7)
+;          - HEIGTH: +4(A7)
+; Output   - NONE
+; Modifies - CURRENT FILL COLOR, D0.L, D1.L, D2.L, D3.L, D4.L
+; -----------------------------------------------------------------------------
+            MOVE.L  #87, D0
+            MOVE.L  16(A7), D1              ; X
+            MOVE.L  12(A7), D2              ; Y
+            MOVE.L  D1, D3                  
+            ADD.L   8(A7), D3               ; WIDHT
+            MOVE.L  D2, D4
+            ADD.L   4(A7), D4               ; HEIGTH
+            TRAP    #15
+            RTS    
+
+
+; -----------------------------------------------------------------------------
+BLACKPIX:   
+; [_INTERNAL API] RETURNS 0 IF PIXEL IS BLACK, 1 OTHERWISE  
+; Input    - X: +8(A7)
+;          - Y: +4(A7)
+; Output   - NONE
+; Modifies - D0.L, D1.L, D2.L
+; -----------------------------------------------------------------------------
+            MOVE.L  #83, D0
+            MOVE.L  8(A7), D1               ; X
+            MOVE.L  4(A7), D2               ; Y
+            TRAP    #15
+            MOVE.L  D0, D7                  ; Returns D0 
+            RTS    
+
+; -----------------------------------------------------------------------------
+SETPIXEL:   
+; [_INTERNAL API] SETS PIXEL BLACK  
+; Input    - X:     +20(A7)
+;          - Y:     +16(A7)
+;          - RED:   +12(A7)
+;          - GREEN: +8(A7)
+;          - BLUE:  +4(A7)
+; Output   - NONE
+; Modifies - D0.L, D1.L, D2.L, PEN COLOR
+; -----------------------------------------------------------------------------
+            SETCOL  12(A7), 8(A7), 4(A7) 
+            MOVE.L  #80, D0
+            TRAP    #15
+            MOVE.L  20(A7), D1              ; X
+            MOVE.L  16(A7), D2              ; Y
+            MOVE.L  #82, D0
+            TRAP    #15
+            RTS    
+
+
+; -----------------------------------------------------------------------------
+DBENABLE:   
+; [_INTERNAL API] ENABLES DOUBLE BUFFER
+; Input    - NONE
+; Output   - NONE
+; Modifies - D0.L, D1.L
+; -----------------------------------------------------------------------------
+            MOVE.L  #92, D0
+            MOVE.L  #17, D1
+            TRAP    #15
+            RTS    
+
+; -----------------------------------------------------------------------------
+DBDRAW:   
+; [_INTERNAL API] DRAWS DOUBLE BUFFER
+; Input    - NONE
+; Output   - NONE
+; Modifies - D0.L
+; -----------------------------------------------------------------------------
+            MOVE.L  #94, D0
+            TRAP    #15
+            RTS    
+
+
+; -----------------------------------------------------------------------------
+DELAY:   
+; [_INTERNAL API] DELAYS EXECUTION 
+; Input    - MILLIS: +4(A7)
+; Output   - NONE
+; Modifies - D0.L, D1.L
+; -----------------------------------------------------------------------------
+            MOVE.L  #23, D0
+            MOVE.L  4(A7), D1
+            DIVS    #10, D1
+            AND.L   #$0000FFFF, D1
+            TRAP    #15
+            RTS    
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -773,7 +773,11 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 55: break;
           case 9: 
-            { if (!s.empty() && s.peek() == "func" && !funcOpen){
+            { if (!s.empty() && s.peek() == "internal") {
+                    Main.ts.enterBlock();
+                }
+
+                if (!s.empty() && s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
                     funcOpen = true;
                 }     
@@ -862,7 +866,8 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 71: break;
           case 25: 
-            { return getSymbol(ParserSym.ARROW);
+            { Main.ts.exitBlock();
+                return getSymbol(ParserSym.ARROW);
             } 
             // fall through
           case 72: break;
@@ -967,7 +972,7 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 92: break;
           case 46: 
-            { return getSymbol(ParserSym.INTERNAL);
+            { s.push("internal"); return getSymbol(ParserSym.INTERNAL);
             } 
             // fall through
           case 93: break;

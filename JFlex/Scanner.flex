@@ -94,11 +94,19 @@ comment2    = "//"[^\n\r]*
 "read_string" {return getSymbol(ParserSym.READ_STRING);}
 "read_int"     {return getSymbol(ParserSym.READ_INT);}
 "return"    {return getSymbol(ParserSym.RETURN);}
-"_internal" {return getSymbol(ParserSym.INTERNAL);}
-"->"        {return getSymbol(ParserSym.ARROW);}
+"_internal" {s.push("internal"); return getSymbol(ParserSym.INTERNAL);}
+"->"        {
+                Main.ts.exitBlock();
+                return getSymbol(ParserSym.ARROW);
+            }
 
 
-"("         {   if (!s.empty() && s.peek() == "func" && !funcOpen){
+"("         {   
+                if (!s.empty() && s.peek() == "internal") {
+                    Main.ts.enterBlock();
+                }
+
+                if (!s.empty() && s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
                     funcOpen = true;
                 }     

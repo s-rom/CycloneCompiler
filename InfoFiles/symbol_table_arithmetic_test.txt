@@ -9,12 +9,15 @@
 | false          | const <1> bool -1
 | INT32_MAX      | const <2> int 2147483647
 | INT32_MIN      | const <3> int -2147483648
-| red            | input param <4> int
-| green          | input param <5> int
-| blue           | input param <6> int
-| size           | input param <7> int
-| font           | input param <8> int
-| style          | input param <9> int
+     ------------------------
+     | LEVEL 1
+     | red            | input param <4> int
+     | green          | input param <5> int
+     | blue           | input param <6> int
+     | size           | input param <7> int
+     | font           | input param <8> int
+     | style          | input param <9> int
+     ------------------------
 | M68K_set_text_properties| func <0> returns void, params(int red, int green, int blue, int size, int font, int style)
      ------------------------
      | LEVEL 1

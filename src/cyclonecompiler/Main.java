@@ -12,6 +12,7 @@ import SymbolTable.ConstDescription;
 import SymbolTable.Description;
 import SymbolTable.SymbolTable;
 import SymbolTable.TypeDescription;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Map.Entry;
@@ -34,33 +35,85 @@ public class Main {
     public static AtomicType atomicInt;
 
     public static void main (String [] args){
-        final String NAME = "pyramid";
-        compilar(NAME);
+        
+        if (args.length == 0){
+            compileFromIDE("comp2");
+            return;
+        }
+        
+        String fileName = args[0];
+        File f = new File(fileName);
+        int idxOfExtension = f.getName().indexOf(".cc");
+        if (idxOfExtension == -1) {
+            System.err.println(f.getPath()+" is not a Cyclone file. All cyclone files must end with .cc");
+            return;
+        } 
+        
+        fileName = f.getName().substring(0, idxOfExtension);
+        String currentPath = System.getProperty("user.dir");
+        File infoPath = new File(currentPath+"\\info\\");
+        infoPath.mkdir();
+        
+        compileFromCmd(fileName, f.getAbsolutePath(), currentPath, infoPath.getAbsolutePath());
+    }
+    
+    public static void compileFromCmd
+        (String fileName, String absoluteSrc, String rootPath, String infoPath){
+        
+        final String SRC_FILE = absoluteSrc;
+        final String TOKEN_FILE = infoPath+"\\tokens_"+fileName+".txt";
+        final String SYMBOL_TABLE_FILE = infoPath + "\\symbol_table_"+fileName+".txt";
+        final String ERROR_FILE = infoPath+"\\error_log_"+fileName+".txt";
+        final String DOT_FILE = infoPath+"\\"+fileName+".dot";
+        final String IC_VAR = infoPath+"\\"+fileName+"_IC_Var.txt";
+        final String IC_FUNC = infoPath+"\\"+fileName+"_IC_Func.txt";
+       
+        final String ASM_MAIN = rootPath + "\\"+fileName.toUpperCase()+"_MAIN.X68";
+        final String INTERMEDIATE_FILE = rootPath + "\\"+fileName+".ic";
+
+        compile(SRC_FILE, INTERMEDIATE_FILE, ASM_MAIN, TOKEN_FILE, SYMBOL_TABLE_FILE,
+                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC);
+    }
+        
+        
+    public static void compileFromIDE(String name){
+        final String SRC_FILE = ".\\cyclone_src\\"+name+".cc";
+        final String INTERMEDIATE_FILE = ".\\generated\\"+name+".ic";
+
+        final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+name+".txt";
+        final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table_"+name+".txt";
+        final String ERROR_FILE = ".\\InfoFiles\\error_log_"+name+".txt";
+        final String DOT_FILE = ".\\InfoFiles\\"+name+".dot";
+        final String IC_VAR = ".\\InfoFiles\\"+name+"_IC_Var.txt";
+        final String IC_FUNC = ".\\InfoFiles\\"+name+"_IC_Func.txt";
+        final String ASM_MAIN = ".\\generated\\"+name.toUpperCase()+"_MAIN.X68";
+        compile(SRC_FILE, INTERMEDIATE_FILE, ASM_MAIN, TOKEN_FILE, SYMBOL_TABLE_FILE,
+                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC);
     }
  
-    public static void compilar(String NAME){
+    public static void compile(
+            String src_file, 
+            String intermediate_file, 
+            String asm_file,
+            String token_file, 
+            String symbol_table_file, 
+            String error_file,
+            String dot_file,
+            String ic_var,
+            String ic_func){
         
-        final String SRC_FILE = ".\\cyclone_src\\"+NAME+".cc";
-        final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+NAME+".txt";
-        final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table_"+NAME+".txt";
-        final String ERROR_FILE = ".\\InfoFiles\\error_log_"+NAME+".txt";
-        final String INTERMEDIATE_FILE = ".\\generated\\"+NAME+".ic";
-        final String DOT_FILE = ".\\InfoFiles\\"+NAME+".dot";
-        final String IC_VAR = ".\\InfoFiles\\"+NAME+"_IC_Var.txt";
-        final String IC_FUNC = ".\\InfoFiles\\"+NAME+"_IC_Func.txt";
-        final String ASM_MAIN = ".\\generated\\"+NAME.toUpperCase()+"_MAIN.X68";
-
-        
+      
+        System.out.println("Compiling file: "+src_file);
         try {
-            gen = new Generator(INTERMEDIATE_FILE);
-            asmGen = new M68kGenerator(ASM_MAIN);
-            DOT.initWriter(DOT_FILE);
+            gen = new Generator(intermediate_file);
+            asmGen = new M68kGenerator(asm_file);
+            DOT.initWriter(dot_file);
             InfoDump.initAllWriters
-                (TOKEN_FILE, SYMBOL_TABLE_FILE, ERROR_FILE, IC_VAR, IC_FUNC);
+                (token_file, symbol_table_file, error_file, ic_var, ic_func);
             initSymbolTable();
 
             SymbolFactory sf = new ComplexSymbolFactory();
-            Scanner scanner = new Scanner(new FileReader(SRC_FILE));
+            Scanner scanner = new Scanner(new FileReader(src_file));
             Parser parser = new Parser(scanner, sf);
             parser.parse();
             
@@ -95,7 +148,7 @@ public class Main {
             asmGen.generateMain();
             
         } catch (FileNotFoundException ex) {
-            System.err.println("Could not found "+SRC_FILE+"!\n"+ex.getMessage());
+            System.err.println("Could not found "+src_file+"!\n"+ex.getMessage());
         } catch(FatalError f){
             System.err.println("A fatal error ocurred, compilation halted.");
         } catch (Exception ex) {

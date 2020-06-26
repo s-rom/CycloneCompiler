@@ -1,31 +1,11 @@
 ### ---------- Token File ----------
 ### Format: (line,colum) TokenName: Attribute?
 
-(9,0)	FUNC
-(9,5)	VOID_TYPE: void
-(9,10)	ID: cyclone
-(9,17)	LPAREN
-(9,18)	RPAREN
-(10,0)	LCURL
-(31,4)	OUTPUTLN
-(31,9)	LPAREN
-(31,10)	STR_LIT: "Introduce un número: "
-(31,33)	RPAREN
-(31,34)	SEMICOLON
-(32,4)	INT_TYPE: int
-(32,8)	ID: x
-(32,10)	ASSIGN: =
-(32,12)	READ_INT
-(32,20)	LPAREN
-(32,21)	RPAREN
-(32,22)	SEMICOLON
-(33,4)	OUTPUT
-(33,10)	LPAREN
-(33,11)	STR_LIT: "Introducido: "
-(33,26)	COMMA
-(33,28)	ID: x
-(33,29)	RPAREN
-(33,30)	SEMICOLON
-(34,0)	RCURL
-(34,1)	EOF
-(34,1)	EOF
+(2,0)	FUNC
+(2,5)	VOID_TYPE: void
+(2,10)	ID: main
+(2,14)	LPAREN
+(2,15)	RPAREN
+(3,0)	LCURL
+(5,0)	RCURL
+(5,1)	EOF
