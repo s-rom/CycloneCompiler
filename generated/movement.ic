@@ -1,126 +1,683 @@
-# ----------- FUNC: cyclone ----------- 
+# ----------- FUNC: draw_background ----------- 
 f11: skip
     pmb f11
-    t39 = 255                 # Aux var
-    param t39
-    t40 = 255                 # Aux var
-    param t40
-    t41 = 255                 # Aux var
-    param t41
-    t42 = 14                  # Aux var
+    t42 = 34                  # Aux var
     param t42
-    t43 = 6                   # Aux var
+    t43 = 32                  # Aux var
     param t43
-    t44 = 0                   # Aux var
+    t44 = 52                  # Aux var
     param t44
-    call f1
-    t45 = 640                 # Aux var
-    t33 = t45                 # const 'WIDTH' = expr
-    t34 = t33                 # const 'HEIGHT' = expr
-    t46 = 10                  # Aux var
-    t35 = t46                 # const 'side' = expr
+    call f4
+    t45 = 0                   # Aux var
+    param t45
+    t46 = 0                   # Aux var
+    param t46
     param t33
     param t34
+    call f5
+    t47 = 3                   # Aux var
+    t35 = t47                 # 'side' = expr
+    t48 = 196                 # Aux var
+    param t48
+    t49 = 194                 # Aux var
+    param t49
+    t50 = 100                 # Aux var
+    param t50
+    call f4
+    t51 = 513                 # Aux var
+    param t51
+    t52 = 67                  # Aux var
+    param t52
+    t53 = 5                   # Aux var
+    param t53
+    t54 = 5                   # Aux var
+    param t54
+    call f5
+    t55 = 176                 # Aux var
+    param t55
+    t56 = 232                 # Aux var
+    param t56
+    t57 = 5                   # Aux var
+    param t57
+    t58 = 5                   # Aux var
+    param t58
+    call f5
+    t59 = 420                 # Aux var
+    param t59
+    t60 = 133                 # Aux var
+    param t60
+    t61 = 4                   # Aux var
+    param t61
+    t62 = 4                   # Aux var
+    param t62
+    call f5
+    t63 = 196                 # Aux var
+    param t63
+    t64 = 203                 # Aux var
+    param t64
+    t65 = 2                   # Aux var
+    param t65
+    t66 = 2                   # Aux var
+    param t66
+    call f5
+    t67 = 136                 # Aux var
+    param t67
+    t68 = 78                  # Aux var
+    param t68
+    t69 = 5                   # Aux var
+    param t69
+    t70 = 5                   # Aux var
+    param t70
+    call f5
+    t71 = 458                 # Aux var
+    param t71
+    t72 = 116                 # Aux var
+    param t72
+    t73 = 4                   # Aux var
+    param t73
+    t74 = 4                   # Aux var
+    param t74
+    call f5
+    t75 = 221                 # Aux var
+    param t75
+    t76 = 26                  # Aux var
+    param t76
+    t77 = 5                   # Aux var
+    param t77
+    t78 = 5                   # Aux var
+    param t78
+    call f5
+    t79 = 587                 # Aux var
+    param t79
+    t80 = 330                 # Aux var
+    param t80
+    t81 = 5                   # Aux var
+    param t81
+    t82 = 5                   # Aux var
+    param t82
+    call f5
+    t83 = 20                  # Aux var
+    param t83
+    t84 = 75                  # Aux var
+    param t84
+    t85 = 4                   # Aux var
+    param t85
+    t86 = 4                   # Aux var
+    param t86
+    call f5
+    t87 = 578                 # Aux var
+    param t87
+    t88 = 492                 # Aux var
+    param t88
+    t89 = 2                   # Aux var
+    param t89
+    t90 = 2                   # Aux var
+    param t90
+    call f5
+    t91 = 85                  # Aux var
+    param t91
+    t92 = 140                 # Aux var
+    param t92
+    t93 = 3                   # Aux var
+    param t93
+    t94 = 3                   # Aux var
+    param t94
+    call f5
+    t95 = 71                  # Aux var
+    param t95
+    t96 = 517                 # Aux var
+    param t96
+    t97 = 4                   # Aux var
+    param t97
+    t98 = 4                   # Aux var
+    param t98
+    call f5
+    t99 = 252                 # Aux var
+    param t99
+    t100 = 52                 # Aux var
+    param t100
+    t101 = 3                  # Aux var
+    param t101
+    t102 = 3                  # Aux var
+    param t102
+    call f5
+    t103 = 438                # Aux var
+    param t103
+    t104 = 46                 # Aux var
+    param t104
+    t105 = 4                  # Aux var
+    param t105
+    t106 = 4                  # Aux var
+    param t106
+    call f5
+    t107 = 135                # Aux var
+    param t107
+    t108 = 107                # Aux var
+    param t108
+    t109 = 4                  # Aux var
+    param t109
+    t110 = 4                  # Aux var
+    param t110
+    call f5
+    t111 = 283                # Aux var
+    param t111
+    t112 = 137                # Aux var
+    param t112
+    t113 = 5                  # Aux var
+    param t113
+    t114 = 5                  # Aux var
+    param t114
+    call f5
+    t115 = 162                # Aux var
+    param t115
+    t116 = 112                # Aux var
+    param t116
+    t117 = 2                  # Aux var
+    param t117
+    t118 = 2                  # Aux var
+    param t118
+    call f5
+    t119 = 414                # Aux var
+    param t119
+    t120 = 478                # Aux var
+    param t120
+    t121 = 5                  # Aux var
+    param t121
+    t122 = 5                  # Aux var
+    param t122
+    call f5
+    t123 = 564                # Aux var
+    param t123
+    t124 = 42                 # Aux var
+    param t124
+    t125 = 3                  # Aux var
+    param t125
+    t126 = 3                  # Aux var
+    param t126
+    call f5
+    t127 = 596                # Aux var
+    param t127
+    t128 = 369                # Aux var
+    param t128
+    t129 = 5                  # Aux var
+    param t129
+    t130 = 5                  # Aux var
+    param t130
+    call f5
+    t131 = 452                # Aux var
+    param t131
+    t132 = 0                  # Aux var
+    param t132
+    t133 = 5                  # Aux var
+    param t133
+    t134 = 5                  # Aux var
+    param t134
+    call f5
+    t135 = 171                # Aux var
+    param t135
+    t136 = 65                 # Aux var
+    param t136
+    t137 = 3                  # Aux var
+    param t137
+    t138 = 3                  # Aux var
+    param t138
+    call f5
+    t139 = 226                # Aux var
+    param t139
+    t140 = 213                # Aux var
+    param t140
+    t141 = 2                  # Aux var
+    param t141
+    t142 = 2                  # Aux var
+    param t142
+    call f5
+    t143 = 333                # Aux var
+    param t143
+    t144 = 160                # Aux var
+    param t144
+    t145 = 5                  # Aux var
+    param t145
+    t146 = 5                  # Aux var
+    param t146
+    call f5
+    t147 = 96                 # Aux var
+    param t147
+    t148 = 294                # Aux var
+    param t148
+    t149 = 4                  # Aux var
+    param t149
+    t150 = 4                  # Aux var
+    param t150
+    call f5
+    t151 = 96                 # Aux var
+    param t151
+    t152 = 430                # Aux var
+    param t152
+    t153 = 5                  # Aux var
+    param t153
+    t154 = 5                  # Aux var
+    param t154
+    call f5
+    t155 = 486                # Aux var
+    param t155
+    t156 = 180                # Aux var
+    param t156
+    t157 = 4                  # Aux var
+    param t157
+    t158 = 4                  # Aux var
+    param t158
+    call f5
+    t159 = 7                  # Aux var
+    param t159
+    t160 = 476                # Aux var
+    param t160
+    t161 = 4                  # Aux var
+    param t161
+    t162 = 4                  # Aux var
+    param t162
+    call f5
+    t163 = 537                # Aux var
+    param t163
+    t164 = 507                # Aux var
+    param t164
+    t165 = 4                  # Aux var
+    param t165
+    t166 = 4                  # Aux var
+    param t166
+    call f5
+    t167 = 51                 # Aux var
+    param t167
+    t168 = 208                # Aux var
+    param t168
+    t169 = 2                  # Aux var
+    param t169
+    t170 = 2                  # Aux var
+    param t170
+    call f5
+    t171 = 38                 # Aux var
+    param t171
+    t172 = 437                # Aux var
+    param t172
+    t173 = 4                  # Aux var
+    param t173
+    t174 = 4                  # Aux var
+    param t174
+    call f5
+    t175 = 399                # Aux var
+    param t175
+    t176 = 329                # Aux var
+    param t176
+    t177 = 4                  # Aux var
+    param t177
+    t178 = 4                  # Aux var
+    param t178
+    call f5
+    t179 = 151                # Aux var
+    param t179
+    t180 = 22                 # Aux var
+    param t180
+    t181 = 5                  # Aux var
+    param t181
+    t182 = 5                  # Aux var
+    param t182
+    call f5
+    t183 = 134                # Aux var
+    param t183
+    t184 = 583                # Aux var
+    param t184
+    t185 = 4                  # Aux var
+    param t185
+    t186 = 4                  # Aux var
+    param t186
+    call f5
+    t187 = 587                # Aux var
+    param t187
+    t188 = 389                # Aux var
+    param t188
+    t189 = 5                  # Aux var
+    param t189
+    t190 = 5                  # Aux var
+    param t190
+    call f5
+    t191 = 43                 # Aux var
+    param t191
+    t192 = 204                # Aux var
+    param t192
+    t193 = 4                  # Aux var
+    param t193
+    t194 = 4                  # Aux var
+    param t194
+    call f5
+    t195 = 524                # Aux var
+    param t195
+    t196 = 328                # Aux var
+    param t196
+    t197 = 2                  # Aux var
+    param t197
+    t198 = 2                  # Aux var
+    param t198
+    call f5
+    t199 = 189                # Aux var
+    param t199
+    t200 = 263                # Aux var
+    param t200
+    t201 = 3                  # Aux var
+    param t201
+    t202 = 3                  # Aux var
+    param t202
+    call f5
+    t203 = 440                # Aux var
+    param t203
+    t204 = 334                # Aux var
+    param t204
+    t205 = 2                  # Aux var
+    param t205
+    t206 = 2                  # Aux var
+    param t206
+    call f5
+    t207 = 27                 # Aux var
+    param t207
+    t208 = 326                # Aux var
+    param t208
+    t209 = 2                  # Aux var
+    param t209
+    t210 = 2                  # Aux var
+    param t210
+    call f5
+    t211 = 201                # Aux var
+    param t211
+    t212 = 582                # Aux var
+    param t212
+    t213 = 3                  # Aux var
+    param t213
+    t214 = 3                  # Aux var
+    param t214
+    call f5
+    t215 = 386                # Aux var
+    param t215
+    t216 = 441                # Aux var
+    param t216
+    t217 = 4                  # Aux var
+    param t217
+    t218 = 4                  # Aux var
+    param t218
+    call f5
+    t219 = 35                 # Aux var
+    param t219
+    t220 = 93                 # Aux var
+    param t220
+    t221 = 2                  # Aux var
+    param t221
+    t222 = 2                  # Aux var
+    param t222
+    call f5
+    t223 = 126                # Aux var
+    param t223
+    t224 = 365                # Aux var
+    param t224
+    t225 = 2                  # Aux var
+    param t225
+    t226 = 2                  # Aux var
+    param t226
+    call f5
+    t227 = 522                # Aux var
+    param t227
+    t228 = 353                # Aux var
+    param t228
+    t229 = 5                  # Aux var
+    param t229
+    t230 = 5                  # Aux var
+    param t230
+    call f5
+    t231 = 530                # Aux var
+    param t231
+    t232 = 117                # Aux var
+    param t232
+    t233 = 5                  # Aux var
+    param t233
+    t234 = 5                  # Aux var
+    param t234
+    call f5
+    t235 = 351                # Aux var
+    param t235
+    t236 = 286                # Aux var
+    param t236
+    t237 = 5                  # Aux var
+    param t237
+    t238 = 5                  # Aux var
+    param t238
+    call f5
+    t239 = 537                # Aux var
+    param t239
+    t240 = 309                # Aux var
+    param t240
+    t241 = 2                  # Aux var
+    param t241
+    t242 = 2                  # Aux var
+    param t242
+    call f5
+    t243 = 370                # Aux var
+    param t243
+    t244 = 537                # Aux var
+    param t244
+    t245 = 3                  # Aux var
+    param t245
+    t246 = 3                  # Aux var
+    param t246
+    call f5
+    t247 = 138                # Aux var
+    param t247
+    t248 = 140                # Aux var
+    param t248
+    t249 = 5                  # Aux var
+    param t249
+    t250 = 5                  # Aux var
+    param t250
+    call f5
+    t251 = 8                  # Aux var
+    param t251
+    t252 = 189                # Aux var
+    param t252
+    t253 = 3                  # Aux var
+    param t253
+    t254 = 3                  # Aux var
+    param t254
+    call f5
+    t255 = 279                # Aux var
+    param t255
+    t256 = 53                 # Aux var
+    param t256
+    t257 = 5                  # Aux var
+    param t257
+    t258 = 5                  # Aux var
+    param t258
+    call f5
+    t259 = 578                # Aux var
+    param t259
+    t260 = 181                # Aux var
+    param t260
+    t261 = 3                  # Aux var
+    param t261
+    t262 = 3                  # Aux var
+    param t262
+    call f5
+    t263 = 372                # Aux var
+    param t263
+    t264 = 155                # Aux var
+    param t264
+    t265 = 5                  # Aux var
+    param t265
+    t266 = 5                  # Aux var
+    param t266
+    call f5
+    t267 = 492                # Aux var
+    param t267
+    t268 = 218                # Aux var
+    param t268
+    t269 = 2                  # Aux var
+    param t269
+    t270 = 2                  # Aux var
+    param t270
+    call f5
+    t271 = 517                # Aux var
+    param t271
+    t272 = 512                # Aux var
+    param t272
+    t273 = 2                  # Aux var
+    param t273
+    t274 = 2                  # Aux var
+    param t274
+    call f5
+    t275 = 371                # Aux var
+    param t275
+    t276 = 505                # Aux var
+    param t276
+    t277 = 3                  # Aux var
+    param t277
+    t278 = 3                  # Aux var
+    param t278
+    call f5
+    t279 = 449                # Aux var
+    param t279
+    t280 = 148                # Aux var
+    param t280
+    t281 = 2                  # Aux var
+    param t281
+    t282 = 2                  # Aux var
+    param t282
+    call f5
+    t283 = 459                # Aux var
+    param t283
+    t284 = 408                # Aux var
+    param t284
+    t285 = 5                  # Aux var
+    param t285
+    t286 = 5                  # Aux var
+    param t286
+    call f5
+    t287 = 1                  # Aux var
+    param t287
+    t288 = 297                # Aux var
+    param t288
+    t289 = 5                  # Aux var
+    param t289
+    t290 = 5                  # Aux var
+    param t290
+    call f5
+    return
+# -------------- END ------------- 
+# ----------- FUNC: cyclone ----------- 
+f12: skip
+    pmb f12
+    t291 = 255                # Aux var
+    param t291
+    t292 = 255                # Aux var
+    param t292
+    t293 = 255                # Aux var
+    param t293
+    t294 = 14                 # Aux var
+    param t294
+    t295 = 6                  # Aux var
+    param t295
+    t296 = 0                  # Aux var
+    param t296
+    call f1
+    t297 = 640                # Aux var
+    t36 = t297                # const 'WIDTH' = expr
+    t37 = t36                 # const 'HEIGHT' = expr
+    t298 = 10                 # Aux var
+    t38 = t298                # const 'side' = expr
+    param t36
+    param t37
     call f2
     call f8
-    t47 = 2                   # Aux var
-    t48 = t34 / t47
-    t36 = t48                 # 'y' = expr
-    t49 = 0                   # Aux var
-    t37 = t49                 # 'x' = expr
-    t50 = 5                   # Aux var
-    t38 = t50                 # 'v' = expr
-    t51 = 0                   # Aux var
-    param t51
-    t52 = 0                   # Aux var
-    param t52
-    t53 = 0                   # Aux var
-    param t53
+    t299 = 2                  # Aux var
+    t300 = t37 / t299
+    t39 = t300                # 'y' = expr
+    t301 = 0                  # Aux var
+    t40 = t301                # 'x' = expr
+    t302 = 5                  # Aux var
+    t41 = t302                # 'v' = expr
+    t303 = 0                  # Aux var
+    param t303
+    t304 = 0                  # Aux var
+    param t304
+    t305 = 0                  # Aux var
+    param t305
     call f3
 e0: skip                      # Loop init
-    t54 = -1                  # Aux var
-    if ( t54 == 0 ) goto e1
-    t55 = 34                  # Aux var
-    param t55
-    t56 = 32                  # Aux var
-    param t56
-    t57 = 52                  # Aux var
-    param t57
-    call f4
-    t58 = 0                   # Aux var
-    param t58
-    t59 = 0                   # Aux var
-    param t59
-    param t33
-    param t34
-    call f5
-    t60 = 95                  # Aux var
-    param t60
-    t61 = 205                 # Aux var
-    param t61
-    t62 = 225                 # Aux var
-    param t62
-    call f4
-    t63 = t37 - t35
-    param t63
+    t306 = -1                 # Aux var
+    if ( t306 == 0 ) goto e1
     param t36
-    param t35
-    param t35
-    call f5
-    t64 = 118                 # Aux var
-    param t64
-    t65 = 66                  # Aux var
-    param t65
-    t66 = 138                 # Aux var
-    param t66
-    call f4
     param t37
-    param t36
-    param t35
-    param t35
+    call f11
+    t307 = 95                 # Aux var
+    param t307
+    t308 = 205                # Aux var
+    param t308
+    t309 = 225                # Aux var
+    param t309
+    call f4
+    t310 = t40 - t38
+    param t310
+    param t39
+    param t38
+    param t38
     call f5
-    t67 = t37 - t35
-    param t67
-    t68 = t36 - t35
-    param t68
-    param t35
-    param t35
+    t311 = 118                # Aux var
+    param t311
+    t312 = 66                 # Aux var
+    param t312
+    t313 = 138                # Aux var
+    param t313
+    call f4
+    param t40
+    param t39
+    param t38
+    param t38
     call f5
-    t69 = t37 - t35
-    param t69
-    t70 = t36 + t35
-    param t70
-    param t35
-    param t35
+    t314 = t40 - t38
+    param t314
+    t315 = t39 - t38
+    param t315
+    param t38
+    param t38
     call f5
-    t71 = 2                   # Aux var
-    t72 = t71 * t35
-    t73 = t37 - t72
-    param t73
-    t74 = 2                   # Aux var
-    t75 = t74 * t35
-    t76 = t36 - t75
-    param t76
-    param t35
-    param t35
+    t316 = t40 - t38
+    param t316
+    t317 = t39 + t38
+    param t317
+    param t38
+    param t38
     call f5
-    t77 = 2                   # Aux var
-    t78 = t77 * t35
-    t79 = t37 - t78
-    param t79
-    t80 = 2                   # Aux var
-    t81 = t80 * t35
-    t82 = t36 + t81
-    param t82
-    param t35
-    param t35
+    t318 = 2                  # Aux var
+    t319 = t318 * t38
+    t320 = t40 - t319
+    param t320
+    t321 = 2                  # Aux var
+    t322 = t321 * t38
+    t323 = t39 - t322
+    param t323
+    param t38
+    param t38
     call f5
-    t83 = t37 + t38
-    t84 = t83 % t33
-    t37 = t84                 # 'x' = expr
+    t324 = 2                  # Aux var
+    t325 = t324 * t38
+    t326 = t40 - t325
+    param t326
+    t327 = 2                  # Aux var
+    t328 = t327 * t38
+    t329 = t39 + t328
+    param t329
+    param t38
+    param t38
+    call f5
+    t330 = t40 + t41
+    t331 = t330 % t36
+    t40 = t331                # 'x' = expr
     call f9
-    t85 = 33                  # Aux var
-    param t85
+    t332 = 33                 # Aux var
+    param t332
     call f10
     goto e0
 e1: skip                      # Loop final

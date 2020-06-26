@@ -1,0 +1,12 @@
+f0 | M68K_set_text_color | local bytes: 0 | parameter bytes: 12
+f1 | M68K_set_text_properties | local bytes: 0 | parameter bytes: 24
+f2 | M68K_set_screen_size | local bytes: 0 | parameter bytes: 8
+f3 | M68K_set_stroke | local bytes: 0 | parameter bytes: 12
+f4 | M68K_set_fill | local bytes: 0 | parameter bytes: 12
+f5 | M68K_draw_rect | local bytes: 0 | parameter bytes: 16
+f6 | M68K_pixel_not_black | local bytes: 0 | parameter bytes: 8
+f7 | M68K_set_pixel | local bytes: 0 | parameter bytes: 20
+f8 | M68K_enable_double_buffer | local bytes: 0 | parameter bytes: 0
+f9 | M68K_show_double_buffer | local bytes: 0 | parameter bytes: 0
+f10 | M68K_sleep | local bytes: 0 | parameter bytes: 4
+f11 | cyclone | local bytes: 42 | parameter bytes: 0

@@ -9,4 +9,5 @@ f7 | M68K_set_pixel | local bytes: 0 | parameter bytes: 20
 f8 | M68K_enable_double_buffer | local bytes: 0 | parameter bytes: 0
 f9 | M68K_show_double_buffer | local bytes: 0 | parameter bytes: 0
 f10 | M68K_sleep | local bytes: 0 | parameter bytes: 4
-f11 | cyclone | local bytes: 212 | parameter bytes: 0
+f11 | draw_background | local bytes: 1000 | parameter bytes: 8
+f12 | cyclone | local bytes: 192 | parameter bytes: 0

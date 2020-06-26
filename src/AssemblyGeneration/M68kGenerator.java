@@ -8,7 +8,6 @@ import IntermediateCode.Function;
 import IntermediateCode.Opcode;
 import IntermediateCode.VarType;
 import SymbolTable.FuncDescription;
-import cyclonecompiler.InfoDump;
 import cyclonecompiler.Main;
 
 public class M68kGenerator extends AsmGenerator{

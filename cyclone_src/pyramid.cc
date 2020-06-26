@@ -17,6 +17,7 @@ func void print_n_spaces(int n)
     }
 }
 
+
 func void pyramid(int base)
 {
     int row = 0;

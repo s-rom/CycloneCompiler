@@ -35,9 +35,9 @@ public class Main {
     public static AtomicType atomicInt;
 
     public static void main (String [] args){
-        
+        gen();
         if (args.length == 0){
-            compileFromIDE("comp2");
+            compileFromIDE("movement");
             return;
         }
         
@@ -55,6 +55,20 @@ public class Main {
         infoPath.mkdir();
         
         compileFromCmd(fileName, f.getAbsolutePath(), currentPath, infoPath.getAbsolutePath());
+    }
+    
+    
+    public static void gen(){
+       
+        
+        for (int i = 0; i < 30; i++)
+        { 
+            int side = (int) (Math.random() * 4) + 2;
+            int x = (int) (Math.random() * 600);
+            int y = (int) (Math.random() * 600);
+            System.out.println("M68K_draw_rect("+x+","+y+","+side+","+side+");");
+
+        }
     }
     
     public static void compileFromCmd

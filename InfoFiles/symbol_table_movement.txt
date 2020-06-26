@@ -84,14 +84,21 @@
 | M68K_sleep     | func <10> returns void, params(int millis)
      ------------------------
      | LEVEL 1
-     | WIDTH          | const <33> int 
-     | HEIGHT         | const <34> int 
-     | side           | const <35> int 
-     | y              | local var <36> int
-     | x              | local var <37> int
-     | v              | local var <38> int
+     | w              | input param <33> int
+     | h              | input param <34> int
+     | side           | local var <35> int
+     ------------------------
+| draw_background| func <11> returns void, params(int w, int h)
+     ------------------------
+     | LEVEL 1
+     | WIDTH          | const <36> int 
+     | HEIGHT         | const <37> int 
+     | side           | const <38> int 
+     | y              | local var <39> int
+     | x              | local var <40> int
+     | v              | local var <41> int
           ------------------------
           | LEVEL 2
           ------------------------
      ------------------------
-| cyclone        | func <11> returns void, params()
+| cyclone        | func <12> returns void, params()
