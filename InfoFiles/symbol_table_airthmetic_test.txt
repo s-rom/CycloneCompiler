@@ -1,0 +1,11 @@
+### ---------- Symbol Table ----------
+------------------------
+| LEVEL 0
+| void           | TS_NULL [0,0] 0byte
+| string         | TS_CHAR [255,0] 1byte
+| int            | TS_INT [2147483647,-2147483648] 4bytes
+| bool           | TS_BOOL [255,0] 1byte
+| true           | const <0> bool 0
+| false          | const <1> bool -1
+| INT32_MAX      | const <2> int 2147483647
+| INT32_MIN      | const <3> int -2147483648

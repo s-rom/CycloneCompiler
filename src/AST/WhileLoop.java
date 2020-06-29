@@ -46,8 +46,11 @@ public class WhileLoop extends Node{
         Main.gen.generateSkip(eini, "Loop init");
         this.e.generateIntermediateCode();
 
-        // TODO: Replace with proper value of false
-        Main.gen.generateRelational(Opcode.EQ, e.intermediateVar, 0, efin);
+        if (e.intermediateVar == null)
+            Main.gen.generateRelational(Opcode.EQ, e.literal, 0, efin);
+        else 
+            Main.gen.generateRelational(Opcode.EQ, e.intermediateVar, 0, efin);
+        
         this.b.generateIntermediateCode();
         Main.gen.generateGoto(eini);
         Main.gen.generateSkip(efin,"Loop final");

@@ -30,9 +30,9 @@ public class Instruction extends Node{
                         oe = ea.getExpr();
                         oe.generateIntermediateCode();
                         if (this.type == InstructionType.OUTPUT)
-                            Main.gen.generateOutput(oe.intermediateVar);
+                            Main.gen.generateOutput(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
                         else
-                            Main.gen.generateOutputLn(oe.intermediateVar);
+                            Main.gen.generateOutputLn(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
                     }
                     
                     ExprList el = ea.getExprList();
@@ -43,9 +43,9 @@ public class Instruction extends Node{
                             oe = el.getExpr();
                             oe.generateIntermediateCode();
                         if (this.type == InstructionType.OUTPUT)
-                            Main.gen.generateOutput(oe.intermediateVar);
+                            Main.gen.generateOutput(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
                         else
-                            Main.gen.generateOutputLn(oe.intermediateVar);                        
+                            Main.gen.generateOutputLn(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
                         }
                         el = el.getNext();
                     }
@@ -55,8 +55,9 @@ public class Instruction extends Node{
             
             case RETURN:
                 this.e.generateIntermediateCode();
-                Main.gen.generateReturn(this.e.intermediateVar);
-                break;
+                Main.gen.generateReturn(this.e.intermediateVar == null ? 
+                        this.e.literal : this.e.intermediateVar);
+                break;  
             
             case ASSIGNATION:
                 assign.generateIntermediateCode();

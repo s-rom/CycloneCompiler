@@ -32,6 +32,7 @@ public class Primary extends Node {
     public PrimaryType productionType;
     private AtomicType type;
     
+    public Object literal = null;
     
     private int line, column;
     public String getLocationInfo(){
@@ -62,29 +63,34 @@ public class Primary extends Node {
                 break;
                 
             case STR_LIT:
-                this.intermediateVar = 
-                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING, null);
-                
-                Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
+                this.literal = str_lit;
+                this.intermediateVar = null;
+//                this.intermediateVar = 
+//                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING, null);
+//                Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
                 break;
                 
             case BOOL_LIT:
                 // Genera ti = bool_lit
                 // local
-                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.BOOL, null);
+//                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.BOOL, null);
                 
                 int intEquiv;
                 if (bool_lit) intEquiv = -1;
                 else intEquiv = 0;
                 
-                Main.gen.generateAssignation(intEquiv, intermediateVar, "Aux var");
+                this.literal = intEquiv;
+                this.intermediateVar = null;
+//                Main.gen.generateAssignation(intEquiv, intermediateVar, "Aux var");
                 break;
                 
             case INT_LIT:
                 // Genera ti = int_lit
                 // local
-                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.INT, null);
-                Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
+                this.literal = int_lit;
+                this.intermediateVar = null;
+//                this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, VarType.INT, null);
+//                Main.gen.generateAssignation(int_lit, intermediateVar, "Aux var");
                 break;
                 
             case FUNCTION_CALL:

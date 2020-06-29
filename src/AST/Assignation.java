@@ -216,8 +216,12 @@ public class Assignation extends Node{
                 VarType vt = VarType.stringToVarType(type);
                 v = new Variable(cd.getConstNum(), VarSemantics.LOCAL, vt, null);
             }
-            Main.gen.generateAssignation(e.intermediateVar, v,
+            
+            if(e.literal == null && e.intermediateVar != null)
+                Main.gen.generateAssignation(e.intermediateVar, v,
                     "const \'"+id+"\' = expr");
+            else 
+                Main.gen.generateAssignation(e.literal, v, "const \'"+id+"\' = "+e.literal);
             
             return;
         }
@@ -249,8 +253,13 @@ public class Assignation extends Node{
             
         }
 
-        if (e != null)
-            Main.gen.generateAssignation(e.intermediateVar, thisVar,
-                "\'"+id+"\' = expr");
+       
+        if (e != null){
+            if(e.literal == null && e.intermediateVar != null)
+                Main.gen.generateAssignation(e.intermediateVar, thisVar,
+                    "\'"+id+"\' = expr");
+            else 
+                Main.gen.generateAssignation(e.literal, thisVar, "\'"+id+"\' = "+e.literal);
+        }
     }
 }

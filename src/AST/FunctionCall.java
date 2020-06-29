@@ -102,7 +102,8 @@ public class FunctionCall extends Node {
         FuncDescription fd = (FuncDescription) Main.ts.getForward(this.id);
         for (Expr arg : this.listFound){
             arg.generateIntermediateCode();
-            Main.gen.generateParam(arg.intermediateVar);
+            Main.gen.generateParam(arg.intermediateVar == null? 
+                    arg.literal : arg.intermediateVar);
         }
                 
         Main.gen.generateCall(fd.getTag());

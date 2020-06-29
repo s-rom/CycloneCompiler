@@ -16,6 +16,7 @@ public class UnExpr extends Node{
     private UnExpr unExpr;
     public Primary p;
     private AtomicType type;
+    public Object literal = null;
     
     public UnExpr(String unOp, UnExpr unExpr, Primary p) throws FatalError {
         this.unOp= unOp;
@@ -107,6 +108,7 @@ public class UnExpr extends Node{
             // UnExpr --> Primary
             p.generateIntermediateCode();
             this.intermediateVar = p.intermediateVar;
+            this.literal = p.literal;
         } else {
             // UnExpr --> UnOP UnExpr
             this.unExpr.generateIntermediateCode();

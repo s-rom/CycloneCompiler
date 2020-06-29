@@ -22,7 +22,8 @@ public class Expr extends Node{
     private String bo; //Operador binario
     public UnExpr ue;
     private AtomicType type; //Tipo de la expresion. Ej: 2+3 (Expr de tipo int)
-
+    public Object literal = null;
+    
     public Expr(Expr e, String bo, UnExpr ue)  throws FatalError{
         this.e = e;
         this.bo = bo;
@@ -232,6 +233,7 @@ public class Expr extends Node{
             // Expr --> UnExpr
             this.ue.generateIntermediateCode();
             this.intermediateVar = ue.intermediateVar;
+            this.literal = ue.literal;
             
         } else {
             // Expr --> Expr BinOp UnExpr

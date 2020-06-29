@@ -21,8 +21,8 @@
 | M68K_set_text_properties| func <0> returns void, params(int red, int green, int blue, int size, int font, int style)
      ------------------------
      | LEVEL 1
-     | CONSOLAS       | const <10> int 
+     | y              | local var <10> int
      | x              | local var <11> int
-     | y              | local var <12> int
+     | z              | local var <12> int
      ------------------------
 | cyclone        | func <1> returns void, params()

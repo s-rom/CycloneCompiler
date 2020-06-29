@@ -7,28 +7,17 @@ func void cyclone()
     const int CONSOLAS = 6;
     M68K_set_text_properties(255, 255, 255, 14, CONSOLAS, 0);
 
-    int x = 7;
-    int y = 3;
+    out("Introduce un entero: ");
+    int x = read_int();
+    
+    outln("");
+    out("Introduce un segundo entero: ");
+    int y = read_int();
 
-    int r = x - y;
-    output(" 7 - 3");
-    output(" = ");
-    outputln(r);
+    
+    out(x, "+", y, " = ", x+y);
 
-    r = x + y;
-    output(" 7 + 3");
-    output(" = ");
-    outputln(r);
 
-    y = -y;
-    r = x - y;
-    output(" 7 - (-3)");
-    output(" = ");
-    outputln(r);
-
-    r = x + y;
-    output(" 7 + (-3)");
-    output(" = ");
-    outputln(r);
+    
   
 }

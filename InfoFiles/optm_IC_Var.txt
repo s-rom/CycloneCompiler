@@ -1,0 +1,4 @@
+t10	| type: local | off: -4 | bytes: 4 | local to: 1 | int | original: y
+t11	| type: local | off: -8 | bytes: 4 | local to: 1 | int | original: x
+t13	| type: local | off: -12 | bytes: 4 | local to: 1 | int
+t12	| type: local | off: -16 | bytes: 4 | local to: 1 | int | original: z

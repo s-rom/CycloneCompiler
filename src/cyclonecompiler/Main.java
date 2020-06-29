@@ -4,6 +4,7 @@ import AssemblyGeneration.AsmGenerator;
 import AssemblyGeneration.M68kGenerator;
 import IntermediateCode.Function;
 import IntermediateCode.Generator;
+import IntermediateCode.Optimizer;
 import Parser.*;
 import Scanner.*;
 import SymbolTable.AtomicType;
@@ -35,9 +36,8 @@ public class Main {
     public static AtomicType atomicInt;
 
     public static void main (String [] args){
-        gen();
         if (args.length == 0){
-            compileFromIDE("movement");
+            compileFromIDE("arithmetic_test");
             return;
         }
         
@@ -57,20 +57,7 @@ public class Main {
         compileFromCmd(fileName, f.getAbsolutePath(), currentPath, infoPath.getAbsolutePath());
     }
     
-    
-    public static void gen(){
-       
         
-        for (int i = 0; i < 30; i++)
-        { 
-            int side = (int) (Math.random() * 4) + 2;
-            int x = (int) (Math.random() * 600);
-            int y = (int) (Math.random() * 600);
-            System.out.println("M68K_draw_rect("+x+","+y+","+side+","+side+");");
-
-        }
-    }
-    
     public static void compileFromCmd
         (String fileName, String absoluteSrc, String rootPath, String infoPath){
         
@@ -84,15 +71,17 @@ public class Main {
        
         final String ASM_MAIN = rootPath + "\\"+fileName.toUpperCase()+"_MAIN.X68";
         final String INTERMEDIATE_FILE = rootPath + "\\"+fileName+".ic";
+        final String IC_OPTIMIZED = rootPath + "\\"+fileName+"_optimized.ic";
 
         compile(SRC_FILE, INTERMEDIATE_FILE, ASM_MAIN, TOKEN_FILE, SYMBOL_TABLE_FILE,
-                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC);
+                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC, IC_OPTIMIZED);
     }
         
         
     public static void compileFromIDE(String name){
         final String SRC_FILE = ".\\cyclone_src\\"+name+".cc";
         final String INTERMEDIATE_FILE = ".\\generated\\"+name+".ic";
+        final String IC_OPTIMIZED = ".\\generated\\"+name+"_optimized.ic";
 
         final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+name+".txt";
         final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table_"+name+".txt";
@@ -100,9 +89,10 @@ public class Main {
         final String DOT_FILE = ".\\InfoFiles\\"+name+".dot";
         final String IC_VAR = ".\\InfoFiles\\"+name+"_IC_Var.txt";
         final String IC_FUNC = ".\\InfoFiles\\"+name+"_IC_Func.txt";
+        
         final String ASM_MAIN = ".\\generated\\"+name.toUpperCase()+"_MAIN.X68";
         compile(SRC_FILE, INTERMEDIATE_FILE, ASM_MAIN, TOKEN_FILE, SYMBOL_TABLE_FILE,
-                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC);
+                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC, IC_OPTIMIZED);
     }
  
     public static void compile(
@@ -114,7 +104,8 @@ public class Main {
             String error_file,
             String dot_file,
             String ic_var,
-            String ic_func){
+            String ic_func,
+            String ic_optimized){
         
       
         System.out.println("Compiling file: "+src_file);
@@ -157,7 +148,13 @@ public class Main {
                         percentage+"%");
             }
             
+            
+            
+            Optimizer opt = new Optimizer(ic_optimized, gen.getFunctionHashMap());
+            opt.optimize();
+            
             System.out.println("\nCompilation successful");
+            
             
             asmGen.generateMain();
             

@@ -139,6 +139,9 @@ public class Generator {
         return this.funcTable.entrySet();
     }
     
+    public HashMap<Integer,Function> getFunctionHashMap(){
+        return this.funcTable;
+    }
     
     public Opcode getOpcodeEquivalence(String keyword){
         return opcodeTable.get(keyword);
@@ -281,7 +284,7 @@ public class Generator {
     }
     
     public String generateOutput(Object var){
-        String instr = TAB + keywordTable[Opcode.OUTPUT.ordinal()]+' '+var.toString();
+        String instr = TAB + keywordTable[Opcode.OUTPUT.ordinal()]+' '+var;
         write(instr);
         currentFunction.addInstruction(new Instruction(Opcode.OUTPUT, null, null, var));
         return instr;
