@@ -13,7 +13,7 @@ public class SymbolTable {
     private Scope current; // inner-most scope
     private Scope last; 
     
-   
+    public String currentFuncID = null;
     private FuncDescription currentFunc;
 
     public FuncDescription getCurrentFunc() {

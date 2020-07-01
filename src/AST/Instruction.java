@@ -29,7 +29,8 @@ public class Instruction extends Node{
                     if (ea.getExpr() != null) {
                         oe = ea.getExpr();
                         oe.generateIntermediateCode();
-                        if (this.type == InstructionType.OUTPUT)
+                        if (this.type == InstructionType.OUTPUT || 
+                                (ea.getExprList() != null))
                             Main.gen.generateOutput(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
                         else
                             Main.gen.generateOutputLn(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
@@ -42,7 +43,8 @@ public class Instruction extends Node{
                         {
                             oe = el.getExpr();
                             oe.generateIntermediateCode();
-                        if (this.type == InstructionType.OUTPUT)
+                        if (this.type == InstructionType.OUTPUT || 
+                                (el.getNext() != null && el.getNext().getExpr() != null))
                             Main.gen.generateOutput(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);
                         else
                             Main.gen.generateOutputLn(oe.intermediateVar == null ? oe.literal : oe.intermediateVar);

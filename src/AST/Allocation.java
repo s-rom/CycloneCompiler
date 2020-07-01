@@ -69,6 +69,7 @@ public class Allocation extends Node{
             v = new Variable(vd.varNumber, vd.getVarSemantics(), vd.getLength(), 
                 VarType.stringToVarType(type), id);
         }
+        Main.gen.generateMemInit(v);
     }
     
     public String getLocationInfo(){

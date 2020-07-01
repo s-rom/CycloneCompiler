@@ -1,0 +1,294 @@
+digraph ccTree {
+graph[nodesep="1"]
+	node [shape=box]
+	node [shape=box]
+	n0 [label = "Arg: int red"]
+	n1 [label = "Arg: int green"]
+	n2 [label = "Arg: int blue"]
+	n3 [label = "Arg: int size"]
+	n4 [label = "Arg: int font"]
+	n5 [label = "Arg: int style"]
+	n6 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n6:a-> n5
+	n7 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n7:a-> n4
+	n7:as-> n6
+	n8 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n8:a-> n3
+	n8:as-> n7
+	n9 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n9:a-> n2
+	n9:as-> n8
+	n10 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n10:a-> n1
+	n10:as-> n9
+	n11 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n11:a-> n0
+	n11:as-> n10
+	n13 [label = "Internal subroutine: SETTXTPR"]
+	n12 [label = "{Function | {Type: void | ID: M68K_set_text_properties | <a>Args | <b> Call }}", shape="record"]
+	n12:b-> n13
+	n12:a-> n11
+	n14 [label = "Primary"]
+	n15 [label = "INT_LIT: 6"]
+	n14-> n15
+	n16 [label = "UnExpr"]
+	n16-> n14
+	n17 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n17:ue-> n16
+	n18 [label = "Declaration: constint CONSOLAS = "]
+	n18-> n17
+	n19 [label = "Instruction"]
+	n19-> n18
+	n20 [label = "Statement"]
+	n20-> n19
+	n21 [label = "Primary"]
+	n22 [label = "INT_LIT: 255"]
+	n21-> n22
+	n23 [label = "UnExpr"]
+	n23-> n21
+	n24 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n24:ue-> n23
+	n25 [label = "Primary"]
+	n26 [label = "INT_LIT: 255"]
+	n25-> n26
+	n27 [label = "UnExpr"]
+	n27-> n25
+	n28 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n28:ue-> n27
+	n29 [label = "Primary"]
+	n30 [label = "INT_LIT: 255"]
+	n29-> n30
+	n31 [label = "UnExpr"]
+	n31-> n29
+	n32 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n32:ue-> n31
+	n33 [label = "Primary"]
+	n34 [label = "INT_LIT: 12"]
+	n33-> n34
+	n35 [label = "UnExpr"]
+	n35-> n33
+	n36 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n36:ue-> n35
+	n37 [label = "Primary"]
+	n38 [label = "ID: CONSOLAS"]
+	n37-> n38
+	n39 [label = "UnExpr"]
+	n39-> n37
+	n40 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n40:ue-> n39
+	n41 [label = "Primary"]
+	n42 [label = "INT_LIT: 0"]
+	n41-> n42
+	n43 [label = "UnExpr"]
+	n43-> n41
+	n44 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n44:ue-> n43
+	n45 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n45:e-> n44
+	n46 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n46:e-> n40
+	n46:el-> n45
+	n47 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n47:e-> n36
+	n47:el-> n46
+	n48 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n48:e-> n32
+	n48:el-> n47
+	n49 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n49:e-> n28
+	n49:el-> n48
+	n50 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n50:e-> n24
+	n50:el-> n49
+	n51 [label = "{FunctionCall | { ID: M68K_set_text_properties | <e>ExprArg}}", shape="record"]
+	n51:e-> n50
+	n52 [label = "Instruction"]
+	n52-> n51
+	n53 [label = "Statement"]
+	n53-> n52
+	n54 [label = "Primary"]
+	n55 [label = "STR_LIT: Hello, World!"]
+	n54-> n55
+	n56 [label = "UnExpr"]
+	n56-> n54
+	n57 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n57:ue-> n56
+	n58 [label = "Declaration: string msg = "]
+	n58-> n57
+	n59 [label = "Instruction"]
+	n59-> n58
+	n60 [label = "Statement"]
+	n60-> n59
+	n61 [label = "Allocation: dst string [5] "]
+	n62 [label = "Instruction"]
+	n62-> n61
+	n63 [label = "Statement"]
+	n63-> n62
+	n64 [label = "Primary"]
+	n65 [label = "STR_LIT: METODO 1 - asignación implícita: string msg = Hello, World!"]
+	n64-> n65
+	n66 [label = "UnExpr"]
+	n66-> n64
+	n67 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n67:ue-> n66
+	n68 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n68:e-> n67
+	n69 [label = "Instruction"]
+	n70 [label = "OUTPUTLN"]
+	n69-> n70
+	n69-> n68
+	n71 [label = "Statement"]
+	n71-> n69
+	n72 [label = "Primary"]
+	n73 [label = "STR_LIT: METODO 2 - asignación explícita: string msg[5]"]
+	n72-> n73
+	n74 [label = "UnExpr"]
+	n74-> n72
+	n75 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n75:ue-> n74
+	n76 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n76:e-> n75
+	n77 [label = "Instruction"]
+	n78 [label = "OUTPUTLN"]
+	n77-> n78
+	n77-> n76
+	n79 [label = "Statement"]
+	n79-> n77
+	n80 [label = "Primary"]
+	n81 [label = "STR_LIT: Operacion permitida: src = msg"]
+	n80-> n81
+	n82 [label = "UnExpr"]
+	n82-> n80
+	n83 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n83:ue-> n82
+	n84 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n84:e-> n83
+	n85 [label = "Instruction"]
+	n86 [label = "OUTPUTLN"]
+	n85-> n86
+	n85-> n84
+	n87 [label = "Statement"]
+	n87-> n85
+	n88 [label = "Primary"]
+	n89 [label = "STR_LIT: --------------------------------"]
+	n88-> n89
+	n90 [label = "UnExpr"]
+	n90-> n88
+	n91 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n91:ue-> n90
+	n92 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n92:e-> n91
+	n93 [label = "Instruction"]
+	n94 [label = "OUTPUTLN"]
+	n93-> n94
+	n93-> n92
+	n95 [label = "Statement"]
+	n95-> n93
+	n96 [label = "Primary"]
+	n97 [label = "ID: msg"]
+	n96-> n97
+	n98 [label = "UnExpr"]
+	n98-> n96
+	n99 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n99:ue-> n98
+	n100 [label = "Assignation: dst = "]
+	n100-> n99
+	n101 [label = "Instruction"]
+	n101-> n100
+	n102 [label = "Statement"]
+	n102-> n101
+	n103 [label = "Primary"]
+	n104 [label = "STR_LIT: bytes(msg): 14, msg: "]
+	n103-> n104
+	n105 [label = "UnExpr"]
+	n105-> n103
+	n106 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n106:ue-> n105
+	n107 [label = "Primary"]
+	n108 [label = "ID: msg"]
+	n107-> n108
+	n109 [label = "UnExpr"]
+	n109-> n107
+	n110 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n110:ue-> n109
+	n111 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n111:e-> n110
+	n112 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n112:e-> n106
+	n112:el-> n111
+	n113 [label = "Instruction"]
+	n114 [label = "OUTPUTLN"]
+	n113-> n114
+	n113-> n112
+	n115 [label = "Statement"]
+	n115-> n113
+	n116 [label = "Primary"]
+	n117 [label = "STR_LIT: bytes(dst): 5+1, dst: "]
+	n116-> n117
+	n118 [label = "UnExpr"]
+	n118-> n116
+	n119 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n119:ue-> n118
+	n120 [label = "Primary"]
+	n121 [label = "ID: dst"]
+	n120-> n121
+	n122 [label = "UnExpr"]
+	n122-> n120
+	n123 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n123:ue-> n122
+	n124 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
+	n124:e-> n123
+	n125 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
+	n125:e-> n119
+	n125:el-> n124
+	n126 [label = "Instruction"]
+	n127 [label = "OUTPUTLN"]
+	n126-> n127
+	n126-> n125
+	n128 [label = "Statement"]
+	n128-> n126
+	n129 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n129:s-> n128
+	n130 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n130:s-> n115
+	n130:sl-> n129
+	n131 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n131:s-> n102
+	n131:sl-> n130
+	n132 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n132:s-> n95
+	n132:sl-> n131
+	n133 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n133:s-> n87
+	n133:sl-> n132
+	n134 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n134:s-> n79
+	n134:sl-> n133
+	n135 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n135:s-> n71
+	n135:sl-> n134
+	n136 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n136:s-> n63
+	n136:sl-> n135
+	n137 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n137:s-> n60
+	n137:sl-> n136
+	n138 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n138:s-> n53
+	n138:sl-> n137
+	n139 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n139:s-> n20
+	n139:sl-> n138
+	n140 [label = "Block"]
+	n140-> n139
+	n141 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n141:b-> n140
+	n142 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n142:f-> n141
+	n143 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n143:f-> n12
+	n143:fl-> n142
+	n144 [label = "Program"]
+	n144-> n143
+}

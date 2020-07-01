@@ -104,8 +104,6 @@ Program         ::=   FunctionList:fl
 
 TypeFunc        ::=   BOOL_TYPE:t
                         {: RESULT = t; :}
-                    | STR_TYPE:t
-                        {: RESULT = t; :}
                     | INT_TYPE:t
                         {: RESULT = t; :}
                     | VOID_TYPE:t

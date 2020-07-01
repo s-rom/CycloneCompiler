@@ -1,0 +1,31 @@
+# ----------- FUNC: cyclone ----------- 
+f1: skip
+    pmb f1
+    t10 = 6                   # const 'CONSOLAS' = 6
+    param 255
+    param 255
+    param 255
+    param 12
+    param t10
+    param 0
+    call f0
+    t13 = "Hello, World!"     # Aux var
+    t11 = t13                 # 'msg' = expr
+    meminit t12
+    t14 = "METODO 1 - asignación implícita: string msg = Hello, World!"# Aux var
+    outputln t14
+    t15 = "METODO 2 - asignación explícita: string msg[5]"# Aux var
+    outputln t15
+    t16 = "Operacion permitida: src = msg"# Aux var
+    outputln t16
+    t17 = "--------------------------------"# Aux var
+    outputln t17
+    t12 = t11                 # 'dst' = expr
+    t18 = "bytes(msg): 14, msg: "# Aux var
+    output t18
+    outputln t11
+    t19 = "bytes(dst): 5+1, dst: "# Aux var
+    output t19
+    outputln t12
+    return
+# -------------- END ------------- 

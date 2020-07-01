@@ -4,7 +4,6 @@ import AssemblyGeneration.AsmGenerator;
 import AssemblyGeneration.M68kGenerator;
 import IntermediateCode.Function;
 import IntermediateCode.Generator;
-import IntermediateCode.Optimizer;
 import Parser.*;
 import Scanner.*;
 import SymbolTable.AtomicType;
@@ -37,7 +36,7 @@ public class Main {
 
     public static void main (String [] args){
         if (args.length == 0){
-            compileFromIDE("arithmetic_test");
+            compileFromIDE("strings");
             return;
         }
         
@@ -47,7 +46,7 @@ public class Main {
         if (idxOfExtension == -1) {
             System.err.println(f.getPath()+" is not a Cyclone file. All cyclone files must end with .cc");
             return;
-        } 
+        }
         
         fileName = f.getName().substring(0, idxOfExtension);
         String currentPath = System.getProperty("user.dir");
@@ -71,28 +70,41 @@ public class Main {
        
         final String ASM_MAIN = rootPath + "\\"+fileName.toUpperCase()+"_MAIN.X68";
         final String INTERMEDIATE_FILE = rootPath + "\\"+fileName+".ic";
-        final String IC_OPTIMIZED = rootPath + "\\"+fileName+"_optimized.ic";
+        final String LIB_PATH = "../../68LIB/";
 
         compile(SRC_FILE, INTERMEDIATE_FILE, ASM_MAIN, TOKEN_FILE, SYMBOL_TABLE_FILE,
-                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC, IC_OPTIMIZED);
+                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC, LIB_PATH);
     }
         
         
     public static void compileFromIDE(String name){
-        final String SRC_FILE = ".\\cyclone_src\\"+name+".cc";
-        final String INTERMEDIATE_FILE = ".\\generated\\"+name+".ic";
-        final String IC_OPTIMIZED = ".\\generated\\"+name+"_optimized.ic";
-
-        final String TOKEN_FILE = ".\\InfoFiles\\tokens_"+name+".txt";
-        final String SYMBOL_TABLE_FILE = ".\\InfoFiles\\symbol_table_"+name+".txt";
-        final String ERROR_FILE = ".\\InfoFiles\\error_log_"+name+".txt";
-        final String DOT_FILE = ".\\InfoFiles\\"+name+".dot";
-        final String IC_VAR = ".\\InfoFiles\\"+name+"_IC_Var.txt";
-        final String IC_FUNC = ".\\InfoFiles\\"+name+"_IC_Func.txt";
         
-        final String ASM_MAIN = ".\\generated\\"+name.toUpperCase()+"_MAIN.X68";
+        File generated_subPath = new File(".\\generated\\"+name+"_GENERATED\\");
+        if (!generated_subPath.exists())
+            generated_subPath.mkdirs();
+        
+        File info_subPath = new File(".\\InfoFiles\\"+name+"_INFO\\");
+        if (!info_subPath.exists())
+            info_subPath.mkdirs();
+        
+        String genPath = ".\\generated\\"+name+"_GENERATED\\";
+        String infoPath = ".\\InfoFiles\\"+name+"_INFO\\";
+      
+        final String SRC_FILE = ".\\cyclone_src\\"+name+".cc";
+        final String INTERMEDIATE_FILE = genPath+name+".ic";
+
+        final String TOKEN_FILE = infoPath+"tokens_"+name+".txt";
+        final String SYMBOL_TABLE_FILE = infoPath+"symbol_table_"+name+".txt";
+        final String ERROR_FILE = infoPath+"error_log_"+name+".txt";
+        final String DOT_FILE = infoPath+name+".dot";
+        final String IC_VAR = infoPath+name+"_IC_Var.txt";
+        final String IC_FUNC = infoPath+name+"_IC_Func.txt";
+        final String LIB_PATH = "../../68LIB/";
+        
+        
+        final String ASM_MAIN = genPath+name.toUpperCase()+"_MAIN.X68";
         compile(SRC_FILE, INTERMEDIATE_FILE, ASM_MAIN, TOKEN_FILE, SYMBOL_TABLE_FILE,
-                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC, IC_OPTIMIZED);
+                ERROR_FILE, DOT_FILE, IC_VAR, IC_FUNC, LIB_PATH);
     }
  
     public static void compile(
@@ -105,13 +117,13 @@ public class Main {
             String dot_file,
             String ic_var,
             String ic_func,
-            String ic_optimized){
+            String libPath){
         
       
         System.out.println("Compiling file: "+src_file);
         try {
             gen = new Generator(intermediate_file);
-            asmGen = new M68kGenerator(asm_file);
+            asmGen = new M68kGenerator(asm_file, libPath);
             DOT.initWriter(dot_file);
             InfoDump.initAllWriters
                 (token_file, symbol_table_file, error_file, ic_var, ic_func);
@@ -148,14 +160,7 @@ public class Main {
                         percentage+"%");
             }
             
-            
-            
-            Optimizer opt = new Optimizer(ic_optimized, gen.getFunctionHashMap());
-            opt.optimize();
-            
             System.out.println("\nCompilation successful");
-            
-            
             asmGen.generateMain();
             
         } catch (FileNotFoundException ex) {

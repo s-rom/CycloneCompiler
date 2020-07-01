@@ -1,5 +1,0 @@
-f0 | M68K_set_text_color | local bytes: 0 | parameter bytes: 12
-f1 | M68K_set_text_properties | local bytes: 0 | parameter bytes: 24
-f2 | print_n_spaces | local bytes: 26 | parameter bytes: 4
-f3 | pyramid | local bytes: 158 | parameter bytes: 4
-f4 | cyclone | local bytes: 164 | parameter bytes: 0

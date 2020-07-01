@@ -63,11 +63,9 @@ public class Primary extends Node {
                 break;
                 
             case STR_LIT:
-                this.literal = str_lit;
-                this.intermediateVar = null;
-//                this.intermediateVar = 
-//                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING, null);
-//                Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
+                this.intermediateVar = 
+                        new IntermediateCode.Variable(VarSemantics.LOCAL, str_lit.length()+1, VarType.STRING, null);
+                Main.gen.generateAssignation(str_lit, intermediateVar, "Aux var");
                 break;
                 
             case BOOL_LIT:

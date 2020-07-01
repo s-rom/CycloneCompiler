@@ -332,6 +332,8 @@ public class Scanner implements java_cup.runtime.Scanner {
 
     private boolean funcOpen = false;
     private Stack<String> s = new Stack();
+    public String lastID = null;
+
     private Symbol getSymbol(int type) {
         String tokenName = ParserSym.terminalNames[type];
         InfoDump.addTokenInfo(tokenName, yyline, yycolumn);
@@ -743,7 +745,8 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 49: break;
           case 3: 
-            { return getSymbol(ParserSym.ID, yytext());
+            { lastID = yytext();
+                return getSymbol(ParserSym.ID, yytext());
             } 
             // fall through
           case 50: break;
@@ -779,6 +782,7 @@ public class Scanner implements java_cup.runtime.Scanner {
 
                 if (!s.empty() && s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
+                    Main.ts.currentFuncID = lastID;
                     funcOpen = true;
                 }     
                 return getSymbol(ParserSym.LPAREN);
@@ -798,7 +802,10 @@ public class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 58: break;
           case 12: 
-            { if (funcOpen) funcOpen = false;
+            { if (funcOpen) {
+                    funcOpen = false;
+                    Main.ts.currentFuncID = null;
+                }
                 s.pop();
                 Main.ts.exitBlock();
                 return getSymbol(ParserSym.RCURL);

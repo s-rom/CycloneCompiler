@@ -1,0 +1,22 @@
+t10	| type: local | off: -4 | bytes: 4 | local to: 1 | int
+t13	| type: local | off: -26 | bytes: 22 | local to: 1 | string
+t14	| type: local | off: -30 | bytes: 4 | local to: 1 | int
+t11	| type: local | off: -34 | bytes: 4 | local to: 1 | int | original: x
+t15	| type: local | off: -64 | bytes: 30 | local to: 1 | string
+t16	| type: local | off: -68 | bytes: 4 | local to: 1 | int
+t12	| type: local | off: -72 | bytes: 4 | local to: 1 | int | original: y
+t17	| type: local | off: -76 | bytes: 4 | local to: 1 | string
+t18	| type: local | off: -80 | bytes: 4 | local to: 1 | string
+t19	| type: local | off: -84 | bytes: 4 | local to: 1 | int
+t20	| type: local | off: -88 | bytes: 4 | local to: 1 | string
+t21	| type: local | off: -92 | bytes: 4 | local to: 1 | string
+t22	| type: local | off: -96 | bytes: 4 | local to: 1 | int
+t23	| type: local | off: -100 | bytes: 4 | local to: 1 | string
+t24	| type: local | off: -104 | bytes: 4 | local to: 1 | string
+t25	| type: local | off: -108 | bytes: 4 | local to: 1 | int
+t26	| type: local | off: -112 | bytes: 4 | local to: 1 | string
+t27	| type: local | off: -116 | bytes: 4 | local to: 1 | string
+t28	| type: local | off: -120 | bytes: 4 | local to: 1 | int
+t29	| type: local | off: -124 | bytes: 4 | local to: 1 | string
+t30	| type: local | off: -128 | bytes: 4 | local to: 1 | string
+t31	| type: local | off: -132 | bytes: 4 | local to: 1 | int

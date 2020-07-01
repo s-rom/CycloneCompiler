@@ -1,0 +1,61 @@
+# ----------- FUNC: cyclone ----------- 
+f1: skip
+    pmb f1
+    t10 = 6                   # const 'CONSOLAS' = 6
+    param 255
+    param 255
+    param 255
+    param 14
+    param t10
+    param 0
+    call f0
+    t13 = "Introduce un entero: "# Aux var
+    output t13
+    read_int t14
+    t11 = t14                 # 'x' = expr
+    t15 = "Introduce un segundo entero: "# Aux var
+    output t15
+    read_int t16
+    t12 = t16                 # 'y' = expr
+    output t11
+    t17 = " + "               # Aux var
+    output t17
+    output t12
+    t18 = " = "               # Aux var
+    output t18
+    t19 = t11 + t12
+    outputln t19
+    output t11
+    t20 = " - "               # Aux var
+    output t20
+    output t12
+    t21 = " = "               # Aux var
+    output t21
+    t22 = t11 - t12
+    outputln t22
+    output t11
+    t23 = " * "               # Aux var
+    output t23
+    output t12
+    t24 = " = "               # Aux var
+    output t24
+    t25 = t11 * t12
+    outputln t25
+    output t11
+    t26 = " / "               # Aux var
+    output t26
+    output t12
+    t27 = " = "               # Aux var
+    output t27
+    t28 = t11 / t12
+    outputln t28
+    output t11
+    t29 = " % "               # Aux var
+    output t29
+    output t12
+    t30 = " = "               # Aux var
+    output t30
+    t31 = t11 % t12
+    outputln t31
+    return
+# -------------- END ------------- 

@@ -1,0 +1,107 @@
+### ---------- Token File ----------
+### Format: (line,colum) TokenName: Attribute?
+
+(1,0)	INTERNAL
+(1,10)	VOID_TYPE: void
+(1,15)	ID: M68K_set_text_properties
+(1,40)	LPAREN
+(1,41)	INT_TYPE: int
+(1,45)	ID: red
+(1,48)	COMMA
+(1,50)	INT_TYPE: int
+(1,54)	ID: green
+(1,59)	COMMA
+(1,61)	INT_TYPE: int
+(1,65)	ID: blue
+(1,69)	COMMA
+(1,71)	INT_TYPE: int
+(1,75)	ID: size
+(1,79)	COMMA
+(1,81)	INT_TYPE: int
+(1,85)	ID: font
+(1,89)	COMMA
+(1,91)	INT_TYPE: int
+(1,95)	ID: style
+(1,100)	RPAREN
+(1,102)	ARROW
+(1,105)	STR_LIT: "SETTXTPR"
+(1,115)	SEMICOLON
+(4,0)	FUNC
+(4,5)	VOID_TYPE: void
+(4,10)	ID: cyclone
+(4,17)	LPAREN
+(4,18)	RPAREN
+(5,0)	LCURL
+(6,4)	CONST: const
+(6,10)	INT_TYPE: int
+(6,14)	ID: CONSOLAS
+(6,23)	ASSIGN: =
+(6,25)	INT_LIT: 6
+(6,26)	SEMICOLON
+(7,4)	ID: M68K_set_text_properties
+(7,28)	LPAREN
+(7,29)	INT_LIT: 255
+(7,32)	COMMA
+(7,34)	INT_LIT: 255
+(7,37)	COMMA
+(7,39)	INT_LIT: 255
+(7,42)	COMMA
+(7,44)	INT_LIT: 12
+(7,46)	COMMA
+(7,48)	ID: CONSOLAS
+(7,56)	COMMA
+(7,58)	INT_LIT: 0
+(7,59)	RPAREN
+(7,60)	SEMICOLON
+(9,4)	STR_TYPE: string
+(9,11)	ID: msg
+(9,15)	ASSIGN: =
+(9,17)	STR_LIT: "Hello, World!"
+(9,32)	SEMICOLON
+(10,4)	STR_TYPE: string
+(10,11)	ID: dst
+(10,14)	LBRACKET
+(10,15)	INT_LIT: 5
+(10,16)	RBRACKET
+(10,17)	SEMICOLON
+(12,4)	OUTPUTLN
+(12,9)	LPAREN
+(12,10)	STR_LIT: "METODO 1 - asignación implícita: string msg = Hello, World!"
+(12,71)	RPAREN
+(12,72)	SEMICOLON
+(13,4)	OUTPUTLN
+(13,9)	LPAREN
+(13,10)	STR_LIT: "METODO 2 - asignación explícita: string msg[5]"
+(13,58)	RPAREN
+(13,59)	SEMICOLON
+(14,4)	OUTPUTLN
+(14,9)	LPAREN
+(14,10)	STR_LIT: "Operacion permitida: src = msg"
+(14,42)	RPAREN
+(14,43)	SEMICOLON
+(15,4)	OUTPUTLN
+(15,9)	LPAREN
+(15,10)	STR_LIT: "--------------------------------"
+(15,44)	RPAREN
+(15,45)	SEMICOLON
+(16,4)	ID: dst
+(16,8)	ASSIGN: =
+(16,10)	ID: msg
+(16,13)	SEMICOLON
+(17,4)	OUTPUTLN
+(17,9)	LPAREN
+(17,10)	STR_LIT: "bytes(msg): 14, msg: "
+(17,33)	COMMA
+(17,35)	ID: msg
+(17,38)	RPAREN
+(17,39)	SEMICOLON
+(18,4)	OUTPUTLN
+(18,9)	LPAREN
+(18,10)	STR_LIT: "bytes(dst): 5+1, dst: "
+(18,34)	COMMA
+(18,35)	ID: dst
+(18,38)	RPAREN
+(18,39)	SEMICOLON
+(19,0)	RCURL
+(19,1)	EOF
+(19,1)	EOF

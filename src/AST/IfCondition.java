@@ -83,7 +83,8 @@ public class IfCondition extends Node{
         Tag efin = null;
         // TODO: Replace with proper value of false
         /* if E.intermediateVar == 0 goto efalse */
-        Main.gen.generateRelational(Opcode.EQ, this.e.intermediateVar, 0, efalse);
+        Object eOperand = e.intermediateVar == null ? e.literal : e.intermediateVar;
+        Main.gen.generateRelational(Opcode.EQ, eOperand, 0, efalse);
         /* Block_if */
         this.ifBlock.generateIntermediateCode();
         

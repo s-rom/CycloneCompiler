@@ -1,0 +1,2 @@
+### ---------- Compilation Errors ----------
+[Semantic Error]: Function M68K_set_text_properties requires 6 parameters, found 3 in line 18, column 42

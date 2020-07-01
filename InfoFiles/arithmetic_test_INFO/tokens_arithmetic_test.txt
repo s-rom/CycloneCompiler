@@ -1,0 +1,157 @@
+### ---------- Token File ----------
+### Format: (line,colum) TokenName: Attribute?
+
+(0,0)	INTERNAL
+(0,10)	VOID_TYPE: void
+(0,15)	ID: M68K_set_text_properties
+(1,4)	LPAREN
+(1,5)	INT_TYPE: int
+(1,9)	ID: red
+(1,12)	COMMA
+(1,14)	INT_TYPE: int
+(1,18)	ID: green
+(1,23)	COMMA
+(1,25)	INT_TYPE: int
+(1,29)	ID: blue
+(1,33)	COMMA
+(1,35)	INT_TYPE: int
+(1,39)	ID: size
+(1,43)	COMMA
+(1,45)	INT_TYPE: int
+(1,49)	ID: font
+(1,53)	COMMA
+(1,55)	INT_TYPE: int
+(1,59)	ID: style
+(1,64)	RPAREN
+(2,4)	ARROW
+(2,7)	STR_LIT: "SETTXTPR"
+(2,17)	SEMICOLON
+(4,0)	FUNC
+(4,5)	VOID_TYPE: void
+(4,10)	ID: cyclone
+(4,17)	LPAREN
+(4,18)	RPAREN
+(5,0)	LCURL
+(6,4)	CONST: const
+(6,10)	INT_TYPE: int
+(6,14)	ID: CONSOLAS
+(6,23)	ASSIGN: =
+(6,25)	INT_LIT: 6
+(6,26)	SEMICOLON
+(7,4)	ID: M68K_set_text_properties
+(7,28)	LPAREN
+(7,29)	INT_LIT: 255
+(7,32)	COMMA
+(7,34)	INT_LIT: 255
+(7,37)	COMMA
+(7,39)	INT_LIT: 255
+(7,42)	COMMA
+(7,44)	INT_LIT: 14
+(7,46)	COMMA
+(7,48)	ID: CONSOLAS
+(7,56)	COMMA
+(7,58)	INT_LIT: 0
+(7,59)	RPAREN
+(7,60)	SEMICOLON
+(9,4)	OUTPUT
+(9,7)	LPAREN
+(9,8)	STR_LIT: "Introduce un entero: "
+(9,31)	RPAREN
+(9,32)	SEMICOLON
+(10,4)	INT_TYPE: int
+(10,8)	ID: x
+(10,10)	ASSIGN: =
+(10,12)	READ_INT
+(10,20)	LPAREN
+(10,21)	RPAREN
+(10,22)	SEMICOLON
+(11,4)	OUTPUT
+(11,7)	LPAREN
+(11,8)	STR_LIT: "Introduce un segundo entero: "
+(11,39)	RPAREN
+(11,40)	SEMICOLON
+(12,4)	INT_TYPE: int
+(12,8)	ID: y
+(12,10)	ASSIGN: =
+(12,12)	READ_INT
+(12,20)	LPAREN
+(12,21)	RPAREN
+(12,22)	SEMICOLON
+(13,4)	OUTPUTLN
+(13,9)	LPAREN
+(13,10)	ID: x
+(13,11)	COMMA
+(13,13)	STR_LIT: " + "
+(13,18)	COMMA
+(13,20)	ID: y
+(13,21)	COMMA
+(13,23)	STR_LIT: " = "
+(13,28)	COMMA
+(13,30)	ID: x
+(13,31)	SUM: +
+(13,32)	ID: y
+(13,33)	RPAREN
+(13,34)	SEMICOLON
+(14,4)	OUTPUTLN
+(14,9)	LPAREN
+(14,10)	ID: x
+(14,11)	COMMA
+(14,13)	STR_LIT: " - "
+(14,18)	COMMA
+(14,20)	ID: y
+(14,21)	COMMA
+(14,23)	STR_LIT: " = "
+(14,28)	COMMA
+(14,30)	ID: x
+(14,31)	SUB: -
+(14,32)	ID: y
+(14,33)	RPAREN
+(14,34)	SEMICOLON
+(15,4)	OUTPUTLN
+(15,9)	LPAREN
+(15,10)	ID: x
+(15,11)	COMMA
+(15,13)	STR_LIT: " * "
+(15,18)	COMMA
+(15,20)	ID: y
+(15,21)	COMMA
+(15,23)	STR_LIT: " = "
+(15,28)	COMMA
+(15,30)	ID: x
+(15,31)	MULT: *
+(15,32)	ID: y
+(15,33)	RPAREN
+(15,34)	SEMICOLON
+(16,4)	OUTPUTLN
+(16,9)	LPAREN
+(16,10)	ID: x
+(16,11)	COMMA
+(16,13)	STR_LIT: " / "
+(16,18)	COMMA
+(16,20)	ID: y
+(16,21)	COMMA
+(16,23)	STR_LIT: " = "
+(16,28)	COMMA
+(16,30)	ID: x
+(16,31)	DIV: /
+(16,32)	ID: y
+(16,33)	RPAREN
+(16,34)	SEMICOLON
+(17,4)	OUTPUTLN
+(17,9)	LPAREN
+(17,10)	ID: x
+(17,11)	COMMA
+(17,13)	STR_LIT: " % "
+(17,18)	COMMA
+(17,20)	ID: y
+(17,21)	COMMA
+(17,23)	STR_LIT: " = "
+(17,28)	COMMA
+(17,30)	ID: x
+(17,31)	MOD: %
+(17,32)	ID: y
+(17,33)	RPAREN
+(17,34)	SEMICOLON
+(18,0)	RCURL
+(18,1)	EOF
+(18,1)	EOF

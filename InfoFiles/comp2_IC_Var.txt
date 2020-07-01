@@ -1,8 +1,0 @@
-t34	| type: local | off: -4 | bytes: 4 | local to: 11 | int
-t33	| type: local | off: -8 | bytes: 4 | local to: 11 | int
-t35	| type: local | off: -12 | bytes: 4 | local to: 11 | int
-t36	| type: local | off: -16 | bytes: 4 | local to: 11 | int
-t37	| type: local | off: -20 | bytes: 4 | local to: 11 | int
-t38	| type: local | off: -24 | bytes: 4 | local to: 11 | int
-t39	| type: local | off: -28 | bytes: 4 | local to: 11 | int
-t40	| type: local | off: -42 | bytes: 14 | local to: 11 | string

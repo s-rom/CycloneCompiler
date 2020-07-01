@@ -1,2 +1,0 @@
-f0 | M68K_set_text_properties | local bytes: 0 | parameter bytes: 24
-f1 | cyclone | local bytes: 24 | parameter bytes: 0

@@ -1,6 +1,7 @@
 package AST;
 
 import IntermediateCode.Tag;
+import IntermediateCode.VarType;
 import SymbolTable.AtomicType;
 import SymbolTable.AtomicType.Atomic;
 import SymbolTable.VarDescription;
@@ -242,18 +243,38 @@ public class Expr extends Node{
             
             // Asunción: Expr y UnExpr tendrán que tener el mismo tipo (detectado en semanticCheck)
             // Si no, habría que determinar el tipo de la expresión en función de sus operandos
-            this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, 
-                    this.ue.intermediateVar.getType(), null);
+            
+            
+      
+            
+            VarType vtype;
+            if (this.ue.intermediateVar == null){
+                if  (e.intermediateVar != null)
+                    vtype = e.intermediateVar.getType();
+                else 
+                    vtype = ue.literal instanceof Integer ? VarType.INT : 
+                            ue.literal instanceof Boolean ? VarType.BOOL : 
+                            VarType.UNKNOWN;
+            } else {
+               vtype = ue.intermediateVar.getType();
+            }
+            
+            this.intermediateVar = new IntermediateCode.Variable(VarSemantics.LOCAL, vtype, null);
+
+            Object ueOperand = ue.intermediateVar == null? ue.literal : 
+                    ue.intermediateVar;
             
             if (!isBinOpRelational()){
+                Object eOperand = e.intermediateVar == null ? e.literal :
+                        e.intermediateVar;
                 Main.gen.generateBinary(Main.gen.getOpcodeEquivalence(bo), 
-                    e.intermediateVar, ue.intermediateVar, intermediateVar);
+                    eOperand, ueOperand, intermediateVar);
             } else {
                 Main.gen.generateTabbedCommentary("Relational");
-                Main.gen.generateAssignation(-1,intermediateVar);
+                Main.gen.generateAssignation(-1, intermediateVar);
                 Tag t = new Tag(); 
                 Main.gen.generateRelational(Main.gen.getOpcodeEquivalence(bo),
-                        e.intermediateVar, ue.intermediateVar, t);
+                        e.intermediateVar, ueOperand, t);
                 Main.gen.generateAssignation(0,intermediateVar);
                 Main.gen.generateSkip(t);
             }

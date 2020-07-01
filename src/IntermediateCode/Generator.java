@@ -33,6 +33,9 @@ FORMATO: OPCODE SRC1 SRC2 DST
                                 output dst
                                 dst = read_string
                                 dst = read_int
+                                meminit dst: allocated variable
+                                        src1: number of bytes
+                                        src2: value 
 */  
 
 
@@ -327,6 +330,14 @@ public class Generator {
         return instr;
     }
     
+    public String generateMemInit(Object dst){
+        String instr = TAB + keywordTable[Opcode.MEMINIT.ordinal()] 
+                + ' ' + dst;
+        write(instr);
+        currentFunction.addInstruction(new Instruction(Opcode.MEMINIT, null, null, dst));
+        return instr;
+    }
+    
     public String generateParam(Object param){
         String instr = TAB + keywordTable[Opcode.PARAM.ordinal()] + ' ' + param;
         write(instr);
@@ -364,6 +375,7 @@ public class Generator {
         keywordTable[(Opcode.OUTPUTLN).ordinal()] = "outputln";
         keywordTable[(Opcode.READ_STRING).ordinal()] = "read_string";
         keywordTable[(Opcode.READ_INT).ordinal()] = "read_int";
+        keywordTable[(Opcode.MEMINIT).ordinal()] = "meminit";
 
         
         for (Opcode op: Opcode.values()){

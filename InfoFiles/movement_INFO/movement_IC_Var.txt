@@ -1,0 +1,25 @@
+t33	| type: param | off: 8 | bytes: 4 | local to: 11 | int
+t34	| type: param | off: 12 | bytes: 4 | local to: 11 | int
+t35	| type: local | off: -4 | bytes: 4 | local to: 11 | int | original: side
+t36	| type: local | off: -4 | bytes: 4 | local to: 12 | int
+t37	| type: local | off: -8 | bytes: 4 | local to: 12 | int
+t38	| type: local | off: -12 | bytes: 4 | local to: 12 | int
+t42	| type: local | off: -16 | bytes: 4 | local to: 12 | int
+t39	| type: local | off: -20 | bytes: 4 | local to: 12 | int | original: y
+t40	| type: local | off: -24 | bytes: 4 | local to: 12 | int | original: x
+t41	| type: local | off: -28 | bytes: 4 | local to: 12 | int | original: v
+t43	| type: local | off: -32 | bytes: 4 | local to: 12 | int
+t44	| type: local | off: -36 | bytes: 4 | local to: 12 | int
+t45	| type: local | off: -40 | bytes: 4 | local to: 12 | int
+t46	| type: local | off: -44 | bytes: 4 | local to: 12 | int
+t47	| type: local | off: -48 | bytes: 4 | local to: 12 | int
+t48	| type: local | off: -52 | bytes: 4 | local to: 12 | int
+t49	| type: local | off: -56 | bytes: 4 | local to: 12 | int
+t50	| type: local | off: -60 | bytes: 4 | local to: 12 | int
+t51	| type: local | off: -64 | bytes: 4 | local to: 12 | int
+t52	| type: local | off: -68 | bytes: 4 | local to: 12 | int
+t53	| type: local | off: -72 | bytes: 4 | local to: 12 | int
+t54	| type: local | off: -76 | bytes: 4 | local to: 12 | int
+t55	| type: local | off: -80 | bytes: 4 | local to: 12 | int
+t56	| type: local | off: -84 | bytes: 4 | local to: 12 | int
+t57	| type: local | off: -88 | bytes: 4 | local to: 12 | int

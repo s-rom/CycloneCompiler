@@ -1,0 +1,136 @@
+# ----------- FUNC: print_n_spaces ----------- 
+f2: skip
+    pmb f2
+    t28 = " "                 # Aux var
+    t14 = t28                 # 'space' = expr
+    t15 = 0                   # 'spc' = 0
+e0: skip                      # Loop init
+    # Relational
+    t29 = -1
+    if ( t15 < t13 ) goto e2
+    t29 = 0
+e2: skip
+    if ( t29 == 0 ) goto e1
+    t30 = " "                 # Aux var
+    output t30
+    t31 = t15 + 1
+    t15 = t31                 # 'spc' = expr
+    goto e0
+e1: skip                      # Loop final
+    return
+# -------------- END ------------- 
+# ----------- FUNC: pyramid ----------- 
+f3: skip
+    pmb f3
+    t17 = 0                   # 'row' = 0
+    t19 = 0                   # 'left_spaces' = 0
+    t32 = "o "                # Aux var
+    t21 = t32                 # 'symbol' = expr
+    t22 = 6                   # const 'CONSOLAS' = 6
+    t23 = 0                   # 'r' = 0
+    t24 = 0                   # 'g' = 0
+    t25 = 255                 # 'b' = 255
+e3: skip                      # Loop init
+    # Relational
+    t33 = -1
+    if ( t17 <= t16 ) goto e5
+    t33 = 0
+e5: skip
+    if ( t33 == 0 ) goto e4
+    t34 = t16 - t17
+    t19 = t34                 # 'left_spaces' = expr
+    t35 = t19 + 2
+    param t35
+    call f2
+    t18 = 0                   # 'col' = 0
+e6: skip                      # Loop init
+    # Relational
+    t36 = -1
+    if ( t18 < t17 ) goto e8
+    t36 = 0
+e8: skip
+    if ( t36 == 0 ) goto e7
+    t37 = t18 % 2
+    t38 = t17 % 2
+    # Relational
+    t39 = -1
+    if ( t38 == t37 ) goto e9
+    t39 = 0
+e9: skip
+    if ( t39 == 0 ) goto e10
+    t23 = 160                 # 'r' = 160
+    t24 = 54                  # 'g' = 54
+    t25 = 210                 # 'b' = 210
+    goto e11
+e10: skip
+    t23 = 215                 # 'r' = 215
+    t24 = 155                 # 'g' = 155
+    t25 = 235                 # 'b' = 235
+e11: skip
+    param t23
+    param t24
+    param t25
+    param 14
+    param t22
+    param 0
+    call f1
+    output t21
+    t40 = t18 + 1
+    t18 = t40                 # 'col' = expr
+    goto e6
+e7: skip                      # Loop final
+    t41 = t17 + 1
+    t17 = t41                 # 'row' = expr
+    t42 = ""                  # Aux var
+    outputln t42
+    goto e3
+e4: skip                      # Loop final
+    return
+# -------------- END ------------- 
+# ----------- FUNC: cyclone ----------- 
+f4: skip
+    pmb f4
+    t26 = 6                   # const 'CONSOLAS' = 6
+    param 255
+    param 255
+    param 255
+    param 14
+    param t26
+    param 0
+    call f1
+    t43 = "Introduce un entero entre 1 y 16: "# Aux var
+    output t43
+    read_int t44
+    t27 = t44                 # 'levels' = expr
+    # Relational
+    t45 = -1
+    if ( t27 > 16 ) goto e12
+    t45 = 0
+e12: skip
+    # Relational
+    t46 = -1
+    if ( t27 <= 0 ) goto e13
+    t46 = 0
+e13: skip
+    t47 = t46 || t45
+    if ( t47 == 0 ) goto e14
+    t48 = "Número inválido : "# Aux var
+    output t48
+    output t27
+    t49 = ". Por defecto n = 8"# Aux var
+    output t49
+    t50 = ""                  # Aux var
+    outputln t50
+    t27 = 8                   # 'levels' = 8
+e14: skip
+    t51 = "Pirámide de "      # Aux var
+    output t51
+    output t27
+    t52 = " niveles"          # Aux var
+    output t52
+    t53 = ""                  # Aux var
+    outputln t53
+    param t27
+    call f3
+    return
+# -------------- END ------------- 

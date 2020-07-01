@@ -9,15 +9,11 @@ func void cyclone()
 
     out("Introduce un entero: ");
     int x = read_int();
-    
-    outln("");
     out("Introduce un segundo entero: ");
-    int y = read_int();
-
-    
-    out(x, "+", y, " = ", x+y);
-
-
-    
-  
+    int y = read_int();    
+    outln(x, " + ", y, " = ", x+y); 
+    outln(x, " - ", y, " = ", x-y);
+    outln(x, " * ", y, " = ", x*y);  
+    outln(x, " / ", y, " = ", x/y);  
+    outln(x, " % ", y, " = ", x%y);  
 }

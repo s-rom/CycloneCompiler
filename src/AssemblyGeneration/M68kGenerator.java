@@ -13,9 +13,8 @@ import cyclonecompiler.Main;
 public class M68kGenerator extends AsmGenerator{
     
     private final int START_PROG_ADRESS = 0x1000;
-    private final String LIB_PATH = "../68LIB/";
-    private final String PRINT_LIB = "PRNTLIB.X68";
-    private final String STR_LIB = "STRLIB.X68";
+    private String LIB_PATH;
+    private final String CYCLONE_LIB = "CYCLONE.X68";
     
     private final String [] SIZE_MODIFIERS = {"B", "W", "L"};
     
@@ -51,11 +50,11 @@ public class M68kGenerator extends AsmGenerator{
         return "B"+op.name().toUpperCase();
     }
      
-    public M68kGenerator(String filePath){
+    public M68kGenerator(String filePath, String LIBPATH){
         super(filePath);
+        this.LIB_PATH = LIBPATH;
         writeAsm(BEFORE_TAB+"ORG $"+Integer.toHexString(START_PROG_ADRESS)+"\n");
-        writeAsm(BEFORE_TAB+"INCLUDE \""+LIB_PATH+PRINT_LIB+"\"\n");
-        writeAsm(BEFORE_TAB+"INCLUDE \""+LIB_PATH+STR_LIB+"\"\n");
+        writeAsm(BEFORE_TAB+"INCLUDE \""+LIB_PATH+CYCLONE_LIB+"\"\n");
     }
     
     public String generatePmb(Instruction instr){
@@ -65,10 +64,10 @@ public class M68kGenerator extends AsmGenerator{
         
         asmInstr = "MOVE.L "+BP+", -("+SP+")";
         asmInstr = getCommentedLine(asmInstr, ";"+instr.toString());
-        asmInstr += BEFORE_TAB + "MOVE.L "+SP+", "+BP + "\n";
+        asmInstr += BEFORE_TAB + "MOVE.L "+SP+", "+BP;
         
         if (localBytes > 0)
-            asmInstr += BEFORE_TAB + "SUB.L #"+localBytes+", "+SP+"\n";
+            asmInstr += "\n"+ BEFORE_TAB + "SUB.L #"+localBytes+", "+SP;
         return asmInstr;
     }
     
@@ -76,7 +75,13 @@ public class M68kGenerator extends AsmGenerator{
         String tabs = getNSpaces(AFTER_TAB - line.length());
         if (commentary.charAt(0) != ';') commentary = ';'+commentary;
         return BEFORE_TAB + line + tabs + commentary + "\n";
-    }   
+    }  
+    
+    public String move(Variable src, Variable dst, String comment){
+        String asmInstr = getCommentedLine("MOVE.L "+src.getOffset()+"("+BP+"), "+
+                                dst.getOffset()+"("+BP+")", comment);
+        return asmInstr;
+    }
     
     public String generateFun(Instruction instr){
         FuncTag funcTag = (FuncTag) instr.getDst();
@@ -101,14 +106,29 @@ public class M68kGenerator extends AsmGenerator{
         
         String tabs = getNSpaces(AFTER_TAB - asmInstr.length());
         asmInstr =  BEFORE_TAB + asmInstr + tabs + ";"+instr.toString()+"\n";
-        asmInstr += BEFORE_TAB + "ADD.L #" + f.computeLocalOccupation().y + ", "+SP+"\n";
+        asmInstr += BEFORE_TAB + "ADD.L #" + f.computeLocalOccupation().y + ", "+SP;
         return asmInstr;
     }
     
+    private String push(Variable v){
+        return "MOVE.L "+v.getOffset()+"("+BP+"), -("+SP+")";
+    }
+    
     public String generateParam(Instruction instr){
-        String asmInstr = BEFORE_TAB + load(instr.getDst(), D_REG_1, instr.toString());
-        asmInstr += BEFORE_TAB + "MOVE.L "+D_REG_1+", -("+SP+")";
-        return asmInstr;    
+        String asmInstr;
+        
+        if (instr.getDst() instanceof Integer){
+            asmInstr = pushIntegerLiteral((Integer)instr.getDst());
+            return this.getCommentedLine(asmInstr, instr.toString());
+        }
+//        
+//        asmInstr = BEFORE_TAB + load(instr.getDst(), D_REG_1, instr.toString());
+//        asmInstr += BEFORE_TAB + "MOVE.L "+D_REG_1+", -("+SP+")";
+        
+        return getCommentedLine(
+                push((Variable) instr.getDst()), 
+                instr.toString()
+        );    
     }
     
     public String generateReturn(Instruction instr){
@@ -181,6 +201,43 @@ public class M68kGenerator extends AsmGenerator{
         asmInstr += v.getOffset()+"("+BP+")";
         return asmInstr;
     }
+    
+   public String meminit(Instruction instr){
+       String asmInstr = "";
+       Variable vDst = (Variable) instr.getDst();
+       int bytes = vDst.getOccupation();
+       int off = vDst.getOffset();
+      
+       int lastDec = 0;
+       
+        while (bytes > 0){
+            int dec; // 4 or 2
+            String mod; // .L or .W
+            
+            if (bytes - 4 >= 0) { // string of 4 bytes
+                dec = 4;
+                mod = ".L";
+            } else { // string of 2 bytes
+                dec = 2;
+                mod = ".W";
+            }
+            
+            bytes -= dec;
+            
+            String hexStr = "";
+            for (int i = 0; i < dec; i++)
+                hexStr += "FF";
+            
+            asmInstr += BEFORE_TAB + "MOVE"+mod+" #$"+hexStr+","+off+"(A6)\n";
+            off += dec;
+            lastDec = dec;
+        }
+        
+        int lastOff = off - lastDec + 1;
+        asmInstr += BEFORE_TAB + "MOVE.B #$00, "+lastOff+"(A6)\n";
+
+       return asmInstr;
+   }
     
    public String storeStringLiteral(Variable v, String str_lit) {
         String asmInstr = "";
@@ -347,7 +404,6 @@ public class M68kGenerator extends AsmGenerator{
         writeAsm(BEFORE_TAB+"END START\n");
     }
     
-    // TODO: test
     private String copyStrings(Variable vDst, Variable vSrc, Instruction instr){
         String asmInstr;
         int offDst = vDst.getOffset();
@@ -365,10 +421,17 @@ public class M68kGenerator extends AsmGenerator{
         return asmInstr;
     }
     
+    private String moveIntegerLiteral(int literal, Variable dst){
+        return "MOVE.L #"+literal+", "+dst.getOffset()+"("+this.BP+")";
+    }
+    
+    private String pushIntegerLiteral(int literal){
+        return "MOVE.L #"+literal+", -("+SP+")";
+    }
+    
     private String generateAssignation(Instruction instr){
         Object src = instr.getSrc1();
         Variable vDst = (Variable) instr.getDst();
-        String asmInstr = "";       
         
         if (src instanceof String){
             return storeStringLiteral(vDst, (String) src);
@@ -379,9 +442,16 @@ public class M68kGenerator extends AsmGenerator{
             return copyStrings(vDst, vSrc, instr);
         }
         
-        asmInstr += BEFORE_TAB + load(src, D_REG_1, instr.toString());
-        asmInstr += BEFORE_TAB + store(D_REG_1, vDst);
-        return asmInstr;
+        if (instr.getSrc1() instanceof Integer){
+            String asmInstr = moveIntegerLiteral((Integer)instr.getSrc1(), vDst);
+            return getCommentedLine(asmInstr, instr.toString());
+        }
+//        
+//        asmInstr += BEFORE_TAB + load(src, D_REG_1, instr.toString());
+//        asmInstr += BEFORE_TAB + store(D_REG_1, vDst);
+        
+        return move((Variable)instr.getSrc1(), (Variable)instr.getDst(), instr.toString())
+                +"\n";
     }
     
     private String generateGoto(Instruction instr){
@@ -456,6 +526,10 @@ public class M68kGenerator extends AsmGenerator{
     protected void generateAsmEquivalent(Instruction instr) {
         switch(instr.getOp())
         {
+            case MEMINIT:
+                writeAsm(this.meminit(instr));
+                break;
+                
             case ADD:
                 writeAsm(generateBinaryOpcode(instr, "ADD"));
                 break;
@@ -519,7 +593,7 @@ public class M68kGenerator extends AsmGenerator{
                 break;
                 
             case PARAM:
-                writeAsm(generateParam(instr)+"\n");
+                writeAsm(generateParam(instr));
                 break;
             
             case ASSIGN:
@@ -539,7 +613,7 @@ public class M68kGenerator extends AsmGenerator{
                 break;
             case READ_STRING:
             case READ_INT:
-                writeAsm(generateRead(instr)+"\n");
+                writeAsm(generateRead(instr));
         }
     }
     

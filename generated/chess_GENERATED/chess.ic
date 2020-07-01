@@ -1,0 +1,73 @@
+# ----------- FUNC: draw_chessboard ----------- 
+f6: skip
+    pmb f6
+    t28 = t27                 # 'rows' = expr
+    t29 = t28                 # 'cols' = expr
+    t37 = t25 / t28
+    t30 = t37                 # 'side' = expr
+    param 255
+    param 255
+    param 255
+    call f4
+    param 255
+    param 255
+    param 255
+    call f3
+    t31 = 0                   # 'r' = 0
+e0: skip                      # Loop init
+    # Relational
+    t38 = -1
+    if ( t31 < t28 ) goto e2
+    t38 = 0
+e2: skip
+    if ( t38 == 0 ) goto e1
+    t32 = 0                   # 'c' = 0
+e3: skip                      # Loop init
+    # Relational
+    t39 = -1
+    if ( t32 < t29 ) goto e5
+    t39 = 0
+e5: skip
+    if ( t39 == 0 ) goto e4
+    t40 = t31 % 2
+    t41 = t32 % 2
+    # Relational
+    t42 = -1
+    if ( t41 == t40 ) goto e6
+    t42 = 0
+e6: skip
+    if ( t42 == 0 ) goto e7
+    t43 = t32 * t30
+    t33 = t43                 # 'x' = expr
+    t44 = t31 * t30
+    t34 = t44                 # 'y' = expr
+    param t33
+    param t34
+    param t30
+    param t30
+    call f5
+e7: skip
+    t45 = t32 + 1
+    t32 = t45                 # 'c' = expr
+    goto e3
+e4: skip                      # Loop final
+    t46 = t31 + 1
+    t31 = t46                 # 'r' = expr
+    goto e0
+e1: skip                      # Loop final
+    return
+# -------------- END ------------- 
+# ----------- FUNC: cyclone ----------- 
+f7: skip
+    pmb f7
+    t35 = 640                 # const 'W' = 640
+    t36 = t35                 # const 'H' = expr
+    param t35
+    param t36
+    call f2
+    param t35
+    param t36
+    param 8
+    call f6
+    return
+# -------------- END ------------- 

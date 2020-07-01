@@ -51,9 +51,14 @@ public class FunctionCall extends Node {
     @Override
     public void semanticCheck() throws FatalError {
         Description d = Main.ts.get(this.id);
-        if (d == null || d.getDescriptionType() != DescriptionType.D_FUNC){
-            InfoDump.reportSemanticError(id+" is not an existing function, in "+getLocationInfo());
+        
+        if ((d == null || d.getDescriptionType() != DescriptionType.D_FUNC)){
+            if (!id.equals(Main.ts.currentFuncID)){
+                InfoDump.reportSemanticError(id+" is not an existing function, in "+getLocationInfo());
+            }
+            return;
         }
+        
         
         ArrayList<Arg> list = ((FuncDescription) d).getParamList();
         listFound = new ArrayList();

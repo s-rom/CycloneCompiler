@@ -1,0 +1,15 @@
+# ----------- FUNC: cyclone ----------- 
+f11: skip
+    pmb f11
+    t33 = 6                   # const 'CONSOLAS' = 6
+    param 255
+    param 255
+    param 255
+    param 14
+    param t33
+    param 0
+    call f1
+    t34 = "Hello, World!"     # Aux var
+    output t34
+    return
+# -------------- END ------------- 

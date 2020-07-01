@@ -38,6 +38,8 @@ import java.util.Stack;
 
     private boolean funcOpen = false;
     private Stack<String> s = new Stack();
+    public String lastID = null;
+
     private Symbol getSymbol(int type) {
         String tokenName = ParserSym.terminalNames[type];
         InfoDump.addTokenInfo(tokenName, yyline, yycolumn);
@@ -108,6 +110,7 @@ comment2    = "//"[^\n\r]*
 
                 if (!s.empty() && s.peek() == "func" && !funcOpen){
                     Main.ts.enterBlock();
+                    Main.ts.currentFuncID = lastID;
                     funcOpen = true;
                 }     
                 return getSymbol(ParserSym.LPAREN);
@@ -119,7 +122,10 @@ comment2    = "//"[^\n\r]*
                 return getSymbol(ParserSym.LCURL);
             }
 "}"         {
-                if (funcOpen) funcOpen = false;
+                if (funcOpen) {
+                    funcOpen = false;
+                    Main.ts.currentFuncID = null;
+                }
                 s.pop();
                 Main.ts.exitBlock();
                 return getSymbol(ParserSym.RCURL);
@@ -165,6 +171,7 @@ comment2    = "//"[^\n\r]*
 
 {ws}        {/* white space */}
 {id}        { 
+                lastID = yytext();
                 return getSymbol(ParserSym.ID, yytext());  
             }
 {comment1}  {}
