@@ -2,295 +2,73 @@ digraph ccTree {
 graph[nodesep="1"]
 	node [shape=box]
 	node [shape=box]
-	n0 [label = "Arg: int r"]
-	n1 [label = "Arg: int g"]
-	n2 [label = "Arg: int b"]
-	n3 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n3:a-> n2
-	n4 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n4:a-> n1
-	n4:as-> n3
-	n5 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n5:a-> n0
-	n5:as-> n4
-	n7 [label = "Internal subroutine: SETTXTCL"]
-	n6 [label = "{Function | {Type: void | ID: M68K_set_text_color | <a>Args | <b> Call }}", shape="record"]
-	n6:b-> n7
+	n0 [label = "Arg: int red"]
+	n1 [label = "Arg: int green"]
+	n2 [label = "Arg: int blue"]
+	n3 [label = "Arg: int size"]
+	n4 [label = "Arg: int font"]
+	n5 [label = "Arg: int style"]
+	n6 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
 	n6:a-> n5
-	n8 [label = "Arg: int red"]
-	n9 [label = "Arg: int green"]
-	n10 [label = "Arg: int blue"]
-	n11 [label = "Arg: int size"]
-	n12 [label = "Arg: int font"]
-	n13 [label = "Arg: int style"]
-	n14 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n14:a-> n13
-	n15 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n15:a-> n12
-	n15:as-> n14
-	n16 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n16:a-> n11
-	n16:as-> n15
-	n17 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n17:a-> n10
-	n17:as-> n16
-	n18 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n18:a-> n9
-	n18:as-> n17
-	n19 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n19:a-> n8
-	n19:as-> n18
-	n21 [label = "Internal subroutine: SETTXTPR"]
-	n20 [label = "{Function | {Type: void | ID: M68K_set_text_properties | <a>Args | <b> Call }}", shape="record"]
-	n20:b-> n21
-	n20:a-> n19
-	n22 [label = "Arg: int width"]
-	n23 [label = "Arg: int height"]
-	n24 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n24:a-> n23
-	n25 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n25:a-> n22
-	n25:as-> n24
-	n27 [label = "Internal subroutine: INITSCRN"]
-	n26 [label = "{Function | {Type: void | ID: M68K_set_screen_size | <a>Args | <b> Call }}", shape="record"]
-	n26:b-> n27
-	n26:a-> n25
-	n28 [label = "Arg: int r"]
-	n29 [label = "Arg: int g"]
-	n30 [label = "Arg: int b"]
-	n31 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n31:a-> n30
-	n32 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n32:a-> n29
-	n32:as-> n31
-	n33 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n33:a-> n28
-	n33:as-> n32
-	n35 [label = "Internal subroutine: SETSTRK"]
-	n34 [label = "{Function | {Type: void | ID: M68K_set_stroke | <a>Args | <b> Call }}", shape="record"]
-	n34:b-> n35
-	n34:a-> n33
-	n36 [label = "Arg: int r"]
-	n37 [label = "Arg: int g"]
-	n38 [label = "Arg: int b"]
-	n39 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n39:a-> n38
-	n40 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n40:a-> n37
-	n40:as-> n39
-	n41 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n41:a-> n36
-	n41:as-> n40
-	n43 [label = "Internal subroutine: SETFILL"]
-	n42 [label = "{Function | {Type: void | ID: M68K_set_fill | <a>Args | <b> Call }}", shape="record"]
-	n42:b-> n43
-	n42:a-> n41
-	n44 [label = "Arg: int x"]
-	n45 [label = "Arg: int y"]
-	n46 [label = "Arg: int width"]
-	n47 [label = "Arg: int height"]
-	n48 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n48:a-> n47
-	n49 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n49:a-> n46
-	n49:as-> n48
-	n50 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n50:a-> n45
-	n50:as-> n49
-	n51 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n51:a-> n44
-	n51:as-> n50
-	n53 [label = "Internal subroutine: DRAWRECT"]
-	n52 [label = "{Function | {Type: void | ID: M68K_draw_rect | <a>Args | <b> Call }}", shape="record"]
-	n52:b-> n53
-	n52:a-> n51
-	n54 [label = "Arg: int x"]
-	n55 [label = "Arg: int y"]
-	n56 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n56:a-> n55
-	n57 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n57:a-> n54
-	n57:as-> n56
-	n59 [label = "Internal subroutine: BLACKPIX"]
-	n58 [label = "{Function | {Type: bool | ID: M68K_pixel_not_black | <a>Args | <b> Call }}", shape="record"]
-	n58:b-> n59
-	n58:a-> n57
-	n60 [label = "Arg: int x"]
-	n61 [label = "Arg: int y"]
-	n62 [label = "Arg: int r"]
-	n63 [label = "Arg: int g"]
-	n64 [label = "Arg: int b"]
-	n65 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n65:a-> n64
-	n66 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n66:a-> n63
-	n66:as-> n65
-	n67 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n67:a-> n62
-	n67:as-> n66
-	n68 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n68:a-> n61
-	n68:as-> n67
-	n69 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n69:a-> n60
-	n69:as-> n68
-	n71 [label = "Internal subroutine: SETPIXEL"]
-	n70 [label = "{Function | {Type: void | ID: M68K_set_pixel | <a>Args | <b> Call }}", shape="record"]
-	n70:b-> n71
-	n70:a-> n69
-	n73 [label = "Internal subroutine: DBENABLE"]
-	n72 [label = "{Function | {Type: void | ID: M68K_enable_double_buffer | <a>Args | <b> Call }}", shape="record"]
-	n72:b-> n73
-	n75 [label = "Internal subroutine: DBDRAW"]
-	n74 [label = "{Function | {Type: void | ID: M68K_show_double_buffer | <a>Args | <b> Call }}", shape="record"]
-	n74:b-> n75
-	n76 [label = "Arg: int millis"]
-	n77 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
-	n77:a-> n76
-	n79 [label = "Internal subroutine: DELAY"]
-	n78 [label = "{Function | {Type: void | ID: M68K_sleep | <a>Args | <b> Call }}", shape="record"]
-	n78:b-> n79
-	n78:a-> n77
-	n80 [label = "Primary"]
-	n81 [label = "INT_LIT: 6"]
-	n80-> n81
-	n82 [label = "UnExpr"]
-	n82-> n80
-	n83 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n83:ue-> n82
-	n84 [label = "Declaration: constint CONSOLAS = "]
-	n84-> n83
-	n85 [label = "Instruction"]
-	n85-> n84
-	n86 [label = "Statement"]
-	n86-> n85
-	n87 [label = "Primary"]
-	n88 [label = "INT_LIT: 255"]
-	n87-> n88
-	n89 [label = "UnExpr"]
-	n89-> n87
-	n90 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n90:ue-> n89
-	n91 [label = "Primary"]
-	n92 [label = "INT_LIT: 255"]
-	n91-> n92
-	n93 [label = "UnExpr"]
-	n93-> n91
-	n94 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n94:ue-> n93
-	n95 [label = "Primary"]
-	n96 [label = "INT_LIT: 255"]
-	n95-> n96
-	n97 [label = "UnExpr"]
-	n97-> n95
-	n98 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n98:ue-> n97
-	n99 [label = "Primary"]
-	n100 [label = "INT_LIT: 14"]
-	n99-> n100
-	n101 [label = "UnExpr"]
-	n101-> n99
-	n102 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n102:ue-> n101
-	n103 [label = "Primary"]
-	n104 [label = "ID: CONSOLAS"]
-	n103-> n104
-	n105 [label = "UnExpr"]
-	n105-> n103
-	n106 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n106:ue-> n105
-	n107 [label = "Primary"]
-	n108 [label = "INT_LIT: 0"]
-	n107-> n108
-	n109 [label = "UnExpr"]
-	n109-> n107
-	n110 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n110:ue-> n109
-	n111 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
-	n111:e-> n110
-	n112 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
-	n112:e-> n106
-	n112:el-> n111
-	n113 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
-	n113:e-> n102
-	n113:el-> n112
-	n114 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
-	n114:e-> n98
-	n114:el-> n113
-	n115 [label = "{ExprList |{<e>Expr | <el>ExprList}}", shape="record"]
-	n115:e-> n94
-	n115:el-> n114
-	n116 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
-	n116:e-> n90
-	n116:el-> n115
-	n117 [label = "{FunctionCall | { ID: M68K_set_text_properties | <e>ExprArg}}", shape="record"]
-	n117:e-> n116
-	n118 [label = "Instruction"]
-	n118-> n117
-	n119 [label = "Statement"]
-	n119-> n118
-	n120 [label = "Primary"]
-	n121 [label = "STR_LIT: Hello, World!"]
-	n120-> n121
-	n122 [label = "UnExpr"]
-	n122-> n120
-	n123 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n123:ue-> n122
-	n124 [label = "{ExprArg | {<e>Expr | <el>ExprList}}", shape="record"]
-	n124:e-> n123
-	n125 [label = "Instruction"]
-	n126 [label = "OUTPUT"]
-	n125-> n126
-	n125-> n124
-	n127 [label = "Statement"]
-	n127-> n125
-	n128 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n128:s-> n127
-	n129 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n129:s-> n119
-	n129:sl-> n128
-	n130 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n130:s-> n86
-	n130:sl-> n129
-	n131 [label = "Block"]
-	n131-> n130
-	n132 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
-	n132:b-> n131
-	n133 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n133:f-> n132
-	n134 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n134:f-> n78
-	n134:fl-> n133
-	n135 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n135:f-> n74
-	n135:fl-> n134
-	n136 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n136:f-> n72
-	n136:fl-> n135
-	n137 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n137:f-> n70
-	n137:fl-> n136
-	n138 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n138:f-> n58
-	n138:fl-> n137
-	n139 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n139:f-> n52
-	n139:fl-> n138
-	n140 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n140:f-> n42
-	n140:fl-> n139
-	n141 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n141:f-> n34
-	n141:fl-> n140
-	n142 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n142:f-> n26
-	n142:fl-> n141
-	n143 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n143:f-> n20
-	n143:fl-> n142
-	n144 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
-	n144:f-> n6
-	n144:fl-> n143
-	n145 [label = "Program"]
-	n145-> n144
+	n7 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n7:a-> n4
+	n7:as-> n6
+	n8 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n8:a-> n3
+	n8:as-> n7
+	n9 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n9:a-> n2
+	n9:as-> n8
+	n10 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n10:a-> n1
+	n10:as-> n9
+	n11 [label = "{Args | {<a>Arg | <as> Args}}", shape="record"]
+	n11:a-> n0
+	n11:as-> n10
+	n13 [label = "Internal subroutine: SETTXTPR"]
+	n12 [label = "{Function | {Type: void | ID: M68K_set_text_properties | <a>Args | <b> Call }}", shape="record"]
+	n12:b-> n13
+	n12:a-> n11
+	n14 [label = "Primary"]
+	n15 [label = "INT_LIT: 7"]
+	n14-> n15
+	n16 [label = "UnExpr"]
+	n16-> n14
+	n17 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n17:ue-> n16
+	n18 [label = "Declaration: int x = "]
+	n18-> n17
+	n19 [label = "Instruction"]
+	n19-> n18
+	n20 [label = "Statement"]
+	n20-> n19
+	n21 [label = "Primary"]
+	n22 [label = "ID: x"]
+	n21-> n22
+	n23 [label = "UnExpr"]
+	n23-> n21
+	n24 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n24:ue-> n23
+	n25 [label = "Declaration: int y = "]
+	n25-> n24
+	n26 [label = "Instruction"]
+	n26-> n25
+	n27 [label = "Statement"]
+	n27-> n26
+	n28 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n28:s-> n27
+	n29 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n29:s-> n20
+	n29:sl-> n28
+	n30 [label = "Block"]
+	n30-> n29
+	n31 [label = "{Function | {Type: void | ID: cyclone | <a>Args | <b>Block}}", shape="record"]
+	n31:b-> n30
+	n32 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n32:f-> n31
+	n33 [label = "{FunctionList | {<f> Function | <fl> FunctionList}}", shape="record"]
+	n33:f-> n12
+	n33:fl-> n32
+	n34 [label = "Program"]
+	n34-> n33
 }

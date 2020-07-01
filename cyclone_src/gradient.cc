@@ -28,7 +28,7 @@ func void draw_board(int w, int h, int dim)
         // clear
         M68K_set_stroke(0, 0, 0);
         M68K_set_fill(0, 0, 0);
-        M68K_draw_rect(0,0,w,h);
+        M68K_draw_rect(0, 0, w, h);
         M68K_set_stroke(255, 255, 255);
 
         int mod_iter = iteration % 3;

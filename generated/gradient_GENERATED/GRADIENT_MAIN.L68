@@ -1,6 +1,6 @@
-00001436 Starting Address
+000014C0 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 01/07/2020 15:38:12
+Created On: 01/07/2020 14:53:21
 
 00001000                             1              ORG $1000
 00001000                             2              INCLUDE "../../68LIB/CYCLONE.X68"
@@ -344,132 +344,245 @@ Created On: 01/07/2020 15:38:12
 00001184                           340  
 00001184                           341  
 00001184                           342  -------------------- end include --------------------
-00001184                           343  F1: 
-00001184  2F0E                     344              MOVE.L A6, -(A7)              ;<PMB, f1(cyclone)>
+00001184                           343  F11: 
+00001184  2F0E                     344              MOVE.L A6, -(A7)              ;<PMB, f11(draw_board)>
 00001186  2C4F                     345              MOVE.L A7, A6
-00001188  9FFC 00000102            346              SUB.L #258, A7
-0000118E  2D7C 00000006 FFFC       347              MOVE.L #6, -4(A6)             ;<ASSIGN, 6, t10>
-00001196  2F3C 000000FF            348              MOVE.L #255, -(A7)            ;<PARAM, 255>
-0000119C  2F3C 000000FF            349              MOVE.L #255, -(A7)            ;<PARAM, 255>
-000011A2  2F3C 000000FF            350              MOVE.L #255, -(A7)            ;<PARAM, 255>
-000011A8  2F3C 0000000C            351              MOVE.L #12, -(A7)             ;<PARAM, 12>
-000011AE  2F2E FFFC                352              MOVE.L -4(A6), -(A7)          ;<PARAM, t10>
-000011B2  2F3C 00000000            353              MOVE.L #0, -(A7)              ;<PARAM, 0>
-000011B8  4EB8 1096                354              JSR SETTXTPR                  ;<CALL, f0>
-000011BC  DFFC 00000018            355              ADD.L #24, A7
-000011C2  2D7C 48656C6C FFEE       356              MOVE.L #$48656c6c,-18(A6)
-000011CA  2D7C 6F2C2057 FFF2       357              MOVE.L #$6f2c2057,-14(A6)
-000011D2  2D7C 6F726C64 FFF6       358              MOVE.L #$6f726c64,-10(A6)
-000011DA  3D7C 2100 FFFA           359              MOVE.W #$2100,-6(A6)
-000011E0  224E                     360              MOVE.L A6, A1                 ;<ASSIGN, t13, t11>
-000011E2  244E                     361              MOVE.L A6, A2
-000011E4  D2FC FFE0                362              ADDA #-32, A1
-000011E8  D4FC FFEE                363              ADDA #-18, A2
-000011EC  4EB8 1000                364              JSR STRCPY
-000011F0  2D7C FFFFFFFF FFDA       365              MOVE.L #$FFFFFFFF,-38(A6)
-000011F8  3D7C FFFF FFDE           366              MOVE.W #$FFFF,-34(A6)
-000011FE  1D7C 0000 FFDF           367              MOVE.B #$00, -33(A6)
-00001204  2D7C 4D45544F FF9E       368              MOVE.L #$4d45544f,-98(A6)
-0000120C  2D7C 444F2031 FFA2       369              MOVE.L #$444f2031,-94(A6)
-00001214  2D7C 202D2061 FFA6       370              MOVE.L #$202d2061,-90(A6)
-0000121C  2D7C 7369676E FFAA       371              MOVE.L #$7369676e,-86(A6)
-00001224  2D7C 616369F3 FFAE       372              MOVE.L #$616369f3,-82(A6)
-0000122C  2D7C 6E20696D FFB2       373              MOVE.L #$6e20696d,-78(A6)
-00001234  2D7C 706CED63 FFB6       374              MOVE.L #$706ced63,-74(A6)
-0000123C  2D7C 6974613A FFBA       375              MOVE.L #$6974613a,-70(A6)
-00001244  2D7C 20737472 FFBE       376              MOVE.L #$20737472,-66(A6)
-0000124C  2D7C 696E6720 FFC2       377              MOVE.L #$696e6720,-62(A6)
-00001254  2D7C 6D736720 FFC6       378              MOVE.L #$6d736720,-58(A6)
-0000125C  2D7C 3D204865 FFCA       379              MOVE.L #$3d204865,-54(A6)
-00001264  2D7C 6C6C6F2C FFCE       380              MOVE.L #$6c6c6f2c,-50(A6)
-0000126C  2D7C 20576F72 FFD2       381              MOVE.L #$20576f72,-46(A6)
-00001274  2D7C 6C642100 FFD6       382              MOVE.L #$6c642100,-42(A6)
-0000127C  224E                     383              MOVE.L A6, A1                 ;<OUTPUTLN, t14>
-0000127E  D3FC FFFFFF9E            384              ADDA.L #-98, A1
-00001284  700D                     385              MOVE.L #13, D0
-00001286  4E4F                     386              TRAP #15
-00001288  2D7C 4D45544F FF6E       387              MOVE.L #$4d45544f,-146(A6)
-00001290  2D7C 444F2032 FF72       388              MOVE.L #$444f2032,-142(A6)
-00001298  2D7C 202D2061 FF76       389              MOVE.L #$202d2061,-138(A6)
-000012A0  2D7C 7369676E FF7A       390              MOVE.L #$7369676e,-134(A6)
-000012A8  2D7C 616369F3 FF7E       391              MOVE.L #$616369f3,-130(A6)
-000012B0  2D7C 6E206578 FF82       392              MOVE.L #$6e206578,-126(A6)
-000012B8  2D7C 706CED63 FF86       393              MOVE.L #$706ced63,-122(A6)
-000012C0  2D7C 6974613A FF8A       394              MOVE.L #$6974613a,-118(A6)
-000012C8  2D7C 20737472 FF8E       395              MOVE.L #$20737472,-114(A6)
-000012D0  2D7C 696E6720 FF92       396              MOVE.L #$696e6720,-110(A6)
-000012D8  2D7C 6D73675B FF96       397              MOVE.L #$6d73675b,-106(A6)
-000012E0  2D7C 355D0000 FF9A       398              MOVE.L #$355d0000,-102(A6)
-000012E8  224E                     399              MOVE.L A6, A1                 ;<OUTPUTLN, t15>
-000012EA  D3FC FFFFFF6E            400              ADDA.L #-146, A1
-000012F0  700D                     401              MOVE.L #13, D0
-000012F2  4E4F                     402              TRAP #15
-000012F4  2D7C 4F706572 FF4E       403              MOVE.L #$4f706572,-178(A6)
-000012FC  2D7C 6163696F FF52       404              MOVE.L #$6163696f,-174(A6)
-00001304  2D7C 6E207065 FF56       405              MOVE.L #$6e207065,-170(A6)
-0000130C  2D7C 726D6974 FF5A       406              MOVE.L #$726d6974,-166(A6)
-00001314  2D7C 6964613A FF5E       407              MOVE.L #$6964613a,-162(A6)
-0000131C  2D7C 20737263 FF62       408              MOVE.L #$20737263,-158(A6)
-00001324  2D7C 203D206D FF66       409              MOVE.L #$203d206d,-154(A6)
-0000132C  2D7C 73670000 FF6A       410              MOVE.L #$73670000,-150(A6)
-00001334  224E                     411              MOVE.L A6, A1                 ;<OUTPUTLN, t16>
-00001336  D3FC FFFFFF4E            412              ADDA.L #-178, A1
-0000133C  700D                     413              MOVE.L #13, D0
-0000133E  4E4F                     414              TRAP #15
-00001340  2D7C 2D2D2D2D FF2C       415              MOVE.L #$2d2d2d2d,-212(A6)
-00001348  2D7C 2D2D2D2D FF30       416              MOVE.L #$2d2d2d2d,-208(A6)
-00001350  2D7C 2D2D2D2D FF34       417              MOVE.L #$2d2d2d2d,-204(A6)
-00001358  2D7C 2D2D2D2D FF38       418              MOVE.L #$2d2d2d2d,-200(A6)
-00001360  2D7C 2D2D2D2D FF3C       419              MOVE.L #$2d2d2d2d,-196(A6)
-00001368  2D7C 2D2D2D2D FF40       420              MOVE.L #$2d2d2d2d,-192(A6)
-00001370  2D7C 2D2D2D2D FF44       421              MOVE.L #$2d2d2d2d,-188(A6)
-00001378  2D7C 2D2D2D2D FF48       422              MOVE.L #$2d2d2d2d,-184(A6)
-00001380  3D7C 0000 FF4C           423              MOVE.W #$0000,-180(A6)
-00001386  224E                     424              MOVE.L A6, A1                 ;<OUTPUTLN, t17>
-00001388  D3FC FFFFFF2C            425              ADDA.L #-212, A1
-0000138E  700D                     426              MOVE.L #13, D0
-00001390  4E4F                     427              TRAP #15
-00001392  224E                     428              MOVE.L A6, A1                 ;<ASSIGN, t11, t12>
-00001394  244E                     429              MOVE.L A6, A2
-00001396  D2FC FFDA                430              ADDA #-38, A1
-0000139A  D4FC FFE0                431              ADDA #-32, A2
-0000139E  4EB8 1000                432              JSR STRCPY
-000013A2  2D7C 62797465 FF16       433              MOVE.L #$62797465,-234(A6)
-000013AA  2D7C 73286D73 FF1A       434              MOVE.L #$73286d73,-230(A6)
-000013B2  2D7C 67293A20 FF1E       435              MOVE.L #$67293a20,-226(A6)
-000013BA  2D7C 31342C20 FF22       436              MOVE.L #$31342c20,-222(A6)
-000013C2  2D7C 6D73673A FF26       437              MOVE.L #$6d73673a,-218(A6)
-000013CA  3D7C 2000 FF2A           438              MOVE.W #$2000,-214(A6)
-000013D0  224E                     439              MOVE.L A6, A1                 ;<OUTPUT, t18>
-000013D2  D3FC FFFFFF16            440              ADDA.L #-234, A1
-000013D8  700E                     441              MOVE.L #14, D0
-000013DA  4E4F                     442              TRAP #15
-000013DC  224E                     443              MOVE.L A6, A1                 ;<OUTPUTLN, t11>
-000013DE  D3FC FFFFFFE0            444              ADDA.L #-32, A1
-000013E4  700D                     445              MOVE.L #13, D0
-000013E6  4E4F                     446              TRAP #15
-000013E8  2D7C 62797465 FEFE       447              MOVE.L #$62797465,-258(A6)
-000013F0  2D7C 73286473 FF02       448              MOVE.L #$73286473,-254(A6)
-000013F8  2D7C 74293A20 FF06       449              MOVE.L #$74293a20,-250(A6)
-00001400  2D7C 352B312C FF0A       450              MOVE.L #$352b312c,-246(A6)
-00001408  2D7C 20647374 FF0E       451              MOVE.L #$20647374,-242(A6)
-00001410  2D7C 3A200000 FF12       452              MOVE.L #$3a200000,-238(A6)
-00001418  224E                     453              MOVE.L A6, A1                 ;<OUTPUT, t19>
-0000141A  D3FC FFFFFEFE            454              ADDA.L #-258, A1
-00001420  700E                     455              MOVE.L #14, D0
-00001422  4E4F                     456              TRAP #15
-00001424  224E                     457              MOVE.L A6, A1                 ;<OUTPUTLN, t12>
-00001426  D3FC FFFFFFDA            458              ADDA.L #-38, A1
-0000142C  700D                     459              MOVE.L #13, D0
-0000142E  4E4F                     460              TRAP #15
-00001430  2E4E                     461              MOVE.L A6, A7                 ;<RET, f1(cyclone)>
-00001432  2C5F                     462              MOVE.L (A7)+, A6
-00001434  4E75                     463              RTS
-00001436                           464  
-00001436  2C4F                     465  START:      MOVE.L A7, A6
-00001438  4EB8 1184                466              JSR F1
-0000143C  FFFF FFFF                467              SIMHALT
-00001440                           468              END START
+00001188  9FFC 0000007C            346              SUB.L #124, A7
+0000118E  2D6E 0008 FFFC           347              MOVE.L 8(A6), -4(A6)          ;<ASSIGN, t35, t36>
+00001194                           348  
+00001194  2D6E FFFC FFF8           349              MOVE.L -4(A6), -8(A6)         ;<ASSIGN, t36, t37>
+0000119A                           350  
+0000119A  2A2E 000C                351              MOVE.L 12(A6), D5             ;<DIV, t33, t36, t49>
+0000119E  2C2E FFFC                352              MOVE.L -4(A6), D6
+000011A2  8BC6                     353              DIVS D6, D5
+000011A4  CABC 0000FFFF            354              AND.L #$0000FFFF, D5
+000011AA  2D45 FFF4                355              MOVE.L D5, -12(A6)
+000011AE  2D6E FFF4 FFF0           356              MOVE.L -12(A6), -16(A6)       ;<ASSIGN, t49, t38>
+000011B4                           357  
+000011B4  2A3C 000000FF            358              MOVE.L #255, D5               ;<DIV, 255, t35, t50>
+000011BA  2C2E 0008                359              MOVE.L 8(A6), D6
+000011BE  8BC6                     360              DIVS D6, D5
+000011C0  CABC 0000FFFF            361              AND.L #$0000FFFF, D5
+000011C6  2D45 FFEC                362              MOVE.L D5, -20(A6)
+000011CA  2D6E FFEC FFE8           363              MOVE.L -20(A6), -24(A6)       ;<ASSIGN, t50, t39>
+000011D0                           364  
+000011D0  2D7C 00000000 FFE4       365              MOVE.L #0, -28(A6)            ;<ASSIGN, 0, t40>
+000011D8                           366  E0: 
+000011D8  7CFF                     367              MOVE.L #-1, D6                ;<EQ, -1, 0, e1>
+000011DA  7A00                     368              MOVE.L #0, D5
+000011DC  BC85                     369              CMP.L D5, D6
+000011DE  6700 0290                370              BEQ E1
+000011E2                           371  
+000011E2  2F3C 00000000            372              MOVE.L #0, -(A7)              ;<PARAM, 0>
+000011E8  2F3C 00000000            373              MOVE.L #0, -(A7)              ;<PARAM, 0>
+000011EE  2F3C 00000000            374              MOVE.L #0, -(A7)              ;<PARAM, 0>
+000011F4  4EB8 10D8                375              JSR SETSTRK                   ;<CALL, f3>
+000011F8  DFFC 0000000C            376              ADD.L #12, A7
+000011FE  2F3C 00000000            377              MOVE.L #0, -(A7)              ;<PARAM, 0>
+00001204  2F3C 00000000            378              MOVE.L #0, -(A7)              ;<PARAM, 0>
+0000120A  2F3C 00000000            379              MOVE.L #0, -(A7)              ;<PARAM, 0>
+00001210  4EB8 10F4                380              JSR SETFILL                   ;<CALL, f4>
+00001214  DFFC 0000000C            381              ADD.L #12, A7
+0000121A  2F3C 00000000            382              MOVE.L #0, -(A7)              ;<PARAM, 0>
+00001220  2F3C 00000000            383              MOVE.L #0, -(A7)              ;<PARAM, 0>
+00001226  2F2E 000C                384              MOVE.L 12(A6), -(A7)          ;<PARAM, t33>
+0000122A  2F2E 0010                385              MOVE.L 16(A6), -(A7)          ;<PARAM, t34>
+0000122E  4EB8 1110                386              JSR DRAWRECT                  ;<CALL, f5>
+00001232  DFFC 00000010            387              ADD.L #16, A7
+00001238  2F3C 000000FF            388              MOVE.L #255, -(A7)            ;<PARAM, 255>
+0000123E  2F3C 000000FF            389              MOVE.L #255, -(A7)            ;<PARAM, 255>
+00001244  2F3C 000000FF            390              MOVE.L #255, -(A7)            ;<PARAM, 255>
+0000124A  4EB8 10D8                391              JSR SETSTRK                   ;<CALL, f3>
+0000124E  DFFC 0000000C            392              ADD.L #12, A7
+00001254  2A2E FFE4                393              MOVE.L -28(A6), D5            ;<MOD, t40, 3, t51>
+00001258  7C03                     394              MOVE.L #3, D6
+0000125A  8BC6                     395              DIVS D6, D5
+0000125C  E08D                     396              LSR.L  #8, D5
+0000125E  E08D                     397              LSR.L  #8, D5
+00001260  2D45 FFD4                398              MOVE.L D5, -44(A6)
+00001264  2D6E FFD4 FFD0           399              MOVE.L -44(A6), -48(A6)       ;<ASSIGN, t51, t44>
+0000126A                           400  
+0000126A  2D7C 00000000 FFCC       401              MOVE.L #0, -52(A6)            ;<ASSIGN, 0, t45>
+00001272                           402  E2: 
+00001272  2D7C FFFFFFFF FFC8       403              MOVE.L #-1, -56(A6)           ;<ASSIGN, -1, t52>
+0000127A  2C2E FFCC                404              MOVE.L -52(A6), D6            ;<LT, t45, t36, e4>
+0000127E  2A2E FFFC                405              MOVE.L -4(A6), D5
+00001282  BC85                     406              CMP.L D5, D6
+00001284  6D00 000A                407              BLT E4
+00001288                           408  
+00001288  2D7C 00000000 FFC8       409              MOVE.L #0, -56(A6)            ;<ASSIGN, 0, t52>
+00001290                           410  E4: 
+00001290  2C2E FFC8                411              MOVE.L -56(A6), D6            ;<EQ, t52, 0, e3>
+00001294  7A00                     412              MOVE.L #0, D5
+00001296  BC85                     413              CMP.L D5, D6
+00001298  6700 01AA                414              BEQ E3
+0000129C                           415  
+0000129C  2D7C 00000000 FFC4       416              MOVE.L #0, -60(A6)            ;<ASSIGN, 0, t46>
+000012A4                           417  E5: 
+000012A4  2D7C FFFFFFFF FFC0       418              MOVE.L #-1, -64(A6)           ;<ASSIGN, -1, t53>
+000012AC  2C2E FFC4                419              MOVE.L -60(A6), D6            ;<LT, t46, t37, e7>
+000012B0  2A2E FFF8                420              MOVE.L -8(A6), D5
+000012B4  BC85                     421              CMP.L D5, D6
+000012B6  6D00 000A                422              BLT E7
+000012BA                           423  
+000012BA  2D7C 00000000 FFC0       424              MOVE.L #0, -64(A6)            ;<ASSIGN, 0, t53>
+000012C2                           425  E7: 
+000012C2  2C2E FFC0                426              MOVE.L -64(A6), D6            ;<EQ, t53, 0, e6>
+000012C6  7A00                     427              MOVE.L #0, D5
+000012C8  BC85                     428              CMP.L D5, D6
+000012CA  6700 0162                429              BEQ E6
+000012CE                           430  
+000012CE  2D7C FFFFFFFF FFBC       431              MOVE.L #-1, -68(A6)           ;<ASSIGN, -1, t54>
+000012D6  2C2E FFD0                432              MOVE.L -48(A6), D6            ;<EQ, t44, 0, e8>
+000012DA  7A00                     433              MOVE.L #0, D5
+000012DC  BC85                     434              CMP.L D5, D6
+000012DE  6700 000A                435              BEQ E8
+000012E2                           436  
+000012E2  2D7C 00000000 FFBC       437              MOVE.L #0, -68(A6)            ;<ASSIGN, 0, t54>
+000012EA                           438  E8: 
+000012EA  2C2E FFBC                439              MOVE.L -68(A6), D6            ;<EQ, t54, 0, e9>
+000012EE  7A00                     440              MOVE.L #0, D5
+000012F0  BC85                     441              CMP.L D5, D6
+000012F2  6700 003C                442              BEQ E9
+000012F6                           443  
+000012F6  2C2E FFCC                444              MOVE.L -52(A6), D6            ;<MULT, t45, t39, t55>
+000012FA  2A2E FFE8                445              MOVE.L -24(A6), D5
+000012FE  CBC6                     446              MULS D6, D5
+00001300  2D45 FFB8                447              MOVE.L D5, -72(A6)
+00001304  2F2E FFB8                448              MOVE.L -72(A6), -(A7)         ;<PARAM, t55>
+00001308  2C2E FFC4                449              MOVE.L -60(A6), D6            ;<MULT, t46, t39, t56>
+0000130C  2A2E FFE8                450              MOVE.L -24(A6), D5
+00001310  CBC6                     451              MULS D6, D5
+00001312  2D45 FFB4                452              MOVE.L D5, -76(A6)
+00001316  2F2E FFB4                453              MOVE.L -76(A6), -(A7)         ;<PARAM, t56>
+0000131A  2F3C 000000FF            454              MOVE.L #255, -(A7)            ;<PARAM, 255>
+00001320  4EB8 10F4                455              JSR SETFILL                   ;<CALL, f4>
+00001324  DFFC 0000000C            456              ADD.L #12, A7
+0000132A  4EF9 000013E2            457              JMP E10                       ;<GOTO, e10>
+00001330                           458  E9: 
+00001330  2D7C FFFFFFFF FFB0       459              MOVE.L #-1, -80(A6)           ;<ASSIGN, -1, t57>
+00001338  2C2E FFD0                460              MOVE.L -48(A6), D6            ;<EQ, t44, 1, e11>
+0000133C  7A01                     461              MOVE.L #1, D5
+0000133E  BC85                     462              CMP.L D5, D6
+00001340  6700 000A                463              BEQ E11
+00001344                           464  
+00001344  2D7C 00000000 FFB0       465              MOVE.L #0, -80(A6)            ;<ASSIGN, 0, t57>
+0000134C                           466  E11: 
+0000134C  2C2E FFB0                467              MOVE.L -80(A6), D6            ;<EQ, t57, 0, e12>
+00001350  7A00                     468              MOVE.L #0, D5
+00001352  BC85                     469              CMP.L D5, D6
+00001354  6700 0058                470              BEQ E12
+00001358                           471  
+00001358  2C2E 0008                472              MOVE.L 8(A6), D6              ;<SUB, t35, t46, t58>
+0000135C  2A2E FFC4                473              MOVE.L -60(A6), D5
+00001360  9C85                     474              SUB.L D5, D6
+00001362  2D46 FFAC                475              MOVE.L D6, -84(A6)
+00001366  2C2E FFAC                476              MOVE.L -84(A6), D6            ;<MULT, t58, t39, t59>
+0000136A  2A2E FFE8                477              MOVE.L -24(A6), D5
+0000136E  CBC6                     478              MULS D6, D5
+00001370  2D45 FFA8                479              MOVE.L D5, -88(A6)
+00001374  2F2E FFA8                480              MOVE.L -88(A6), -(A7)         ;<PARAM, t59>
+00001378  2C2E 0008                481              MOVE.L 8(A6), D6              ;<SUB, t35, t45, t60>
+0000137C  2A2E FFCC                482              MOVE.L -52(A6), D5
+00001380  9C85                     483              SUB.L D5, D6
+00001382  2D46 FFA4                484              MOVE.L D6, -92(A6)
+00001386  2C2E FFA4                485              MOVE.L -92(A6), D6            ;<MULT, t60, t39, t61>
+0000138A  2A2E FFE8                486              MOVE.L -24(A6), D5
+0000138E  CBC6                     487              MULS D6, D5
+00001390  2D45 FFA0                488              MOVE.L D5, -96(A6)
+00001394  2F2E FFA0                489              MOVE.L -96(A6), -(A7)         ;<PARAM, t61>
+00001398  2F3C 000000FF            490              MOVE.L #255, -(A7)            ;<PARAM, 255>
+0000139E  4EB8 10F4                491              JSR SETFILL                   ;<CALL, f4>
+000013A2  DFFC 0000000C            492              ADD.L #12, A7
+000013A8  4EF9 000013E2            493              JMP E13                       ;<GOTO, e13>
+000013AE                           494  E12: 
+000013AE  2C2E FFC4                495              MOVE.L -60(A6), D6            ;<MULT, t46, t39, t62>
+000013B2  2A2E FFE8                496              MOVE.L -24(A6), D5
+000013B6  CBC6                     497              MULS D6, D5
+000013B8  2D45 FF9C                498              MOVE.L D5, -100(A6)
+000013BC  2F2E FF9C                499              MOVE.L -100(A6), -(A7)        ;<PARAM, t62>
+000013C0  2C2E FFCC                500              MOVE.L -52(A6), D6            ;<MULT, t45, t39, t63>
+000013C4  2A2E FFE8                501              MOVE.L -24(A6), D5
+000013C8  CBC6                     502              MULS D6, D5
+000013CA  2D45 FF98                503              MOVE.L D5, -104(A6)
+000013CE  2F2E FF98                504              MOVE.L -104(A6), -(A7)        ;<PARAM, t63>
+000013D2  2F3C 000000FF            505              MOVE.L #255, -(A7)            ;<PARAM, 255>
+000013D8  4EB8 10F4                506              JSR SETFILL                   ;<CALL, f4>
+000013DC  DFFC 0000000C            507              ADD.L #12, A7
+000013E2                           508  E13: 
+000013E2                           509  E10: 
+000013E2  2C2E FFC4                510              MOVE.L -60(A6), D6            ;<MULT, t46, t38, t64>
+000013E6  2A2E FFF0                511              MOVE.L -16(A6), D5
+000013EA  CBC6                     512              MULS D6, D5
+000013EC  2D45 FF94                513              MOVE.L D5, -108(A6)
+000013F0  2F2E FF94                514              MOVE.L -108(A6), -(A7)        ;<PARAM, t64>
+000013F4  2C2E FFCC                515              MOVE.L -52(A6), D6            ;<MULT, t45, t38, t65>
+000013F8  2A2E FFF0                516              MOVE.L -16(A6), D5
+000013FC  CBC6                     517              MULS D6, D5
+000013FE  2D45 FF90                518              MOVE.L D5, -112(A6)
+00001402  2F2E FF90                519              MOVE.L -112(A6), -(A7)        ;<PARAM, t65>
+00001406  2F2E FFF0                520              MOVE.L -16(A6), -(A7)         ;<PARAM, t38>
+0000140A  2F2E FFF0                521              MOVE.L -16(A6), -(A7)         ;<PARAM, t38>
+0000140E  4EB8 1110                522              JSR DRAWRECT                  ;<CALL, f5>
+00001412  DFFC 00000010            523              ADD.L #16, A7
+00001418  2C2E FFC4                524              MOVE.L -60(A6), D6            ;<ADD, t46, 1, t66>
+0000141C  7A01                     525              MOVE.L #1, D5
+0000141E  DA86                     526              ADD.L D6, D5
+00001420  2D45 FF8C                527              MOVE.L D5, -116(A6)
+00001424  2D6E FF8C FFC4           528              MOVE.L -116(A6), -60(A6)      ;<ASSIGN, t66, t46>
+0000142A                           529  
+0000142A  4EF8 12A4                530              JMP E5                        ;<GOTO, e5>
+0000142E                           531  E6: 
+0000142E  2C2E FFCC                532              MOVE.L -52(A6), D6            ;<ADD, t45, 1, t67>
+00001432  7A01                     533              MOVE.L #1, D5
+00001434  DA86                     534              ADD.L D6, D5
+00001436  2D45 FF88                535              MOVE.L D5, -120(A6)
+0000143A  2D6E FF88 FFCC           536              MOVE.L -120(A6), -52(A6)      ;<ASSIGN, t67, t45>
+00001440                           537  
+00001440  4EF8 1272                538              JMP E2                        ;<GOTO, e2>
+00001444                           539  E3: 
+00001444  4EB8 116A                540              JSR DBDRAW                    ;<CALL, f9>
+00001448  DFFC 00000000            541              ADD.L #0, A7
+0000144E  2F3C 000001F4            542              MOVE.L #500, -(A7)            ;<PARAM, 500>
+00001454  4EB8 1170                543              JSR DELAY                     ;<CALL, f10>
+00001458  588F                     544              ADD.L #4, A7
+0000145A  2C2E FFE4                545              MOVE.L -28(A6), D6            ;<ADD, t40, 1, t68>
+0000145E  7A01                     546              MOVE.L #1, D5
+00001460  DA86                     547              ADD.L D6, D5
+00001462  2D45 FF84                548              MOVE.L D5, -124(A6)
+00001466  2D6E FF84 FFE4           549              MOVE.L -124(A6), -28(A6)      ;<ASSIGN, t68, t40>
+0000146C                           550  
+0000146C  4EF8 11D8                551              JMP E0                        ;<GOTO, e0>
+00001470                           552  E1: 
+00001470  2E4E                     553              MOVE.L A6, A7                 ;<RET, f11(draw_board)>
+00001472  2C5F                     554              MOVE.L (A7)+, A6
+00001474  4E75                     555              RTS
+00001476                           556  F12: 
+00001476  2F0E                     557              MOVE.L A6, -(A7)              ;<PMB, f12(cyclone)>
+00001478  2C4F                     558              MOVE.L A7, A6
+0000147A  518F                     559              SUB.L #8, A7
+0000147C  2D7C 00000280 FFFC       560              MOVE.L #640, -4(A6)           ;<ASSIGN, 640, t47>
+00001484  2D6E FFFC FFF8           561              MOVE.L -4(A6), -8(A6)         ;<ASSIGN, t47, t48>
+0000148A                           562  
+0000148A  2F2E FFFC                563              MOVE.L -4(A6), -(A7)          ;<PARAM, t47>
+0000148E  2F2E FFF8                564              MOVE.L -8(A6), -(A7)          ;<PARAM, t48>
+00001492  4EB8 1086                565              JSR INITSCRN                  ;<CALL, f2>
+00001496  508F                     566              ADD.L #8, A7
+00001498  4EB8 1162                567              JSR DBENABLE                  ;<CALL, f8>
+0000149C  DFFC 00000000            568              ADD.L #0, A7
+000014A2  2F2E FFFC                569              MOVE.L -4(A6), -(A7)          ;<PARAM, t47>
+000014A6  2F2E FFF8                570              MOVE.L -8(A6), -(A7)          ;<PARAM, t48>
+000014AA  2F3C 00000010            571              MOVE.L #16, -(A7)             ;<PARAM, 16>
+000014B0  4EB8 1184                572              JSR F11                       ;<CALL, f11>
+000014B4  DFFC 0000000C            573              ADD.L #12, A7
+000014BA  2E4E                     574              MOVE.L A6, A7                 ;<RET, f12(cyclone)>
+000014BC  2C5F                     575              MOVE.L (A7)+, A6
+000014BE  4E75                     576              RTS
+000014C0                           577  
+000014C0  2C4F                     578  START:      MOVE.L A7, A6
+000014C2  4EB8 1476                579              JSR F12
+000014C6  FFFF FFFF                580              SIMHALT
+000014CA                           581              END START
 
 No errors detected
 No warnings generated
@@ -483,7 +596,22 @@ DBDRAW              116A
 DBENABLE            1162
 DELAY               1170
 DRAWRECT            1110
-F1                  1184
+E0                  11D8
+E1                  1470
+E10                 13E2
+E11                 134C
+E12                 13AE
+E13                 13E2
+E2                  1272
+E3                  1444
+E4                  1290
+E5                  12A4
+E6                  142E
+E7                  12C2
+E8                  12EA
+E9                  1330
+F11                 1184
+F12                 1476
 INITSCRN            1086
 NEWLN               1054
 PRINTB              101A
@@ -499,7 +627,7 @@ SETPIXEL            113A
 SETSTRK             10D8
 SETTXTCL            1068
 SETTXTPR            1096
-START               1436
+START               14C0
 STRCPY              1000
 STRCPY:EXIT         1018
 STRCPY:LOOP         1000

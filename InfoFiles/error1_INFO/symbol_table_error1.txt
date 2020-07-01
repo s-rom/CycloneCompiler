@@ -11,77 +11,14 @@
 | INT32_MIN      | const <3> int -2147483648
      ------------------------
      | LEVEL 1
-     | r              | input param <4> int
-     | g              | input param <5> int
-     | b              | input param <6> int
+     | red            | input param <4> int
+     | green          | input param <5> int
+     | blue           | input param <6> int
+     | size           | input param <7> int
+     | font           | input param <8> int
+     | style          | input param <9> int
      ------------------------
-| M68K_set_text_color| func <0> returns void, params(int r, int g, int b)
-     ------------------------
-     | LEVEL 1
-     | red            | input param <7> int
-     | green          | input param <8> int
-     | blue           | input param <9> int
-     | size           | input param <10> int
-     | font           | input param <11> int
-     | style          | input param <12> int
-     ------------------------
-| M68K_set_text_properties| func <1> returns void, params(int red, int green, int blue, int size, int font, int style)
+| M68K_set_text_properties| func <0> returns void, params(int red, int green, int blue, int size, int font, int style)
      ------------------------
      | LEVEL 1
-     | width          | input param <13> int
-     | height         | input param <14> int
-     ------------------------
-| M68K_set_screen_size| func <2> returns void, params(int width, int height)
-     ------------------------
-     | LEVEL 1
-     | r              | input param <15> int
-     | g              | input param <16> int
-     | b              | input param <17> int
-     ------------------------
-| M68K_set_stroke| func <3> returns void, params(int r, int g, int b)
-     ------------------------
-     | LEVEL 1
-     | r              | input param <18> int
-     | g              | input param <19> int
-     | b              | input param <20> int
-     ------------------------
-| M68K_set_fill  | func <4> returns void, params(int r, int g, int b)
-     ------------------------
-     | LEVEL 1
-     | x              | input param <21> int
-     | y              | input param <22> int
-     | width          | input param <23> int
-     | height         | input param <24> int
-     ------------------------
-| M68K_draw_rect | func <5> returns void, params(int x, int y, int width, int height)
-     ------------------------
-     | LEVEL 1
-     | x              | input param <25> int
-     | y              | input param <26> int
-     ------------------------
-| M68K_pixel_not_black| func <6> returns bool, params(int x, int y)
-     ------------------------
-     | LEVEL 1
-     | x              | input param <27> int
-     | y              | input param <28> int
-     | r              | input param <29> int
-     | g              | input param <30> int
-     | b              | input param <31> int
-     ------------------------
-| M68K_set_pixel | func <7> returns void, params(int x, int y, int r, int g, int b)
-     ------------------------
-     | LEVEL 1
-     ------------------------
-| M68K_enable_double_buffer| func <8> returns void, params()
-     ------------------------
-     | LEVEL 1
-     ------------------------
-| M68K_show_double_buffer| func <9> returns void, params()
-     ------------------------
-     | LEVEL 1
-     | millis         | input param <32> int
-     ------------------------
-| M68K_sleep     | func <10> returns void, params(int millis)
-     ------------------------
-     | LEVEL 1
-     | CONSOLAS       | const <33> int 
+     | CONSOLAS       | const <10> int 

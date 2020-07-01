@@ -152,29 +152,38 @@ graph[nodesep="1"]
 	n78:b-> n79
 	n78:a-> n77
 	n80 [label = "Primary"]
-	n81 [label = "INT_LIT: 3"]
+	n81 [label = "INT_LIT: 128"]
 	n80-> n81
 	n82 [label = "UnExpr"]
 	n82-> n80
 	n83 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
 	n83:ue-> n82
-	n84 [label = "Instruction"]
-	n85 [label = "RETURN"]
-	n84-> n85
-	n85-> n83
+	n84 [label = "Declaration: int x = "]
+	n84-> n83
+	n85 [label = "Instruction"]
+	n85-> n84
 	n86 [label = "Statement"]
-	n86-> n84
-	n87 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
-	n87:s-> n86
-	n88 [label = "Block"]
-	n88-> n87
-	n89 [label = "{Function | {Type: int | ID: prueba | <a>Args | <b>Block}}", shape="record"]
-	n89:b-> n88
-	n90 [label = "{FunctionCall | { ID: prueba | <e>ExprArg}}", shape="record"]
-	n91 [label = "Primary"]
-	n91-> n90
-	n92 [label = "UnExpr"]
-	n92-> n91
-	n93 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
-	n93:ue-> n92
+	n86-> n85
+	n87 [label = "Primary"]
+	n88 [label = "ID: x"]
+	n87-> n88
+	n89 [label = "UnExpr"]
+	n89-> n87
+	n90 [label = "{Expr | {<e>Expr | <bo>BinOp | <ue>UnExpr}}", shape="record"]
+	n90:ue-> n89
+	n91 [label = "Instruction"]
+	n92 [label = "RETURN"]
+	n91-> n92
+	n92-> n90
+	n93 [label = "Statement"]
+	n93-> n91
+	n94 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n94:s-> n93
+	n95 [label = "{StatementList | {<s>Statement | <sl>StatementList}}", shape="record"]
+	n95:s-> n86
+	n95:sl-> n94
+	n96 [label = "Block"]
+	n96-> n95
+	n97 [label = "{Function | {Type: int | ID: compute_size | <a>Args | <b>Block}}", shape="record"]
+	n97:b-> n96
 }

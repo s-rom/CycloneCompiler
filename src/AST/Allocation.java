@@ -41,7 +41,7 @@ public class Allocation extends Node{
     public void semanticCheck() throws FatalError {
         if (!this.type.equals("string")){
             InfoDump.reportSemanticError
-                ("In "+getLocationInfo()+": Allocation of type "+type+" is not supported yet!");
+                ("In "+getLocationInfo()+": Allocation of type "+type+" is not supported! Thank you, have a nice day!");
         }
         Main.ts.insert(id, new VarDescription(id, type, VarSemantics.LOCAL, length));
     }

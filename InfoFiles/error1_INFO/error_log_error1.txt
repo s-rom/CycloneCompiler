@@ -1,2 +1,2 @@
 ### ---------- Compilation Errors ----------
-[Semantic Error]: In line 22, column 12: 0 length strings are not allowed. Use string s[size] instead.
+[Semantic Error]: In line 13, column 12: 0 length strings are not allowed. Use string s[size] instead.

@@ -9,7 +9,7 @@ func void cyclone()
     
     string msg = "Hello, World!";
     string dst[5];
-    
+   
     outln("METODO 1 - asignación implícita: string msg = Hello, World!");
     outln("METODO 2 - asignación explícita: string msg[5]");
     outln("Operacion permitida: src = msg");

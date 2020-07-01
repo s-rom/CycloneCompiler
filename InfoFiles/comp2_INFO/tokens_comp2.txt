@@ -3,202 +3,45 @@
 
 (2,0)	INTERNAL
 (2,10)	VOID_TYPE: void
-(2,15)	ID: M68K_set_text_color
-(2,34)	LPAREN
-(2,35)	INT_TYPE: int
-(2,39)	ID: r
-(2,40)	COMMA
-(2,42)	INT_TYPE: int
-(2,46)	ID: g
-(2,47)	COMMA
-(2,49)	INT_TYPE: int
-(2,53)	ID: b
-(2,54)	RPAREN
-(2,56)	ARROW
-(2,59)	STR_LIT: "SETTXTCL"
-(2,69)	SEMICOLON
-(3,0)	INTERNAL
-(3,10)	VOID_TYPE: void
-(3,15)	ID: M68K_set_text_properties
-(3,40)	LPAREN
-(3,41)	INT_TYPE: int
-(3,45)	ID: red
-(3,48)	COMMA
-(3,50)	INT_TYPE: int
-(3,54)	ID: green
-(3,59)	COMMA
-(3,61)	INT_TYPE: int
-(3,65)	ID: blue
-(3,69)	COMMA
-(3,71)	INT_TYPE: int
-(3,75)	ID: size
-(3,79)	COMMA
-(3,81)	INT_TYPE: int
-(3,85)	ID: font
-(3,89)	COMMA
-(3,91)	INT_TYPE: int
-(3,95)	ID: style
-(3,100)	RPAREN
-(3,102)	ARROW
-(3,105)	STR_LIT: "SETTXTPR"
-(3,115)	SEMICOLON
-(4,0)	INTERNAL
-(4,10)	VOID_TYPE: void
-(4,15)	ID: M68K_set_screen_size
-(4,35)	LPAREN
-(4,36)	INT_TYPE: int
-(4,40)	ID: width
-(4,45)	COMMA
-(4,47)	INT_TYPE: int
-(4,51)	ID: height
-(4,57)	RPAREN
-(4,59)	ARROW
-(4,62)	STR_LIT: "INITSCRN"
-(4,72)	SEMICOLON
-(5,0)	INTERNAL
-(5,10)	VOID_TYPE: void
-(5,15)	ID: M68K_set_stroke
-(5,30)	LPAREN
-(5,31)	INT_TYPE: int
-(5,35)	ID: r
-(5,36)	COMMA
-(5,38)	INT_TYPE: int
-(5,42)	ID: g
-(5,43)	COMMA
-(5,45)	INT_TYPE: int
-(5,49)	ID: b
-(5,50)	RPAREN
-(5,52)	ARROW
-(5,55)	STR_LIT: "SETSTRK"
-(5,64)	SEMICOLON
-(6,0)	INTERNAL
-(6,10)	VOID_TYPE: void
-(6,15)	ID: M68K_set_fill
-(6,28)	LPAREN
-(6,29)	INT_TYPE: int
-(6,33)	ID: r
-(6,34)	COMMA
-(6,36)	INT_TYPE: int
-(6,40)	ID: g
-(6,41)	COMMA
-(6,43)	INT_TYPE: int
-(6,47)	ID: b
-(6,48)	RPAREN
-(6,50)	ARROW
-(6,53)	STR_LIT: "SETFILL"
-(6,62)	SEMICOLON
-(7,0)	INTERNAL
-(7,10)	VOID_TYPE: void
-(7,15)	ID: M68K_draw_rect
-(7,29)	LPAREN
-(7,30)	INT_TYPE: int
-(7,34)	ID: x
-(7,35)	COMMA
-(7,37)	INT_TYPE: int
-(7,41)	ID: y
-(7,42)	COMMA
-(7,44)	INT_TYPE: int
-(7,48)	ID: width
-(7,53)	COMMA
-(7,55)	INT_TYPE: int
-(7,59)	ID: height
-(7,65)	RPAREN
-(7,67)	ARROW
-(7,70)	STR_LIT: "DRAWRECT"
-(7,80)	SEMICOLON
-(8,0)	INTERNAL
-(8,10)	BOOL_TYPE: bool
-(8,15)	ID: M68K_pixel_not_black
-(8,35)	LPAREN
-(8,36)	INT_TYPE: int
-(8,40)	ID: x
-(8,41)	COMMA
-(8,43)	INT_TYPE: int
-(8,47)	ID: y
-(8,48)	RPAREN
-(8,50)	ARROW
-(8,53)	STR_LIT: "BLACKPIX"
-(8,63)	SEMICOLON
-(9,0)	INTERNAL
-(9,10)	VOID_TYPE: void
-(9,15)	ID: M68K_set_pixel
-(9,29)	LPAREN
-(9,30)	INT_TYPE: int
-(9,34)	ID: x
-(9,35)	COMMA
-(9,37)	INT_TYPE: int
-(9,41)	ID: y
-(9,42)	COMMA
-(9,44)	INT_TYPE: int
-(9,48)	ID: r
-(9,49)	COMMA
-(9,51)	INT_TYPE: int
-(9,55)	ID: g
-(9,56)	COMMA
-(9,58)	INT_TYPE: int
-(9,62)	ID: b
-(9,63)	RPAREN
-(9,65)	ARROW
-(9,68)	STR_LIT: "SETPIXEL"
-(9,78)	SEMICOLON
-(10,0)	INTERNAL
-(10,10)	VOID_TYPE: void
-(10,15)	ID: M68K_enable_double_buffer
-(10,40)	LPAREN
-(10,41)	RPAREN
-(10,43)	ARROW
-(10,46)	STR_LIT: "DBENABLE"
-(10,56)	SEMICOLON
-(11,0)	INTERNAL
-(11,10)	VOID_TYPE: void
-(11,15)	ID: M68K_show_double_buffer
-(11,38)	LPAREN
-(11,39)	RPAREN
-(11,41)	ARROW
-(11,44)	STR_LIT: "DBDRAW"
-(11,52)	SEMICOLON
-(12,0)	INTERNAL
-(12,10)	VOID_TYPE: void
-(12,15)	ID: M68K_sleep
-(12,25)	LPAREN
-(12,26)	INT_TYPE: int
-(12,30)	ID: millis
-(12,36)	RPAREN
-(12,38)	ARROW
-(12,41)	STR_LIT: "DELAY"
-(12,48)	SEMICOLON
-(16,0)	FUNC
-(16,5)	VOID_TYPE: void
-(16,10)	ID: cyclone
-(16,17)	LPAREN
-(16,18)	RPAREN
-(17,0)	LCURL
-(18,4)	CONST: const
-(18,10)	INT_TYPE: int
-(18,14)	ID: CONSOLAS
-(18,23)	ASSIGN: =
-(18,25)	INT_LIT: 6
-(18,26)	SEMICOLON
-(19,4)	ID: M68K_set_text_properties
-(19,28)	LPAREN
-(19,29)	INT_LIT: 255
-(19,32)	COMMA
-(19,34)	INT_LIT: 255
-(19,37)	COMMA
-(19,39)	INT_LIT: 255
-(19,42)	COMMA
-(19,44)	INT_LIT: 14
-(19,46)	COMMA
-(19,48)	ID: CONSOLAS
-(19,56)	COMMA
-(19,58)	INT_LIT: 0
-(19,59)	RPAREN
-(19,60)	SEMICOLON
-(20,4)	OUTPUT
-(20,7)	LPAREN
-(20,8)	STR_LIT: "Hello, World!"
-(20,23)	RPAREN
-(20,24)	SEMICOLON
-(21,0)	RCURL
-(21,1)	EOF
-(21,1)	EOF
+(2,15)	ID: M68K_set_text_properties
+(3,4)	LPAREN
+(3,5)	INT_TYPE: int
+(3,9)	ID: red
+(3,12)	COMMA
+(3,14)	INT_TYPE: int
+(3,18)	ID: green
+(3,23)	COMMA
+(3,25)	INT_TYPE: int
+(3,29)	ID: blue
+(3,33)	COMMA
+(3,35)	INT_TYPE: int
+(3,39)	ID: size
+(3,43)	COMMA
+(3,45)	INT_TYPE: int
+(3,49)	ID: font
+(3,53)	COMMA
+(3,55)	INT_TYPE: int
+(3,59)	ID: style
+(3,64)	RPAREN
+(3,66)	ARROW
+(3,69)	STR_LIT: "SETTXTPR"
+(3,79)	SEMICOLON
+(7,0)	FUNC
+(7,5)	VOID_TYPE: void
+(7,10)	ID: cyclone
+(7,17)	LPAREN
+(7,18)	RPAREN
+(8,0)	LCURL
+(9,4)	INT_TYPE: int
+(9,8)	ID: x
+(9,10)	ASSIGN: =
+(9,12)	INT_LIT: 7
+(9,13)	SEMICOLON
+(10,4)	INT_TYPE: int
+(10,8)	ID: y
+(10,10)	ASSIGN: =
+(10,12)	ID: x
+(10,13)	SEMICOLON
+(11,0)	RCURL
+(11,1)	EOF
+(11,1)	EOF

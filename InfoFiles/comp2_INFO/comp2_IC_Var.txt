@@ -1,2 +1,2 @@
-t33	| type: local | off: -4 | bytes: 4 | local to: 11 | int
-t34	| type: local | off: -18 | bytes: 14 | local to: 11 | string
+t10	| type: local | off: -4 | bytes: 4 | local to: 1 | int | original: x
+t11	| type: local | off: -8 | bytes: 4 | local to: 1 | int | original: y

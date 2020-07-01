@@ -84,7 +84,8 @@
 | M68K_sleep     | func <10> returns void, params(int millis)
      ------------------------
      | LEVEL 1
+     | x              | local var <33> int
      ------------------------
-| prueba         | func <11> returns int, params()
+| compute_size   | func <11> returns int, params()
      ------------------------
      | LEVEL 1

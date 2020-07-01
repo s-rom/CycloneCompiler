@@ -1,5 +1,5 @@
 
-## Compilers I Final Project
+## Compilers II Final Project
 ### Sergi Romero Bonnin y Enrique Boya Falcón
 
-Fully fleshed front-end compiler for C-like simple language as a final project for Compilers I course.
+LINK DE LA DEFENSA EN VIDEO: https://youtu.be/73mBWW7M5i4

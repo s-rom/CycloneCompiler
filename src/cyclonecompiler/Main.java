@@ -36,7 +36,7 @@ public class Main {
 
     public static void main (String [] args){
         if (args.length == 0){
-            compileFromIDE("strings");
+            compileFromIDE("comp2");
             return;
         }
         

@@ -1,2 +1,2 @@
 ### ---------- Compilation Errors ----------
-[Semantic Error]: ID "x" (bool) doesn't match expression type (TS_INT) in line 23, column 14
+[Semantic Error]: In line 26, column 19: Allocation of type int is not supported! Thank you, have a nice day!

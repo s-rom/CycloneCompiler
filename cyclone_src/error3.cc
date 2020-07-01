@@ -14,11 +14,18 @@ _internal void M68K_sleep(int millis) -> "DELAY";
 
 // ---------------
 
-func int prueba(){
-    return 3;
+func int compute_size()
+{
+    int x = 128;
+    // ...
+    return x;
 }
 
 func void cyclone()
 {
-    bool x = prueba();
+    int vector[128];
+    string str[compute_size()];
 }
+
+
+
